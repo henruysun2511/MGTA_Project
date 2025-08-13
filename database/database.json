@@ -1,0 +1,502 @@
+{
+  "accounts": [
+    {
+      "id": "1",
+      "username": "huysun2511",
+      "password": "123456",
+      "role": "student",
+      "status": false
+    },
+    {
+      "id": "2",
+      "username": "thutra",
+      "password": "1998",
+      "role": "admin"
+    },
+    {
+      "id": "3dc1",
+      "username": "huysun",
+      "password": "1234",
+      "role": "student",
+      "status": false
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "acountId": 1
+    },
+    {
+      "id": "a88d",
+      "accountId": "3dc1",
+      "fullname": "Đặng Nhật Huy",
+      "phoneNumber": "0362832880",
+      "email": "huysun2511@gmail.com",
+      "classroom": "7",
+      "school": "Thcs Huy Văn",
+      "preScore": "99",
+      "parentFullName": "Đăng Viết Tuấn",
+      "address": "Hà Nội",
+      "parentPhoneNumber": "0362832880"
+    }
+  ],
+  "classes": [
+    {
+      "id": "1",
+      "name": "7A1"
+    },
+    {
+      "id": "2",
+      "name": "7A3"
+    },
+    {
+      "id": "3",
+      "name": "8A1"
+    },
+    {
+      "id": "4",
+      "name": "8A2"
+    },
+    {
+      "id": "5",
+      "name": "9A1"
+    }
+  ],
+  "classSessions": [
+    {
+      "id": "1",
+      "name": "Ca 1 (14h - 15h30)"
+    },
+    {
+      "id": "2",
+      "name": "Ca 2 (18h30 - 20h)"
+    },
+    {
+      "id": "3",
+      "name": "Ca 3 (20h - 21h30)"
+    }
+  ],
+  "studySchedules": [
+    {
+      "id": "1",
+      "idSession": 1,
+      "idClass": 1,
+      "date": "2025-08-10",
+      "linkZoom": "https://zoom.us/j/123456"
+    },
+    {
+      "id": "2",
+      "idSession": 2,
+      "idClass": 1,
+      "date": "2025-08-11",
+      "linkZoom": "https://zoom.us/j/123456"
+    }
+  ],
+  "assignments": [
+    {
+      "id": "1",
+      "name": "Bài tập 1",
+      "idClass": 1,
+      "idSkill": [
+        1,
+        2
+      ],
+      "totalTime": 40,
+      "unit": "Unit 1",
+      "image": [
+        "de1.jpg"
+      ],
+      "totalQuestion": 20,
+      "questions": [
+        {
+          "id": 1,
+          "name": 1,
+          "key": "A"
+        },
+        {
+          "id": 2,
+          "name": 2,
+          "key": "B"
+        },
+        {
+          "id": 3,
+          "name": 3,
+          "key": "C"
+        },
+        {
+          "id": 4,
+          "name": 4,
+          "key": "C"
+        },
+        {
+          "id": 5,
+          "name": 5,
+          "key": "D"
+        },
+        {
+          "id": 6,
+          "name": 6,
+          "key": "That is the way"
+        }
+      ]
+    },
+    {
+      "id": "15ca",
+      "name": "Bài tập 2",
+      "idClass": 3,
+      "idSkill": [
+        2,
+        3
+      ],
+      "unit": "2",
+      "totalTime": "40",
+      "totalQuestion": 5,
+      "file": [
+        {
+          "uid": "rc-upload-1754815148719-7",
+          "lastModified": 1754476832904,
+          "lastModifiedDate": "2025-08-06T10:40:32.904Z",
+          "name": "screencapture-localhost-5173-admin-accountMana-2025-08-06-17_40_17.png",
+          "size": 659627,
+          "type": "image/png",
+          "percent": 0,
+          "originFileObj": {
+            "uid": "rc-upload-1754815148719-7"
+          }
+        }
+      ],
+      "answers": [
+        {
+          "key": 1,
+          "stt": 1,
+          "cauSo": "Câu 1",
+          "dapAn": "A"
+        },
+        {
+          "key": 2,
+          "stt": 2,
+          "cauSo": "Câu 2",
+          "dapAn": "B"
+        },
+        {
+          "key": 3,
+          "stt": 3,
+          "cauSo": "Câu 3",
+          "dapAn": "C"
+        },
+        {
+          "key": 4,
+          "stt": 4,
+          "cauSo": "Câu 4",
+          "dapAn": "D"
+        },
+        {
+          "key": 5,
+          "stt": 5,
+          "cauSo": "Câu 5",
+          "dapAn": "A"
+        }
+      ]
+    },
+    {
+      "id": "cfb3",
+      "name": "Bài tập 3",
+      "idClass": "4",
+      "idSkill": [
+        "2"
+      ],
+      "unit": "2",
+      "totalTime": "40",
+      "totalQuestion": 2,
+      "file": [
+        {
+          "uid": "rc-upload-1754958643337-3",
+          "lastModified": 1754476845376,
+          "lastModifiedDate": "2025-08-06T10:40:45.376Z",
+          "name": "screencapture-localhost-5173-admin-studySchedule-2025-08-06-17_40_42.png",
+          "size": 572278,
+          "type": "image/png",
+          "percent": 0,
+          "originFileObj": {
+            "uid": "rc-upload-1754958643337-3"
+          }
+        }
+      ],
+      "keys": [
+        {
+          "id": 1,
+          "stt": 1,
+          "cauSo": "Câu 1",
+          "dapAn": "A"
+        },
+        {
+          "id": 2,
+          "stt": 2,
+          "cauSo": "Câu 2",
+          "dapAn": "B"
+        }
+      ]
+    },
+    {
+      "id": "ae96",
+      "name": "Bài tập 3",
+      "unit": "2",
+      "totalTime": "40",
+      "totalQuestion": 2,
+      "file": [
+        {
+          "uid": "rc-upload-1754981507145-3",
+          "lastModified": 1754475727878,
+          "lastModifiedDate": "2025-08-06T10:22:07.878Z",
+          "name": "screencapture-127-0-0-1-5500-Project-MGTA-demo-score-html-2025-08-06-17_22_01.png",
+          "size": 1276359,
+          "type": "image/png",
+          "percent": 0,
+          "originFileObj": {
+            "uid": "rc-upload-1754981507145-3"
+          }
+        }
+      ],
+      "idClass": "3",
+      "idSkill": [
+        "2",
+        "3"
+      ],
+      "keys": [
+        {
+          "id": 1,
+          "stt": 1,
+          "cauSo": "Câu 1",
+          "dapAn": "A"
+        },
+        {
+          "id": 2,
+          "stt": 2,
+          "cauSo": "Câu 2",
+          "dapAn": "B"
+        }
+      ]
+    },
+    {
+      "id": "b627",
+      "name": "Bài tập 3",
+      "idClass": "3",
+      "idSkill": [
+        "2",
+        "3"
+      ],
+      "unit": "2",
+      "totalTime": "40",
+      "totalQuestion": 1,
+      "file": [
+        {
+          "uid": "rc-upload-1754981866855-3",
+          "lastModified": 1754476832904,
+          "lastModifiedDate": "2025-08-06T10:40:32.904Z",
+          "name": "screencapture-localhost-5173-admin-accountMana-2025-08-06-17_40_17.png",
+          "size": 659627,
+          "type": "image/png",
+          "percent": 0,
+          "originFileObj": {
+            "uid": "rc-upload-1754981866855-3"
+          }
+        }
+      ],
+      "keys": [
+        {
+          "id": 1,
+          "stt": 1,
+          "cauSo": "Câu 1",
+          "dapAn": "A"
+        }
+      ]
+    },
+    {
+      "id": "6c97",
+      "name": "Bài tập 3",
+      "idClass": "2",
+      "idSkill": [
+        "5"
+      ],
+      "unit": "2",
+      "totalTime": "40",
+      "totalQuestion": 1,
+      "file": [
+        {
+          "uid": "rc-upload-1754982014035-3",
+          "lastModified": 1754475727878,
+          "lastModifiedDate": "2025-08-06T10:22:07.878Z",
+          "name": "screencapture-127-0-0-1-5500-Project-MGTA-demo-score-html-2025-08-06-17_22_01.png",
+          "size": 1276359,
+          "type": "image/png",
+          "percent": 0,
+          "originFileObj": {
+            "uid": "rc-upload-1754982014035-3"
+          }
+        }
+      ],
+      "keys": [
+        {
+          "id": 1,
+          "stt": 1,
+          "cauSo": "Câu 1",
+          "dapAn": "A"
+        }
+      ],
+      "isDeleted": true
+    },
+    {
+      "id": "f022",
+      "name": "Bài tập 3",
+      "idClass": "3",
+      "idSkill": [
+        "5"
+      ],
+      "unit": "2",
+      "totalTime": "40",
+      "totalQuestion": 1,
+      "file": [
+        {
+          "uid": "rc-upload-1754986981438-2",
+          "lastModified": 1754476845376,
+          "lastModifiedDate": "2025-08-06T10:40:45.376Z",
+          "name": "screencapture-localhost-5173-admin-studySchedule-2025-08-06-17_40_42.png",
+          "size": 572278,
+          "type": "image/png",
+          "percent": 0,
+          "originFileObj": {
+            "uid": "rc-upload-1754986981438-2"
+          }
+        }
+      ],
+      "keys": [
+        {
+          "id": 1,
+          "stt": 1,
+          "cauSo": "Câu 1",
+          "dapAn": "A"
+        }
+      ]
+    },
+    {
+      "id": "d108",
+      "name": "Bài tập 2",
+      "idClass": "2",
+      "idSkill": [
+        "5",
+        "4"
+      ],
+      "unit": "2",
+      "totalTime": "40",
+      "totalQuestion": 1,
+      "file": [
+        {
+          "uid": "rc-upload-1754988116599-2",
+          "lastModified": 1754476845376,
+          "lastModifiedDate": "2025-08-06T10:40:45.376Z",
+          "name": "screencapture-localhost-5173-admin-studySchedule-2025-08-06-17_40_42.png",
+          "size": 572278,
+          "type": "image/png",
+          "percent": 0,
+          "originFileObj": {
+            "uid": "rc-upload-1754988116599-2"
+          }
+        }
+      ],
+      "keys": [
+        {
+          "id": 1,
+          "stt": 1,
+          "cauSo": "Câu 1",
+          "dapAn": "A"
+        }
+      ],
+      "isDeleted": true
+    }
+  ],
+  "skills": [
+    {
+      "id": "1",
+      "name": "Ngữ pháp"
+    },
+    {
+      "id": "2",
+      "name": "Từ vựng"
+    },
+    {
+      "id": "3",
+      "name": "Nghe hiểu"
+    },
+    {
+      "id": "4",
+      "name": "Nói"
+    },
+    {
+      "id": "5",
+      "name": "Đọc hiểu"
+    },
+    {
+      "id": "6",
+      "name": "Viết"
+    }
+  ],
+  "submissions": [
+    {
+      "id": "1",
+      "idUser": 1,
+      "idClass": 1,
+      "totalTrue": "3",
+      "totalWrong": "3",
+      "time": "20h",
+      "totalTime": "00:56:55",
+      "answers": [
+        {
+          "id": 1,
+          "name": 1,
+          "answer": "A",
+          "status": "true"
+        },
+        {
+          "id": 1,
+          "name": 1,
+          "answer": "B",
+          "status": "true"
+        },
+        {
+          "id": 1,
+          "name": 1,
+          "answer": "D",
+          "status": "false"
+        },
+        {
+          "id": 1,
+          "name": 1,
+          "answer": "C",
+          "status": "true"
+        },
+        {
+          "id": 1,
+          "name": 1,
+          "answer": "A",
+          "status": "True"
+        },
+        {
+          "id": 1,
+          "name": 1,
+          "answer": "A",
+          "status": "false"
+        },
+        {
+          "id": 1,
+          "name": 1,
+          "answer": "Hehe",
+          "status": "false"
+        }
+      ]
+    }
+  ],
+  "notifications": [],
+  "comments": [],
+  "blog": [],
+  "feedbacks": []
+}

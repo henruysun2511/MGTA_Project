@@ -1,0 +1,106 @@
+@import '../assets/colors.scss';
+
+.header {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    padding-top: 20px;
+
+    .header__wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 55px;
+        padding: 0 45px;
+        background-color: white;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+        .header__logo {
+            width: 120px;
+            height: auto;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                a {
+                    text-decoration: none;
+                    font-size: 18px;
+                    font-weight: 500;
+                    color: black;
+                    transition: color 0.3s;
+
+                    &:hover {
+                        color: $color-light-pink;
+                    }
+
+                    &.active {
+                        color: $color-light-pink;
+                    }
+                }
+            }
+        }
+
+        .header__auth {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+
+            p {
+                font-size: 18px;
+                cursor: pointer;
+            }
+
+            svg {
+                font-size: 24px;
+                color: $color-yellow;
+                cursor: pointer;
+            }
+
+
+            .header__button-login {
+                @extend %button-base;
+                background-color: $color-mint-green;
+                color: white;
+
+            }
+
+            .header__button-register {
+                @extend %button-base;
+                background-color: $color-dark-pink;
+                color: white;
+            }
+
+            .header__button-admin{
+                font-size: 18px;
+                color: $color-dark-pink;
+                border: 1px solid $color-dark-pink;
+            }
+        }
+    }
+}
+
+%button-base {
+    padding: 7px 20px;
+    font-size: 19px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 25px;
+
+
+    &:hover {
+        background-color: #f6c964;
+        color: black;
+    }
+}
