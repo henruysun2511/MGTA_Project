@@ -1,4 +1,4 @@
-import { BellFilled, BookOutlined, DeleteOutlined, FolderOutlined, HomeFilled, LaptopOutlined, LogoutOutlined, ScheduleOutlined, UserOutlined } from '@ant-design/icons';
+import { BellFilled, BookOutlined, DeleteOutlined, FolderOutlined, HomeFilled, LaptopOutlined, LogoutOutlined, ReadOutlined, ScheduleOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Menu } from 'antd';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import avatar from '../assets/images/gv.png';
@@ -15,10 +15,12 @@ export default function AdminLayout() {
     const items = [
         { icon: <FolderOutlined />, label: 'Tổng quan', key: '/admin/overview' },
         { icon: <UserOutlined />, label: 'Quản lý tài khoản', key: '/admin/accountMana' },
-        { icon: <ScheduleOutlined />, label: 'Quản lý lịch học', key: '/admin/studySchedule' },
-        { icon: <BookOutlined />, label: 'Quản lý bài tập', key: '/admin/asignmentMana' },
+        { icon: <ReadOutlined />, label: 'Quản lý lớp', key: '/admin/classMana' },
+        { icon: <ScheduleOutlined />, label: 'Quản lý lịch học', key: '/admin/classScheduleMana' },
+        { icon: <BookOutlined />, label: 'Quản lý bài tập', key: '/admin/exerciseMana' },
         { icon: <LaptopOutlined />, label: 'Quản lý blog', key: '/admin/blogMana' },
-         { icon: <DeleteOutlined />, label: 'Thùng rác', key: '/admin/recycleBin' }
+        { icon: <DeleteOutlined />, label: 'Thùng rác', key: '/admin/recycleBin' },
+
     ];
 
     return (

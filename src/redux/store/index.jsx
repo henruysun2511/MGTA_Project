@@ -1,13 +1,20 @@
 import { combineReducers } from "redux";
-import { assignmentReducer } from "../reducers/assignmentReducer";
-import { classReducer } from "../reducers/classReducer";
+import { baseReducer } from "../reducers/baseReducer";
+import { exerciseReducer } from "../reducers/exerciseReducer";
+import filterExerciseReducer from "../reducers/filterExerciseReducer";
 import loginReducer from "../reducers/loginReducer";
-import { skillReducer } from "../reducers/skillReducer";
-
 
 
 const AllReducers = combineReducers({
-    loginReducer, assignmentReducer, classReducer, skillReducer
+    loginReducer, exerciseReducer, filterExerciseReducer,
+    classschedules: baseReducer("classschedules"),
+    classes: baseReducer("classes"),
+    classsessions: baseReducer("classsessions"),
+    students: baseReducer("students"),
+    deadlines: baseReducer("deadlines"),
+    exercises: baseReducer("exercises"),
+    accounts: baseReducer("accounts"),
+    skills: baseReducer("skills")
 });
 
 export default AllReducers;

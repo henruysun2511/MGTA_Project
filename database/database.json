@@ -5,7 +5,7 @@
       "username": "huysun2511",
       "password": "123456",
       "role": "student",
-      "status": false
+      "status": "active"
     },
     {
       "id": "2",
@@ -18,400 +18,488 @@
       "username": "huysun",
       "password": "1234",
       "role": "student",
-      "status": false
+      "status": "active"
     }
   ],
-  "users": [
+  "students": [
     {
       "id": "1",
-      "acountId": 1
+      "acountId": 1,
+      "classId": 2
     },
     {
       "id": "a88d",
       "accountId": "3dc1",
-      "fullname": "Đặng Nhật Huy",
-      "phoneNumber": "0362832880",
+      "name": "Đặng Nhật Huy",
+      "phone": "0362832880",
       "email": "huysun2511@gmail.com",
-      "classroom": "7",
+      "class": "12D10",
       "school": "Thcs Huy Văn",
       "preScore": "99",
-      "parentFullName": "Đăng Viết Tuấn",
+      "parentName": "Đăng Viết Tuấn",
       "address": "Hà Nội",
-      "parentPhoneNumber": "0362832880"
+      "parentPhone": "0362832880",
+      "classId": "1"
     }
   ],
   "classes": [
     {
       "id": "1",
-      "name": "7A1"
+      "className": "7A1",
+      "deleted": false
     },
     {
       "id": "2",
-      "name": "7A3"
+      "className": "7A3"
     },
     {
       "id": "3",
-      "name": "8A1"
+      "className": "8A1"
     },
     {
       "id": "4",
-      "name": "8A2"
+      "className": "8A2"
     },
     {
       "id": "5",
-      "name": "9A1"
+      "className": "9A1",
+      "deleted": true
+    },
+    {
+      "id": "0e74",
+      "className": "áasd",
+      "deleted": true
     }
   ],
-  "classSessions": [
+  "classsessions": [
     {
       "id": "1",
-      "name": "Ca 1 (14h - 15h30)"
+      "name": "Ca 1",
+      "startTime": "16:00",
+      "endTime": "18:30"
     },
     {
       "id": "2",
-      "name": "Ca 2 (18h30 - 20h)"
+      "name": "Ca 2",
+      "startTime": "18:30",
+      "endTime": "20:00"
     },
     {
       "id": "3",
-      "name": "Ca 3 (20h - 21h30)"
+      "name": "Ca 3",
+      "startTime": "20:00",
+      "endTime": "21:30"
     }
   ],
-  "studySchedules": [
+  "classschedules": [
     {
       "id": "1",
-      "idSession": 1,
-      "idClass": 1,
-      "date": "2025-08-10",
-      "linkZoom": "https://zoom.us/j/123456"
+      "classSessionId": 1,
+      "classId": 1,
+      "schedule": "07/06/2025 07:00:00",
+      "linkZoom": "https://zoom.us/j/123456",
+      "className": "7A1",
+      "classSessionName": "Ca 1",
+      "deleted": true
     },
     {
-      "id": "2",
-      "idSession": 2,
-      "idClass": 1,
-      "date": "2025-08-11",
-      "linkZoom": "https://zoom.us/j/123456"
+      "id": "e311",
+      "classSessionId": "2",
+      "schedule": "13/08/2025 07:00:00",
+      "classId": "2",
+      "linkZoom": "ấdadasdadasd",
+      "className": "7A3",
+      "classSessionName": "Ca 2",
+      "deleted": true
+    },
+    {
+      "id": "b265",
+      "classSessionId": "3",
+      "schedule": "2025-08-05",
+      "classId": "3",
+      "linkZoom": "ấdadasdadasd"
+    },
+    {
+      "id": "d1c0",
+      "classSessionId": "2",
+      "schedule": "2025-08-05",
+      "classId": "3",
+      "linkZoom": "ấdadasdadasd"
+    },
+    {
+      "id": "4ded",
+      "classSessionId": "3",
+      "schedule": "2025-08-06",
+      "classId": "3",
+      "linkZoom": "ấdadasdadasd"
+    },
+    {
+      "id": "1974",
+      "classSessionId": "3",
+      "schedule": "2025-08-06",
+      "classId": "2",
+      "linkZoom": "ấdadasdadasd"
+    },
+    {
+      "id": "53d5",
+      "classSessionId": "3",
+      "schedule": "2025-08-08",
+      "classId": "2",
+      "linkZoom": "ấdadasdadasd"
+    },
+    {
+      "id": "ffdb",
+      "classSessionId": "2",
+      "schedule": "2025-08-08",
+      "classId": "2",
+      "linkZoom": "ấdadasdadasd"
+    },
+    {
+      "id": "e6cb",
+      "classSessionId": "3",
+      "schedule": "2025-08-15",
+      "classId": "3",
+      "linkZoom": "ấdadasdadasd"
+    },
+    {
+      "id": "6e44",
+      "classSessionId": "3",
+      "schedule": "2025-08-15",
+      "classId": "1",
+      "linkZoom": "ấdadasdadasd"
     }
   ],
-  "assignments": [
+  "exercises": [
     {
-      "id": "1",
-      "name": "Bài tập 1",
-      "idClass": 1,
-      "idSkill": [
-        1,
-        2
-      ],
-      "totalTime": 40,
-      "unit": "Unit 1",
-      "image": [
-        "de1.jpg"
-      ],
-      "totalQuestion": 20,
-      "questions": [
-        {
-          "id": 1,
-          "name": 1,
-          "key": "A"
-        },
-        {
-          "id": 2,
-          "name": 2,
-          "key": "B"
-        },
-        {
-          "id": 3,
-          "name": 3,
-          "key": "C"
-        },
-        {
-          "id": 4,
-          "name": 4,
-          "key": "C"
-        },
-        {
-          "id": 5,
-          "name": 5,
-          "key": "D"
-        },
-        {
-          "id": 6,
-          "name": 6,
-          "key": "That is the way"
-        }
-      ]
-    },
-    {
-      "id": "15ca",
-      "name": "Bài tập 2",
-      "idClass": 3,
-      "idSkill": [
-        2,
-        3
+      "id": "3350",
+      "title": "Bài tập 2",
+      "skillId": [
+        "3"
       ],
       "unit": "2",
-      "totalTime": "40",
-      "totalQuestion": 5,
-      "file": [
-        {
-          "uid": "rc-upload-1754815148719-7",
-          "lastModified": 1754476832904,
-          "lastModifiedDate": "2025-08-06T10:40:32.904Z",
-          "name": "screencapture-localhost-5173-admin-accountMana-2025-08-06-17_40_17.png",
-          "size": 659627,
-          "type": "image/png",
-          "percent": 0,
-          "originFileObj": {
-            "uid": "rc-upload-1754815148719-7"
-          }
-        }
+      "totalTime": 15,
+      "images": [
+        "IMG_4473.JPEG"
       ],
-      "answers": [
-        {
-          "key": 1,
-          "stt": 1,
-          "cauSo": "Câu 1",
-          "dapAn": "A"
-        },
-        {
-          "key": 2,
-          "stt": 2,
-          "cauSo": "Câu 2",
-          "dapAn": "B"
-        },
-        {
-          "key": 3,
-          "stt": 3,
-          "cauSo": "Câu 3",
-          "dapAn": "C"
-        },
-        {
-          "key": 4,
-          "stt": 4,
-          "cauSo": "Câu 4",
-          "dapAn": "D"
-        },
-        {
-          "key": 5,
-          "stt": 5,
-          "cauSo": "Câu 5",
-          "dapAn": "A"
-        }
-      ]
+      "deleted": true,
+      "questions": [],
+      "createAt": "2025-08-10T08:34:36.008Z"
     },
     {
-      "id": "cfb3",
-      "name": "Bài tập 3",
-      "idClass": "4",
-      "idSkill": [
+      "id": "b3f0",
+      "title": "Bài tập 2",
+      "skillId": [
         "2"
       ],
       "unit": "2",
-      "totalTime": "40",
-      "totalQuestion": 2,
-      "file": [
-        {
-          "uid": "rc-upload-1754958643337-3",
-          "lastModified": 1754476845376,
-          "lastModifiedDate": "2025-08-06T10:40:45.376Z",
-          "name": "screencapture-localhost-5173-admin-studySchedule-2025-08-06-17_40_42.png",
-          "size": 572278,
-          "type": "image/png",
-          "percent": 0,
-          "originFileObj": {
-            "uid": "rc-upload-1754958643337-3"
-          }
-        }
+      "totalTime": 15,
+      "images": [
+        "ETS 2023 RC.pdf"
       ],
-      "keys": [
-        {
-          "id": 1,
-          "stt": 1,
-          "cauSo": "Câu 1",
-          "dapAn": "A"
-        },
-        {
-          "id": 2,
-          "stt": 2,
-          "cauSo": "Câu 2",
-          "dapAn": "B"
-        }
-      ]
+      "deleted": true,
+      "questions": []
     },
     {
-      "id": "ae96",
-      "name": "Bài tập 3",
-      "unit": "2",
-      "totalTime": "40",
-      "totalQuestion": 2,
-      "file": [
-        {
-          "uid": "rc-upload-1754981507145-3",
-          "lastModified": 1754475727878,
-          "lastModifiedDate": "2025-08-06T10:22:07.878Z",
-          "name": "screencapture-127-0-0-1-5500-Project-MGTA-demo-score-html-2025-08-06-17_22_01.png",
-          "size": 1276359,
-          "type": "image/png",
-          "percent": 0,
-          "originFileObj": {
-            "uid": "rc-upload-1754981507145-3"
-          }
-        }
+      "id": "08e6",
+      "title": "bro",
+      "skillId": [
+        "2"
       ],
-      "idClass": "3",
-      "idSkill": [
+      "unit": "2",
+      "totalTime": 15,
+      "totalQuestion": 1,
+      "images": [
+        "ETS 2023 LC.pdf"
+      ],
+      "deleted": true,
+      "questions": []
+    },
+    {
+      "id": "2114",
+      "title": "brother",
+      "skillId": [
         "2",
         "3"
       ],
-      "keys": [
+      "unit": "6",
+      "totalTime": 15,
+      "totalQuestion": 3,
+      "images": [
+        "IMG_4473.JPEG"
+      ],
+      "deleted": true,
+      "questions": []
+    },
+    {
+      "id": "0b8f",
+      "title": "brother3234",
+      "skillId": [
+        "3",
+        "2"
+      ],
+      "unit": "2",
+      "totalTime": 5,
+      "totalQuestion": 4,
+      "images": [
+        "ETS 2023 RC.pdf",
+        "ETS 2023 RC.pdf"
+      ],
+      "deleted": false,
+      "questions": [
         {
-          "id": 1,
-          "stt": 1,
-          "cauSo": "Câu 1",
-          "dapAn": "A"
+          "index": 1,
+          "answer": "B"
         },
         {
-          "id": 2,
-          "stt": 2,
-          "cauSo": "Câu 2",
-          "dapAn": "B"
+          "index": 2,
+          "answer": "C"
+        },
+        {
+          "index": 3,
+          "answer": "D"
+        },
+        {
+          "index": 4,
+          "answer": "A"
         }
       ]
     },
     {
-      "id": "b627",
-      "name": "Bài tập 3",
-      "idClass": "3",
-      "idSkill": [
-        "2",
-        "3"
+      "id": "d821",
+      "title": "brother2",
+      "skillId": [
+        "3",
+        "2"
       ],
-      "unit": "2",
-      "totalTime": "40",
-      "totalQuestion": 1,
-      "file": [
-        {
-          "uid": "rc-upload-1754981866855-3",
-          "lastModified": 1754476832904,
-          "lastModifiedDate": "2025-08-06T10:40:32.904Z",
-          "name": "screencapture-localhost-5173-admin-accountMana-2025-08-06-17_40_17.png",
-          "size": 659627,
-          "type": "image/png",
-          "percent": 0,
-          "originFileObj": {
-            "uid": "rc-upload-1754981866855-3"
-          }
-        }
+      "unit": "6",
+      "totalTime": 15,
+      "totalQuestion": 2,
+      "images": [
+        "ETS 2023 RC.pdf",
+        "ETS 2023 RC.pdf"
       ],
-      "keys": [
+      "deleted": false,
+      "questions": [
         {
-          "id": 1,
-          "stt": 1,
-          "cauSo": "Câu 1",
-          "dapAn": "A"
+          "index": 1,
+          "answer": "B"
+        },
+        {
+          "index": 2,
+          "answer": "C"
         }
       ]
     },
     {
-      "id": "6c97",
-      "name": "Bài tập 3",
-      "idClass": "2",
-      "idSkill": [
-        "5"
+      "id": "1dfc",
+      "title": "brother",
+      "skillId": [
+        "3",
+        "2"
       ],
-      "unit": "2",
-      "totalTime": "40",
-      "totalQuestion": 1,
-      "file": [
+      "unit": "6",
+      "totalTime": 15,
+      "totalQuestion": 2,
+      "images": [
+        "ETS 2023 RC.pdf",
+        "ETS 2023 RC.pdf"
+      ],
+      "deleted": false,
+      "questions": [
         {
-          "uid": "rc-upload-1754982014035-3",
-          "lastModified": 1754475727878,
-          "lastModifiedDate": "2025-08-06T10:22:07.878Z",
-          "name": "screencapture-127-0-0-1-5500-Project-MGTA-demo-score-html-2025-08-06-17_22_01.png",
-          "size": 1276359,
-          "type": "image/png",
-          "percent": 0,
-          "originFileObj": {
-            "uid": "rc-upload-1754982014035-3"
-          }
-        }
-      ],
-      "keys": [
+          "index": 1,
+          "answer": "B"
+        },
         {
-          "id": 1,
-          "stt": 1,
-          "cauSo": "Câu 1",
-          "dapAn": "A"
-        }
-      ],
-      "isDeleted": true
-    },
-    {
-      "id": "f022",
-      "name": "Bài tập 3",
-      "idClass": "3",
-      "idSkill": [
-        "5"
-      ],
-      "unit": "2",
-      "totalTime": "40",
-      "totalQuestion": 1,
-      "file": [
-        {
-          "uid": "rc-upload-1754986981438-2",
-          "lastModified": 1754476845376,
-          "lastModifiedDate": "2025-08-06T10:40:45.376Z",
-          "name": "screencapture-localhost-5173-admin-studySchedule-2025-08-06-17_40_42.png",
-          "size": 572278,
-          "type": "image/png",
-          "percent": 0,
-          "originFileObj": {
-            "uid": "rc-upload-1754986981438-2"
-          }
-        }
-      ],
-      "keys": [
-        {
-          "id": 1,
-          "stt": 1,
-          "cauSo": "Câu 1",
-          "dapAn": "A"
+          "index": 2,
+          "answer": "CC"
         }
       ]
     },
     {
-      "id": "d108",
-      "name": "Bài tập 2",
-      "idClass": "2",
-      "idSkill": [
-        "5",
+      "id": "97c8",
+      "title": "brother2",
+      "skillId": [
+        "3",
         "4"
       ],
+      "unit": "6",
+      "totalTime": 15,
+      "totalQuestion": 5,
+      "images": [
+        "IMG_4473.JPEG"
+      ],
+      "deleted": false,
+      "questions": [
+        {
+          "index": 1,
+          "answer": "A"
+        },
+        {
+          "index": 2,
+          "answer": "B"
+        },
+        {
+          "index": 3,
+          "answer": "V"
+        },
+        {
+          "index": 4,
+          "answer": "DD"
+        },
+        {
+          "index": 5,
+          "answer": "EEEE"
+        }
+      ]
+    },
+    {
+      "id": "f259",
+      "title": "brother2",
+      "skillId": [
+        "3"
+      ],
       "unit": "2",
-      "totalTime": "40",
+      "totalTime": 15,
+      "totalQuestion": 2,
+      "images": [
+        "ETS 2023 RC.pdf"
+      ],
+      "deleted": false,
+      "questions": [
+        {
+          "index": 1,
+          "answer": "A"
+        },
+        {
+          "index": 2,
+          "answer": "BBBBBB"
+        }
+      ]
+    },
+    {
+      "id": "2bf3",
+      "title": "Bài tập 2",
+      "skillId": [
+        "3",
+        "4"
+      ],
+      "unit": "6",
+      "totalTime": 15,
+      "totalQuestion": 2,
+      "images": [
+        "ETS 2023 RC.pdf"
+      ],
+      "deleted": false,
+      "questions": [
+        {
+          "index": 1,
+          "answer": "A"
+        },
+        {
+          "index": 2,
+          "answer": "B"
+        }
+      ]
+    },
+    {
+      "id": "f0cb",
+      "title": "hello ae",
+      "skillId": [
+        "4",
+        "2"
+      ],
+      "unit": "2",
+      "totalTime": 20,
+      "totalQuestion": 2,
+      "images": [
+        "ETS 2023 RC.pdf"
+      ],
+      "deleted": false,
+      "questions": [
+        {
+          "index": 1,
+          "answer": "A"
+        },
+        {
+          "index": 2,
+          "answer": "B"
+        }
+      ]
+    },
+    {
+      "id": "fb67",
+      "title": "bro",
+      "skillId": [
+        "4",
+        "2",
+        "3"
+      ],
+      "unit": "6",
+      "totalTime": 15,
+      "totalQuestion": 4,
+      "images": [
+        "IMG_4473.JPEG"
+      ],
+      "deleted": true,
+      "questions": [
+        {
+          "index": 1,
+          "answer": "A"
+        },
+        {
+          "index": 2,
+          "answer": "B"
+        },
+        {
+          "index": 3,
+          "answer": "C"
+        },
+        {
+          "index": 4,
+          "answer": "D"
+        }
+      ]
+    },
+    {
+      "id": "fa58",
+      "title": "brother2",
+      "skillId": [
+        "4"
+      ],
+      "unit": "6",
+      "totalTime": 5,
       "totalQuestion": 1,
-      "file": [
-        {
-          "uid": "rc-upload-1754988116599-2",
-          "lastModified": 1754476845376,
-          "lastModifiedDate": "2025-08-06T10:40:45.376Z",
-          "name": "screencapture-localhost-5173-admin-studySchedule-2025-08-06-17_40_42.png",
-          "size": 572278,
-          "type": "image/png",
-          "percent": 0,
-          "originFileObj": {
-            "uid": "rc-upload-1754988116599-2"
-          }
-        }
+      "images": [
+        "ETS 2023 RC.pdf"
       ],
-      "keys": [
+      "deleted": false,
+      "questions": [
         {
-          "id": 1,
-          "stt": 1,
-          "cauSo": "Câu 1",
-          "dapAn": "A"
+          "index": 1,
+          "answer": "B"
         }
+      ]
+    },
+    {
+      "id": "c8ad",
+      "title": "brother2",
+      "skillId": [
+        "3"
       ],
-      "isDeleted": true
+      "unit": "6",
+      "totalTime": 15,
+      "totalQuestion": 1,
+      "images": [
+        "ETS 2023 RC.pdf"
+      ],
+      "deleted": false,
+      "questions": [
+        {
+          "index": 1,
+          "answer": "B"
+        }
+      ]
     }
   ],
   "skills": [
@@ -498,5 +586,90 @@
   "notifications": [],
   "comments": [],
   "blog": [],
-  "feedbacks": []
+  "feedbacks": [],
+  "deadlines": [
+    {
+      "id": "68cc",
+      "deleted": false,
+      "classId": "2",
+      "exerciseId": "3350",
+      "due_date": "00:00:00 21/8/2025"
+    },
+    {
+      "id": "2e76",
+      "deleted": false,
+      "classId": "3",
+      "exerciseId": "b3f0",
+      "due_date": "00:00:00 20/8/2025"
+    },
+    {
+      "id": "c305",
+      "deleted": false,
+      "classId": "3",
+      "exerciseId": "08e6",
+      "due_date": "00:00:00 13/8/2025"
+    },
+    {
+      "id": "3ff6",
+      "deleted": false,
+      "classId": "3",
+      "exerciseId": "2114",
+      "due_date": "00:00:00 28/8/2025"
+    },
+    {
+      "id": "ad46",
+      "deleted": false,
+      "classId": "4",
+      "exerciseId": "d821",
+      "due_date": "00:00:00 28/8/2025"
+    },
+    {
+      "id": "a5aa",
+      "deleted": false,
+      "classId": "4",
+      "exerciseId": "1dfc",
+      "due_date": "00:00:00 28/8/2025"
+    },
+    {
+      "id": "eaa8",
+      "deleted": false,
+      "classId": "3",
+      "exerciseId": "97c8",
+      "due_date": "00:00:00 15/8/2025"
+    },
+    {
+      "id": "e0d3",
+      "deleted": false,
+      "classId": "3",
+      "exerciseId": "f259",
+      "due_date": "00:00:00 13/8/2025"
+    },
+    {
+      "id": "f9eb",
+      "deleted": false,
+      "classId": "3",
+      "exerciseId": "2bf3",
+      "due_date": "00:00:00 30/7/2025"
+    },
+    {
+      "id": "e91e",
+      "exerciseId": "1dfc",
+      "classId": "1",
+      "due_date": "2025-08-27"
+    },
+    {
+      "id": "25e0",
+      "exerciseId": "97c8",
+      "classId": "1",
+      "due_date": "2025-08-28"
+    },
+    {
+      "id": "2e6e",
+      "exerciseId": "1dfc",
+      "classId": "1",
+      "due_date": "2025-08-07",
+      "className": "brother",
+      "deleted": true
+    }
+  ]
 }

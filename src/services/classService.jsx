@@ -1,6 +1,6 @@
 import { get } from "../utils/request";
 
-export const getAllClass = async () => {
+export const getAllClasses = async () => {
     const result = await get("classes");
     return result;
 }

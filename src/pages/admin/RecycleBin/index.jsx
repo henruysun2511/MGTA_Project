@@ -1,6 +1,7 @@
 import { Tabs } from 'antd';
 import padding1 from "../../../components/Padding";
-import AssignmentList from './components/AssignmentList';
+import ClassScheduleTable from './childrens/ClassScheduleTable';
+import ExcerciseTable from './childrens/ExcerciseTable';
 
 export default function RecycleBin() {
     const items = [
@@ -12,12 +13,12 @@ export default function RecycleBin() {
         {
             key: '2',
             label: 'Lịch học',
-            children: 'Content of Tab Pane 2',
+            children: <ClassScheduleTable />,
         },
         {
             key: '3',
             label: 'Bài tập',
-            children: <AssignmentList />,
+            children: <ExcerciseTable />,
         },
         {
             key: '4',

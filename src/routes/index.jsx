@@ -3,12 +3,13 @@ import AdminLayout from "../layouts/AdminLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import UserLayout from "../layouts/UserLayout";
 import AccountMana from "../pages/admin/AccountMana";
-import AsignmentMana from "../pages/admin/AsignmentMana";
-import AsignmentDetailMana from "../pages/admin/AsignmentMana/AsignmentDetailMana";
 import BlogMana from "../pages/admin/BlogMana";
+import ClassMana from "../pages/admin/ClassMana";
+import ClassScheduleMana from "../pages/admin/ClassScheduleMana";
+import ExerciseMana from "../pages/admin/ExerciseMana";
+import ExerciseDetailMana from "../pages/admin/ExerciseMana/ExerciseDetailMana";
 import Overview from "../pages/admin/Overview";
 import RecycleBin from "../pages/admin/RecycleBin";
-import StudyScheduleMana from "../pages/admin/StudyScheduleMana";
 import Login from "../pages/auth/Login";
 import Logout from "../pages/auth/Logout";
 import Register from "../pages/auth/Register";
@@ -53,10 +54,11 @@ const router = createBrowserRouter([
     children: [
       { path: "overview", element: <Overview /> },
       { path: "accountMana", element: <AccountMana /> },
-      { path: "asignmentMana", element: <AsignmentMana /> },
-      { path: "asignmentDetailMana/:id", element: <AsignmentDetailMana /> },
+      { path: "exerciseMana", element: <ExerciseMana /> },
+      { path: "exerciseDetailMana/:id", element: <ExerciseDetailMana /> },
       { path: "blogMana", element: <BlogMana /> },
-      { path: "studySchedule", element: <StudyScheduleMana /> },
+      { path: "classScheduleMana", element: <ClassScheduleMana /> },
+      { path: "classMana", element: <ClassMana /> },
       { path: "recycleBin", element: <RecycleBin />}
     ],
   }
