@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import padding1 from "../../../components/Padding";
 import { fetchAction } from '../../../redux/actions/baseAction';
 import { getAllData } from '../../../services/baseService';
-import ClassScheduleCreateModal from './classScheduleCreateModal';
-import ClassScheduleFilter from './ClassScheduleFilter';
-import ClassScheduleTable from './classScheduleTable';
+import ClassScheduleCreateModal from './childrens/ClassScheduleCreateModal';
+import ClassScheduleFilter from './childrens/ClassScheduleFilter';
+import ClassScheduleTable from './childrens/ClassScheduleTable';
 
 const { Search } = Input;
 const { Option } = Select;

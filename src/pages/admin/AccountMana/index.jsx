@@ -1,62 +1,62 @@
-import { Input, Select, Space } from 'antd';
+import { Input, Space } from 'antd';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import padding1 from "../../../components/Padding";
-import AccountList from "./AccountList";
+import { fetchAction } from '../../../redux/actions/baseAction';
+import { getAllData } from '../../../services/baseService';
+import AccountFilter from './childrens/AccountFilter';
+import AccountTable from './childrens/AccountTable';
 const { Search } = Input;
 
 export default function AccountMana() {
-    const options = [
-        {
-            value: 'all',
-            label: 'Tất cả'
-        },
-        {
-            value: 1,
-            label: 'Đã kích hoạt'
-        },
-        {
-            value: 0,
-            label: 'Chưa kích hoạt'
-        }
-    ];
+    const dispatch = useDispatch();
 
-    const options2 = [
-        {
-            value: 'all',
-            label: 'Tất cả'
-        },
-        {
-            value: '6A',
-            label: '6A'
-        },
-        {
-            value: '6B',
-            label: '6B'
-        },
-        {
-            value: '7A',
-            label: '7A'
-        },
-        {
-            value: '7B',
-            label: '7B'
-        },
-        {
-            value: '8A',
-            label: '8A'
-        },
-    ]
+    useEffect(() => {
+        getAllData("accounts").then((res) => dispatch(fetchAction("accounts", res)));
+        getAllData("students").then((res) => dispatch(fetchAction("students", res)));
+        getAllData("classes").then((res) => dispatch(fetchAction("classes", res)));
+    }, [dispatch]);
+
+    const accountData = useSelector(state => state.accounts.list).filter(acc => !acc.deleted);
+    const studentData = useSelector(state => state.students.list).filter(st => !st.deleted);
+    const classData = useSelector(state => state.classes.list).filter(cl => !cl.deleted);
+
+    const [filters, setFilters] = useState({
+        keyword: "",
+        status: "all",
+        classId: "all"
+    });
+
+    const handleFilterChange = ({ type, value }) => {
+        setFilters(prev => ({ ...prev, [type]: value }));
+    };
+
+    const filteredAccounts = accountData.filter(acc => {
+        // lọc theo keyword
+        if (filters.keyword && !acc.username.toLowerCase().includes(filters.keyword.toLowerCase())) {
+            return false;
+        }
+        // lọc theo trạng thái
+        if (filters.status !== "all") {
+            if (acc.status !== filters.status) return false;
+        }
+        // lọc theo lớp
+        if (filters.classId !== "all") {
+            const student = studentData.find(st => st.accountId === acc.id);
+            if (!student || String(student.classId) !== String(filters.classId)) {
+                return false;
+            }
+        }
+        return true;
+    });
+
 
     return (
         <>
             <div style={padding1}>
                 <Space direction='vertical' size='large' style={{ width: '100%' }}>
-                    <Search placeholder="Tìm kiếm tài khoản" size='large' style={{ width: "100%", fontSize: "18px" }} />
-                    <Space direction='horizontal' size='large'>
-                        <p>Trạng thái: </p>
-                        <Select size='large' defaultValue={'all'} options={options} style={{ width: "200px", fontSize: "18px" }}></Select>
-                         <p>Lớp: </p><Select size='large' defaultValue={'all'} options={options2} style={{ width: "200px", fontSize: "18px" }}></Select>
-                    </Space>
-                    <AccountList></AccountList>
+                    <AccountFilter classData={classData} accountData={accountData} onFilterChange={handleFilterChange} />
+                    <AccountTable accountData={filteredAccounts} studentData={studentData} classData={classData} />
                 </Space>
             </div>
 

@@ -1,0 +1,60 @@
+import GV from "../../../../assets/images/gv2.webp";
+import Container2 from "../../../../components/Container/container2";
+import Title from "../../../../components/Title";
+
+export default function Section6() {
+    return (
+        <>
+            <div class="home__section-6">
+                <Title title={"Sơ lược về cô trà"} />
+                <Container2>
+                    <div class="profile__wrap">
+                        <div class="profile__image">
+                            <div class="profile__box">
+                                <img src={GV} alt="giaovien.webp" />
+                            </div>
+                            <div class="profile__box bx-0">NGUYỄN THU TRÀ</div>
+                            <div class="profile__box bx-1">1998</div>
+                            <div class="profile__box bx-2">HÀ NỘI</div>
+
+                        </div>
+                        <div class="profile__content">
+                            <h3><strong>Không còn </strong>sợ tiếng Anh nữa – nhờ cô Trà!</h3>
+                            <ul class="profile__achieve">
+                                <li>
+                                    <div class="profile__icon">
+                                        <i class="fa-solid fa-graduation-cap"></i>
+                                    </div>
+                                    <p>Tốt nghiệp loại giỏi (Upper-second Division) ngành Quản Trị Kinh Doanh - Chương trình liên
+                                        kết
+                                        quốc tế (Top-Up) University of the West of England</p>
+                                </li>
+                                <li>
+                                    <div class="profile__icon ic-1">
+                                        <i class="fa-solid fa-certificate"></i>
+                                    </div>
+                                    <p>Chứng chỉ tiếng anh TEG - Level 4</p>
+                                </li>
+                                <li>
+                                    <div class="profile__icon ic-2">
+                                        <i class="fa-solid fa-pen-fancy"></i>
+                                    </div>
+                                    <p>6 năm chuyên dạy kèm tiếng anh mất gốc dành cho học sinh cấp 2 từ lớp 6-9 theo chương trình
+                                        của
+                                        BGD (sách giáo khoa Global Success)</p>
+                                </li>
+                                <li>
+                                    <div class="profile__icon ic-3">
+                                        <i class="fa-solid fa-book-open"></i>
+                                    </div>
+                                    <p>2 Năm dạy kèm chương tình tiếng anh Cambridge Vinschool tiểu học </p>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </Container2>
+            </div>
+        </>
+    )
+}

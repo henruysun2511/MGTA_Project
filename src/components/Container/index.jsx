@@ -1,10 +1,13 @@
 export default function Container({ children }){
     const style = {
-        margin: "0 200px"
+        margin: "0 350px"
     }
     return (
-        <div className="container" style={style}>
+        <div style={style}>
               {children}
         </div>
     )
 };
+
+
+

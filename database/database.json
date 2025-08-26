@@ -1,502 +1,373 @@
 {
   "accounts": [
     {
-      "id": "1",
-      "username": "huysun2511",
-      "password": "123456",
+      "id": "a1",
+      "username": "student1",
+      "password": "123",
       "role": "student",
-      "status": "active"
+      "status": "active",
+      "name": "Nguyen Van A",
+      "class": "7A1",
+      "phone": "0123456789"
     },
     {
-      "id": "2",
-      "username": "thutra",
-      "password": "1998",
+      "id": "a2",
+      "username": "student2",
+      "password": "123",
+      "role": "student",
+      "status": "inactive",
+      "name": "Tran Van B",
+      "class": "7A2",
+      "phone": "0123456790"
+    },
+    {
+      "id": "a3",
+      "username": "teacher1",
+      "password": "123",
+      "role": "teacher"
+    },
+    {
+      "id": "a4",
+      "username": "admin1",
+      "password": "123",
       "role": "admin"
     },
     {
-      "id": "3dc1",
-      "username": "huysun",
-      "password": "1234",
+      "id": "a5",
+      "username": "student3",
+      "password": "123",
       "role": "student",
-      "status": "active"
+      "status": "active",
+      "name": "Le Thi C",
+      "class": "8A1",
+      "phone": "0123456791"
+    },
+    {
+      "id": "a6",
+      "username": "student4",
+      "password": "123",
+      "role": "student",
+      "status": "active",
+      "name": "Pham Van D",
+      "class": "8A2",
+      "phone": "0123456792"
+    },
+    {
+      "id": "a7",
+      "username": "student5",
+      "password": "123",
+      "role": "student",
+      "status": false,
+      "deleted": false,
+      "name": "N/A",
+      "class": "Chưa phân lớp",
+      "phone": "N/A"
+    },
+    {
+      "id": "a8",
+      "username": "student6",
+      "password": "123",
+      "role": "student",
+      "status": "active",
+      "name": "Nguyen Thi E",
+      "class": "9A1",
+      "phone": "0123456793"
+    },
+    {
+      "id": "a9",
+      "username": "student7",
+      "password": "123",
+      "role": "student",
+      "status": "inactive",
+      "name": "Hoang Van F",
+      "class": "9A2",
+      "phone": "0123456794"
+    },
+    {
+      "id": "a10",
+      "username": "student8",
+      "password": "123",
+      "role": "student",
+      "status": "active",
+      "name": "Nguyen Van G",
+      "class": "7A3",
+      "phone": "0123456795"
+    },
+    {
+      "id": "a11",
+      "username": "student9",
+      "password": "123",
+      "role": "student",
+      "status": "active",
+      "name": "Đặng Phương Nam",
+      "class": "7A3",
+      "phone": "0123456795"
     }
   ],
   "students": [
     {
-      "id": "1",
-      "acountId": 1,
-      "classId": 2
+      "id": "s8",
+      "accountId": "a11",
+      "name": "Đặng Phương Nam",
+      "phone": "0123456789",
+      "class": "7A1",
+      "school": "THCS A",
+      "preScore": "95",
+      "parentName": "Nguyen Van B",
+      "address": "Hà Nội",
+      "parentPhone": "0987654321",
+      "classId": "c1"
     },
     {
-      "id": "a88d",
-      "accountId": "3dc1",
-      "name": "Đặng Nhật Huy",
-      "phone": "0362832880",
-      "email": "huysun2511@gmail.com",
-      "class": "12D10",
-      "school": "Thcs Huy Văn",
-      "preScore": "99",
-      "parentName": "Đăng Viết Tuấn",
+      "id": "s1",
+      "accountId": "a1",
+      "name": "Nguyen Van A",
+      "phone": "0123456789",
+      "class": "7A1",
+      "school": "THCS A",
+      "preScore": "95",
+      "parentName": "Nguyen Van B",
       "address": "Hà Nội",
-      "parentPhone": "0362832880",
-      "classId": "1"
+      "parentPhone": "0987654321",
+      "classId": "c1"
+    },
+    {
+      "id": "s2",
+      "accountId": "a2",
+      "name": "Tran Van B",
+      "phone": "0123456790",
+      "class": "7A2",
+      "school": "THCS A",
+      "preScore": "85",
+      "parentName": "Tran Van C",
+      "address": "Hà Nội",
+      "parentPhone": "0987654322",
+      "classId": "c1"
+    },
+    {
+      "id": "s3",
+      "accountId": "a5",
+      "name": "Le Thi C",
+      "phone": "0123456791",
+      "class": "8A1",
+      "school": "THCS B",
+      "preScore": "90",
+      "parentName": "Le Van D",
+      "address": "Hà Nội",
+      "parentPhone": "0987654323",
+      "classId": "c3"
+    },
+    {
+      "id": "s4",
+      "accountId": "a6",
+      "name": "Pham Van D",
+      "phone": "0123456792",
+      "class": "8A2",
+      "school": "THCS B",
+      "preScore": "80",
+      "parentName": "Pham Van E",
+      "address": "Hà Nội",
+      "parentPhone": "0987654324",
+      "classId": "c4"
+    },
+    {
+      "id": "s5",
+      "accountId": "a8",
+      "name": "Nguyen Thi E",
+      "phone": "0123456793",
+      "class": "9A1",
+      "school": "THCS C",
+      "preScore": "70",
+      "parentName": "Nguyen Van F",
+      "address": "Hà Nội",
+      "parentPhone": "0987654325",
+      "classId": "c5"
+    },
+    {
+      "id": "s6",
+      "accountId": "a9",
+      "name": "Hoang Van F",
+      "phone": "0123456794",
+      "class": "9A2",
+      "school": "THCS C",
+      "preScore": "88",
+      "parentName": "Hoang Van G",
+      "address": "Hà Nội",
+      "parentPhone": "0987654326",
+      "classId": "c6"
+    },
+    {
+      "id": "s7",
+      "accountId": "a10",
+      "name": "Nguyen Van G",
+      "phone": "0123456795",
+      "class": "7A3",
+      "school": "THCS A",
+      "preScore": "92",
+      "parentName": "Nguyen Van H",
+      "address": "Hà Nội",
+      "parentPhone": "0987654327",
+      "classId": "c7"
     }
   ],
   "classes": [
     {
-      "id": "1",
-      "className": "7A1",
-      "deleted": false
+      "id": "c1",
+      "className": "7A1"
     },
     {
-      "id": "2",
-      "className": "7A3"
+      "id": "c2",
+      "className": "7A2"
     },
     {
-      "id": "3",
+      "id": "c3",
       "className": "8A1"
     },
     {
-      "id": "4",
+      "id": "c4",
       "className": "8A2"
     },
     {
-      "id": "5",
-      "className": "9A1",
-      "deleted": true
+      "id": "c5",
+      "className": "9A1"
     },
     {
-      "id": "0e74",
-      "className": "áasd",
+      "id": "c6",
+      "className": "9A2"
+    },
+    {
+      "id": "c7",
+      "className": "7A3"
+    },
+    {
+      "id": "c8",
+      "className": "9A3",
       "deleted": true
     }
   ],
   "classsessions": [
     {
-      "id": "1",
+      "id": "cs1",
       "name": "Ca 1",
       "startTime": "16:00",
-      "endTime": "18:30"
+      "endTime": "17:30"
     },
     {
-      "id": "2",
+      "id": "cs2",
       "name": "Ca 2",
-      "startTime": "18:30",
-      "endTime": "20:00"
+      "startTime": "17:30",
+      "endTime": "19:00"
     },
     {
-      "id": "3",
+      "id": "cs3",
       "name": "Ca 3",
-      "startTime": "20:00",
-      "endTime": "21:30"
+      "startTime": "19:00",
+      "endTime": "20:30"
     }
   ],
   "classschedules": [
     {
-      "id": "1",
-      "classSessionId": 1,
-      "classId": 1,
-      "schedule": "07/06/2025 07:00:00",
-      "linkZoom": "https://zoom.us/j/123456",
-      "className": "7A1",
-      "classSessionName": "Ca 1",
-      "deleted": true
+      "id": "sch1",
+      "classSessionId": "cs1",
+      "classId": "c1",
+      "schedule": "2025-08-10",
+      "linkZoom": "https://zoom.us/j/123456"
     },
     {
-      "id": "e311",
-      "classSessionId": "2",
-      "schedule": "13/08/2025 07:00:00",
-      "classId": "2",
-      "linkZoom": "ấdadasdadasd",
-      "className": "7A3",
-      "classSessionName": "Ca 2",
-      "deleted": true
+      "id": "sch2",
+      "classSessionId": "cs2",
+      "classId": "c2",
+      "schedule": "2025-08-11",
+      "linkZoom": "https://zoom.us/j/123457"
     },
     {
-      "id": "b265",
-      "classSessionId": "3",
-      "schedule": "2025-08-05",
-      "classId": "3",
-      "linkZoom": "ấdadasdadasd"
-    },
-    {
-      "id": "d1c0",
-      "classSessionId": "2",
-      "schedule": "2025-08-05",
-      "classId": "3",
-      "linkZoom": "ấdadasdadasd"
-    },
-    {
-      "id": "4ded",
-      "classSessionId": "3",
-      "schedule": "2025-08-06",
-      "classId": "3",
-      "linkZoom": "ấdadasdadasd"
-    },
-    {
-      "id": "1974",
-      "classSessionId": "3",
-      "schedule": "2025-08-06",
-      "classId": "2",
-      "linkZoom": "ấdadasdadasd"
-    },
-    {
-      "id": "53d5",
-      "classSessionId": "3",
-      "schedule": "2025-08-08",
-      "classId": "2",
-      "linkZoom": "ấdadasdadasd"
-    },
-    {
-      "id": "ffdb",
-      "classSessionId": "2",
-      "schedule": "2025-08-08",
-      "classId": "2",
-      "linkZoom": "ấdadasdadasd"
-    },
-    {
-      "id": "e6cb",
-      "classSessionId": "3",
-      "schedule": "2025-08-15",
-      "classId": "3",
-      "linkZoom": "ấdadasdadasd"
-    },
-    {
-      "id": "6e44",
-      "classSessionId": "3",
-      "schedule": "2025-08-15",
-      "classId": "1",
-      "linkZoom": "ấdadasdadasd"
+      "id": "sch3",
+      "classSessionId": "cs3",
+      "classId": "c3",
+      "schedule": "2025-08-12",
+      "linkZoom": "https://zoom.us/j/123458"
     }
   ],
   "exercises": [
     {
-      "id": "3350",
-      "title": "Bài tập 2",
+      "id": "ex1",
+      "title": "Bài tập 1",
       "skillId": [
-        "3"
-      ],
-      "unit": "2",
-      "totalTime": 15,
-      "images": [
-        "IMG_4473.JPEG"
-      ],
-      "deleted": true,
-      "questions": [],
-      "createAt": "2025-08-10T08:34:36.008Z"
-    },
-    {
-      "id": "b3f0",
-      "title": "Bài tập 2",
-      "skillId": [
+        "1",
         "2"
       ],
-      "unit": "2",
+      "unit": "1",
       "totalTime": 15,
-      "images": [
-        "ETS 2023 RC.pdf"
-      ],
-      "deleted": true,
-      "questions": []
+      "totalQuestion": 2,
+      "images": [],
+      "deleted": false,
+      "questions": [
+        {
+          "index": 1,
+          "answer": "A"
+        },
+        {
+          "index": 2,
+          "answer": "C"
+        }
+      ]
     },
     {
-      "id": "08e6",
-      "title": "bro",
-      "skillId": [
-        "2"
-      ],
-      "unit": "2",
-      "totalTime": 15,
-      "totalQuestion": 1,
-      "images": [
-        "ETS 2023 LC.pdf"
-      ],
-      "deleted": true,
-      "questions": []
-    },
-    {
-      "id": "2114",
-      "title": "brother",
+      "id": "ex2",
+      "title": "Bài tập 2",
       "skillId": [
         "2",
         "3"
-      ],
-      "unit": "6",
-      "totalTime": 15,
-      "totalQuestion": 3,
-      "images": [
-        "IMG_4473.JPEG"
-      ],
-      "deleted": true,
-      "questions": []
-    },
-    {
-      "id": "0b8f",
-      "title": "brother3234",
-      "skillId": [
-        "3",
-        "2"
-      ],
-      "unit": "2",
-      "totalTime": 5,
-      "totalQuestion": 4,
-      "images": [
-        "ETS 2023 RC.pdf",
-        "ETS 2023 RC.pdf"
-      ],
-      "deleted": false,
-      "questions": [
-        {
-          "index": 1,
-          "answer": "B"
-        },
-        {
-          "index": 2,
-          "answer": "C"
-        },
-        {
-          "index": 3,
-          "answer": "D"
-        },
-        {
-          "index": 4,
-          "answer": "A"
-        }
-      ]
-    },
-    {
-      "id": "d821",
-      "title": "brother2",
-      "skillId": [
-        "3",
-        "2"
-      ],
-      "unit": "6",
-      "totalTime": 15,
-      "totalQuestion": 2,
-      "images": [
-        "ETS 2023 RC.pdf",
-        "ETS 2023 RC.pdf"
-      ],
-      "deleted": false,
-      "questions": [
-        {
-          "index": 1,
-          "answer": "B"
-        },
-        {
-          "index": 2,
-          "answer": "C"
-        }
-      ]
-    },
-    {
-      "id": "1dfc",
-      "title": "brother",
-      "skillId": [
-        "3",
-        "2"
-      ],
-      "unit": "6",
-      "totalTime": 15,
-      "totalQuestion": 2,
-      "images": [
-        "ETS 2023 RC.pdf",
-        "ETS 2023 RC.pdf"
-      ],
-      "deleted": false,
-      "questions": [
-        {
-          "index": 1,
-          "answer": "B"
-        },
-        {
-          "index": 2,
-          "answer": "CC"
-        }
-      ]
-    },
-    {
-      "id": "97c8",
-      "title": "brother2",
-      "skillId": [
-        "3",
-        "4"
-      ],
-      "unit": "6",
-      "totalTime": 15,
-      "totalQuestion": 5,
-      "images": [
-        "IMG_4473.JPEG"
-      ],
-      "deleted": false,
-      "questions": [
-        {
-          "index": 1,
-          "answer": "A"
-        },
-        {
-          "index": 2,
-          "answer": "B"
-        },
-        {
-          "index": 3,
-          "answer": "V"
-        },
-        {
-          "index": 4,
-          "answer": "DD"
-        },
-        {
-          "index": 5,
-          "answer": "EEEE"
-        }
-      ]
-    },
-    {
-      "id": "f259",
-      "title": "brother2",
-      "skillId": [
-        "3"
-      ],
-      "unit": "2",
-      "totalTime": 15,
-      "totalQuestion": 2,
-      "images": [
-        "ETS 2023 RC.pdf"
-      ],
-      "deleted": false,
-      "questions": [
-        {
-          "index": 1,
-          "answer": "A"
-        },
-        {
-          "index": 2,
-          "answer": "BBBBBB"
-        }
-      ]
-    },
-    {
-      "id": "2bf3",
-      "title": "Bài tập 2",
-      "skillId": [
-        "3",
-        "4"
-      ],
-      "unit": "6",
-      "totalTime": 15,
-      "totalQuestion": 2,
-      "images": [
-        "ETS 2023 RC.pdf"
-      ],
-      "deleted": false,
-      "questions": [
-        {
-          "index": 1,
-          "answer": "A"
-        },
-        {
-          "index": 2,
-          "answer": "B"
-        }
-      ]
-    },
-    {
-      "id": "f0cb",
-      "title": "hello ae",
-      "skillId": [
-        "4",
-        "2"
       ],
       "unit": "2",
       "totalTime": 20,
-      "totalQuestion": 2,
-      "images": [
-        "ETS 2023 RC.pdf"
-      ],
+      "totalQuestion": 10,
+      "images": [],
       "deleted": false,
       "questions": [
         {
           "index": 1,
-          "answer": "A"
-        },
-        {
-          "index": 2,
-          "answer": "B"
-        }
-      ]
-    },
-    {
-      "id": "fb67",
-      "title": "bro",
-      "skillId": [
-        "4",
-        "2",
-        "3"
-      ],
-      "unit": "6",
-      "totalTime": 15,
-      "totalQuestion": 4,
-      "images": [
-        "IMG_4473.JPEG"
-      ],
-      "deleted": true,
-      "questions": [
-        {
-          "index": 1,
-          "answer": "A"
-        },
-        {
-          "index": 2,
-          "answer": "B"
-        },
-        {
-          "index": 3,
           "answer": "C"
         },
         {
-          "index": 4,
+          "index": 2,
           "answer": "D"
         }
       ]
     },
     {
-      "id": "fa58",
-      "title": "brother2",
+      "id": "d198",
+      "title": "Bài tập 3",
       "skillId": [
+        "3",
+        "2",
         "4"
       ],
-      "unit": "6",
-      "totalTime": 5,
-      "totalQuestion": 1,
-      "images": [
-        "ETS 2023 RC.pdf"
-      ],
-      "deleted": false,
-      "questions": [
-        {
-          "index": 1,
-          "answer": "B"
-        }
-      ]
-    },
-    {
-      "id": "c8ad",
-      "title": "brother2",
-      "skillId": [
-        "3"
-      ],
-      "unit": "6",
+      "unit": "1",
       "totalTime": 15,
-      "totalQuestion": 1,
+      "totalQuestion": 2,
       "images": [
-        "ETS 2023 RC.pdf"
+        {
+          "uid": "rc-upload-1756217687915-4",
+          "lastModified": 1751791975670,
+          "lastModifiedDate": "2025-07-06T08:52:55.670Z",
+          "name": "ETS 2023 RC.pdf",
+          "size": 27165533,
+          "type": "application/pdf",
+          "percent": 0,
+          "originFileObj": {
+            "uid": "rc-upload-1756217687915-4"
+          }
+        }
       ],
       "deleted": false,
       "questions": [
         {
           "index": 1,
+          "answer": "A"
+        },
+        {
+          "index": 2,
           "answer": "B"
         }
       ]
@@ -528,148 +399,199 @@
       "name": "Viết"
     }
   ],
-  "submissions": [
+  "notifications": [
     {
-      "id": "1",
-      "idUser": 1,
-      "idClass": 1,
-      "totalTrue": "3",
-      "totalWrong": "3",
-      "time": "20h",
-      "totalTime": "00:56:55",
-      "answers": [
-        {
-          "id": 1,
-          "name": 1,
-          "answer": "A",
-          "status": "true"
-        },
-        {
-          "id": 1,
-          "name": 1,
-          "answer": "B",
-          "status": "true"
-        },
-        {
-          "id": 1,
-          "name": 1,
-          "answer": "D",
-          "status": "false"
-        },
-        {
-          "id": 1,
-          "name": 1,
-          "answer": "C",
-          "status": "true"
-        },
-        {
-          "id": 1,
-          "name": 1,
-          "answer": "A",
-          "status": "True"
-        },
-        {
-          "id": 1,
-          "name": 1,
-          "answer": "A",
-          "status": "false"
-        },
-        {
-          "id": 1,
-          "name": 1,
-          "answer": "Hehe",
-          "status": "false"
-        }
-      ]
+      "id": "n1",
+      "accountId": "a1",
+      "type": "exercise",
+      "content": "Bạn có bài tập mới",
+      "createdAt": "2025-08-01T10:00:00Z"
+    },
+    {
+      "id": "n2",
+      "accountId": "a2",
+      "type": "deadline",
+      "content": "Còn 1 ngày nộp bài",
+      "createdAt": "2025-08-02T10:00:00Z"
     }
   ],
-  "notifications": [],
-  "comments": [],
-  "blog": [],
+  "comments": [
+    {
+      "id": "cmt1",
+      "accountId": "a1",
+      "content": "Bài tập khá khó",
+      "exerciseId": "ex1",
+      "createdAt": "2025-08-02T08:00:00Z"
+    }
+  ],
+  "blogs": [
+    {
+      "id": "b1",
+      "title": "Kinh nghiệm học tiếng Anh",
+      "content": "<p>Nội dung blog</p>",
+      "images": [],
+      "tags": [
+        "học tập",
+        "tiếng anh"
+      ],
+      "publishedAt": "2025-08-01T00:00:00Z"
+    }
+  ],
   "feedbacks": [],
   "deadlines": [
     {
-      "id": "68cc",
-      "deleted": false,
-      "classId": "2",
-      "exerciseId": "3350",
-      "due_date": "00:00:00 21/8/2025"
+      "id": "d1",
+      "classId": "c1",
+      "exerciseId": "ex1",
+      "due_date": "2025-08-20"
     },
     {
-      "id": "2e76",
-      "deleted": false,
-      "classId": "3",
-      "exerciseId": "b3f0",
-      "due_date": "00:00:00 20/8/2025"
+      "id": "d2",
+      "classId": "c2",
+      "exerciseId": "ex2",
+      "due_date": "2025-08-21"
     },
     {
-      "id": "c305",
-      "deleted": false,
-      "classId": "3",
-      "exerciseId": "08e6",
-      "due_date": "00:00:00 13/8/2025"
+      "id": "a87d",
+      "exerciseId": "ex2",
+      "classId": "c1",
+      "due_date": "2025-08-21"
+    }
+  ],
+  "results": [
+    {
+      "id": "r1",
+      "score": 9,
+      "incorrecCount": 1,
+      "correctCount": 9,
+      "duration": "00:20:00",
+      "exerciseId": "ex1",
+      "studentId": "s1",
+      "endTime": "2025-08-24T14:25:23.710Z",
+      "answers": [
+        {
+          "index": 1,
+          "studentAnswer": "A",
+          "correctAnswer": "B",
+          "isCorrect": false
+        },
+        {
+          "index": 2,
+          "studentAnswer": "A",
+          "correctAnswer": "A",
+          "isCorrect": true
+        }
+      ]
     },
     {
-      "id": "3ff6",
-      "deleted": false,
-      "classId": "3",
-      "exerciseId": "2114",
-      "due_date": "00:00:00 28/8/2025"
+      "id": "r2",
+      "score": 7.5,
+      "incorrecCount": 3,
+      "correctCount": 7,
+      "duration": "00:25:00",
+      "exerciseId": "ex1",
+      "studentId": "s2",
+      "endTime": "2025-08-24T14:40:10.000Z",
+      "answers": []
     },
     {
-      "id": "ad46",
-      "deleted": false,
-      "classId": "4",
-      "exerciseId": "d821",
-      "due_date": "00:00:00 28/8/2025"
+      "id": "r3",
+      "score": 8,
+      "incorrecCount": 2,
+      "correctCount": 8,
+      "duration": "00:18:30",
+      "exerciseId": "ex2",
+      "studentId": "s3",
+      "endTime": "2025-08-25T09:15:00.000Z",
+      "answers": []
     },
     {
-      "id": "a5aa",
-      "deleted": false,
-      "classId": "4",
-      "exerciseId": "1dfc",
-      "due_date": "00:00:00 28/8/2025"
+      "id": "r4",
+      "score": 6,
+      "incorrecCount": 4,
+      "correctCount": 6,
+      "duration": "00:30:00",
+      "exerciseId": "ex2",
+      "studentId": "s4",
+      "endTime": "2025-08-25T10:00:00.000Z",
+      "answers": []
     },
     {
-      "id": "eaa8",
-      "deleted": false,
-      "classId": "3",
-      "exerciseId": "97c8",
-      "due_date": "00:00:00 15/8/2025"
+      "id": "r5",
+      "score": 9.5,
+      "incorrecCount": 0,
+      "correctCount": 10,
+      "duration": "00:15:00",
+      "exerciseId": "ex1",
+      "studentId": "s5",
+      "endTime": "2025-08-26T08:45:00.000Z",
+      "answers": []
     },
     {
-      "id": "e0d3",
-      "deleted": false,
-      "classId": "3",
-      "exerciseId": "f259",
-      "due_date": "00:00:00 13/8/2025"
+      "id": "r6",
+      "score": 8.5,
+      "incorrecCount": 1,
+      "correctCount": 9,
+      "duration": "00:22:00",
+      "exerciseId": "ex2",
+      "studentId": "s6",
+      "endTime": "2025-08-26T09:10:00.000Z",
+      "answers": []
     },
     {
-      "id": "f9eb",
-      "deleted": false,
-      "classId": "3",
-      "exerciseId": "2bf3",
-      "due_date": "00:00:00 30/7/2025"
+      "id": "r7",
+      "score": 7,
+      "incorrecCount": 3,
+      "correctCount": 7,
+      "duration": "00:28:00",
+      "exerciseId": "ex1",
+      "studentId": "s7",
+      "endTime": "2025-08-27T14:00:00.000Z",
+      "answers": []
     },
     {
-      "id": "e91e",
-      "exerciseId": "1dfc",
-      "classId": "1",
-      "due_date": "2025-08-27"
+      "id": "r8",
+      "score": 8.2,
+      "incorrecCount": 2,
+      "correctCount": 8,
+      "duration": "00:19:00",
+      "exerciseId": "ex2",
+      "studentId": "s1",
+      "endTime": "2025-08-27T15:00:00.000Z",
+      "answers": []
     },
     {
-      "id": "25e0",
-      "exerciseId": "97c8",
-      "classId": "1",
-      "due_date": "2025-08-28"
+      "id": "r9",
+      "score": 6.8,
+      "incorrecCount": 4,
+      "correctCount": 6,
+      "duration": "00:27:30",
+      "exerciseId": "ex2",
+      "studentId": "s2",
+      "endTime": "2025-08-28T09:30:00.000Z",
+      "answers": []
     },
     {
-      "id": "2e6e",
-      "exerciseId": "1dfc",
-      "classId": "1",
-      "due_date": "2025-08-07",
-      "className": "brother",
-      "deleted": true
+      "id": "r10",
+      "score": 9,
+      "incorrecCount": 1,
+      "correctCount": 9,
+      "duration": "00:21:00",
+      "exerciseId": "ex2",
+      "studentId": "s3",
+      "endTime": "2025-08-28T10:15:00.000Z",
+      "answers": []
+    },
+    {
+      "id": "r11",
+      "score": 8.7,
+      "incorrecCount": 1,
+      "correctCount": 9,
+      "duration": "00:23:15",
+      "exerciseId": "ex2",
+      "studentId": "s4",
+      "endTime": "2025-08-29T11:00:00.000Z",
+      "answers": []
     }
   ]
 }

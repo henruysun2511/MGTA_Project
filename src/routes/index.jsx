@@ -10,6 +10,7 @@ import ExerciseMana from "../pages/admin/ExerciseMana";
 import ExerciseDetailMana from "../pages/admin/ExerciseMana/ExerciseDetailMana";
 import Overview from "../pages/admin/Overview";
 import RecycleBin from "../pages/admin/RecycleBin";
+import ScoreMana from "../pages/admin/ScoreMana";
 import Login from "../pages/auth/Login";
 import Logout from "../pages/auth/Logout";
 import Register from "../pages/auth/Register";
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
       { path: "practice", element: <Practice /> },
       { path: "score", element: <Score /> },
       { path: "aboutUs", element: <AboutUs /> },
-       { path: "profile", element: <Profile /> }
+      { path: "profile", element: <Profile /> }
     ],
   },
   {
@@ -59,7 +60,8 @@ const router = createBrowserRouter([
       { path: "blogMana", element: <BlogMana /> },
       { path: "classScheduleMana", element: <ClassScheduleMana /> },
       { path: "classMana", element: <ClassMana /> },
-      { path: "recycleBin", element: <RecycleBin />}
+      { path: "scoreMana", element: <ScoreMana /> },
+      { path: "recycleBin", element: <RecycleBin /> }
     ],
   }
 ]);

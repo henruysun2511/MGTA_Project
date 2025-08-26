@@ -6,10 +6,10 @@ import padding1 from "../../../components/Padding";
 import { usePagination } from "../../../hooks/usePagination";
 import { fetchAction } from "../../../redux/actions/baseAction";
 import { getAllData } from "../../../services/baseService";
-import ExerciseCard from "./components/ExerciseCard";
-import ExerciseFilter from "./components/ExerciseFilter";
-import ExerciseFormModal from "./components/ExerciseFormModal";
-import ExerciseKeyModal from "./components/ExerciseKeyModal";
+import ExerciseCard from "./childrens/ExerciseCard";
+import ExerciseFilter from "./childrens/ExerciseFilter";
+import ExerciseFormModal from "./childrens/ExerciseFormModal";
+import ExerciseKeyModal from "./childrens/ExerciseKeyModal";
 
 
 export default function ExerciseList() {

@@ -1,46 +1,37 @@
-import { Button, Col, DatePicker, Form, Modal, Select } from 'antd';
-import dayjs from "dayjs";
+import { Button, Col, Form, Input, Modal, Row } from 'antd';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateAction } from '../../../../../redux/actions/baseAction';
 import { updateData } from '../../../../../services/baseService';
 
 export default function ClassStudentUpdateModal({ open, onCancel, record }) {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
-
-    const exerciseData = useSelector((state) => state.exercises.list).filter(ex => !ex.deleted);
-    const exerciseOptions = exerciseData.map((item) => ({
-        value: item.id,
-        label: item.title,
-    }));
-
+    console.log(record)
     useEffect(() => {
         if (open && record) {
             form.setFieldsValue({
-                exerciseId: record.exerciseId,
-                due_date: record.due_date ? dayjs(record.due_date, "YYYY-MM-DD") : null
+                name: record.name,
+                school: record.school,
+                address: record.address,
+                parentName: record.parentName,
+                parentPhone: record.parentPhone,
             });
         }
     }, [open, record, form]);
 
-    const handleUpdateClassExercise = async (values) => {
-        const formatted = values.due_date.format("YYYY-MM-DD");
-        const options = {
-            classId: record.classId,
-            exerciseId: values.exerciseId,
-            due_date: formatted
-        };
-
-        const res = await updateData("deadlines", record.id, options);
+    const handleUpdateClassStudents = async (values) => {
+        const res = await updateData("students", record.id, values);
         if (res) {
-            dispatch(updateAction("deadlines", res));
-            alert("Cập nhật bài tập thành công");
+            dispatch(updateAction("students", res));
+            alert("Cập nhật thông tin học sinh thành công");
             onCancel();
         } else {
-            alert("Cập nhật bài tập thất bại");
+            alert("Cập nhật thông tin học sinh thất bại");
         }
     };
+
+
 
     return (<>
         <Modal
@@ -48,29 +39,40 @@ export default function ClassStudentUpdateModal({ open, onCancel, record }) {
             title="Cập nhật lịch học"
             onCancel={onCancel}
             footer={null}
+            width={900}
         >
-            <Form form={form} layout="vertical" onFinish={handleUpdateClassExercise}>
-                <Form.Item
-                    name="exerciseId"
-                    label="Bài tập"
-                    rules={[{ required: true, message: 'Vui lòng chọn bài tập' }]}
-                >
-                    <Select placeholder="Chọn bài tập" options={exerciseOptions}>
-                    </Select>
-                </Form.Item>
+            <Form layout="vertical" form={form} onFinish={handleUpdateClassStudents}>
+                <Row gutter={16}>
+                    <Col span={12}>
+                        <Form.Item name="name" label="Học sinh" rules={[{ required: true }]}>
+                            <Input placeholder="Nhập tên học sinh" />
+                        </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                        <Form.Item name="school" label="Trường" rules={[{ required: true }]}>
+                            <Input placeholder="Nhập trường" />
+                        </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                        <Form.Item name="address" label="Địa chỉ" rules={[{ required: true }]}>
+                            <Input placeholder="Nhập địa chỉ" />
+                        </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                        <Form.Item name="parentName" label="Phụ huynh" rules={[{ required: true }]}>
+                            <Input placeholder="Nhập họ tên phụ huynh" />
+                        </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                        <Form.Item name="parentPhone" label="Số điện thoại phụ huynh" rules={[{ required: true }]}>
+                            <Input placeholder="Nhập số điện thoại phụ huynh" />
+                        </Form.Item>
+                    </Col>
 
-                <Form.Item
-                    name="due_date"
-                    label="Thời hạn nộp bài"
-                    rules={[{ required: true, message: 'Vui lòng chọn thời hạn nộp bài' }]}
-                >
-                    <DatePicker format="DD/MM/YYYY" style={{ width: '100%' }} />
-                </Form.Item>
-
-
-                <Col span={24} style={{ textAlign: "right" }}>
-                    <Button type="primary" htmlType="submit">Lưu bài tập</Button>
-                </Col>
+                    <Col span={24} style={{ textAlign: "right" }}>
+                        <Button type="primary" htmlType="submit">Lưu bài tập</Button>
+                    </Col>
+                </Row>
             </Form>
         </Modal>
     </>)

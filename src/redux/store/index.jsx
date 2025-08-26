@@ -14,7 +14,10 @@ const AllReducers = combineReducers({
     deadlines: baseReducer("deadlines"),
     exercises: baseReducer("exercises"),
     accounts: baseReducer("accounts"),
-    skills: baseReducer("skills")
+    skills: baseReducer("skills"),
+    blogs: baseReducer("blogs"),
+    results: baseReducer("results"),
+    notifications: baseReducer("nofitications"),
 });
 
 export default AllReducers;

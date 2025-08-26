@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { usePagination } from '../../../../../hooks/usePagination';
 import ClassStudentChangeClassModal from './ClassStudentChangeClassModal';
+import ClassStudentUpdateModal from './ClassStudentUpdateModal';
 const { Column } = Table;
 
 export default function ClassStudentTable({ classStudentData }) {
@@ -13,7 +14,7 @@ export default function ClassStudentTable({ classStudentData }) {
     const [openModal, setOpenModal] = useState(false);
     const [openClassModal, setOpenClassModal] = useState(false);
     const [editingRecord, setEditingRecord] = useState(null);
-    
+
     return (
         <>
             <Table dataSource={classStudentData}
@@ -33,15 +34,15 @@ export default function ClassStudentTable({ classStudentData }) {
                                 <EditOutlined onClick={() => { setOpenModal(true); setEditingRecord(record); }} />
                             </Tooltip>
                             <Tooltip title="Chuyển lớp">
-                                <RetweetOutlined onClick={() => {setOpenClassModal(true); setEditingRecord(record);}} />
+                                <RetweetOutlined onClick={() => { setOpenClassModal(true); setEditingRecord(record); }} />
                             </Tooltip>
                         </Space>
                     )}
                 />
             </Table>
 
-            <ClassStudentChangeClassModal open={openClassModal} onCancel={() => setOpenClassModal(false)} record={editingRecord}/>
-
+            <ClassStudentChangeClassModal open={openClassModal} onCancel={() => setOpenClassModal(false)} record={editingRecord} />
+            <ClassStudentUpdateModal open={openModal} onCancel={() => setOpenModal(false)} record={editingRecord} />
         </>
     )
 }

@@ -10,3 +10,13 @@ const padding1 = {
 };
 
 export default padding1;
+
+export const padding2 = {
+    borderRadius: "10px",
+    boxShadow: "0px 6px 15px rgba(0, 0, 0, 0.2)",
+    padding: "20px",
+    marginBottom: "20px",
+}
+
+
+

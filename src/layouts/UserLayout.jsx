@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import { useSelector } from 'react-redux';
 import { Link, NavLink, Outlet } from "react-router-dom";
 import logo from '../assets/images/logoNoBackGround.png';
-import Container from "../components/Container";
+import Container2 from '../components/Container/container2';
 import { getCookie } from '../utils/cookies';
 import './UserLayout.scss';
 
@@ -15,7 +15,7 @@ export default function UserLayout() {
     return (
         <>
             <div className="header">
-                <Container>
+                <Container2>
                     <div className="header__wrap">
                         <Link to=""><div className='header__logo'><img src={logo} alt="logo.png" /></div></Link>
                         <ul>
@@ -52,7 +52,7 @@ export default function UserLayout() {
                         )}
 
                     </div>
-                </Container>
+                </Container2>
             </div>
             <Outlet />
 

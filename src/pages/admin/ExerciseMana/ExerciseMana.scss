@@ -1,129 +1,96 @@
 @import '../../../assets/colors.scss';
 
-.practice-item {
+.exercise__item {
     border: 1px solid rgb(156, 154, 154);
     padding: 15px;
     border-radius: 15px;
     margin: 15px 0;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 250px;
+    height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
+
+    .exercise__icon {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        color: gray;
+        margin-bottom: 5px;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    h3 {
+        font-size: 20px;
+        font-weight: 600;
+
+    }
+
+    .exercise__tag {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 10px 0;
+        overflow: scroll;
+        scrollbar-width: none;
+
+        p {
+            background-color: #F2F8FE;
+            padding: 5px;
+            border-radius: 20px;
+            margin-bottom: 3px;
+        }
+    }
+
+    .button__delete {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        border: 1px solid black;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px;
+        padding: 5px;
+    }
+
+    .button__detail {
+        text-align: center;
+        border-radius: 2px;
+        margin: 20px 0 0 0;
+        padding: 5px 10px;
+        cursor: pointer;
+        background-color: $color-yellow;
+    }
 }
 
-.button-delete{
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    border: 1px solid black;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-    padding: 5px;
-}
+.exercise-detail {
+    .exercise-detail__wrap {
+        display: flex;
+        gap: 150px;
+        margin-bottom: 15px;
 
-.practice-item h3,
-.practice-history h3 {
-    font-size: 20px;
-    font-weight: 600;
+        .exercise-detail__icon {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-}
+        .exercise-detail__tag {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 10px 0;
 
-.practice-item .inner-icon {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    color: gray;
-    margin-bottom: 5px;
-}
-
-.practice-item .inner-icon p {
-    margin: 0;
-}
-
-.practice-item .practice-tag,
-.practice-history .practice-tag {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin: 10px 0;
-}
-
-.practice-item .practice-tag p,
-.practice-history .practice-tag p {
-    background-color: #F2F8FE;
-    padding: 5px;
-    border-radius: 20px;
-    margin-bottom: 3px;
-}
-
-.practice-item .practice-status {
-    background-color: #6BB175;
-    padding: 1px 5px;
-    margin: 10px 0;
-    color: white;
-    text-align: center;
-    width: 100px;
-}
-
-.button-detail {
-    text-align: center;
-    border-radius: 2px;
-    margin: 20px 0 0 0;
-    padding: 5px 10px;
-    cursor: pointer;
-    background-color: $color-yellow;
-}
-
-
-.practice-item .practice-status.ps-1 {
-    background-color: rgb(234, 46, 46);
-}
-
-
-.practice h3 {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.practice .inner-icon {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    color: black;
-    margin: 20px 0;
-}
-
-.practice .inner-icon p {
-    margin: 0;
-}
-
-.practice .practice-tag {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin: 20px 0px;
-}
-
-.practice .practice-tag p {
-    background-color: #F2F8FE;
-    padding: 5px;
-    border-radius: 20px;
-    margin-bottom: 3px;
-}
-
-.p1 {
-    margin: 20px 0;
-}
-
-.flex {
-    display: flex;
-
-}
-
-.flex div {
-    margin-right: 100px;
+            p {
+                background-color: #F2F8FE;
+                padding: 5px;
+                border-radius: 20px;
+                margin-bottom: 3px;
+            }
+        }
+    }
 }
