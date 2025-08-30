@@ -32,7 +32,8 @@
       "id": "a4",
       "username": "admin1",
       "password": "123",
-      "role": "admin"
+      "role": "admin",
+      "accessToken": 123456
     },
     {
       "id": "a5",
