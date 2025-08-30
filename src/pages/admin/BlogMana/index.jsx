@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import padding1 from "../../../components/Padding";
 import { fetchAction } from '../../../redux/actions/baseAction';
 import { getAllData } from '../../../services/baseService';
-import "./BlogMana.scss";
+import "./blogMana.scss";
 import BlogCreateModal from './childrens/BlogCreateModal';
 import BlogFilter from './childrens/BlogFilter';
 import BlogTable from './childrens/BlogTable';
