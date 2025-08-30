@@ -1,0 +1,111 @@
+@import "../../../assets/colors.scss";
+
+.blog__item {
+
+    .blog__writer {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            background-color: $color-light-pink;
+            border-radius: 50%;
+            border: 5px dashed $color-yellow;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        }
+
+        .name {
+            margin-bottom: 5px;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .time {
+            color: gray;
+        }
+    }
+
+    .blog__title {
+        margin: 20px 0;
+        font-size: 25px;
+        font-weight: 600;
+    }
+
+    .blog__content {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .blog__image {
+        position: relative; // quan trọng
+        margin: 30px auto; // căn giữa theo khung cha
+        width: 630px;
+        height: 630px;
+
+        img {
+            border-radius: 15px;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            display: block;
+            z-index: 0;
+        }
+
+        .prev,
+        .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+
+            i {
+                font-size: 30px;
+                cursor: pointer;
+                background-color: $color-yellow;
+                border-radius: 50%;
+                padding: 10px;
+            }
+        }
+
+        .prev {
+            left: -45px;
+        }
+
+        .next {
+            right: -45px;
+        }
+    }
+
+    .blog__tag {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 0;
+        margin: 0;
+
+        li {
+            background-color: #C4D1E9;
+            padding: 3px 7px;
+            color: blue;
+            border-radius: 15px;
+            display: inline-block;
+        }
+    }
+
+    .blog__react {
+        margin: 30px 0 0 0;
+        font-size: 20px;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        cursor: pointer;
+    }
+}

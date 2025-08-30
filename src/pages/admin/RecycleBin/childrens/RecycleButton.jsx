@@ -1,6 +1,6 @@
-import { DeleteOutlined, RetweetOutlined } from "@ant-design/icons";
+import { RetweetOutlined } from "@ant-design/icons";
 import { Button, Space } from "antd";
-import { handleDeleteAll, handleRestoreAll } from "./RecycleHandle";
+import { handleRestoreAll } from "./RecycleHandle";
 
 export default function RecycleButton({ dispatch, path, list }) {
     return (
@@ -13,15 +13,6 @@ export default function RecycleButton({ dispatch, path, list }) {
                     onClick={() => handleRestoreAll(dispatch, path, list)}
                 >
                     Khôi phục tất cả
-                </Button>
-                <Button
-                    icon={<DeleteOutlined />}
-                    type="primary"
-                    danger
-                    size="large"
-                    onClick={() => handleDeleteAll(dispatch, path, list)}
-                >
-                    Xóa tất cả
                 </Button>
             </Space>
         </div>

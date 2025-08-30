@@ -12,13 +12,20 @@ export default function AccountMana() {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        // getAllData("api/v1/admin/account/accounts").then((res) => {
+        //     console.log(res);
+        //     dispatch(fetchAction("accounts", res.data.data))
+        // });
         getAllData("accounts").then((res) => dispatch(fetchAction("accounts", res)));
         getAllData("students").then((res) => dispatch(fetchAction("students", res)));
         getAllData("classes").then((res) => dispatch(fetchAction("classes", res)));
     }, [dispatch]);
 
+
     const accountData = useSelector(state => state.accounts.list).filter(acc => !acc.deleted);
+
     const studentData = useSelector(state => state.students.list).filter(st => !st.deleted);
+        console.log(studentData);
     const classData = useSelector(state => state.classes.list).filter(cl => !cl.deleted);
 
     const [filters, setFilters] = useState({
@@ -31,7 +38,7 @@ export default function AccountMana() {
         setFilters(prev => ({ ...prev, [type]: value }));
     };
 
-    const filteredAccounts = accountData.filter(acc => {
+    const filteredAccounts = (accountData ?? []).filter(acc => {
         // lọc theo keyword
         if (filters.keyword && !acc.username.toLowerCase().includes(filters.keyword.toLowerCase())) {
             return false;

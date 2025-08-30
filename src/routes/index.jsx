@@ -15,9 +15,9 @@ import Login from "../pages/auth/Login";
 import Logout from "../pages/auth/Logout";
 import Register from "../pages/auth/Register";
 import AboutUs from "../pages/client/AboutUs";
-import AsignmentDetail from "../pages/client/AsignmentDetail";
 import Blog from "../pages/client/Blog";
 import Curriculum from "../pages/client/Curriculum";
+import ExerciseDetail from "../pages/client/ExerciseDetail";
 import Feedback from "../pages/client/Feedback";
 import Home from "../pages/client/Home";
 import Practice from "../pages/client/Practice";
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
       { path: "curriculum", element: <Curriculum /> },
       { path: "blog", element: <Blog /> },
       { path: "feedback", element: <Feedback /> },
-      { path: "asignmentDetail", element: <AsignmentDetail /> },
+      { path: "exerciseDetail/:id", element: <ExerciseDetail /> },
       { path: "practice", element: <Practice /> },
       { path: "score", element: <Score /> },
       { path: "aboutUs", element: <AboutUs /> },

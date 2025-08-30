@@ -10,6 +10,11 @@ export const getDataById = async (path, id) => {
     return result;
 }
 
+export const getDataBySpecificId = async (path, key, id) => {
+    const result = await get(`${path}?${key}=${id}`);
+    return result;
+}
+
 export const createData = async (path,options) => {
     const result = await post(path, options);
     return result;

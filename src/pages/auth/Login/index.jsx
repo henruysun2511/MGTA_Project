@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from '../../../assets/images/logoNoBackGround.png';
 import { checkLogin } from '../../../redux/actions/loginAction';
 import { login } from '../../../services/userService';
-import { setCookie } from "../../../utils/cookies";
 import "./login.scss";
 
 export default function Login() {
@@ -19,22 +18,58 @@ export default function Login() {
         const username = e.username;
         const password = e.password;
         const response = await login(username, password);
+        console.log(response);
         if (response.length > 0) {
             setError(null);
             setSuccess("Đăng nhập thành công");
-            setCookie("id",response[0].id,1);
-            setCookie("username",response[0].username,1);
-            setCookie("password",response[0].password,1);
-            setCookie("role",response[0].role,1);
+            localStorage.setItem("accessToken", response[0].accessToken);
             dispatch(checkLogin(true));
-            setTimeout(() => {
-                navigate("/");
-            }, 2000);
-        } else {
+            setTimeout(() => { navigate("/"); }, 2000);
+        }
+        else {
             setSuccess(null);
             setError("Tên đăng nhập hoặc mật khẩu sai");
         }
     }
+
+
+    // const handleSubmit = async (e) => {
+    //     const username = e.username;
+    //     const password = e.password;
+
+    //     try {
+    //         const response = await login(username, password);
+    //         console.log(response);
+
+    //         if (response.message === "Đăng nhập thành công" && response.data?.accessToken) {
+    //             setError(null);
+    //             setSuccess("Đăng nhập thành công");
+
+    //             // Lưu token vào localStorage
+    //             localStorage.setItem("accessToken", response.data.accessToken);
+
+    //             dispatch(checkLogin(true));
+
+    //             // Thông báo
+    //             alert("Đăng nhập thành công");
+
+    //             // Điều hướng về trang chủ
+    //             setTimeout(() => {
+    //                 navigate("/");
+    //             }, 1000);
+    //         } else {
+    //             setSuccess(null);
+    //             setError("Tên đăng nhập hoặc mật khẩu sai");
+    //             alert("Tên đăng nhập hoặc mật khẩu sai");
+    //         }
+    //     } catch (error) {
+    //         console.error(error);
+    //         setSuccess(null);
+    //         setError("Có lỗi xảy ra khi đăng nhập");
+    //         alert("Có lỗi xảy ra khi đăng nhập");
+    //     }
+    // };
+
 
     return (
         <>

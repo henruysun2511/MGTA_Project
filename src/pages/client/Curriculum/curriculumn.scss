@@ -1,0 +1,285 @@
+@import "../../../assets/colors.scss";
+
+
+
+
+.events {
+    list-style: none;
+    margin: 0;
+    padding: 6px;
+}
+
+.schedule__item {
+    background: #f0f9ff;
+    /* xanh nhạt */
+    border: 1px solid #bae6fd;
+    border-radius: 8px;
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    font-size: 13px;
+    line-height: 1.4;
+    transition: all 0.2s ease;
+}
+
+.schedule__item:hover {
+    background: #e0f2fe;
+    border-color: #38bdf8;
+    transform: translateY(-2px);
+}
+
+.schedule-info {
+    font-weight: 600;
+    color: #0369a1;
+    margin-bottom: 4px;
+}
+
+.link {
+    display: inline-block;
+    background: #0284c7;
+    color: #fff !important;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.link:hover {
+    background: #0369a1;
+}
+
+.ant-picker-calendar .ant-picker-cell {
+    height: 100px !important;
+    /* chỉnh kích thước ô (mặc định ~70px) */
+    vertical-align: top;
+}
+
+
+.curriculumn__section-1 {
+    padding-top: 300px;
+    background: linear-gradient(135deg, #5c6ff4, #e870c2);
+    height: 900px;
+    z-index: 1;
+
+    h1 {
+        margin-bottom: 30px;
+        color: white;
+    }
+
+
+    .practice__history-wrap {
+        .practice___history-item {
+            background-color: white;
+            padding: 15px;
+            border-radius: 15px;
+
+            .practice__tag {
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+                margin: 15px 0;
+
+                p {
+                    background-color: #F2F8FE;
+                    padding: 5px;
+                    border-radius: 20px;
+                    margin-bottom: 3px;
+                }
+            }
+
+            .practice__info {
+                margin-bottom: 15px;
+            }
+        }
+    }
+}
+
+.curriculumn__section-2 {
+    margin-bottom: 250px;
+
+    .practice__list {
+        .practice__item {
+            border: 1px solid rgb(156, 154, 154);
+            padding: 15px;
+            border-radius: 15px;
+            margin: 15px 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            &:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            }
+
+            h3 {
+                font-size: 20px;
+                font-weight: 600;
+            }
+
+            .practice__icon {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                color: gray;
+
+                p {
+                    margin: 0;
+                }
+            }
+
+            .practice__tag {
+                display: flex;
+                gap: 5px;
+                flex-wrap: wrap;
+                margin: 10px 0 20px;
+                overflow: scroll;
+                height: 100px;
+                scrollbar-width: none;
+
+                p {
+                    background-color: #F2F8FE;
+                    padding: 5px;
+                    border-radius: 20px;
+                    margin-bottom: 0;
+                    height: 30px;
+                }
+            }
+
+            .practice__status {
+                background-color: #6BB175;
+                padding: 1px 5px;
+                margin: 10px 0;
+                color: white;
+                text-align: center;
+                width: 100px;
+
+                &.ps--1 {
+                    background-color: rgb(234, 46, 46);
+                }
+            }
+
+            .button__detail {
+                padding: 5px 20px;
+                text-align: center;
+                border-radius: 2px;
+                margin: 20px 0 0 0;
+                background-color: $color-yellow;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.schedule,
+.practice-wrap {
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+
+
+
+
+.date-picker {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.date-info {
+    width: 100%;
+    margin-bottom: 20px;
+    border-right: 1px solid rgb(179, 175, 175);
+}
+
+.date-item {
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+    border-bottom: 5px solid #69dfe1;
+    margin-bottom: 50px;
+}
+
+.day {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.route {
+    font-weight: 700;
+}
+
+.study-item {
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.link {
+    background-color: #597CEF;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.study-info {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.class__wrap {
+    margin: 50px 0;
+
+    h1 {
+        margin-bottom: 30px;
+        font-weight: 700;
+    }
+
+    .class__list {
+        display: flex;
+        gap: 20px;
+        padding: 0;
+
+        li {
+            font-size: 20px;
+            border: 2px solid #e88ec6;
+            border-radius: 45px;
+            padding: 5px 15px;
+            cursor: pointer;
+            text-transform: uppercase;
+
+            &.active {
+                background-color: $color-dark-pink;
+                color: white;
+            }
+        }
+    }
+}

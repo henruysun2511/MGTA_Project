@@ -15,16 +15,19 @@ export default function AccountTable({ accountData, studentData, classData }) {
 
     const dataSource = accountData.map((account) => {
         const studentDataByAccountId = studentData.find((st) => st.accountId === account.id);
-        const classDataByStudentId = studentDataByAccountId ?
-            classData.find((cl) => String(cl.id) === String(studentDataByAccountId.classId)) : null;
+
+        const classDataByStudentId = studentDataByAccountId
+            ? classData.find((cl) => String(cl.id) === String(studentDataByAccountId.classId))
+            : null;
 
         return {
             ...account,
             name: studentDataByAccountId ? studentDataByAccountId.name : "N/A",
             class: classDataByStudentId ? classDataByStudentId.className : "Chưa phân lớp",
         };
-
-    }).filter((acc) => acc.role === "student");
+    })
+    .filter((acc) => acc.role === "student");
+    console.log(dataSource);
 
     const handleActivate = async (record) => {
         const res = await updateData("accounts", record.id, { ...record, status: "active" });
@@ -72,7 +75,7 @@ export default function AccountTable({ accountData, studentData, classData }) {
                                 <Tooltip title="Phân lớp">
                                     <EditOutlined
                                         style={{ color: "#1890ff", cursor: "pointer" }}
-                                        onClick={() => {setOpenEditClassModal(true); setEditingRecord(record);} }
+                                        onClick={() => { setOpenEditClassModal(true); setEditingRecord(record); }}
                                     />
                                 </Tooltip>
                             )}
@@ -86,7 +89,7 @@ export default function AccountTable({ accountData, studentData, classData }) {
                     render={(text, record) => (
                         <Space size="middle">
                             <Tooltip title="Xem chi tiết tài khoản">
-                                <EyeOutlined onClick={() => {setOpenWatchDetailModal(true); setEditingRecord(record);}} />
+                                <EyeOutlined onClick={() => { setOpenWatchDetailModal(true); setEditingRecord(record); }} />
                             </Tooltip>
                             <Tooltip title="Xóa tài khoản">
                                 <DeleteOutlined onClick={() => handleDeleteAccount(record)} />
@@ -120,7 +123,7 @@ export default function AccountTable({ accountData, studentData, classData }) {
                 />
             </Table>
 
-            <AccountUpdateClassModal open={openEditClassModal} onCancel={() => setOpenEditClassModal(false)} record={editingRecord}/>
+            <AccountUpdateClassModal open={openEditClassModal} onCancel={() => setOpenEditClassModal(false)} record={editingRecord} />
             <AccountWatchDetailModal open={openWatchDetailModal} onCancel={() => setOpenWatchDetailModal(false)} record={editingRecord} />
         </>
     )

@@ -5,6 +5,11 @@ export const login = async (username, password) => {
     return result;
 }
 
+// export const login = async (username, password) => {
+//     const result = await post("api/v1/auth/login", {username: username, password: password});
+//     return result;
+// }
+
 export const register = async (options) => {
     const result = await post(`accounts`, options);
     return result;

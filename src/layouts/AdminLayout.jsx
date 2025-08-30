@@ -1,8 +1,9 @@
-import { BellFilled, BookOutlined, DeleteOutlined, FolderOutlined, HomeFilled, LaptopOutlined, LogoutOutlined, ReadOutlined, ScheduleOutlined, TrophyOutlined, UserOutlined } from '@ant-design/icons';
+import { BookOutlined, DeleteOutlined, FolderOutlined, HomeFilled, LaptopOutlined, LogoutOutlined, ReadOutlined, ScheduleOutlined, TrophyOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Menu } from 'antd';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import avatar from '../assets/images/gv.png';
 import logo from '../assets/images/logo.jpg';
+import NofiticationStudent from '../components/Nofitications/NofiticationStudent';
 import "./AdminLayout.scss";
 
 export default function AdminLayout() {
@@ -42,7 +43,8 @@ export default function AdminLayout() {
                         <Button className='button__home' icon={<HomeFilled />}>
                             <Link to="/">Home</Link>
                         </Button>
-                        <BellFilled className='admin__icon-nofitication' />
+                        <NofiticationStudent />
+
                     </div>
                     <div className='admin__content'>
                         <Outlet />

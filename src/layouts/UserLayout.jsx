@@ -4,13 +4,17 @@ import { useSelector } from 'react-redux';
 import { Link, NavLink, Outlet } from "react-router-dom";
 import logo from '../assets/images/logoNoBackGround.png';
 import Container2 from '../components/Container/container2';
-import { getCookie } from '../utils/cookies';
 import './UserLayout.scss';
 
 export default function UserLayout() {
-    const role = getCookie("role");
+    const token = localStorage.getItem("accessToken");
+    // const role = getCookie("role");
     const isLogin = useSelector(state => state.loginReducer);
-    const username = getCookie("username");
+    // const username = getCookie("username");
+
+    // useEffect(() => {
+    //     get
+    // })
 
     return (
         <>
@@ -24,7 +28,7 @@ export default function UserLayout() {
                             <li><NavLink to="/feedback">Feedback</NavLink></li>
                             <li><NavLink to="/aboutus">Về chúng tôi</NavLink></li>
                         </ul>
-                        {!role && (
+                        {!token ? (
                             <div className="header__auth">
                                 <Button className="header__button-login">
                                     <Link to="/auth/login">Đăng nhập</Link>
@@ -33,8 +37,14 @@ export default function UserLayout() {
                                     <Link to="/auth/register">Đăng ký</Link>
                                 </Button>
                             </div>
-                        )}
-                        {role === "student" && (
+                        ) : (<div className="header__auth">
+                            <BellFilled />
+                            <p>Xin chào  /</p>
+                            <Button className="header__button-register">
+                                <Link to="/auth/logout">Đăng xuất</Link>
+                            </Button>
+                        </div>)}
+                        {/* {role === "student" && (
                             <div className="header__auth">
                                 <BellFilled />
                                 <p>Xin chào {username} /</p>
@@ -42,14 +52,14 @@ export default function UserLayout() {
                                     <Link to="/auth/logout">Đăng xuất</Link>
                                 </Button>
                             </div>
-                        )}
-                        {role === "admin" && (
+                        )} */}
+                        {/* {role === "admin" && (
                             <div className="header__auth">
                                 <Button className="header__button-admin">
                                     <Link to="/admin/overview">Trang quản lý</Link>
                                 </Button>
                             </div>
-                        )}
+                        )} */}
 
                     </div>
                 </Container2>

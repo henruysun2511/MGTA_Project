@@ -18,6 +18,7 @@ const AllReducers = combineReducers({
     blogs: baseReducer("blogs"),
     results: baseReducer("results"),
     notifications: baseReducer("nofitications"),
+    comments: baseReducer("comments"),
 });
 
 export default AllReducers;

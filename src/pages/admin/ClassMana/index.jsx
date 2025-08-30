@@ -10,6 +10,7 @@ import ClassTab from "./childrens/ClassTab";
 export default function ClassMana() {
     const dispatch = useDispatch();
     const classData = useSelector((state) => state.classes.list);
+    const studentData = useSelector((state) => state.students.list).filter(st => !st.deleted);
 
     const [items, setItems] = useState([]);
     const [activeKey, setActiveKey] = useState("");
@@ -19,6 +20,9 @@ export default function ClassMana() {
     useEffect(() => {
         getAllData("classes").then((res) => {
             dispatch(fetchAction("classes", res));
+        });
+         getAllData("students").then((res) => {
+            dispatch(fetchAction("students", res));
         });
     }, [dispatch]);
 
@@ -46,7 +50,12 @@ export default function ClassMana() {
         dispatch(softDeleteAction("classes", targetKey));
         const res = await updateData("classes", targetKey, { deleted: true });
         if (res) {
-            alert("Đã xóa lớp");
+            const affectedStudents = studentData.filter(st => String(st.classId) === String(targetKey));
+            for (const st of affectedStudents) {
+                await updateData("students", st.id, { classId: "" });
+            }
+            alert("Đã xóa lớp và cập nhật học sinh");
+
             let newActiveKey = activeKey;
             let lastIndex = -1;
             items.forEach((item, i) => {
@@ -75,7 +84,6 @@ export default function ClassMana() {
         }
     };
 
-
     const handleAddClass = async (value) => {
         const res = await createData("classes", value);
         if (res) {
@@ -100,7 +108,8 @@ export default function ClassMana() {
                     size="large"
                     onChange={onChange}
                     activeKey={activeKey}
-                    onEdit={onEdit}
+
+                    onEdit={(targetKey, action) => onEdit(targetKey, action)}
                 />
             </div>
 

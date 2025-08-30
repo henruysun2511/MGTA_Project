@@ -1,10 +1,10 @@
-import { DeleteOutlined, RetweetOutlined } from '@ant-design/icons';
+import { RetweetOutlined } from '@ant-design/icons';
 import { Space, Table, Tooltip } from 'antd';
 import { useDispatch } from 'react-redux';
 import { usePagination } from '../../../../hooks/usePagination';
 import RecycleButton from './RecycleButton';
 import RecycleFilter from './RecycleFilter';
-import { handleDelete, handleRestore, handleRestoreAll } from './RecycleHandle';
+import { handleRestore, handleRestoreAll } from './RecycleHandle';
 const { Column } = Table;
 
 export default function RecycleClassTable({ classData }) {
@@ -29,9 +29,6 @@ export default function RecycleClassTable({ classData }) {
                             <Space size="middle">
                                 <Tooltip title="Khôi phục">
                                     <RetweetOutlined onClick={() => handleRestore(dispatch, "classes", record.id, { ...record, deleted: false })} />
-                                </Tooltip>
-                                <Tooltip title="Xóa vĩnh viễn">
-                                    <DeleteOutlined onClick={() => handleDelete(dispatch, "classes", record.id)} />
                                 </Tooltip>
                             </Space>
                         )}
