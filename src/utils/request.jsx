@@ -1,5 +1,6 @@
 //Định nghĩa các phương thức lên server
-const API_DOMAIN = "http://localhost:3001/";
+// const API_DOMAIN = "http://localhost:3001/";
+const API_DOMAIN = "https://mgta-fake-api.onrender.com/api/";
 
 // const API_DOMAIN = "https://9f0f6cb767be.ngrok-free.app/";
 
