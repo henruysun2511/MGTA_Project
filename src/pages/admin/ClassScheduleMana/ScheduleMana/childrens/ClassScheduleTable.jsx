@@ -2,10 +2,10 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Space, Table, Tooltip } from 'antd';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { usePagination } from '../../../../hooks/usePagination';
-import { softDeleteAction } from '../../../../redux/actions/baseAction';
-import { updateData } from '../../../../services/baseService';
-import { formatDateFromApi } from "../../../../utils/formatDate";
+import { usePagination } from '../../../../../hooks/usePagination';
+import { softDeleteAction } from '../../../../../redux/actions/baseAction';
+import { updateData } from '../../../../../services/baseService';
+import { formatDateFromApi } from "../../../../../utils/formatDate";
 import ClassScheduleUpdateModal from './ClassScheduleUpdateModal';
 const { Column } = Table;
 

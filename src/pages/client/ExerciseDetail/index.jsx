@@ -1,7 +1,7 @@
 import { Button, Col, Form, Input, Row, Table } from 'antd';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchAction } from "../../../redux/actions/baseAction";
 import { getDataBySpecificId } from "../../../services/baseService";
 import { formatDateFromApi } from '../../../utils/formatDate';
@@ -86,9 +86,21 @@ export default function ExerciseDetail() {
         tuLuan = exerciseData[0].questions.filter(q => q.answer?.length > 1).length;
     }
 
-    const handleComment = async (e) => {
-        console.log(e);
+    const handleComment = async (value) => {
+        const options = {
+            ...value,
+
+
+        }
     }
+
+    const navigate = useNavigate();
+
+    const handlePractice = (id) => {
+        navigate(`/practice/:${id}`)
+    }
+
+
 
     return (
         <>
@@ -96,61 +108,62 @@ export default function ExerciseDetail() {
                 <div className="inner-wrap">
                     <Row gutter={20}>
                         <Col span={16}>
-                            <div className="col-8">
-                                <div className="practice">
-                                    <h1>{exerciseData[0]?.title}</h1>
-                                    <p>Ngày đăng: {formatDateFromApi(exerciseData[0]?.createAt) || 'N/A'}</p>
-                                    <h3>Thông tin chung</h3>
-                                    <div className="inner-icon">
-                                        <i className="fa-solid fa-users"></i>
-                                        <p>Unit: {exerciseData[0]?.unit || 'N/A'}</p>
-                                    </div>
-                                    <div className="inner-icon">
-                                        <i className="fa-solid fa-clock"></i>
-                                        <p>Thời gian làm bài: {exerciseData[0]?.totalTime || 'N/A'} phút</p>
-                                    </div>
-                                    <div className="inner-icon">
-                                        <i className="fa-solid fa-circle-question"></i>
-                                        <p>Số lượng câu hỏi: {exerciseData[0]?.totalQuestion || 'N/A'} câu hỏi</p>
-                                    </div>
-                                    <h3>Chi tiết câu hỏi:</h3>
-                                    <p className="p1">Câu trắc nghiệm: {tracNghiem} câu</p>
-                                    <p className="p1">Câu điền đáp án: {tuLuan} câu</p>
+                            <div className="practice">
+                                <h1>{exerciseData[0]?.title}</h1>
+                                <p>Ngày đăng: {formatDateFromApi(exerciseData[0]?.createAt) || 'N/A'}</p>
+                                <h3>Thông tin chung</h3>
+                                <div className="inner-icon">
+                                    <i className="fa-solid fa-users"></i>
+                                    <p>Unit: {exerciseData[0]?.unit || 'N/A'}</p>
                                 </div>
-
-                                {/* Bình luận */}
-                                <div className="comment">
-                                    <h3>Bình luận</h3>
-                                    <Form layout="vertical" onFinish={handleComment}>
-                                        <Row>
-                                            <Col span={22}>
-                                                <Form.Item name="content" label="" rules={[{ required: true }]}>
-                                                    <Input size='large' placeholder="Cảm xúc của em sau khi làm bài" />
-                                                </Form.Item>
-                                            </Col>
-                                            <Col span={2} style={{ textAlign: "right" }}>
-                                                <Button size='large' type="primary" htmlType="submit">Gửi</Button>
-                                            </Col>
-                                        </Row>
-                                    </Form>
-
-
-                                    {commentData.map(c => {
-                                        const student = studentMap[c.studentId];
-                                        return (
-                                            <div className="comment-user" key={c.id}>
-                                                <div className="comment-image">
-                                                    <img src={student?.avatar || "default-avatar.png"} alt="" />
-                                                </div>
-                                                <div className="comment-info">
-                                                    <div className="comment-name">{student?.name || "Ẩn danh"}</div>
-                                                    <div className="comment-content">{c.content}</div>
-                                                </div>
-                                            </div>
-                                        )
-                                    })}
+                                <div className="inner-icon">
+                                    <i className="fa-solid fa-clock"></i>
+                                    <p>Thời gian làm bài: {exerciseData[0]?.totalTime || 'N/A'} phút</p>
                                 </div>
+                                <div className="inner-icon">
+                                    <i className="fa-solid fa-circle-question"></i>
+                                    <p>Số lượng câu hỏi: {exerciseData[0]?.totalQuestion || 'N/A'} câu hỏi</p>
+                                </div>
+                                <h3>Chi tiết câu hỏi:</h3>
+                                <p className="p1">Câu trắc nghiệm: {tracNghiem} câu</p>
+                                <p className="p1">Câu điền đáp án: {tuLuan} câu</p>
+
+                                <div class="button-practice" onClick={() => handlePractice(exerciseData[0]?.id)}>LUYỆN TẬP</div>
                             </div>
+
+                            {/* Bình luận */}
+                            <div className="comment">
+                                <h3>Bình luận</h3>
+                                <Form layout="vertical" onFinish={handleComment}>
+                                    <Row>
+                                        <Col span={22}>
+                                            <Form.Item name="content" label="" rules={[{ required: true }]}>
+                                                <Input size='large' placeholder="Cảm xúc của em sau khi làm bài" />
+                                            </Form.Item>
+                                        </Col>
+                                        <Col span={2} style={{ textAlign: "right" }}>
+                                            <Button size='large' type="primary" htmlType="submit">Gửi</Button>
+                                        </Col>
+                                    </Row>
+                                </Form>
+
+
+                                {commentData.map(c => {
+                                    const student = studentMap[c.studentId];
+                                    return (
+                                        <div className="comment-user" key={c.id}>
+                                            <div className="comment-image">
+                                                <img src={student?.avatar || "default-avatar.png"} alt="" />
+                                            </div>
+                                            <div className="comment-info">
+                                                <div className="comment-name">{student?.name || "Ẩn danh"}</div>
+                                                <div className="comment-content">{c.content}</div>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+
                         </Col>
 
                         {/* Bảng xếp hạng */}

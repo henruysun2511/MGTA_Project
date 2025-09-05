@@ -43,7 +43,7 @@ const router = createBrowserRouter([
       { path: "blog", element: <Blog /> },
       { path: "feedback", element: <Feedback /> },
       { path: "exerciseDetail/:id", element: <ExerciseDetail /> },
-      { path: "practice", element: <Practice /> },
+      { path: "practice/:id", element: <Practice /> },
       { path: "score", element: <Score /> },
       { path: "aboutUs", element: <AboutUs /> },
       { path: "profile", element: <Profile /> }

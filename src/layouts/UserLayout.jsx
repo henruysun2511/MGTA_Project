@@ -1,20 +1,15 @@
-import { BellFilled } from '@ant-design/icons';
 import { Button } from 'antd';
 import { useSelector } from 'react-redux';
 import { Link, NavLink, Outlet } from "react-router-dom";
 import logo from '../assets/images/logoNoBackGround.png';
 import Container2 from '../components/Container/container2';
+import NofiticationStudent from '../components/Nofitications/NofiticationStudent';
 import './UserLayout.scss';
 
 export default function UserLayout() {
     const token = localStorage.getItem("accessToken");
-    // const role = getCookie("role");
     const isLogin = useSelector(state => state.loginReducer);
-    // const username = getCookie("username");
 
-    // useEffect(() => {
-    //     get
-    // })
 
     return (
         <>
@@ -43,7 +38,7 @@ export default function UserLayout() {
                                         </Button>
                                     ) : (
                                         <>
-                                            <BellFilled style={{ marginRight: 8 }} />
+                                            <NofiticationStudent style={{ marginRight: 8 }} />
                                             <p>Xin chào /</p>
                                             <Button className="header__button-register">
                                                 <Link to="/auth/logout">Đăng xuất</Link>

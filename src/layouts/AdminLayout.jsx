@@ -3,7 +3,7 @@ import { Button, Menu } from 'antd';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import avatar from '../assets/images/gv.png';
 import logo from '../assets/images/logo.jpg';
-import NofiticationStudent from '../components/Nofitications/NofiticationStudent';
+import NofiticationAdmin from '../components/Nofitications/NofiticationAdmin';
 import "./AdminLayout.scss";
 
 export default function AdminLayout() {
@@ -43,7 +43,7 @@ export default function AdminLayout() {
                         <Button className='button__home' icon={<HomeFilled />}>
                             <Link to="/">Home</Link>
                         </Button>
-                        <NofiticationStudent />
+                        <NofiticationAdmin />
 
                     </div>
                     <div className='admin__content'>

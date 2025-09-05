@@ -1,16 +1,10 @@
 import { Button, Col, DatePicker, Form, Input, Modal, Select } from 'antd';
-import dayjs from "dayjs";
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateAction } from '../../../../redux/actions/baseAction';
-import { updateData } from '../../../../services/baseService';
-
-export default function ClassScheduleUpdateModal({ open, onCancel, record }) {
+import { useDispatch } from 'react-redux';
+import { createAction } from '../../../../../redux/actions/baseAction';
+import { createData } from '../../../../../services/baseService';
+export default function ClassScheduleCreateModal({ open, onCancel, classData, classSessionData }) {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
-
-    const classData = useSelector((state) => state.classes.list);
-    const classSessionData = useSelector((state) => state.classsessions.list);
 
     const classOptions = classData.map((item) => ({
         value: item.id,
@@ -22,45 +16,30 @@ export default function ClassScheduleUpdateModal({ open, onCancel, record }) {
         label: item.name,
     }));
 
-    useEffect(() => {
-        if (open && record) {
-            form.setFieldsValue({
-                classId: record.classId,
-                classSessionId: record.classSessionId,
-                linkZoom: record.linkZoom,
-                schedule: record.schedule
-                    ? dayjs(record.schedule, "DD/MM/YYYY")
-                    : null
-            });
-        }
-    }, [open, record, form]);
-
-    const handleUpdateClassSchedule = async (values) => {
+    const handleAddClassSchedule = async (values) => {
         const formatted = values.schedule.format("YYYY-MM-DD");
         const options = {
             ...values,
-            id: record.id, 
             schedule: formatted
-        };
-
-        const res = await updateData("classschedules", record.id, options);
-        if (res) {
-            dispatch(updateAction("classschedules", res));
-            alert("Cập nhật lịch học thành công");
-            onCancel(); 
-        } else {
-            alert("Cập nhật lịch học thất bại");
         }
-    };
+        const res = await createData("classschedules", options);
+        if (res) {
+            dispatch(createAction("classschedules", res));
+            alert("Thêm lịch học mới thành công");
+            onCancel();
+        } else {
+            alert("Thêm lịch học mới thất bại");
+        }
+    }
 
     return (<>
         <Modal
             open={open}
-            title="Cập nhật lịch học"
+            title="Thêm lịch học mới"
             onCancel={onCancel}
             footer={null}
         >
-            <Form layout="vertical" form={form} onFinish={handleUpdateClassSchedule}>
+            <Form layout="vertical" form={form} onFinish={handleAddClassSchedule}>
                 <Form.Item
                     name="classSessionId"
                     label="Ca học"
@@ -95,9 +74,10 @@ export default function ClassScheduleUpdateModal({ open, onCancel, record }) {
                     <Input placeholder="https://zoom.us/..." />
                 </Form.Item>
                 <Col span={24} style={{ textAlign: "right" }}>
-                    <Button type="primary" htmlType="submit">Lưu lịch học</Button>
+                    <Button type="primary" htmlType="submit">Thêm lịch học</Button>
                 </Col>
             </Form>
         </Modal>
+
     </>)
 }

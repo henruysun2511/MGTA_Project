@@ -34,6 +34,10 @@ export default function StudentExercise({ deadlineData, exerciseData, skillData,
         return matchSearch && matchSkill && matchDelete;
     });
 
+    const handleWatchDetail = (id) => {
+        navigate(`/exerciseDetail/:${id}`);
+    }
+
     return (
         <>
             <Space direction='vertical' size="large" style={{ width: "100%" }}>
@@ -95,7 +99,7 @@ export default function StudentExercise({ deadlineData, exerciseData, skillData,
                                         <div className="practice__status ps--1">
                                             Chưa làm
                                         </div>
-                                        <div className="button__detail" onClick={() => navigate(`/exerciseDetail/:${dl.id}`)}>Xem chi tiết</div>
+                                        <div className="button__detail" onClick={() => handleWatchDetail(dl.id)}>Xem chi tiết</div>
                                     </div>
                                 </Col>
                             )

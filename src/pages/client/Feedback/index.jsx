@@ -1,6 +1,15 @@
-function Feedback(){
+import Section1 from "./childrens/section1";
+import Section2 from "./childrens/section2";
+import Section3 from "./childrens/section3";
+import "./feedback.scss";
+
+function Feedback() {
     return (
-        <>Đánh giá </>
+        <>
+            <Section1 />
+            <Section2 />
+            <Section3 />
+        </>
     );
 }
 

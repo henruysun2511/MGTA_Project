@@ -2,6 +2,7 @@ import { Button, Col, DatePicker, Form, Modal, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { createAction } from "../../../../../redux/actions/baseAction";
 import { createData } from "../../../../../services/baseService";
+import { alertSuccess } from "../../../../../utils/alerts";
 
 
 export default function ClassExerciseCreateModal({ open, onClose, exerciseData, classId }) {
@@ -26,7 +27,12 @@ export default function ClassExerciseCreateModal({ open, onClose, exerciseData, 
         const res = await createData("deadlines", options);
         if (res) {
             dispatch(createAction("deadlines", res));
-            alert("Giao bài tập thành công");
+            // const nofityOptions = {
+            //     message: `Giáo viên đã giao thêm bài tập mới`,
+            // }
+            // const res2 = await createData("nofitications", nofityOptions);
+
+            alertSuccess("Giao bài tập thành công");
             onClose();
         } else {
             alert("Giao bài tập thất bại");
