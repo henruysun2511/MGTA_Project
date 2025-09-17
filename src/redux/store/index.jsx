@@ -1,12 +1,10 @@
 import { combineReducers } from "redux";
 import { baseReducer } from "../reducers/baseReducer";
-import { exerciseReducer } from "../reducers/exerciseReducer";
-import filterExerciseReducer from "../reducers/filterExerciseReducer";
 import loginReducer from "../reducers/loginReducer";
 
 
 const AllReducers = combineReducers({
-    loginReducer, exerciseReducer, filterExerciseReducer,
+    loginReducer, 
     classschedules: baseReducer("classschedules"),
     classes: baseReducer("classes"),
     classsessions: baseReducer("classsessions"),
@@ -19,6 +17,8 @@ const AllReducers = combineReducers({
     results: baseReducer("results"),
     notifications: baseReducer("nofitications"),
     comments: baseReducer("comments"),
+    roles: baseReducer("roels"),
+    permissions: baseReducer("permissions"),
 });
 
 export default AllReducers;

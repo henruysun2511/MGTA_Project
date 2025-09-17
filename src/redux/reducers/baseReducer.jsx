@@ -1,7 +1,6 @@
 const initialState = {
   list: [],
-  //   loading: false,
-  //   error: null
+  current: null,
 };
 
 export const baseReducer = (resource) => {
@@ -13,38 +12,34 @@ export const baseReducer = (resource) => {
       case "FETCH":
         return { ...state, list: action.payload };
 
+      case "FETCH_BY_ID":
+        return { ...state, current: action.payload };
+
       case "CREATE":
         return { ...state, list: [...state.list, action.payload] };
 
       case "UPDATE":
         return {
           ...state,
-          list: state.list.map((it) =>
-            it.id === action.payload.id ? action.payload : it
+          list: state.list.map(it =>
+            it._id === action.payload._id ? action.payload : it
           ),
+          current: state.current?._id === action.payload._id ? action.payload : state.current,
         };
-
-      case "SOFT_DELETE":
-        return {
-          ...state,
-          list: state.list.map((it) =>
-            it.id === action.payload ? { ...it, deleted: true } : it
-          ),
-        };
-
       case "DELETE":
         return {
           ...state,
-          list: state.list.filter((it) => it.id !== action.payload),
+          list: state.list.filter((it) => it._id !== action.payload),
         };
 
-      case "RECYCLE":
-        return {
-          ...state,
-          list: state.list.map((it) =>
-            it.id === action.payload ? { ...it, deleted: false } : it
-          ),
-        };
+      // case "DELETE":
+      //   const deleteId = typeof action.payload === "string"
+      //     ? action.payload
+      //     : action.payload._id;
+      //   return {
+      //     ...state,
+      //     list: state.list.filter((it) => it._id !== deleteId),
+      //   };
 
       default:
         return state;

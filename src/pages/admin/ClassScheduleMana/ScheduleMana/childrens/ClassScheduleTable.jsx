@@ -2,47 +2,39 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Space, Table, Tooltip } from 'antd';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { usePagination } from '../../../../../hooks/usePagination';
-import { softDeleteAction } from '../../../../../redux/actions/baseAction';
-import { updateData } from '../../../../../services/baseService';
 import { formatDateFromApi } from "../../../../../utils/formatDate";
+import { handleDelete } from '../../../../../utils/handles';
 import ClassScheduleUpdateModal from './ClassScheduleUpdateModal';
 const { Column } = Table;
 
-export default function ClassScheduleTable({ classScheduleData, classData, classSessionData }) {
-    const initialData = classScheduleData.map((item, index) => ({
-        ...item,
-        className: classData.find(cls => String(cls.id) === String(item.classId))?.className || "",
-        classSessionName: classSessionData.find(cls => String(cls.id) === String(item.classSessionId))?.name || "",
-        schedule: formatDateFromApi(classScheduleData[index].schedule)
-    }));
-
+export default function ClassScheduleTable({ classScheduleData, classData, classSessionData, pagination }) {
     const dispatch = useDispatch();
 
+    const initialData = classScheduleData?.map((item, index) => ({
+        ...item,
+        className: item.classId?.className || classData.find(cls => String(cls._id) === String(item.classId))?.className || "",
+        classSessionName: item.classSessionId?.classSessionName || classSessionData.find(cls => String(cls._id) === String(item.classSessionId))?.classSessionName || "",
+        schedule: formatDateFromApi(item.schedule)
+    })).filter(item => !item.deleted);
+
+
     const handleSoftDeleteClassSchedule = async (item) => {
-        dispatch(softDeleteAction("classschedules", item.id));
-        const options = {
-            ...item,
-            deleted: true
-        }
-        const res = await updateData("classschedules", item.id, options);
-        if (res) {
-            alert("Đã chuyển vào thùng rác");
-        } else {
-            alert("Không thể xóa");
-        }
+        await handleDelete(dispatch, "admin/class-schedule", "classschedules", item._id, "lịch học");
     }
 
     const [openModal, setOpenModal] = useState(false);
     const [editingRecord, setEditingRecord] = useState(null);
 
-    const dataSource = initialData.filter(item => !item.deleted)
-    const { getPagination, getIndex } = usePagination(10);
 
     return (<>
-        <Table dataSource={dataSource}
-            pagination={getPagination(dataSource.length)}>
-            <Column title="STT" key="index" render={(text, record, index) => getIndex(index)} />
+        <Table dataSource={initialData} pagination={false} rowKey="_id">
+            <Column
+                title="STT"
+                key="index"
+                render={(text, record, index) =>
+                    ((pagination?.currentPage - 1) * pagination.limit) + index + 1
+                }
+            />
             <Column title="Ca học" dataIndex="classSessionName" key="shift" />
             <Column title="Lớp" dataIndex="className" key="classroom" />
             <Column title="Lịch" dataIndex="schedule" key="schedule" />
@@ -66,6 +58,9 @@ export default function ClassScheduleTable({ classScheduleData, classData, class
 
         <ClassScheduleUpdateModal open={openModal}
             onCancel={() => { setOpenModal(false); setEditingRecord(null); }}
-            record={editingRecord} />
+            record={editingRecord}
+            classData={classData}
+            classSessionData={classSessionData}
+        />
     </>)
 }

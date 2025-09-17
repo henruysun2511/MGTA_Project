@@ -2,19 +2,20 @@ import { PlusOutlined } from '@ant-design/icons';
 import {
     Button,
     Form,
+    Pagination,
     Space
 } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import padding1 from "../../../components/Padding";
+import useFetch from '../../../hooks/useFetch';
+import useQuery from '../../../hooks/useQuery';
 import { fetchAction } from '../../../redux/actions/baseAction';
-import { getAllData } from '../../../services/baseService';
 import { formatDateFromApi } from '../../../utils/formatDate';
 import "./blogMana.scss";
 import BlogCreateModal from './childrens/BlogCreateModal';
 import BlogFilter from './childrens/BlogFilter';
 import BlogTable from './childrens/BlogTable';
-
 
 export default function BlogMana() {
     const [form] = Form.useForm();
@@ -23,11 +24,21 @@ export default function BlogMana() {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        getAllData("blogs").then((res) => { dispatch(fetchAction("blogs", res)); });
-    }, [dispatch]);
+    const [query, updateQuery, resetQuery] = useQuery({
+        page: 1,
+        limit: 10
+    })
+    const [data] = useFetch("admin/blog/blogs", query, {});
+    console.log(data);
 
-    const blogData = useSelector((state) => state.blogs.list).filter(bl => !bl.deleted);
+    useEffect(() => {
+        if (data) {
+            dispatch(fetchAction("blogs", data?.blogActives?.items));
+        }
+    }, [data, dispatch]);
+
+    const blogData = useSelector((state) => state.blogs.list || []);
+    console.log(blogData);
 
     // Lọc + sắp xếp
     const [filters, setFilters] = useState({ search: "", sort: "newest", date: "" });
@@ -52,6 +63,13 @@ export default function BlogMana() {
             }
         });
 
+    const handlePageChange = (page, pageSize) => {
+        updateQuery({
+            page: page,
+            limit: pageSize
+        });
+    };
+
     return (
         <div style={padding1}>
             <Space direction="vertical" size="large" style={{ width: '100%' }}>
@@ -68,7 +86,18 @@ export default function BlogMana() {
                     </Button>
                 </div>
 
-                <BlogTable blogData={filteredBlogs} />
+                <BlogTable blogData={filteredBlogs} pagination={data?.blogActives?.pagination} />
+
+                {data?.blogActives?.pagination && (
+                    <Pagination
+                        current={data.blogActives.pagination.currentPage}
+                        pageSize={data.blogActives.pagination.limit}
+                        total={data.blogActives.pagination.count}
+                        onChange={handlePageChange}
+                        showSizeChanger
+                        pageSizeOptions={['5', '10', '20', '50']}
+                    />
+                )}
             </Space>
 
             {/* Modal thêm blog */}

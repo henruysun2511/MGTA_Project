@@ -1,74 +1,54 @@
-import { Alert, Form, Input } from 'antd';
-import { useState } from 'react';
+import { Form, Input } from 'antd';
+import { jwtDecode } from "jwt-decode";
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom";
 import logo from '../../../assets/images/logoNoBackGround.png';
 import { checkLogin } from '../../../redux/actions/loginAction';
-import { login } from '../../../services/userService';
+import { createData } from '../../../services/baseService';
+import { alertError, alertSuccess } from '../../../utils/alerts';
 import "./login.scss";
 
 export default function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(null);
-
     const handleSubmit = async (e) => {
         const username = e.username;
         const password = e.password;
-        const response = await login(username, password);
-        console.log(response);
-        if (response.length > 0) {
-            setError(null);
-            setSuccess("Đăng nhập thành công");
-            localStorage.setItem("accessToken", response[0].accessToken);
-            dispatch(checkLogin(true));
-            setTimeout(() => { navigate("/"); }, 2000);
+
+        try {
+            const response = await createData("auth/login", { username: username, password: password });
+            console.log(response);
+
+            if (response.statusCode === 200 && response.data?.accessToken) {
+                const decoded = jwtDecode(response.data?.accessToken);
+                localStorage.setItem("roleId", decoded.roleId);
+                localStorage.setItem("accountId", decoded.accountId);
+                localStorage.setItem("accessToken", response.data.accessToken);
+                localStorage.setItem("username", response.data.username);
+
+                dispatch(checkLogin(true));
+
+                alertSuccess("Đăng nhập thành công");
+
+                setTimeout(() => {
+                    navigate("/");
+                }, 1000);
+            } else if (response.statusCode === 401) {
+                dispatch(checkLogin(true));
+                alertSuccess("Đăng nhập thành công " + response.message);
+                setTimeout(() => {
+                    navigate("/");
+                }, 1000);
+            }
+            else {
+                alertError("Tên đăng nhập hoặc mật khẩu sai");
+            }
+        } catch (error) {
+            console.error(error);
+            alertError("Có lỗi xảy ra khi đăng nhập");
         }
-        else {
-            setSuccess(null);
-            setError("Tên đăng nhập hoặc mật khẩu sai");
-        }
-    }
-
-
-    // const handleSubmit = async (e) => {
-    //     const username = e.username;
-    //     const password = e.password;
-
-    //     try {
-    //         const response = await login(username, password);
-    //         console.log(response);
-
-    //         if (response.message === "Đăng nhập thành công" && response.data?.accessToken) {
-    //             setError(null);
-    //             setSuccess("Đăng nhập thành công");
-
-    //             // Lưu token vào localStorage
-    //             localStorage.setItem("accessToken", response.data.accessToken);
-
-    //             dispatch(checkLogin(true));
-
-    //             // Thông báo
-    //             alert("Đăng nhập thành công");
-
-    //             // Điều hướng về trang chủ
-    //             setTimeout(() => {
-    //                 navigate("/");
-    //             }, 1000);
-    //         } else {
-    //             setSuccess(null);
-    //             setError("Tên đăng nhập hoặc mật khẩu sai");
-    //             alert("Tên đăng nhập hoặc mật khẩu sai");
-    //         }
-    //     } catch (error) {
-    //         console.error(error);
-    //         setSuccess(null);
-    //         setError("Có lỗi xảy ra khi đăng nhập");
-    //         alert("Có lỗi xảy ra khi đăng nhập");
-    //     }
-    // };
+    };
 
 
     return (
@@ -82,21 +62,17 @@ export default function Login() {
                     <h2>Đăng nhập</h2>
 
                     <Form className="login__form"
-                        // name="basic"
                         labelCol={{ span: 8, style: { textAlign: 'left' } }}
                         wrapperCol={{ span: 16 }}
                         style={{ maxWidth: 600 }}
                         onFinish={handleSubmit}
-                    // initialValues={{ remember: true }}
-                    // onFinishFailed={onFinishFailed}
-                    // autoComplete="off"
                     >
 
                         <div className="login__item">
                             <Form.Item
                                 label="Tên đăng nhập"
                                 name="username"
-                                rules={[{ required: true, message: 'Please input your username!' }]}
+                                rules={[{ required: true, message: 'Vui lòng nhập tên đăng nhập' }]}
                             >
                                 <Input />
                             </Form.Item>
@@ -104,11 +80,13 @@ export default function Login() {
                             <Form.Item
                                 label="Mật khẩu"
                                 name="password"
-                                rules={[{ required: true, message: 'Please input your password!' }]}
+                                rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]}
                             >
                                 <Input.Password />
                             </Form.Item>
                         </div>
+
+                        <div className='forgot-passsword'>Quên mật khẩu?</div>
 
                         <div className="login__button">
                             <button type="submit">Đăng nhập</button>
@@ -117,20 +95,12 @@ export default function Login() {
                     </Form>
 
                     <div className="login__logo">
-                        <img src={logo} alt="" />
+                        <Link to="/">
+                            <img src={logo} alt="" />
+                        </Link>
                     </div>
                 </div>
             </div>
-            <div className='my-alert'>
-                {error && (
-                    <Alert message={error} type="error" showIcon />
-                )}
-                {success && (
-                    <Alert message={success} type="success" showIcon />
-                )}
-            </div>
-
         </>
     )
-
 }

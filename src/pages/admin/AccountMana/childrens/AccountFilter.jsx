@@ -1,31 +1,31 @@
 import { Input, Select, Space } from 'antd';
+import { useEffect, useState } from 'react';
+import useDebounce from '../../../../hooks/useDebounce';
 
 const { Search } = Input;
 
-export default function AccountFilter({ classData, onFilterChange }) {
-    const { Search } = Input;
+export default function AccountFilter({ onFilterChange }) {
+
+    const [searchText, setSearchText] = useState("");
+    const debouncedSearch = useDebounce(searchText, 500)
 
     const statusOptions = [
-        { value: "all", label: "Tất cả" },
+        { value: "", label: "Tất cả" },
         { value: "active", label: "Đã kích hoạt" },
         { value: "inactive", label: "Chưa kích hoạt" }
-    ];
+    ]; 
 
-    const classOptions = [
-        { value: "all", label: "Tất cả" },
-        ...classData.map(item => ({
-            value: item.id,
-            label: item.className,
-        }))
-    ];
+    useEffect(() => {
+            onFilterChange({ username: debouncedSearch });
+        }, [debouncedSearch]);
 
     return (
         <Space direction='vertical' size='large' style={{ width: '100%' }}>
             <Search
-                placeholder="Tìm kiếm tài khoản"
+                placeholder="Tìm kiếm tài khoản (theo username)"
                 size='large'
                 style={{ width: "100%", fontSize: "18px" }}
-                onChange={(e) => onFilterChange({ type: "keyword", value: e.target.value })}
+                onChange={(e) => setSearchText(e.target.value) }
             />
             <Space direction='horizontal' size='large'>
                 <p>Trạng thái: </p>
@@ -34,15 +34,7 @@ export default function AccountFilter({ classData, onFilterChange }) {
                     size='large'
                     defaultValue={'all'}
                     style={{ width: "200px", fontSize: "18px" }}
-                    onChange={(value) => onFilterChange({ type: "status", value })}
-                />
-                <p>Lớp: </p>
-                <Select
-                    options={classOptions}
-                    size='large'
-                    defaultValue={'all'}
-                    style={{ width: "200px", fontSize: "18px" }}
-                    onChange={(value) => onFilterChange({ type: "classId", value })}
+                    onChange={(value) => onFilterChange({status: value})}
                 />
             </Space>
         </Space>

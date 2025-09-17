@@ -8,7 +8,9 @@ import ClassMana from "../pages/admin/ClassMana";
 import ClassScheduleMana from "../pages/admin/ClassScheduleMana";
 import ExerciseMana from "../pages/admin/ExerciseMana";
 import ExerciseDetailMana from "../pages/admin/ExerciseMana/ExerciseDetailMana";
+import SkillMana from "../pages/admin/ExerciseMana/SkillMana";
 import Overview from "../pages/admin/Overview";
+import PermissionRoleMana from "../pages/admin/PermissionRoleMana";
 import RecycleBin from "../pages/admin/RecycleBin";
 import ScoreMana from "../pages/admin/ScoreMana";
 import Login from "../pages/auth/Login";
@@ -61,7 +63,9 @@ const router = createBrowserRouter([
       { path: "classScheduleMana", element: <ClassScheduleMana /> },
       { path: "classMana", element: <ClassMana /> },
       { path: "scoreMana", element: <ScoreMana /> },
-      { path: "recycleBin", element: <RecycleBin /> }
+      { path: "recycleBin", element: <RecycleBin /> },
+      { path: "permissionMana", element: <PermissionRoleMana /> },
+      { path: "skillMana", element: <SkillMana /> }
     ],
   }
 ]);

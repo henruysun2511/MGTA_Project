@@ -1,9 +1,9 @@
 import { Input, Select, Space, Table } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { usePagination } from "../../../../hooks/usePagination";
-import { fetchAction } from "../../../../redux/actions/baseAction";
-import { getAllData } from "../../../../services/baseService";
+import { usePagination } from "../../../../../hooks/usePagination";
+import { fetchAction } from "../../../../../redux/actions/baseAction";
+import { getAllData } from "../../../../../services/baseService";
 const { Search } = Input;
 const { Column } = Table;
 

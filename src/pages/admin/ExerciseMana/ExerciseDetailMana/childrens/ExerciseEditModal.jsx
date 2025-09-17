@@ -1,48 +1,47 @@
 import { Button, Col, Form, Input, InputNumber, Modal, Row, Select } from "antd";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { updateExerciseAction } from "../../../../redux/actions/exerciseAction";
-import { editExercise } from "../../../../services/exerciseService";
+import useFetch from "../../../../../hooks/useFetch";
+import { handleUpdate } from "../../../../../utils/handles";
 
 
-export default function ExerciseEditModal({ open, onCancel, skillOptions, exerciseData }) {
+export default function ExerciseEditModal({ open, onCancel, exerciseData }) {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
 
-  const skills = skillOptions.map(s => ({ label: s.name, value: s.id }));
-  useEffect(() => {
-    if (open && exerciseData?.length > 0) {
-      const data = exerciseData[0];
+  const [skillDataRes] = useFetch("admin/skill/skills", {}, {});
+  const skillData = skillDataRes || [];
+  
+  const skillOptions = skillData.map(skill => ({
+    value: skill._id,
+    label: skill.skillName
+  }));
 
+  useEffect(() => {
+    if (open && exerciseData) {
       form.setFieldsValue({
-        title: data.title || '',
-        skillId: data.skillId || [],
-        unit: data.unit || '',
-        totalQuestion: data.totalQuestion || 0
+        title: exerciseData.title || '',
+        skillId: exerciseData.skillId?.map(s => s._id) || [],
+        unit: exerciseData.unit || '',
+        totalQuestion: exerciseData.totalQuestion || 0,
+        duration: exerciseData.duration || 0
       });
     }
   }, [open, exerciseData, form]);
 
   const handleSubmit = async (values) => {
-
-    const id = exerciseData[0].id;
-
+    const id = exerciseData._id;
     const options = {
+      ...exerciseData,
       title: values.title,
-      skillId: values.skillId,
+      skillId: values.skillId || [],
       unit: values.unit,
       totalQuestion: values.totalQuestion,
-      totalTime: values.totalTime
+      duration: values.duration
     };
+    console.log(options);
 
-    const response = await editExercise(id, options);
-    if (response) {
-      dispatch(updateExerciseAction(response));
-      alert("Cập nhật bài tập thành công");
-    } else {
-      alerrt("Cập nhật bài tập thất bại")
-    }
-    onCancel();
+    await handleUpdate(dispatch, "admin/exercise", "exercises", id, options, () => onCancel());
   }
 
   return (
@@ -56,14 +55,14 @@ export default function ExerciseEditModal({ open, onCancel, skillOptions, exerci
           </Col>
 
           <Col span={12}>
-            <Form.Item name="totalTime" label="Thời gian làm (Phút)" rules={[{ required: true }]}>
+            <Form.Item name="duration" label="Thời gian làm (Phút)" rules={[{ required: true }]}>
               <InputNumber min={0} defaultValue={0} step={5} style={{ width: "100%" }} />
             </Form.Item>
           </Col>
 
           <Col span={12}>
             <Form.Item name="skillId" label="Kĩ năng" rules={[{ required: true }]}>
-              <Select options={skills} mode="tags" placeholder="Nhập kỹ năng" />
+              <Select options={skillOptions} mode="tags" placeholder="Nhập kỹ năng" />
             </Form.Item>
           </Col>
 

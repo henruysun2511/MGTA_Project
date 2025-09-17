@@ -1,77 +1,95 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Input, Select, Space } from 'antd';
+import { Button, Pagination, Space } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import useFetch from '../../../../hooks/useFetch';
+import useQuery from '../../../../hooks/useQuery';
 import { fetchAction } from '../../../../redux/actions/baseAction';
-import { getAllData } from '../../../../services/baseService';
 import ClassScheduleCreateModal from './childrens/ClassScheduleCreateModal';
 import ClassScheduleFilter from './childrens/ClassScheduleFilter';
 import ClassScheduleTable from './childrens/ClassScheduleTable';
 
-const { Search } = Input;
-const { Option } = Select;
 
 export default function ScheduleMana() {
     const dispatch = useDispatch();
 
     const [modalVisible, setModalVisible] = useState(false);
-    const classScheduleData = useSelector((state) => state.classschedules.list);
-    const classData = useSelector((state) => state.classes.list);
-    const classSessionData = useSelector((state) => state.classsessions.list);
+
+    const [query, updateQuery, resetQuery] = useQuery({
+        page: 1,
+        limit: 10,
+    });
+
+    const [data] = useFetch("admin/class-schedule/class-schedules", query, {});
+    console.log(data);
 
     useEffect(() => {
-        getAllData("classschedules").then((res) => { dispatch(fetchAction("classschedules", res)); });
-        getAllData("classes").then((res) => { dispatch(fetchAction("classes", res)); });
-        getAllData("classsessions").then((res) => { dispatch(fetchAction("classsessions", res)); });
-    }, [dispatch]);
+        if (data) {
+            dispatch(fetchAction("classschedules", data.classSchedules?.items));
+        }
+    }, [data, dispatch]);
 
-    const [filters, setFilters] = useState({
-        keyword: "",
-        date: "",
-        classId: "all",
-        classSessionId: "all",
-    });
+    const classScheduleData = useSelector(state => state.classschedules.list || []).filter(csc => !csc.deleted);
 
-    const filteredData = classScheduleData.filter((item) => {
-        const matchKeyword =
-            !filters.keyword ||
-            item.linkZoom?.toLowerCase().includes(filters.keyword.toLowerCase());
+    const handleFilterChange = (newFilter) => {
+        updateQuery({
+            ...newFilter,
+            page: 1, 
+        });
+    };
 
-        const matchDate =
-            !filters.date ||
-            item.schedule.startsWith(filters.date); // vì schedule là "YYYY-MM-DD..."
+    const handlePageChange = (page, pageSize) => {
+        updateQuery({
+            page: page,
+            limit: pageSize
+        });
+    };
 
-        const matchClass =
-            filters.classId === "all" || String(item.classId) === String(filters.classId);
+    const [classDataRes] = useFetch("admin/class/classes");
+    const classData = classDataRes?.classes?.items || [];
 
-        const matchSession =
-            filters.classSessionId === "all" || String(item.classSessionId) === String(filters.classSessionId);
-
-        return matchKeyword && matchDate && matchClass && matchSession;
-    });
+    const [classSessionRes] = useFetch("admin/class-session/class-sessions");
+    const classSessionData = classSessionRes || [];
 
     return (
         <>
-
             <Space direction="vertical" size="large" style={{ width: '100%' }}>
-                <ClassScheduleFilter classData={classData} classSessionData={classSessionData}
-                    onFilterChange={(newFilter) => setFilters({ ...filters, ...newFilter })} />
+                <ClassScheduleFilter
+                    classData={classData}
+                    classSessionData={classSessionData}
+                    onFilterChange={handleFilterChange}
+                />
                 <div style={{ textAlign: "right" }}>
                     <Button
                         type="primary"
-                        size=" middle"
+                        size="middle"
                         icon={<PlusOutlined />}
-                        onClick={() => { setModalVisible(true) }}
+                        onClick={() => setModalVisible(true)}
                     >
                         Thêm lịch học mới
                     </Button>
                 </div>
-                <ClassScheduleTable classScheduleData={filteredData} classData={classData} classSessionData={classSessionData} />
+                <ClassScheduleTable classScheduleData={classScheduleData} classData={classData}
+                    classSessionData={classSessionData} pagination={data?.classSchedules?.pagination} />
+
+                {data?.classSchedules?.pagination && (
+                    <Pagination
+                        current={data.classSchedules.pagination.currentPage}
+                        pageSize={data.classSchedules.pagination.limit}
+                        total={data.classSchedules.pagination.count}
+                        onChange={handlePageChange}
+                        showSizeChanger
+                        pageSizeOptions={['5', '10', '20', '50']}
+                    />
+                )}
             </Space>
 
-
-            <ClassScheduleCreateModal open={modalVisible} onCancel={() => { setModalVisible(false) }} classData={classData} classSessionData={classSessionData} />
-
+            <ClassScheduleCreateModal
+                open={modalVisible}
+                onCancel={() => setModalVisible(false)}
+                classData={classData}
+                classSessionData={classSessionData}
+            />
         </>
     );
 }

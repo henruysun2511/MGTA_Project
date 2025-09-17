@@ -8,8 +8,9 @@ import './UserLayout.scss';
 
 export default function UserLayout() {
     const token = localStorage.getItem("accessToken");
+    const roleId = localStorage.getItem("roleId");
     const isLogin = useSelector(state => state.loginReducer);
-
+    const username = localStorage.getItem("username");
 
     return (
         <>
@@ -32,14 +33,14 @@ export default function UserLayout() {
                         <div className="header__auth">
                             {token ? (
                                 <>
-                                    {token === "123456" ? (
+                                    {roleId === "68ada708a19888b3462e7a6f" ? (
                                         <Button className="header__button-admin">
                                             <Link to="/admin/overview">Trang quản lý</Link>
                                         </Button>
                                     ) : (
                                         <>
                                             <NofiticationStudent style={{ marginRight: 8 }} />
-                                            <p>Xin chào /</p>
+                                            <Link to="/profile"><p>Xin chào {username ? username : "N/A"}/</p></Link>
                                             <Button className="header__button-register">
                                                 <Link to="/auth/logout">Đăng xuất</Link>
                                             </Button>

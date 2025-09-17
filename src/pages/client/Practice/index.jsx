@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchAction } from "../../../redux/actions/baseAction";
-import { getDataBySpecificId } from "../../../services/baseService";
 import "./practice.scss";
 const { Countdown } = Statistic;
 
@@ -52,14 +51,39 @@ export default function Practice() {
     };
 
     const handleSubmit = () => {
-        const result = Object.entries(answers).map(([index, answer]) => ({
-            index: Number(index),
-            answer: answer
-        }));
+        if (!exerciseData[0]) return;
 
-        console.log("Danh sách câu trả lời:", result);
+        const totalDurationMs = totalTime * 60 * 1000;
+        const workedDurationMs = totalDurationMs - timeLeft;
+
+        const formatDuration = (ms) => {
+            const totalSec = Math.floor(ms / 1000);
+            const h = String(Math.floor(totalSec / 3600)).padStart(2, "0");
+            const m = String(Math.floor((totalSec % 3600) / 60)).padStart(2, "0");
+            const s = String(totalSec % 60).padStart(2, "0");
+            return `${h}:${m}:${s}`;
+        };
+
+        const payload = {
+            duration: formatDuration(workedDurationMs),
+            exerciseId: exerciseData[0].id,
+            studentId: "s1", // TODO: thay bằng user login
+            endTime: new Date().toISOString(),
+            answers: exerciseData[0].questions.map((q) => ({
+                index: q.index,
+                studentAnswer: answers[q.index] || "",
+                correctAnswer: q.answer,
+            })),
+        };
+
+        console.log("Payload nộp bài:", payload);
     };
 
+    const [timeLeft, setTimeLeft] = useState(exerciseData.totalTime * 60 * 1000);
+
+    const onCountdownChange = (val) => {
+        setTimeLeft(val);
+    };
     const [deadline, setDeadline] = useState(exerciseData.totalTime); // 30s
 
     return (
@@ -91,8 +115,9 @@ export default function Practice() {
                                 <div class="time">
                                     <Countdown
                                         title="Thời gian làm bài"
-                                        value={Date.now() + (exerciseData[0]?.totalTime || 0) * 1000}
+                                        value={deadline}
                                         format="HH:mm:ss"
+                                        onChange={onCountdownChange}
                                         onFinish={() => {
                                             alert("Hết thời gian!");
                                             // ở đây có thể tự động nộp bài

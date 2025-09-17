@@ -2,7 +2,7 @@ import { Button, Col, Form, Input, Modal, TimePicker } from 'antd';
 import { useDispatch } from 'react-redux';
 import { createAction } from '../../../../../redux/actions/baseAction';
 import { createData } from '../../../../../services/baseService';
-
+import { alertError, alertSuccess } from '../../../../../utils/alerts';
 export default function ClassSessionCreateModal({open, onCancel}) {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
@@ -14,13 +14,13 @@ export default function ClassSessionCreateModal({open, onCancel}) {
             endTime: values.endTime.format("HH:mm"),
         }
 
-        const res = await createData("classsessions", options);
-        if (res) {
-            dispatch(createAction("classsessions", res));
-            alert("Thêm ca học mới thành công");
+        const res = await createData("admin/class-session", options);
+        if (res.statusCode === 201) {
+            dispatch(createAction("classsessions", res.data));
+            alertSuccess(res.message);
             onCancel();
         } else {
-            alert("Thêm ca học mới thất bại");
+            alertError(res.message);
         }
     }
 
@@ -33,7 +33,7 @@ export default function ClassSessionCreateModal({open, onCancel}) {
         >
             <Form layout="vertical" form={form} onFinish={handleAddClassSession}>
                 <Form.Item
-                    name="name"
+                    name="classSessionName"
                     label="Ca học"
                     rules={[{ required: true, message: 'Vui lòng chọn ca học' }]}
                 >

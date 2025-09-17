@@ -1,19 +1,22 @@
 import { Button, Col, DatePicker, Form, Input, Modal, Select } from 'antd';
 import { useDispatch } from 'react-redux';
-import { createAction } from '../../../../../redux/actions/baseAction';
-import { createData } from '../../../../../services/baseService';
+// import { createAction } from '../../../../../redux/actions/baseAction';
+// import { createData } from '../../../../../services/baseService';
+// import { alertError, alertSuccess } from '../../../../../utils/alerts';
+import { handleCreate } from '../../../../../utils/handles';
+
 export default function ClassScheduleCreateModal({ open, onCancel, classData, classSessionData }) {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
 
-    const classOptions = classData.map((item) => ({
-        value: item.id,
+    const classOptions = classData?.map((item) => ({
+        value: item._id,
         label: item.className,
     }));
 
-    const classSessionOptions = classSessionData.map((item) => ({
-        value: item.id,
-        label: item.name,
+    const classSessionOptions = classSessionData?.map((item) => ({
+        value: item._id,
+        label: item.classSessionName,
     }));
 
     const handleAddClassSchedule = async (values) => {
@@ -22,14 +25,7 @@ export default function ClassScheduleCreateModal({ open, onCancel, classData, cl
             ...values,
             schedule: formatted
         }
-        const res = await createData("classschedules", options);
-        if (res) {
-            dispatch(createAction("classschedules", res));
-            alert("Thêm lịch học mới thành công");
-            onCancel();
-        } else {
-            alert("Thêm lịch học mới thất bại");
-        }
+        await handleCreate(dispatch, "admin/class-schedule","classschedules", options, () => onCancel());
     }
 
     return (<>

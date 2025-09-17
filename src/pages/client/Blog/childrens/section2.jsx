@@ -2,8 +2,8 @@ import { Input } from 'antd';
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Container from "../../../../components/Container";
+import useFetch from '../../../../hooks/useFetch';
 import { fetchAction } from '../../../../redux/actions/baseAction';
-import { getAllData } from '../../../../services/baseService';
 import BlogItem from './BlogItem';
 const { Search } = Input;
 
@@ -11,11 +11,14 @@ export default function Section2() {
     const dispatch = useDispatch();
     const blogData = useSelector((state) => state.blogs.list) || [];
 
+    const [data] = useFetch("base/blog/blogs", {}, {});
+    console.log(data);
+
     useEffect(() => {
-        getAllData("blogs").then((res) => { 
-            dispatch(fetchAction("blogs", res)); 
-        });
-    }, [dispatch]);
+        if(data){ 
+            dispatch(fetchAction("blogs", data?.blogs?.items)); 
+        }
+    }, [dispatch, data]);
 
     const [searchText, setSearchText] = useState("");
     const blogRefs = useRef({}); // lưu ref theo id
@@ -47,10 +50,10 @@ export default function Section2() {
                             <div
                                 key={blog.id}
                                 className="blog__index"
-                                onClick={() => handleScrollTo(blog.id)}
+                                onClick={() => handleScrollTo(blog._id)}
                             >
                                 <i className="fa-solid fa-blog"></i>
-                                {blog.title}
+                                {blog._title}
                             </div>
                         ))}
                     </div>

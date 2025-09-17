@@ -1,17 +1,35 @@
+import { EditOutlined } from "@ant-design/icons";
 import { Checkbox, Input, Space } from "antd";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import useDebounce from "../../../../hooks/useDebounce";
 
-export default function ExcerciseFilter({ skillOptions, onFilterChange }) {
+export default function ExcerciseFilter({ skillData, onFilterChange }) {
   const { Search } = Input;
   const dispatch = useDispatch();
 
-  const handleChangeSearch = (e) => {
-    onFilterChange({ keyword: e.target.value });
-  };
+
+  const [searchText, setSearchText] = useState("");
+  const debouncedSearch = useDebounce(searchText, 500);
+
+  useEffect(() => {
+    onFilterChange({ title: debouncedSearch });
+  }, [debouncedSearch]);
 
   const handleChangeSkill = (selectedSkills) => {
-    onFilterChange({ skills: selectedSkills });
+    console.log(selectedSkills)
+    onFilterChange({ skillName: selectedSkills });
   };
+
+  const uniqueSkills = Array.from(
+    new Map(skillData?.map(item => [item.skillName, item])).values()
+  );
+
+  const skillOptions = uniqueSkills.map(item => ({
+    value: item.skillName,
+    label: item.skillName
+  }));
 
   return (
     <>
@@ -19,12 +37,13 @@ export default function ExcerciseFilter({ skillOptions, onFilterChange }) {
         <Search
           placeholder="Tìm kiếm bài tập"
           size="large"
-          onChange={handleChangeSearch}
+          onChange={(e) => setSearchText(e.target.value)}
           style={{ width: "100%" }}
         />
-        <Space direction="horizontal">
+        <Space direction="horizontal" size="large">
           <p>Kỹ năng:</p>
           <Checkbox.Group options={skillOptions} onChange={handleChangeSkill} />
+          <Link to={"/admin/skillMana"}><EditOutlined /></Link>
         </Space>
 
       </div>

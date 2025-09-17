@@ -2,7 +2,7 @@ import { UploadOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, InputNumber, Modal, Row, Select, Upload } from "antd";
 import { useEffect } from "react";
 
-export default function ExcerciseFormModal({ open, onCancel, onSubmit, skillOptions, initialValues }) {
+export default function ExcerciseFormModal({ open, onCancel, onSubmit, skillData, initialValues }) {
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -10,6 +10,11 @@ export default function ExcerciseFormModal({ open, onCancel, onSubmit, skillOpti
       form.setFieldsValue(initialValues || { grade: "all", skills: [] });
     }
   }, [open, initialValues, form]);
+
+  const skillOptions = skillData?.map(item => ({
+    value: item._id,
+    label: item.skillName
+  }));
 
   return (
     <Modal width={900} title="THÊM BÀI TẬP MỚI" open={open} onCancel={onCancel} footer={null}>
@@ -31,8 +36,8 @@ export default function ExcerciseFormModal({ open, onCancel, onSubmit, skillOpti
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item name="totalTime" label="Thời gian làm" rules={[{ required: true }]}>
-              <InputNumber min={5} defaultValue={10} step={5} style={{width: "100%"}}/>
+            <Form.Item name="duration" label="Thời gian làm" rules={[{ required: true }]}>
+              <InputNumber min={5} defaultValue={5} step={5} style={{width: "100%"}}/>
             </Form.Item>
           </Col>
           <Col span={12}>
@@ -48,18 +53,16 @@ export default function ExcerciseFormModal({ open, onCancel, onSubmit, skillOpti
               getValueFromEvent={(e) => (Array.isArray(e) ? e : e?.fileList)}
               rules={[{ required: true }]}
             >
-              <Upload beforeUpload={() => false}>
+              <Upload accept="image/*" beforeUpload={() => false} >
                 <Button icon={<UploadOutlined />}>Chọn file</Button>
               </Upload>
             </Form.Item>
           </Col>
           <Col span={24} style={{ textAlign: "right" }}>
-            <Button type="primary" htmlType="submit">Lưu bài tập</Button>
+            <Button type="primary" htmlType="submit">Thêm</Button>
           </Col>
         </Row>
       </Form>
     </Modal>
-
-
   );
 }

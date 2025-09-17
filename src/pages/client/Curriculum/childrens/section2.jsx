@@ -2,7 +2,6 @@ import { Tabs } from 'antd';
 import { useState } from 'react';
 import { useSelector } from "react-redux";
 import Container2 from "../../../../components/Container/container2";
-import StudentClassSchedule from "./StudentClassSchedule/StudentClassSchedule";
 import StudentClassZoom from './StudentClassZoom/StudentClassZoom';
 import StudentExercise from "./StudentExercise/StudentExercise";
 
@@ -59,18 +58,13 @@ export default function Section2() {
     const items = [
         {
             key: '1',
-            label: 'Lịch học',
-            children: <StudentClassSchedule />,
-        },
-        {
-            key: '2',
             label: 'Học zoom',
             children: <StudentClassZoom
                 classScheduleData={filteredSchedules}
                 classSessionData={filteredSessions} />,
         },
         {
-            key: '3',
+            key: '2',
             label: 'Bài tập',
             children: <StudentExercise
                 deadlineData={filteredDeadlines}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getData } from "../services/baseService";
 
-const useFetch = (path, query, config = {}) => {
+const useFetch = (path, query = {}, config = {}) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);

@@ -1,28 +1,34 @@
 import { Image } from 'antd';
 import { useState } from 'react';
 import GV from "../../../../assets/images/gv.png";
+import useFetch from '../../../../hooks/useFetch';
 import { formatDateFromApi } from '../../../../utils/formatDate';
 
 export default function BlogItem({ key, blog }) {
+    console.log(blog);
+    console.log(blog._id)
+    const blogDataById = useFetch(`admin/blog/blog-detail/${blog._id}`, {}, {});
+    console.log(blogDataById);
+
     const [currentIndex, setCurrentIndex] = useState(0);
-    const h4Matches = blog.content.match(/<h4>(.*?)<\/h4>/g) || [];
+    const h4Matches = blog?.content?.match(/<h4>(.*?)<\/h4>/g) || [];
     const tags = h4Matches.map(h4 => h4.replace(/<\/?h4>/g, ""));
 
     const prevSlide = () => {
         setCurrentIndex((prev) =>
-            prev === 0 ? blog.images.length - 1 : prev - 1
+            prev === 0 ? blog?.images?.length - 1 : prev - 1
         );
     };
 
     const nextSlide = () => {
         setCurrentIndex((prev) =>
-            prev === blog.images.length - 1 ? 0 : prev + 1
+            prev === blog?.images?.length - 1 ? 0 : prev + 1
         );
     };
 
-
-    return (<>
-        <div className="blog__item" key={blog.id}>
+    return (
+    <>
+        <div className="blog__item" key={blog._id}>
             <div className="blog__writer">
                 <div className="avatar">
                     <img src={GV} alt="anhdaidiengiaovien.png" />
@@ -38,7 +44,7 @@ export default function BlogItem({ key, blog }) {
             <div
                 className="blog__content"
                 dangerouslySetInnerHTML={{
-                    __html: blog.content.replace(/<h4>.*?<\/h4>/g, "")
+                    __html: blog?.content?.replace(/<h4>.*?<\/h4>/g, "")
                 }}
             />
 
@@ -49,7 +55,7 @@ export default function BlogItem({ key, blog }) {
                 </div>
                 <Image
                     width={"100%"}
-                    src={blog.images[currentIndex]}
+                    src={blog?.images[currentIndex]}
                     alt={`blog-${currentIndex}`}
                 />
                 <div className="next" onClick={nextSlide}>

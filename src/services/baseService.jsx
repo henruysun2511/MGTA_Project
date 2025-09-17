@@ -1,22 +1,24 @@
-import { del, get, patch, post } from "../utils/request";
+import { del, get, patch, post, postFormData } from "../utils/request";
 
 export const getAllData = async (path) => {
     const result = await get(path);
     return result;
 }
 
-export const getDataById = async (path, id) => {
-    const result = await get(`${path}?id=${id}`);
-    return result;
-}
+export const getData = async (path, queryString) => {
+  const result = await get(`${path}?${queryString}`);
+  console.log("Fetch URL:", `${path}?${queryString}`);
+  return result;
+};
 
-export const getDataBySpecificId = async (path, key, id) => {
-    const result = await get(`${path}?${key}=${id}`);
-    return result;
-}
 
 export const createData = async (path,options) => {
     const result = await post(path, options);
+    return result;
+}
+
+export const createImageData = async (path,options) => {
+    const result = await postFormData(path, options);
     return result;
 }
 

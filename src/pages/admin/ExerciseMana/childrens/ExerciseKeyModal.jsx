@@ -1,8 +1,7 @@
-import { Input, Modal, Table } from "antd";
+import { Input, Modal, Spin, Table } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { createAction } from "../../../../redux/actions/baseAction";
-import { createData } from "../../../../services/baseService";
+import { handleCreate, handleUploadImage } from "../../../../utils/handles";
 
 
 const ExcerciseKeyModal = ({ visible, onClose, totalQuestion, exerciseData }) => {
@@ -44,35 +43,27 @@ const ExcerciseKeyModal = ({ visible, onClose, totalQuestion, exerciseData }) =>
     },
   ];
 
+  const [loading, setLoading] = useState(false);
+
   const handleOk = async () => {
-    //Định dạng lại ảnh, đáp án
-    // const images = exerciseData.images.map(image => image.name);
+    const uploadedUrls = await handleUploadImage(exerciseData.images, setLoading);
+    console.log(uploadedUrls)
+
     const questions = answers.map(item => ({
       index: item.stt,
-      answer: item.dapAn
+      answer: item.dapAn,
     }));
 
     const options = {
-      title: exerciseData.title,
-      skillId: exerciseData.skillId,
-      unit: exerciseData.unit,
-      totalTime: exerciseData.totalTime,
-      totalQuestion: exerciseData.totalQuestion,
-      images: exerciseData.images,
-      deleted: false,
+      ...exerciseData,
+      unit: Number(exerciseData.unit),
       questions: questions,
+      images: uploadedUrls.urls,
     };
 
+    console.log("options gửi lên:", options);
 
-    const response = await createData("exercises", options);
-    if (response) {
-      alert("Thêm bài tập thành công");
-      dispatch(createAction("exercises", response));
-      onClose();
-    }
-    else {
-      alert("Thêm bài tập thất bại");
-    }  
+    await handleCreate(dispatch, "admin/exercise", "exercises", options, () => onClose());
   };
 
   return (
@@ -82,13 +73,16 @@ const ExcerciseKeyModal = ({ visible, onClose, totalQuestion, exerciseData }) =>
       onCancel={onClose}
       onOk={handleOk}
       width={600}
+      confirmLoading={loading}
     >
-      <Table
-        dataSource={answers}
-        columns={columns}
-        pagination={false}
-        rowKey="id"
-      />
+      <Spin spinning={loading} tip="Đang xử lý...">
+        <Table
+          dataSource={answers}
+          columns={columns}
+          pagination={false}
+          rowKey="id"
+        />
+      </Spin>
     </Modal>
   );
 };

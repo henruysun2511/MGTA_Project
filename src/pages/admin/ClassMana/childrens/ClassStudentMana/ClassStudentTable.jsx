@@ -1,25 +1,20 @@
-import { EditOutlined, RetweetOutlined } from '@ant-design/icons';
+import { RetweetOutlined } from '@ant-design/icons';
 import { Space, Table, Tooltip } from 'antd';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { usePagination } from '../../../../../hooks/usePagination';
 import ClassStudentChangeClassModal from './ClassStudentChangeClassModal';
-import ClassStudentUpdateModal from './ClassStudentUpdateModal';
 const { Column } = Table;
 
-export default function ClassStudentTable({ classStudentData }) {
-    const dispatch = useDispatch();
-
-    const { getPagination, getIndex } = usePagination(10);
-    const [openModal, setOpenModal] = useState(false);
+export default function ClassStudentTable({ classStudentData, pagination }) {
     const [openClassModal, setOpenClassModal] = useState(false);
     const [editingRecord, setEditingRecord] = useState(null);
 
     return (
         <>
-            <Table dataSource={classStudentData}
+            <Table dataSource={classStudentData} pagination={false}
             >
-                <Column title="STT" key="index" render={(text, record, index) => getIndex(index)} />
+                <Column title="STT" key="index" render={(text, record, index) =>
+                    ((pagination?.currentPage - 1) * pagination?.limit) + index + 1
+                }/>
                 <Column title="Học sinh" dataIndex="name" key="shift" />
                 <Column title="Trường" dataIndex="school" key="shift" />
                 <Column title="Địa chỉ" dataIndex="address" key="shift" />
@@ -30,9 +25,6 @@ export default function ClassStudentTable({ classStudentData }) {
                     key="action"
                     render={(text, record) => (
                         <Space size="large">
-                            <Tooltip title="Chỉnh sửa">
-                                <EditOutlined onClick={() => { setOpenModal(true); setEditingRecord(record); }} />
-                            </Tooltip>
                             <Tooltip title="Chuyển lớp">
                                 <RetweetOutlined onClick={() => { setOpenClassModal(true); setEditingRecord(record); }} />
                             </Tooltip>
@@ -42,7 +34,6 @@ export default function ClassStudentTable({ classStudentData }) {
             </Table>
 
             <ClassStudentChangeClassModal open={openClassModal} onCancel={() => setOpenClassModal(false)} record={editingRecord} />
-            <ClassStudentUpdateModal open={openModal} onCancel={() => setOpenModal(false)} record={editingRecord} />
         </>
     )
 }

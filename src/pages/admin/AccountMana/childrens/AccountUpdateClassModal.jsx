@@ -1,40 +1,37 @@
 import { Button, Form, Modal, Select, Table } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateAction } from '../../../../redux/actions/baseAction';
-import { updateData } from '../../../../services/baseService';
+import { useDispatch } from 'react-redux';
+import { alertError } from '../../../../utils/alerts';
+import { handleUpdate } from '../../../../utils/handles';
 const { Column } = Table;
 
-export default function AccountUpdateClassModal({ open, onCancel, record }) {
+export default function AccountUpdateClassModal({ open, onCancel, record, classData, studentData }) {
     const dispatch = useDispatch();
 
-    const classData = useSelector(state => state.classes.list).filter(cl => !cl.deleted);
     const classOptions = classData.map(cl => ({
         label: cl.className,
-        value: cl.id
-    })); 
+        value: cl._id
+    }));
 
-    const studentData = useSelector(state => state.students.list).filter(st => !st.deleted);
     const studentByAccountId = record
-        ? studentData.find(st => st.accountId === record.id)
+        ? studentData.find(st => st.accountId?._id === record._id)
         : null;
+
+    console.log(studentData);
+    console.log(studentByAccountId);
 
     const handleUpdateClassStudents = async (values) => {
         if (!record) return;
-        if(record.status === "inactive") {
-            alert("Tài khoản này chưa được kích hoạt. Vui lòng kích hoạt trước khi phân lớp.");
+        if (record.status === "inactive") {
+            alertError("Tài khoản này chưa được kích hoạt. Vui lòng kích hoạt trước khi phân lớp.");
             return;
         }
 
-        const res = await updateData("students", studentByAccountId.id, {
-            ...studentByAccountId,
-            classId: values.classId,  
-        });
+        const options = {
 
-        if (res) {
-            dispatch(updateAction("students", res));
-            alert(`Đã cập nhật lớp cho tài khoản ${record.username} - ${record.name}`);
-            onCancel(); 
+            classId: values.classId,
         }
+
+        await handleUpdate(dispatch, 'admin/student/add-class', "students", studentByAccountId._id, options, () => onCancel());
     };
 
     return (

@@ -2,8 +2,6 @@ import { Button, Col, Form, Input, Row, Table } from 'antd';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchAction } from "../../../redux/actions/baseAction";
-import { getDataBySpecificId } from "../../../services/baseService";
 import { formatDateFromApi } from '../../../utils/formatDate';
 import './exerciseDetail.scss';
 const Column = { Table }
@@ -17,46 +15,46 @@ export default function ExerciseDetail() {
         const fetchData = async () => {
             try {
                 //Lấy deadline theo id
-                const deadlines = await getDataBySpecificId("deadlines", "id", cleanId);
-                dispatch(fetchAction("deadlines", deadlines));
-                if (!deadlines || deadlines.length === 0) return;
+                // const deadlines = await getDataBySpecificId("deadlines", "id", cleanId);
+                // dispatch(fetchAction("deadlines", deadlines));
+                // if (!deadlines || deadlines.length === 0) return;
 
-                const exerciseId = deadlines[0].exerciseId;
+                // const exerciseId = deadlines[0].exerciseId;
 
-                // Lấy exercise theo exerciseId
-                const exercises = await getDataBySpecificId("exercises", "id", exerciseId);
-                dispatch(fetchAction("exercises", exercises));
-                if (!exercises || exercises.length === 0) return;
+                // // Lấy exercise theo exerciseId
+                // const exercises = await getDataBySpecificId("exercises", "id", exerciseId);
+                // dispatch(fetchAction("exercises", exercises));
+                // if (!exercises || exercises.length === 0) return;
 
-                //Lấy skillIds từ exercise
-                if (exercises[0].skillIds?.length) {
-                    const skills = await getDataBySpecificId("skills", "id", exercises[0].skillIds);
-                    dispatch(fetchAction("skills", skills));
-                }
+                // //Lấy skillIds từ exercise
+                // if (exercises[0].skillIds?.length) {
+                //     const skills = await getDataBySpecificId("skills", "id", exercises[0].skillIds);
+                //     dispatch(fetchAction("skills", skills));
+                // }
 
-                //Lấy result theo exerciseId
-                const results = await getDataBySpecificId("results", "exerciseId", exerciseId);
-                dispatch(fetchAction("results", results));
+                // //Lấy result theo exerciseId
+                // const results = await getDataBySpecificId("results", "exerciseId", exerciseId);
+                // dispatch(fetchAction("results", results));
 
-                //Lấy comments theo exerciseId
-                const comments = await getDataBySpecificId("comments", "exerciseId", exerciseId);
-                dispatch(fetchAction("comments", comments));
+                // //Lấy comments theo exerciseId
+                // const comments = await getDataBySpecificId("comments", "exerciseId", exerciseId);
+                // dispatch(fetchAction("comments", comments));
 
-                // Lấy toàn bộ studentId từ comments và results
-                const studentIds = [
-                    ...new Set([
-                        ...(comments?.map(c => c.studentId) || []),
-                        ...(results?.map(r => r.studentId) || [])
-                    ])
-                ];
+                // // Lấy toàn bộ studentId từ comments và results
+                // const studentIds = [
+                //     ...new Set([
+                //         ...(comments?.map(c => c.studentId) || []),
+                //         ...(results?.map(r => r.studentId) || [])
+                //     ])
+                // ];
 
 
-                if (studentIds.length) {
-                    const students = await Promise.all(
-                        studentIds.map(id => getDataBySpecificId("students", "id", id))
-                    );
-                    dispatch(fetchAction("students", students.flat()));
-                }
+                // if (studentIds.length) {
+                //     const students = await Promise.all(
+                //         studentIds.map(id => getDataBySpecificId("students", "id", id))
+                //     );
+                //     dispatch(fetchAction("students", students.flat()));
+                // }
             } catch (error) {
                 console.error("Fetch error:", error);
             }
@@ -201,3 +199,4 @@ export default function ExerciseDetail() {
         </>
     );
 }
+

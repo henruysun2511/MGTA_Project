@@ -6,21 +6,19 @@ import {
 import { Button, Input, Table } from 'antd';
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateExerciseAction } from "../../../../redux/actions/exerciseAction";
-import { editExercise } from "../../../../services/exerciseService";
+import { handleUpdate } from '../../../../../utils/handles';
 
 export default function ExerciseQuestionTable({ exerciseData }) {
     const dispatch = useDispatch();
     const [editableQuestions, setEditableQuestions] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
 
-
     useEffect(() => {
-        if (exerciseData[0]?.questions) {
+        if (exerciseData?.questions) {
             // Tạo bản copy để edit
-            setEditableQuestions(exerciseData[0].questions.map(q => ({ ...q })));
+            setEditableQuestions(exerciseData.questions.map(q => ({ ...q })));
         }
-    }, []);
+    }, [exerciseData]);
 
 
     const answerColumns = [
@@ -57,8 +55,8 @@ export default function ExerciseQuestionTable({ exerciseData }) {
 
     const handleCancel = () => {
         // Khôi phục dữ liệu gốc
-        if (exerciseData[0]?.questions) {
-            setEditableQuestions(exerciseData[0].questions.map(q => ({ ...q })));
+        if (exerciseData?.questions) {
+            setEditableQuestions(exerciseData.questions.map(q => ({ ...q })));
         }
         setIsEditing(false);
     };
@@ -70,16 +68,13 @@ export default function ExerciseQuestionTable({ exerciseData }) {
 
     const handleSave = async () => {
         const options = {
+            ...exerciseData,
+            skillId: exerciseData.skillId.map(s => s._id),
             questions: editableQuestions,
             totalQuestion: editableQuestions.length
         };
-        const response = await editExercise(exerciseData[0].id, options);
-        if (response) {
-            dispatch(updateExerciseAction(response));
-            alert("Sửa câu hỏi thành công");
-        } else {
-            alert("Sửa câu hỏi thất bại");
-        }
+
+        await handleUpdate(dispatch, "admin/exercise", "exercise", exerciseData._id, options);
         setIsEditing(false);
     };
 

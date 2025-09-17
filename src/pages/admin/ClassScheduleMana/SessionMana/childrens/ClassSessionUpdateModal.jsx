@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateAction } from '../../../../../redux/actions/baseAction';
 import { updateData } from '../../../../../services/baseService';
+import { alertError, alertSuccess } from '../../../../../utils/alerts';
 
 export default function ClassSessionUpdateModal({ open, onCancel, record }) {
     const [form] = Form.useForm();
@@ -12,7 +13,7 @@ export default function ClassSessionUpdateModal({ open, onCancel, record }) {
     useEffect(() => {
         if (open && record) {
             form.setFieldsValue({
-                name: record.name || 'N/A',
+                classSessionName: record.classSessionName || 'N/A',
                 startTime: record.startTime ? dayjs(record.startTime, "HH:mm") : null,
                 endTime: record.endTime ? dayjs(record.endTime, "HH:mm") : null,
             });
@@ -26,13 +27,14 @@ export default function ClassSessionUpdateModal({ open, onCancel, record }) {
             endTime: values.endTime.format("HH:mm")
         };
 
-        const res = await updateData("classsessions", record.id, options);
-        if (res) {
-            dispatch(updateAction("classsessions", res));
-            alert("Cập nhật lịch học thành công");
+        const res = await updateData("admin/class-session", record._id, options);
+        console.log(res);
+        if (res.statusCode === 200) {
+            dispatch(updateAction("classsessions", res.data));
+            alertSuccess(res.message);
             onCancel();
         } else {
-            alert("Cập nhật lịch học thất bại");
+            alertError(res.message);
         }
     };
 
@@ -45,7 +47,7 @@ export default function ClassSessionUpdateModal({ open, onCancel, record }) {
         >
             <Form layout="vertical" form={form} onFinish={handleUpdateClassSession}>
                 <Form.Item
-                    name="name"
+                    name="classSessionName"
                     label="Ca học"
                     rules={[{ required: true, message: 'Vui lòng chọn ca học' }]}
                 >

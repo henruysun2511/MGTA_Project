@@ -1,32 +1,28 @@
 import { Button, Col, DatePicker, Form, Input, Modal, Select } from 'antd';
 import dayjs from "dayjs";
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateAction } from '../../../../../redux/actions/baseAction';
-import { updateData } from '../../../../../services/baseService';
+import { useDispatch } from 'react-redux';
+import { handleUpdate } from '../../../../../utils/handles';
 
-export default function ClassScheduleUpdateModal({ open, onCancel, record }) {
+export default function ClassScheduleUpdateModal({ open, onCancel, record, classData, classSessionData }) {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
 
-    const classData = useSelector((state) => state.classes.list);
-    const classSessionData = useSelector((state) => state.classsessions.list);
-
-    const classOptions = classData.map((item) => ({
-        value: item.id,
+    const classOptions = classData?.map((item) => ({
+        value: item._id,
         label: item.className,
     }));
 
-    const classSessionOptions = classSessionData.map((item) => ({
-        value: item.id,
-        label: item.name,
+    const classSessionOptions = classSessionData?.map((item) => ({
+        value: item._id,
+        label: item.classSessionName,
     }));
 
     useEffect(() => {
         if (open && record) {
             form.setFieldsValue({
-                classId: record.classId,
-                classSessionId: record.classSessionId,
+                classId: record.classId?._id,
+                classSessionId: record.classSessionId?._id,
                 linkZoom: record.linkZoom,
                 schedule: record.schedule
                     ? dayjs(record.schedule, "DD/MM/YYYY")
@@ -39,19 +35,12 @@ export default function ClassScheduleUpdateModal({ open, onCancel, record }) {
         const formatted = values.schedule.format("YYYY-MM-DD");
         const options = {
             ...values,
-            id: record.id, 
+            id: record.id,
             schedule: formatted
         };
 
-        const res = await updateData("classschedules", record.id, options);
-        if (res) {
-            dispatch(updateAction("classschedules", res));
-            alert("Cập nhật lịch học thành công");
-            onCancel(); 
-        } else {
-            alert("Cập nhật lịch học thất bại");
-        }
-    };
+        await handleUpdate(dispatch, "admin/class-schedule", "classschedules", record._id, options, ()=> onCancel());
+    }
 
     return (<>
         <Modal

@@ -2,22 +2,25 @@ import { DeleteOutlined, EditOutlined, EyeOutlined, StopOutlined } from '@ant-de
 import { Button, Space, Table, Tooltip } from 'antd';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { usePagination } from '../../../../hooks/usePagination';
-import { updateAction } from '../../../../redux/actions/baseAction';
-import { updateData } from '../../../../services/baseService';
+import { alertConfirm } from '../../../../utils/alerts';
+import { handleDelete, handleUpdate } from '../../../../utils/handles';
 import AccountUpdateClassModal from './AccountUpdateClassModal';
 import AccountWatchDetailModal from './AccountWatchDetailModal';
 const { Column, ColumnGroup } = Table;
 
 
-export default function AccountTable({ accountData, studentData, classData }) {
+export default function AccountTable({ accountData, studentData, classData, pagination }) {
     const dispatch = useDispatch();
 
     const dataSource = accountData.map((account) => {
-        const studentDataByAccountId = studentData.find((st) => st.accountId === account.id);
+        const studentDataByAccountId = studentData.find(
+            (st) => st.accountId && st.accountId._id === account._id
+        );
 
-        const classDataByStudentId = studentDataByAccountId
-            ? classData.find((cl) => String(cl.id) === String(studentDataByAccountId.classId))
+        const classDataByStudentId = studentDataByAccountId?.classId
+            ? classData.find(
+                (cl) => String(cl._id) === String(studentDataByAccountId.classId?._id)
+            )
             : null;
 
         return {
@@ -25,43 +28,35 @@ export default function AccountTable({ accountData, studentData, classData }) {
             name: studentDataByAccountId ? studentDataByAccountId.name : "N/A",
             class: classDataByStudentId ? classDataByStudentId.className : "Chưa phân lớp",
         };
-    })
-    .filter((acc) => acc.role === "student");
-    console.log(dataSource);
+    });
 
     const handleActivate = async (record) => {
-        const res = await updateData("accounts", record.id, { ...record, status: "active" });
-        if (res) {
-            dispatch(updateAction("accounts", res));
-            alert(`Tài khoản ${record.username} đã kích hoạt`);
+        console.log(record._id)
+        const result = await alertConfirm(`Kích hoạt tài khoản ${record.username || ""} ?`, "", "Xác nhận", "Hủy");
+        if (result.isConfirmed) {
+            await handleUpdate(dispatch, "admin/account/change-status", "accounts", record._id, { ...record, status: "active" });
         }
     }
 
     const handleInactive = async (record) => {
-        const res = await updateData("accounts", record.id, { ...record, status: 'inactive' });
-        if (res) {
-            dispatch(updateAction("accounts", res));
-            alert(`Tài khoản ${record.username} đã vô hiệu hóa.`);
+        const result = await alertConfirm(`Vô hiệu hóa tài khoản ${record.username || ""} ?`, "", "Xác nhận", "Hủy");
+        if (result.isConfirmed) {
+            await handleUpdate(dispatch, "admin/account/change-status", "accounts", record._id, { ...record, status: "inactive" });
         }
     }
 
     const handleDeleteAccount = async (record) => {
-        const res = await updateData("accounts", record.id, { ...record, deleted: true });
-        if (res) {
-            dispatch(updateAction("accounts", res));
-            alert(`Tài khoản ${record.username} đã xóa.`);
-        }
+        await handleDelete(dispatch, "admin/account", "accounts", record._id, record.username);
     }
 
-    const { getPagination, getIndex } = usePagination(10);
     const [editingRecord, setEditingRecord] = useState(null);
     const [openEditClassModal, setOpenEditClassModal] = useState(false);
     const [openWatchDetailModal, setOpenWatchDetailModal] = useState(false);
 
     return (
         <>
-            <Table dataSource={dataSource} pagination={getPagination(dataSource.length)}>
-                <Column title="STT" key="index" render={(text, record, index) => getIndex(index)} />
+            <Table dataSource={dataSource} pagination={false}>
+                <Column title="STT" key="index" render={(text, record, index) => ((pagination?.currentPage - 1) * pagination?.limit) + index + 1} />
                 <Column title="Họ và tên" dataIndex="name" key="name" />
                 <Column title="Username" dataIndex="username" key="username" />
                 <Column
@@ -123,8 +118,8 @@ export default function AccountTable({ accountData, studentData, classData }) {
                 />
             </Table>
 
-            <AccountUpdateClassModal open={openEditClassModal} onCancel={() => setOpenEditClassModal(false)} record={editingRecord} />
-            <AccountWatchDetailModal open={openWatchDetailModal} onCancel={() => setOpenWatchDetailModal(false)} record={editingRecord} />
+            <AccountUpdateClassModal classData={classData} studentData={studentData} open={openEditClassModal} onCancel={() => setOpenEditClassModal(false)} record={editingRecord} />
+            <AccountWatchDetailModal classData={classData} studentData={studentData} open={openWatchDetailModal} onCancel={() => setOpenWatchDetailModal(false)} record={editingRecord} />
         </>
     )
 }

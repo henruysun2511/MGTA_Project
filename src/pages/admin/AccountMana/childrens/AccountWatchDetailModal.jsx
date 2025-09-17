@@ -1,14 +1,11 @@
 import { Modal, Table } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 const { Column } = Table;
 
-export default function AccountWatchDetailModal({ open, onCancel, record }) {
+export default function AccountWatchDetailModal({classData, studentData, open, onCancel, record }) {
     const dispatch = useDispatch();
-    const studentData = useSelector((state) => state.students.list);
-    const classData = useSelector((state) => state.classes.list);
 
     if (!record) {
-        // Nếu chưa có record thì render modal rỗng hoặc loading
         return (
             <Modal
                 title="Chi tiết tài khoản"
@@ -21,9 +18,10 @@ export default function AccountWatchDetailModal({ open, onCancel, record }) {
         );
     }
 
-    const studentByAccountId = studentData.find((st) => st.accountId === record.id);
+
+    const studentByAccountId = studentData.find((st) => st.accountId && st.accountId._id === record._id) || [];
     const classByStudentId = studentByAccountId
-        ? classData.find((cl) => String(cl.id) === String(studentByAccountId.classId))
+        ? classData.find((cl) => String(cl._id) === String(studentByAccountId.classId))
         : null;
 
     return (

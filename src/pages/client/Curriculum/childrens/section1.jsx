@@ -1,40 +1,9 @@
 import { Col, Row } from "antd";
-import { useSelector } from "react-redux";
 import Container2 from "../../../../components/Container/container2";
 import { formatDateFromApi } from "../../../../utils/formatDate";
 
 export default function Section1() {
-    const accessToken = localStorage.getItem("accessToken");
-
-    // account hiện tại
-    const accountData = useSelector(state => state.accounts.list).filter(
-        acc => !acc.deleted && acc.status === "active"
-    ) || [];
-
-    const currentAccount = accountData.find(
-        acc => String(acc.accessToken) === String(accessToken)
-    );
-
-    // danh sách học sinh
-    const studentData = useSelector(state => state.students.list).filter(
-        st => !st.deleted
-    ) || [];
-
-    // danh sách kết quả
-    const resultData = useSelector(state => state.results.list) || [];
-
-    // tìm học sinh theo accountId
-    const currentStudent = currentAccount
-        ? studentData.find(st => st.accountId === currentAccount.id)
-        : null;
-
-    // tìm kết quả theo studentId
-    const currentResults = currentStudent
-        ? resultData.filter(r => r.studentId === currentStudent.id)
-        : [];
     
-
-    const exerciseData = useSelector(state => state.exercises.list) || [];
     return (
         <>
             <div class="curriculumn__section-1">

@@ -1,61 +1,67 @@
 import { DatePicker, Input, Select, Space } from 'antd';
+import { useEffect, useState } from 'react';
+import useDebounce from '../../../../../hooks/useDebounce';
 const { Search } = Input;
-export default function ClassScheduleFilter({ classData, classSessionData, onFilterChange }) {
+
+export default function ClassScheduleFilter({ onFilterChange, classSessionData, classData }) {
     const classOptions = [
-        { value: "all", label: "Tất cả" },
+        { value: "", label: "Tất cả" },
         ...classData.map((item) => ({
-            value: item.id,
+            value: item.className, 
             label: item.className,
         })),
-    ];
+    ]; 
 
     const classSessionOptions = [
-        { value: "all", label: "Tất cả" },
+        { value: "", label: "Tất cả" },
         ...classSessionData.map((item) => ({
-            value: item.id,
-            label: item.name,
+            value: item.classSessionName, 
+            label: item.classSessionName,
         })),
     ];
 
-    const handleChangeSearch = (value) => {
-        onFilterChange({ keyword: value.target.value })
-    }
+    const [searchText, setSearchText] = useState("");
+    const debouncedSearch = useDebounce(searchText, 500);
 
-    const handleChangeDate = (date, dateString) => {
-        onFilterChange({ date: dateString });
-    };
+    useEffect(() => {
+        onFilterChange({ className: debouncedSearch });
+    }, [debouncedSearch]);
 
-    const handleChangeClass = (value) => {
-        onFilterChange({ classId: value });
-    };
-
-    const handleChangeSession = (value) => {
-        onFilterChange({ classSessionId: value });
-    };
-
-    return (<>
+    return (
         <Space direction="vertical" size="large" style={{ width: '100%' }}>
             <Search
-                placeholder="Tìm kiếm lịch học (theo link zoom)"
+                placeholder="Tìm kiếm lịch học (theo tên lớp)"
                 size="large"
                 style={{ width: "100%", fontSize: "18px" }}
-                onChange={handleChangeSearch}
+                onChange={(e) => setSearchText(e.target.value)}
             />
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '35px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <p>Lịch học:</p>
-                    <DatePicker onChange={handleChangeDate} needConfirm />
+                    <DatePicker
+                        onChange={(date, dateString) => onFilterChange({ schedule: dateString })}
+                    />
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <p>Lớp:</p>
-                    <Select onChange={handleChangeClass} style={{ width: 120 }} options={classOptions} defaultValue="all"/>
+                    <Select
+                        onChange={(value) => onFilterChange({ className: value })}
+                        style={{ width: 160 }}
+                        options={classOptions}
+                        defaultValue={""}
+                    />
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px'  }} >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <p>Ca học:</p>
-                    <Select onChange={handleChangeSession} style={{ width: 120 }} options={classSessionOptions} defaultValue="all" />
+                    <Select
+                        onChange={(value) => onFilterChange({ classSessionName: value })}
+                        style={{ width: 160 }}
+                        options={classSessionOptions}
+                        defaultValue={""}
+                    />
                 </div>
             </div>
         </Space>
-    </>)
+    );
 }

@@ -2,8 +2,9 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Button, Space } from 'antd';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import useFetch from '../../../../hooks/useFetch';
+import useQuery from '../../../../hooks/useQuery';
 import { fetchAction } from '../../../../redux/actions/baseAction';
-import { getAllData } from '../../../../services/baseService';
 import ClassSessionCreateModal from './childrens/ClassSessionCreateModal';
 import ClassSessionFilter from './childrens/ClassSessionFilter';
 import ClassSessionTable from './childrens/ClassSessionTable';
@@ -13,11 +14,20 @@ export default function SessionMana() {
     const dispatch = useDispatch();
 
     const [modalVisible, setModalVisible] = useState(false);
-    const classSessionData = useSelector((state) => state.classsessions.list).filter(item => !item.deleted);
+
+    const [query, updateQuery, resetQuery] = useQuery({
+        currentPage: 1,
+        limit: 10
+    });
+
+    const [data] = useFetch("admin/class-session/class-sessions", query, {});
 
     useEffect(() => {
-        getAllData("classsessions").then((res) => { dispatch(fetchAction("classsessions", res)); });
-    }, [dispatch]);
+        if (data) {
+            dispatch(fetchAction("classsessions", data));
+        }
+    }, [data, dispatch]);
+    const classSessionData = useSelector((state) => (state.classsessions.list || []).filter(cls => !cls.deleted)); 
 
     const [filters, setFilters] = useState({
         search: "",
@@ -26,11 +36,11 @@ export default function SessionMana() {
 
     const filteredSessions = classSessionData
         .filter((item) =>
-            item.name.toLowerCase().includes(filters.search.toLowerCase())
+            item.classSessionName.toLowerCase().includes(filters.search.toLowerCase())
         )
         .sort((a, b) => {
-            if (filters.sort === "asc/name") return a.name.localeCompare(b.name);
-            if (filters.sort === "desc/name") return b.name.localeCompare(a.name);
+            if (filters.sort === "asc/name") return a.classSessionName.localeCompare(b.classSessionName);
+            if (filters.sort === "desc/name") return b.classSessionName.localeCompare(a.classSessionName);
             return 0;
         });
 
