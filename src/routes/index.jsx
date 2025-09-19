@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import ProtectedRoute from "../components/ProtectedRoute";
 import AdminLayout from "../layouts/AdminLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import UserLayout from "../layouts/UserLayout";
@@ -53,21 +54,27 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <AdminLayout />,
+    element: <ProtectedRoute roles={["68ada708a19888b3462e7a6f"]} />, 
     children: [
-      { path: "overview", element: <Overview /> },
-      { path: "accountMana", element: <AccountMana /> },
-      { path: "exerciseMana", element: <ExerciseMana /> },
-      { path: "exerciseDetailMana/:id", element: <ExerciseDetailMana /> },
-      { path: "blogMana", element: <BlogMana /> },
-      { path: "classScheduleMana", element: <ClassScheduleMana /> },
-      { path: "classMana", element: <ClassMana /> },
-      { path: "scoreMana", element: <ScoreMana /> },
-      { path: "recycleBin", element: <RecycleBin /> },
-      { path: "permissionMana", element: <PermissionRoleMana /> },
-      { path: "skillMana", element: <SkillMana /> }
-    ],
+      {
+        element: <AdminLayout />,
+        children: [
+          { path: "overview", element: <Overview /> },
+          { path: "accountMana", element: <AccountMana /> },
+          { path: "exerciseMana", element: <ExerciseMana /> },
+          { path: "exerciseDetailMana/:id", element: <ExerciseDetailMana /> },
+          { path: "blogMana", element: <BlogMana /> },
+          { path: "classScheduleMana", element: <ClassScheduleMana /> },
+          { path: "classMana", element: <ClassMana /> },
+          { path: "scoreMana", element: <ScoreMana /> },
+          { path: "recycleBin", element: <RecycleBin /> },
+          { path: "permissionMana", element: <PermissionRoleMana /> },
+          { path: "skillMana", element: <SkillMana /> },
+        ],
+      },
+    ]
   }
-]);
+]
+);
 
 export default router;

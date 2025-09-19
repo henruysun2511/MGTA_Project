@@ -32,7 +32,7 @@ export default function ClassScheduleTable({ classScheduleData, classData, class
                 title="STT"
                 key="index"
                 render={(text, record, index) =>
-                    ((pagination?.currentPage - 1) * pagination.limit) + index + 1
+                    ((pagination?.currentPage - 1) * pagination?.limit) + index + 1
                 }
             />
             <Column title="Ca học" dataIndex="classSessionName" key="shift" />

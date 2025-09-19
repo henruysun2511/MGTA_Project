@@ -18,6 +18,7 @@ export default function AccountMana() {
     });
 
     const [data] = useFetch("admin/account/accounts", query, {});
+    console.log(data);
     const [studentDataRes] = useFetch("admin/student/students", {}, {});
     const [classDataRes] = useFetch("admin/class/classes", {}, {})
 

@@ -1,10 +1,12 @@
 import { Select, Space } from "antd";
 import Search from "antd/es/transfer/search";
 
-export default function RecycleFilter({ handleRestoreAll, handleDeleteAll }) {
+export default function RecycleBlogFilter() {
     const options = [
-        { value: "date", label: "Ngày xóa" },
-        { value: "name", label: "Theo tên" },
+        { value: "deletedAt", label: "Ngày xóa gần đây" },
+        { value: "-deletedAt", label: "Ngày xóa xa nhất" },
+        { value: "title", label: "Từ A-Z" },
+        { value: "-title", label: "Từ Z-A" },
     ]
     return (<>
         <Space direction="vertical" style={{ width: '100%' }} size="large">
@@ -17,7 +19,7 @@ export default function RecycleFilter({ handleRestoreAll, handleDeleteAll }) {
             <div style={{ display: 'flex', alignItems: 'center', gap: '35px', justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <p>Sắp xếp:</p>
-                    <Select style={{ width: 120 }} options={options} defaultValue="date" />
+                    <Select style={{ width: 120 }} options={options} defaultValue="deletedAt" />
                 </div>
             </div>
         </Space>

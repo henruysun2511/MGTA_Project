@@ -61,8 +61,6 @@ const ExcerciseKeyModal = ({ visible, onClose, totalQuestion, exerciseData }) =>
       images: uploadedUrls.urls,
     };
 
-    console.log("options gửi lên:", options);
-
     await handleCreate(dispatch, "admin/exercise", "exercises", options, () => onClose());
   };
 

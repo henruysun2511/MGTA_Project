@@ -37,7 +37,7 @@
     background-color: #F9FBFD;
     padding: 50px 0;
 
-    .blog__search{
+    .blog__search {
         text-align: right;
     }
 
@@ -98,14 +98,17 @@
 
                     }
 
-                    .name {
-                        margin-bottom: 5px;
-                        font-weight: 700;
-                        font-size: 18px;
-                    }
+                    .blog__info {
+                        .name {
+                            margin-bottom: 5px;
+                            font-weight: 700;
+                            font-size: 18px;
+                        }
 
-                    .time {
-                        color: gray;
+                        .blog__time {
+                            color: gray;
+                            font-size: 13px !important;
+                        }
                     }
                 }
 

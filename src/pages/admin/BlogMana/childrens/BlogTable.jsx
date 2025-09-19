@@ -2,15 +2,13 @@ import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import { Space, Table, Tooltip } from "antd";
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { usePagination } from '../../../../hooks/usePagination';
-import { updateAction } from '../../../../redux/actions/baseAction';
-import { updateData } from '../../../../services/baseService';
 import { formatDateFromApi } from '../../../../utils/formatDate';
+import { handleDelete } from '../../../../utils/handles';
 import BlogUpdateModal from './BlogUpdateModal';
 import BlogWatchDetailModal from './BlogWatchDetailModal';
 const { Column } = Table;
 
-export default function BlogTable({ blogData }) {
+export default function BlogTable({ blogData, pagination }) {
     const dataSource = blogData.map((item) => ({
         ...item,
         publishedAt: formatDateFromApi(item.publishedAt)
@@ -21,20 +19,15 @@ export default function BlogTable({ blogData }) {
     const [editingRecord, setEditingRecord] = useState(null);
     const dispatch = useDispatch();
 
-    const { getPagination, getIndex } = usePagination(10);
 
     const handleSoftDeleteBlog = async (record) => {
-        const response = await updateData("blogs", record.id, {...record, deleted: true});
-        if(response){
-            dispatch(updateAction("blogs", response));
-            alert(`Đã xóa bài viết ${record.title}`);
-        }
+        await handleDelete(dispatch,"admin/blog","blogs",record._id, record.title);
     }
 
     return (
         <>
-            <Table dataSource={dataSource} pagination={getPagination(dataSource.length)}>
-                <Column title="STT" key="index" render={(text, record, index) => getIndex(index)} />
+            <Table dataSource={dataSource} pagination={false}>
+                <Column title="STT" key="index" render={(text, record, index) =>  (((pagination?.currentPage - 1) * pagination?.limit) + index + 1)}/>
                 <Column title="Tiêu đề" dataIndex="title" key="title" />
                 <Column title="Ngày đăng" dataIndex="publishedAt" key="publishedAt" />
                 <Column
@@ -59,6 +52,5 @@ export default function BlogTable({ blogData }) {
             <BlogUpdateModal open={openUpdateModal} onCancel={() => setOpenUpdateModal(false)} record={editingRecord}/>
             <BlogWatchDetailModal open={openWatchDetailModal} onCancel={() => setOpenWatchDetailModal(false)} record={editingRecord}/>
         </>
-
     )
 }

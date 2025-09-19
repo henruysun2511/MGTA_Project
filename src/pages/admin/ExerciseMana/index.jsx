@@ -29,7 +29,7 @@ export default function ExerciseMana() {
         }
     }, [data, dispatch]);
 
-    const exerciseData = useSelector(state => state.exercises.list || []).filter(ex => !ex.deleted).reverse();;
+    const exerciseData = useSelector(state => state.exercises.list || []);
     console.log(exerciseData);
 
     const [skillDataRes] = useFetch("admin/skill/skills", {}, {});

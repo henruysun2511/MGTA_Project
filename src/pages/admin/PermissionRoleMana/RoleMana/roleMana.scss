@@ -1,0 +1,31 @@
+.role__list {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+
+    .role__card {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        margin-bottom: 20px;
+        width: 25%;
+
+        .role__icon{
+            font-size: 30px;
+        }
+
+        h2{
+            margin-bottom: 0px;
+        }
+
+        .role__action{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+}

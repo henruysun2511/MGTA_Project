@@ -22,6 +22,7 @@ export default function Login() {
 
             if (response.statusCode === 200 && response.data?.accessToken) {
                 const decoded = jwtDecode(response.data?.accessToken);
+                console.log(decoded);
                 localStorage.setItem("roleId", decoded.roleId);
                 localStorage.setItem("accountId", decoded.accountId);
                 localStorage.setItem("accessToken", response.data.accessToken);

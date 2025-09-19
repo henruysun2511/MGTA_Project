@@ -1,7 +1,6 @@
 import { PlusOutlined } from '@ant-design/icons';
 import {
     Button,
-    Form,
     Pagination,
     Space
 } from 'antd';
@@ -11,15 +10,12 @@ import padding1 from "../../../components/Padding";
 import useFetch from '../../../hooks/useFetch';
 import useQuery from '../../../hooks/useQuery';
 import { fetchAction } from '../../../redux/actions/baseAction';
-import { formatDateFromApi } from '../../../utils/formatDate';
 import "./blogMana.scss";
 import BlogCreateModal from './childrens/BlogCreateModal';
 import BlogFilter from './childrens/BlogFilter';
 import BlogTable from './childrens/BlogTable';
 
 export default function BlogMana() {
-    const [form] = Form.useForm();
-    const [blogs, setBlogs] = useState([]);
     const [openCreateModal, setOpenCreateModal] = useState(false);
 
     const dispatch = useDispatch();
@@ -29,7 +25,6 @@ export default function BlogMana() {
         limit: 10
     })
     const [data] = useFetch("admin/blog/blogs", query, {});
-    console.log(data);
 
     useEffect(() => {
         if (data) {
@@ -40,28 +35,12 @@ export default function BlogMana() {
     const blogData = useSelector((state) => state.blogs.list || []);
     console.log(blogData);
 
-    // Lọc + sắp xếp
-    const [filters, setFilters] = useState({ search: "", sort: "newest", date: "" });
-
-    const filteredBlogs = blogData
-        .filter(blog => {
-            const matchSearch = filters.search
-                ? blog.title.toLowerCase().includes(filters.search.toLowerCase())
-                : true;
-
-            const matchDate = filters.date
-                ? blog.publishedAt?.startsWith(filters.date)
-                : true;
-
-            return matchSearch && matchDate;
-        })
-        .sort((a, b) => {
-            if (filters.sort === "newest") {
-                return new Date(formatDateFromApi(b.publishedAt)) - new Date(a.publishedAt);
-            } else {
-                return new Date(a.publishedAt) - new Date(b.publishedAt);
-            }
+    const handleFilterChange = (newFilter) => {
+        updateQuery({
+            ...newFilter,
+            page: 1, 
         });
+    };
 
     const handlePageChange = (page, pageSize) => {
         updateQuery({
@@ -73,7 +52,7 @@ export default function BlogMana() {
     return (
         <div style={padding1}>
             <Space direction="vertical" size="large" style={{ width: '100%' }}>
-                <BlogFilter onFilterChange={(f) => setFilters({ ...filters, ...f })} />
+                <BlogFilter onFilterChange={(handleFilterChange)} />
 
                 <div style={{ textAlign: 'right' }}>
                     <Button
@@ -86,7 +65,7 @@ export default function BlogMana() {
                     </Button>
                 </div>
 
-                <BlogTable blogData={filteredBlogs} pagination={data?.blogActives?.pagination} />
+                <BlogTable blogData={blogData} pagination={data?.blogActives?.pagination} />
 
                 {data?.blogActives?.pagination && (
                     <Pagination

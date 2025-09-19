@@ -17,8 +17,10 @@ const AllReducers = combineReducers({
     results: baseReducer("results"),
     notifications: baseReducer("nofitications"),
     comments: baseReducer("comments"),
-    roles: baseReducer("roels"),
+    roles: baseReducer("roles"),
     permissions: baseReducer("permissions"),
+    deletedblogs: baseReducer("deletedblogs"),
+    deletedaccounts: baseReducer("deletedaccounts"),
 });
 
 export default AllReducers;
