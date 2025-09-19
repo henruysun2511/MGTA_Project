@@ -11,7 +11,6 @@ export const getData = async (path, queryString) => {
   return result;
 };
 
-
 export const createData = async (path,options) => {
     const result = await post(path, options);
     return result;

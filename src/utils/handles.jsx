@@ -37,6 +37,30 @@ export const handleUpdate = async (dispatch, apiPath, reduxPath, id, options, on
     }
 }
 
+export const handleRestore = async (dispatch, apiPath, reduxPath, id, options, name) => {
+    try {
+        const result = await alertConfirm(
+            "Khôi phục", 
+            `Khôi phục bài blog ${name}`, 
+            "Xác nhận", 
+            "Hủy"
+        );
+        if (result.isConfirmed) {
+            const res = await updateData(apiPath, id, options);
+            if (res.statusCode === 200) {
+                // cập nhật lại 1 blog cụ thể trong redux
+                dispatch(updateAction(reduxPath, { _id: options.ids[0], deleted: false }));
+                alertSuccess(res.message);
+            } else {
+                alertError(res.message);
+            }
+        }
+    } catch (err) {
+        console.error(err);
+        alertError("Có lỗi xảy ra khi cập nhật. Vui lòng thử lại!");
+    }
+};
+
 export const handleRestoreAll = async (dispatch, apiPath, reduxPath, list) => {
     try {
         const result = await alertConfirm(
@@ -105,7 +129,7 @@ export const handleDeleteAll = async (dispatch, apiPath, reduxPath, list) => {
                 if (res) {
                     dispatch(deleteAction(reduxPath, res.data._id));
                     alertSuccess(res.message);
-                }else{
+                } else {
                     alertError(res.message);
                 }
             }

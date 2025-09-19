@@ -1,28 +1,28 @@
 import { DeleteOutlined, EyeOutlined, RetweetOutlined } from '@ant-design/icons';
 import { Space, Table, Tooltip } from 'antd';
 import { useDispatch } from 'react-redux';
-import { usePagination } from '../../../../../hooks/usePagination';
-import { alertConfirm } from '../../../../../utils/alerts';
-import { handleDelete, handleUpdate } from '../../../../../utils/handles';
+import { formatDateFromApi } from "../../../../../utils/formatDate";
+import { handleDelete, handleRestore } from '../../../../../utils/handles';
 const { Column } = Table;
 
 
 export default function RecycleBlogTable({ blogData }) {
-    const dataSource = blogData ||  [];
+    const dataSource = blogData.map((blog, index) => ({
+        ...blog,
+        key: index, 
+        deletedAt: formatDateFromApi(blog.deletedBy?.[0]?.deletedAt) || null, 
+    }));
+
+
     const dispatch = useDispatch();
 
-
-    const { getPagination, getIndex } = usePagination(8);
-
     const handleRestoreBlog = async (record) => {
-        const result = await alertConfirm("Khôi phục", `Khôi phục bài blog ${record.title}`, "Xác nhận", "Hủy");
-        if(result.isConfirmed){
             const options = {
-                ...record,
-                deleted: false
+                ids: [record._id]
             }
-            await handleUpdate(dispatch, "admin/blog/deletedBlog", "deletedblog", record._id, options, () => {});
-        }
+            console.log(options);
+            // await handleUpdate(dispatch, "admin/blog/restore", "deletedblog", "", options, () => { });
+            await handleRestore(dispatch,"admin/blog/restore", "deletedblogs","", options, record.title );
     }
 
     const handlePermanentDeleteBlog = async (record) => {
@@ -31,8 +31,8 @@ export default function RecycleBlogTable({ blogData }) {
 
     return (
         <>
-            <Table dataSource={dataSource} ppagination={getPagination(dataSource.length)}>
-                <Column title="STT" key="index" render={(text, record, index) => getIndex(index)} />
+            <Table dataSource={dataSource} pagination={false}>
+                <Column title="STT" key="index" render={(text, record, index) => index} />
                 <Column title="Tiêu đề" dataIndex="title" key="name" />
                 <Column title="Thời gian xóa" dataIndex="deletedAt" key="name" />
                 <Column
