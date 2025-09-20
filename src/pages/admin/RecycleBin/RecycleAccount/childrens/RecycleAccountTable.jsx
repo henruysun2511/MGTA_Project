@@ -1,35 +1,35 @@
-import { DeleteOutlined, EyeOutlined, RetweetOutlined } from '@ant-design/icons';
+import { DeleteOutlined, RetweetOutlined } from '@ant-design/icons';
 import { Space, Table, Tooltip } from 'antd';
 import { useDispatch } from 'react-redux';
-import { usePagination } from '../../../../../hooks/usePagination';
+import { formatDateFromApi } from '../../../../../utils/formatDate';
+import { handlePermanentDelete, handleRestore } from '../../../../../utils/handles';
 const { Column } = Table;
 
 
-export default function RecycleAccountTable({ accountData }) {
-    const dataSource = accountData || [];
+export default function RecycleAccountTable({ accountData, pagination }) {
+    const dataSource = accountData.map((acc, index) => ({
+        ...acc,
+        key: index,
+        deletedAt: formatDateFromApi(acc.deletedBy?.deletedAt) || null,
+    }));
+
     const dispatch = useDispatch();
 
-    const { getPagination, getIndex } = usePagination(8);
+    const handleRestoreBlog = async (record) => {
+        const options = {
+            ids: [record._id]
+        }
+        await handleRestore(dispatch, "admin/account/restore", "deletedaccounts", "", options, record.title);
+    }
 
-    const handleRestoreAccount = async (record) => {
-            const result = await alertConfirm("Khôi phục", `Khôi phục tài khoản ${record.username}`, "Xác nhận", "Hủy");
-            if(result.isConfirmed){
-                const options = {
-                    ...record,
-                    deleted: false
-                }
-                await handleUpdate(dispatch,"admin/account/restore", "deletedaccounts", record._id, options, () => {});
-            }
-        }
-    
-        const handlePermanentDeleteAccount = async (record) => {
-            await handleDelete(dispatch, "admin/blog/delete", "deletedaccounts", record._id, record.title);
-        }
+    const handlePermanentDeleteBlog = async (record) => {
+        await handlePermanentDelete(dispatch, "admin/account/delete", "deletedaccounts", record._id, record.username);
+    }
 
     return (
         <>
-            <Table dataSource={dataSource} ppagination={getPagination(dataSource.length)}>
-                <Column title="STT" key="index" render={(text, record, index) => getIndex(index)} />
+            <Table dataSource={dataSource} pagination={false}>
+                <Column title="STT" key="index" render={(text, record, index) => (((pagination?.currentPage - 1) * pagination?.limit) + index + 1)} />
                 <Column title="Username" dataIndex="username" key="name" />
                 <Column title="Thời gian xóa" dataIndex="deletedAt" key="name" />
                 <Column
@@ -37,14 +37,11 @@ export default function RecycleAccountTable({ accountData }) {
                     key="action"
                     render={(text, record) => (
                         <Space size="middle">
-                            <Tooltip title="Xem chi tiết">
-                                <EyeOutlined onClick={() => console.log('View', record)} />
-                            </Tooltip>
                             <Tooltip title="Khôi phục">
-                                <RetweetOutlined onClick={() => handleRestoreAccount(record) }/>
+                                <RetweetOutlined onClick={() => handleRestoreBlog(record)} />
                             </Tooltip>
                             <Tooltip title="Xóa vĩnh viễn">
-                                <DeleteOutlined onClick={() => handlePermanentDeleteAccount(record)} />
+                                <DeleteOutlined onClick={() => handlePermanentDeleteBlog(record)} />
                             </Tooltip>
                         </Space>
                     )}
@@ -52,5 +49,4 @@ export default function RecycleAccountTable({ accountData }) {
             </Table>
         </>
     )
-
 }

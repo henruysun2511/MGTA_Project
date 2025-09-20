@@ -21,7 +21,7 @@ export default function AccountWatchDetailModal({classData, studentData, open, o
 
     const studentByAccountId = studentData.find((st) => st.accountId && st.accountId._id === record._id) || [];
     const classByStudentId = studentByAccountId
-        ? classData.find((cl) => String(cl._id) === String(studentByAccountId.classId))
+        ? classData.find((cl) => String(cl._id) === String(studentByAccountId.classId._id))
         : null;
 
     return (

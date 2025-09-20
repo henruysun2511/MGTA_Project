@@ -11,7 +11,7 @@ export default function Section2() {
     const dispatch = useDispatch();
     const blogData = useSelector((state) => state.blogs.list) || [];
 
-    const [data] = useFetch("base/blog/blogs", {}, {});
+    const [data] = useFetch("blog/blogs", {}, {});
     console.log(data);
 
     useEffect(() => {
@@ -53,7 +53,7 @@ export default function Section2() {
                                 onClick={() => handleScrollTo(blog._id)}
                             >
                                 <i className="fa-solid fa-blog"></i>
-                                {blog._title}
+                                {blog.title}
                             </div>
                         ))}
                     </div>
@@ -62,7 +62,7 @@ export default function Section2() {
                         {filteredBlogs.map(blog => (
                             <div
                                 key={blog.id}
-                                ref={(el) => (blogRefs.current[blog.id] = el)}
+                                ref={(el) => (blogRefs.current[blog._id] = el)}
                             >
                                 <BlogItem blog={blog} />
                             </div>

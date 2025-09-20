@@ -19,7 +19,7 @@ export default function AccountTable({ accountData, studentData, classData, pagi
 
         const classDataByStudentId = studentDataByAccountId?.classId
             ? classData.find(
-                (cl) => String(cl._id) === String(studentDataByAccountId.classId?._id)
+                (cl) => cl._id === studentDataByAccountId.classId?._id
             )
             : null;
 
@@ -31,7 +31,6 @@ export default function AccountTable({ accountData, studentData, classData, pagi
     });
 
     const handleActivate = async (record) => {
-        console.log(record._id)
         const result = await alertConfirm(`Kích hoạt tài khoản ${record.username || ""} ?`, "", "Xác nhận", "Hủy");
         if (result.isConfirmed) {
             await handleUpdate(dispatch, "admin/account/change-status", "accounts", record._id, { ...record, status: "active" });

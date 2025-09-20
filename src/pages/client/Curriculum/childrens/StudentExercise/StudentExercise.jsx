@@ -1,46 +1,47 @@
-import { Checkbox, Col, Input, Row, Space } from 'antd';
-import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
-const { Search } = Input;
+// import { Checkbox, Col, Input, Row, Space } from 'antd';
+// import { useState } from 'react';
+// import { useNavigate } from "react-router-dom";
+// const { Search } = Input;
 
 export default function StudentExercise({ deadlineData, exerciseData, skillData, classData }) {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
-    const skillOptions = skillData.map((sk) => ({
-        value: sk.id,
-        label: sk.name
-    }));
+    // const skillOptions = skillData.map((sk) => ({
+    //     value: sk.id,
+    //     label: sk.name
+    // }));
 
-    const [filter, setFilter] = useState({
-        searchText: "",
-        selectedSkills: []
-    });
+    // const [filter, setFilter] = useState({
+    //     searchText: "",
+    //     selectedSkills: []
+    // });
 
-    const filteredDeadlineData = deadlineData.filter(dl => {
-        const exercise = exerciseData.find(ex => ex.id === dl.exerciseId);
-        if (!exercise) return false;
+    // const filteredDeadlineData = deadlineData.filter(dl => {
+    //     const exercise = exerciseData.find(ex => ex.id === dl.exerciseId);
+    //     if (!exercise) return false;
 
-        const matchSearch = exercise.title
-            .toLowerCase()
-            .includes(filter.searchText.toLowerCase());
+    //     const matchSearch = exercise.title
+    //         .toLowerCase()
+    //         .includes(filter.searchText.toLowerCase());
 
-        const matchSkill =
-            filter.selectedSkills.length === 0 ||
-            filter.selectedSkills.some(skillId => exercise.skillId.includes(skillId));
+    //     const matchSkill =
+    //         filter.selectedSkills.length === 0 ||
+    //         filter.selectedSkills.some(skillId => exercise.skillId.includes(skillId));
 
-        // nếu có thêm điều kiện xóa thì check luôn
-        const matchDelete = !exercise.deleted;
+    //     // nếu có thêm điều kiện xóa thì check luôn
+    //     const matchDelete = !exercise.deleted;
 
-        return matchSearch && matchSkill && matchDelete;
-    });
+    //     return matchSearch && matchSkill && matchDelete;
+    // });
 
-    const handleWatchDetail = (id) => {
-        navigate(`/exerciseDetail/:${id}`);
-    }
+    // const handleWatchDetail = (id) => {
+    //     navigate(`/exerciseDetail/:${id}`);
+    // }
 
     return (
         <>
-            <Space direction='vertical' size="large" style={{ width: "100%" }}>
+        xoom
+            {/* <Space direction='vertical' size="large" style={{ width: "100%" }}>
                 <Search
                     placeholder="Tìm kiếm tên bài tập"
                     size="large"
@@ -88,7 +89,7 @@ export default function StudentExercise({ deadlineData, exerciseData, skillData,
                                         </div>
 
                                         {/* Hiển thị danh sách kỹ năng */}
-                                        <div className="practice__tag">
+                                        {/* <div className="practice__tag">
                                             {skillNames.map((name, idx) => (
                                                 <p key={idx}>
                                                     # {name}
@@ -106,7 +107,7 @@ export default function StudentExercise({ deadlineData, exerciseData, skillData,
                         })) : (<i>Không tìm thấy bài tập nào được giao</i>)}
                     </Row>
                 </div>
-            </Space>
+            </Space> */} */}
         </>
     )
 }

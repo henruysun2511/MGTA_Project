@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
-import ProtectedRoute from "../components/ProtectedRoute";
+import ProtectedAdminRoute from "../components/ProtectedAdminRoute";
+import ProtectedClientRoute from "../components/ProtectedClientRoute";
 import AdminLayout from "../layouts/AdminLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import UserLayout from "../layouts/UserLayout";
@@ -45,16 +46,21 @@ const router = createBrowserRouter([
       { path: "curriculum", element: <Curriculum /> },
       { path: "blog", element: <Blog /> },
       { path: "feedback", element: <Feedback /> },
-      { path: "exerciseDetail/:id", element: <ExerciseDetail /> },
-      { path: "practice/:id", element: <Practice /> },
-      { path: "score", element: <Score /> },
       { path: "aboutUs", element: <AboutUs /> },
-      { path: "profile", element: <Profile /> }
+      {
+        element: <ProtectedClientRoute />, 
+        children: [
+          { path: "exerciseDetail/:id", element: <ExerciseDetail /> },
+          { path: "practice/:id", element: <Practice /> },
+          { path: "score", element: <Score /> },
+          { path: "profile", element: <Profile /> },
+        ]
+      }
     ],
   },
   {
     path: "/admin",
-    element: <ProtectedRoute roles={["68ada708a19888b3462e7a6f"]} />, 
+    element: <ProtectedAdminRoute roles={["68ada708a19888b3462e7a6f"]} />,
     children: [
       {
         element: <AdminLayout />,

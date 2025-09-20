@@ -2,11 +2,11 @@ import { DeleteOutlined, EyeOutlined, RetweetOutlined } from '@ant-design/icons'
 import { Space, Table, Tooltip } from 'antd';
 import { useDispatch } from 'react-redux';
 import { formatDateFromApi } from "../../../../../utils/formatDate";
-import { handleDelete, handleRestore } from '../../../../../utils/handles';
+import { handlePermanentDelete, handleRestore } from '../../../../../utils/handles';
 const { Column } = Table;
 
 
-export default function RecycleBlogTable({ blogData }) {
+export default function RecycleBlogTable({ blogData, pagination }) {
     const dataSource = blogData.map((blog, index) => ({
         ...blog,
         key: index, 
@@ -20,19 +20,17 @@ export default function RecycleBlogTable({ blogData }) {
             const options = {
                 ids: [record._id]
             }
-            console.log(options);
-            // await handleUpdate(dispatch, "admin/blog/restore", "deletedblog", "", options, () => { });
             await handleRestore(dispatch,"admin/blog/restore", "deletedblogs","", options, record.title );
     }
 
     const handlePermanentDeleteBlog = async (record) => {
-        await handleDelete(dispatch, "admin/blog/delete", "deletedblogs", record._id, record.title);
+        await handlePermanentDelete(dispatch, "admin/blog/delete", "deletedblogs", record._id, record.title);
     }
 
     return (
         <>
             <Table dataSource={dataSource} pagination={false}>
-                <Column title="STT" key="index" render={(text, record, index) => index} />
+                <Column title="STT" key="index" render={(text, record, index) => (((pagination?.currentPage - 1) * pagination?.limit) + index + 1)}/>
                 <Column title="Tiêu đề" dataIndex="title" key="name" />
                 <Column title="Thời gian xóa" dataIndex="deletedAt" key="name" />
                 <Column

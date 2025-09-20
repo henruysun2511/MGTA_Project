@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useFetch from "../../../../hooks/useFetch";
 import { fetchAction } from "../../../../redux/actions/baseAction";
+import "../PermissionMana/permission.scss";
 import RoleCard from "./childrens/RoleCard";
 import RoleCreateModal from "./childrens/RoleCreateModal";
 import './roleMana.scss';
@@ -11,7 +12,9 @@ import './roleMana.scss';
 export default function RoleMana() {
     const dispatch = useDispatch();
     const [openCreateModal, setOpenCreateModal] = useState(false);
+
     const [data] = useFetch("admin/role/roles", {}, {});
+    console.log(data);
 
     useEffect(() => {
         if (data) {
@@ -20,6 +23,24 @@ export default function RoleMana() {
     }, [data, dispatch]);
 
     const roleData = useSelector(state => state.roles.list || []);
+    const permissionData = useSelector(state => state.permissions.list || []);
+
+    
+
+    const newRoleData = roleData.map(role => {
+        return {
+            ...role,
+            permissions: role.permissions?.map(permissionId => {
+                const permissionName = permissionData.find(per => per._id === permissionId)?.name || "";
+                return {
+                    _id: permissionId,
+                    permissionName
+                };
+            }) || []
+        };
+    });
+
+    console.log(newRoleData)
 
     return (
         <>

@@ -1,6 +1,6 @@
 import { createAction, deleteAction, updateAction } from "../redux/actions/baseAction";
 import { createData, createImageData, deleteData, updateData } from "../services/baseService";
-import { alertConfirm, alertError, alertSuccess } from "./alerts";
+import { alertConfirm, alertError, alertSuccess, alertWarning } from "./alerts";
 
 
 export const handleCreate = async (dispatch, apiPath, reduxPath, options, onSuccess) => {
@@ -40,9 +40,9 @@ export const handleUpdate = async (dispatch, apiPath, reduxPath, id, options, on
 export const handleRestore = async (dispatch, apiPath, reduxPath, id, options, name) => {
     try {
         const result = await alertConfirm(
-            "Khôi phục", 
-            `Khôi phục bài blog ${name}`, 
-            "Xác nhận", 
+            "Khôi phục",
+            `Khôi phục bài blog ${name}`,
+            "Xác nhận",
             "Hủy"
         );
         if (result.isConfirmed) {
@@ -66,27 +66,36 @@ export const handleRestoreAll = async (dispatch, apiPath, reduxPath, list) => {
         const result = await alertConfirm(
             "Xác nhận khôi phục tất cả?",
             "",
-            "Xóa",
+            "Khôi phục",
             "Hủy"
         );
         if (result.isConfirmed) {
-            for (const item of list) {
-                const res = await updateData(apiPath, item._id, { ...item, deleted: false });
-                console.log(res);
-                if (res.statusCode === 200) {
-                    dispatch(updateAction(reduxPath, res.data));
-                    alertSuccess(res.message);
-                } else {
-                    alertError(res.message);
-                }
+            if (!list.length) {
+                alertWarning("Không có danh sách nào để khôi phục", "");
+                return;
+            }
+
+            // Lấy tất cả _id trong list
+            const ids = list.map(item => item._id);
+            const options = { ids };
+
+            const res = await updateData(apiPath, "", options);
+
+            if (res.statusCode === 200) {
+                // Cập nhật lại tất cả trong redux
+                ids.forEach(id => {
+                    dispatch(updateAction(reduxPath, { _id: id, deleted: false }));
+                });
+                alertSuccess(res.message || "Khôi phục tất cả thành công!");
+            } else {
+                alertError(res.message);
             }
         }
-
     } catch (err) {
         console.error(err);
         alertError("Có lỗi xảy ra khi khôi phục. Vui lòng thử lại!");
     }
-}
+};
 
 export const handleDelete = async (dispatch, apiPath, reduxPath, id, name) => {
     try {
@@ -114,6 +123,32 @@ export const handleDelete = async (dispatch, apiPath, reduxPath, id, name) => {
     }
 }
 
+export const handlePermanentDelete = async (dispatch, apiPath, reduxPath, id, name) => {
+    try {
+        const result = await alertConfirm(
+            "Xác nhận xóa?",
+            `Bạn có chắc muốn xóa "${name}" không?`,
+            "Xóa",
+            "Hủy"
+        );
+        if (result.isConfirmed) {
+            const res = await deleteData(apiPath, id);
+            console.log(res);
+            if (res.statusCode === 200) {
+                dispatch(deleteAction(reduxPath, id));
+                alertSuccess(res.message);
+            } else {
+                alertError(res.message);
+            }
+        } else {
+            return;
+        }
+    } catch (err) {
+        console.error(err);
+        alertError("Có lỗi xảy ra khi xóa. Vui lòng thử lại!");
+    }
+}
+
 export const handleDeleteAll = async (dispatch, apiPath, reduxPath, list) => {
     try {
         const result = await alertConfirm(
@@ -123,11 +158,15 @@ export const handleDeleteAll = async (dispatch, apiPath, reduxPath, list) => {
             "Hủy"
         );
         if (result.isConfirmed) {
+            if (!list.length > 0) {
+                alertWarning("Không có danh sách nào để xóa", "");
+                return;
+            }
             for (const item of list) {
                 const res = await deleteData(apiPath, item._id);
                 console.log(res);
                 if (res) {
-                    dispatch(deleteAction(reduxPath, res.data._id));
+                    dispatch(deleteAction(reduxPath, item._id));
                     alertSuccess(res.message);
                 } else {
                     alertError(res.message);

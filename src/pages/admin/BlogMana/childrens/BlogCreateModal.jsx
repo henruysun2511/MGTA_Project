@@ -74,6 +74,7 @@ export default function BlogCreateModal({ open, onCancel }) {
                             name="images"
                             label="Ảnh"
                             valuePropName="fileList"
+                            rules={[{ required: true, message: 'Vui lòng chọn ảnh' }]}
                             getValueFromEvent={e => Array.isArray(e) ? e : e?.fileList}
                         >
                             <Upload

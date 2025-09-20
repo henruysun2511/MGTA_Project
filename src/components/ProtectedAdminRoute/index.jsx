@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-export default function ProtectedRoute({ roles = [] }) {
+export default function ProtectedAdminRoute({ roles = [] }) {
   const roleId = localStorage.getItem("roleId");
 
   if (!roleId) {

@@ -1,8 +1,15 @@
 import { Col, Row } from "antd";
 import Container2 from "../../../../components/Container/container2";
+import useFetch from '../../../../hooks/useFetch';
 import { formatDateFromApi } from "../../../../utils/formatDate";
 
 export default function Section1() {
+    const accessToken = localStorage.getItem("accessToken");
+
+    const [data] = useFetch("exercise/results", {}, {})
+    console.log(data);
+
+    const currentResults = []
     
     return (
         <>
@@ -40,7 +47,7 @@ export default function Section1() {
                             </div>
                         </>
                     ) : (
-                        <h1>Mày chưa đăng nhập</h1>
+                        <h1>Bạn chưa đăng nhập</h1>
                     )
                     }
 
