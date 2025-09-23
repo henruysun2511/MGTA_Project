@@ -25,7 +25,6 @@ export default function RoleMana() {
     const roleData = useSelector(state => state.roles.list || []);
     const permissionData = useSelector(state => state.permissions.list || []);
 
-    
 
     const newRoleData = roleData.map(role => {
         return {
@@ -49,7 +48,6 @@ export default function RoleMana() {
                     <Button size="large" icon={<PlusOutlined />} type="primary" onClick={() => setOpenCreateModal(true)}>Thêm vai trò</Button>
                 </div>
                 <div className='role__list'>
-
                     {roleData.length > 0 && (
                         roleData.map((role, idx) => (
                             <RoleCard key={idx} role={role} />

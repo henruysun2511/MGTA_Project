@@ -1,4 +1,5 @@
 import { Tabs } from 'antd';
+import { useEffect, useState } from 'react';
 import Container2 from "../../../../components/Container/container2";
 import useFetch from '../../../../hooks/useFetch';
 import StudentClassZoom from './StudentClassZoom/StudentClassZoom';
@@ -7,34 +8,41 @@ import StudentExercise from "./StudentExercise/StudentExercise";
 export default function Section2() {
     const accessToken = localStorage.getItem("accessToken");
 
+    // Danh sách lớp
     const [classDataRes] = useFetch('class/classes', {}, {})
-    console.log(classDataRes);
+    const classData = classDataRes?.classes ?? [];
 
+    // Lớp của học sinh đang đăng nhập
     const [classStudentDataRes] = useFetch('student/class', {}, {})
-    console.log(classStudentDataRes)
+    const classStudentData = classStudentDataRes?.classId ?? null;
 
-    const currentClass = [];
-    const classData = []
-    const currentAccount = [];
+    const [selectedClass, setSelectedClass] = useState(null);
+
+    useEffect(() => {
+        if (accessToken) {
+            if (classStudentData?._id) {
+                setSelectedClass(classStudentData);
+            }
+        } else {
+            if (classData.length > 0) {
+                setSelectedClass(classData[0]);
+            }
+        }
+    }, [accessToken, classData, classStudentData]);
+
     const items = [
         {
             key: '1',
             label: 'Học zoom',
-            children: <StudentClassZoom />,
+            children: selectedClass ? <StudentClassZoom classId={selectedClass._id}/> : null,
         },
         {
             key: '2',
             label: 'Bài tập',
-            children: <StudentExercise/>,
+            children: selectedClass ? <StudentExercise classId={selectedClass._id} /> : null,
         },
     ];
 
-
-    //Chưa đăng nhập
-    //Hiện tất danh sách lớp
-    //Đăng nhập rồi
-    //Chưa phân lớp: hiện chưa phân lớp
-    //Đã phân lớp: hiện lớp đó
 
     return (
         <>
@@ -43,18 +51,26 @@ export default function Section2() {
                     <h1>Danh sách lớp</h1>
                     <ul className='class__list'>
                         {
-                            accessToken && currentClass && currentAccount?.status === "active" ? (
-                                <li>{currentClass.className || "Chưa phân lớp"}</li>
+                            accessToken ? (
+                                classStudentData ? (
+                                    <li className='active'>
+                                        {classStudentData.className}
+                                    </li>
+                                ) : (
+                                    <li>Chưa phân lớp
+                                    </li>
+                                )
+
                             ) : (
-                                classData.map(cls => (
+                                classData ? classData.map(cls => (
                                     <li
-                                        className={selectedClass?.id === cls.id ? "active" : ""}
+                                        className={selectedClass?._id === cls._id ? "active" : ""}
                                         key={cls.id}
                                         onClick={() => setSelectedClass(cls)}
                                     >
                                         {cls.className}
                                     </li>
-                                ))
+                                )) : <p>Lỗi khi tải lớp</p>
                             )
                         }
                     </ul>
@@ -68,3 +84,4 @@ export default function Section2() {
         </>
     )
 }
+

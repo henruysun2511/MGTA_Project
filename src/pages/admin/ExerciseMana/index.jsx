@@ -25,16 +25,14 @@ export default function ExerciseMana() {
 
     useEffect(() => {
         if (data) {
-            dispatch(fetchAction("exercises", data.exercises?.items))
+             dispatch(fetchAction("exercises", data.exercises?.items || []));
         }
     }, [data, dispatch]);
 
     const exerciseData = useSelector(state => state.exercises.list || []);
     console.log(exerciseData);
-
     const [skillDataRes] = useFetch("admin/skill/skills", {}, {});
     const skillData = skillDataRes || [];
-    console.log(skillData);
 
     const [formOpen, setFormOpen] = useState(false);
     const [answerOpen, setAnswerOpen] = useState(false);
@@ -74,8 +72,8 @@ export default function ExerciseMana() {
                     </div>
 
                     <Row gutter={[16, 16]}>
-                        {exerciseData.map((exercise) => (
-                            <Col xl={4} key={exercise._id}>
+                        {exerciseData.map((exercise, index) => (
+                            <Col xl={4} key={index}>
                                 <ExerciseCard
                                     exercise={exercise}
                                 />

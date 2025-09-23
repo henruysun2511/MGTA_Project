@@ -12,7 +12,8 @@ import SkillTable from "./childrens/SkillTable";
 export default function SkillMana() {
     const dispatch = useDispatch();
     const [data] = useFetch("admin/skill/skills", {}, {});
-    console.log(data);
+    const skillData = useSelector(state => state.skills.list || []);
+    const [openModal, setOpenModal] = useState(false);
 
     useEffect(() => {
         if (data) {
@@ -21,9 +22,6 @@ export default function SkillMana() {
 
     }, [data, dispatch]);
 
-    const skillData = useSelector(state => state.skills.list || []);
-
-    const [openModal, setOpenModal] = useState(false);
 
     return (
         <>

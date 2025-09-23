@@ -1,56 +1,89 @@
 @import "../../../assets/colors.scss";
 
-.events {
+.schedule__list {
     list-style: none;
     margin: 0;
     padding: 6px;
+
+    .schedule__item {
+        background: #f0f9ff;
+        border: 1px solid #bae6fd;
+        border-radius: 6px;
+        padding: 4px 6px;
+        margin-bottom: 4px;
+        font-size: 12px;
+        line-height: 1.3;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background: #e0f2fe;
+            border-color: #38bdf8;
+            transform: translateY(-1px);
+        }
+
+        .schedule-info {
+            font-weight: 500;
+            color: #0369a1;
+            margin-bottom: 2px;
+            font-size: 12px;
+        }
+
+        .link {
+            display: block;
+            background: #0284c7;
+            color: #fff !important;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 11px;
+            text-align: center;
+            text-decoration: none;
+            transition: background 0.2s;
+
+            &:hover {
+                background: #0369a1;
+            }
+        }
+    }
 }
 
-.schedule__item {
-    background: #f0f9ff;
-    /* xanh nhạt */
-    border: 1px solid #bae6fd;
-    border-radius: 8px;
-    padding: 8px 10px;
-    margin-bottom: 6px;
-    font-size: 13px;
-    line-height: 1.4;
-    transition: all 0.2s ease;
-}
-
-.schedule__item:hover {
-    background: #e0f2fe;
-    border-color: #38bdf8;
-    transform: translateY(-2px);
-}
-
-.schedule-info {
-    font-weight: 600;
-    color: #0369a1;
-    margin-bottom: 4px;
-}
-
-.link {
-    display: inline-block;
-    background: #0284c7;
-    color: #fff !important;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 12px;
-    text-decoration: none;
-    transition: background 0.2s;
-}
-
-.link:hover {
-    background: #0369a1;
-}
-
+/* Tăng chiều cao ô lịch */
 .ant-picker-calendar .ant-picker-cell {
-    height: 100px !important;
-    /* chỉnh kích thước ô (mặc định ~70px) */
+    height: 160px;
     vertical-align: top;
 }
 
+/* Bên trong cell full chiều cao */
+.ant-picker-calendar .ant-picker-cell-inner {
+    height: 100%;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+/* Hover full ô */
+.ant-picker-calendar .ant-picker-cell-inner:hover {
+  background: #e6f4ff; 
+  border-radius: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* Ngày hiện tại */
+.ant-picker-calendar .ant-picker-cell-today .ant-picker-cell-inner::before {
+  height: 100%;
+  width: 100%;
+  border-radius: 0; 
+  border: 2px solid #1677ff; 
+}
+
+/* Ngày được chọn */
+.ant-picker-calendar .ant-picker-cell-selected .ant-picker-cell-inner {
+  background: #1677ff;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  border-radius: 0;
+}
 
 .curriculumn__section-1 {
     padding-top: 300px;

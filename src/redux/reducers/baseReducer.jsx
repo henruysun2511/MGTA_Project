@@ -32,15 +32,6 @@ export const baseReducer = (resource) => {
           list: state.list.filter((it) => it._id !== action.payload),
         };
 
-      // case "DELETE":
-      //   const deleteId = typeof action.payload === "string"
-      //     ? action.payload
-      //     : action.payload._id;
-      //   return {
-      //     ...state,
-      //     list: state.list.filter((it) => it._id !== deleteId),
-      //   };
-
       default:
         return state;
     }

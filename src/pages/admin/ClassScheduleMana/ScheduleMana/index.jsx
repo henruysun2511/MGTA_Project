@@ -21,7 +21,6 @@ export default function ScheduleMana() {
     });
 
     const [data] = useFetch("admin/class-schedule/class-schedules", query, {});
-    console.log(data);
 
     useEffect(() => {
         if (data) {

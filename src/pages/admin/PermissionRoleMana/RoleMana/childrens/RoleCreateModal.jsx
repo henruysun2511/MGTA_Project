@@ -8,7 +8,6 @@ import PermissionCard from './PermissionCard';
 
 export default function RoleCreateModal({ open, onCancel }) {
     const [form] = Form.useForm();
-
     const dispatch = useDispatch();
 
     const [query, updateQuery, resetQuery] = useQuery({
@@ -18,7 +17,7 @@ export default function RoleCreateModal({ open, onCancel }) {
 
     const [data] = useFetch("admin/permission/permissions", query, {});
 
-    const permissionData = data.permissions?.items || [];
+    const permissionData = data?.permissions?.items ? data.permissions.items : [];
 
     const permissionGrouped = permissionData.reduce((acc, item) => {
         if (!acc[item.module]) {
@@ -42,7 +41,6 @@ export default function RoleCreateModal({ open, onCancel }) {
             ...values,
             permissions: selectedPermissions,
         };
-        console.log("options:", options);
         await handleCreate(dispatch, "admin/role", "roles", options, () => onCancel());
     };
 

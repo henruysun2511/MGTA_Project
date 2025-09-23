@@ -9,7 +9,7 @@ import { createData, updateData } from "../../../services/baseService";
 import { alertError, alertSuccess } from "../../../utils/alerts";
 import { handleDelete, handleUpdate } from "../../../utils/handles";
 import "./ClassMana.scss";
-import ClassTab from "./childrens/ClassTab";
+import ClassTab from "./ClassTab";
 
 export default function ClassMana() {
     const dispatch = useDispatch();

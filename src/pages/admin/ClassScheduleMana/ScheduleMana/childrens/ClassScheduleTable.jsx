@@ -15,8 +15,7 @@ export default function ClassScheduleTable({ classScheduleData, classData, class
         className: item.classId?.className || classData.find(cls => String(cls._id) === String(item.classId))?.className || "",
         classSessionName: item.classSessionId?.classSessionName || classSessionData.find(cls => String(cls._id) === String(item.classSessionId))?.classSessionName || "",
         schedule: formatDateFromApi(item.schedule)
-    })).filter(item => !item.deleted);
-
+    }));
 
     const handleSoftDeleteClassSchedule = async (item) => {
         await handleDelete(dispatch, "admin/class-schedule", "classschedules", item._id, "lịch học");

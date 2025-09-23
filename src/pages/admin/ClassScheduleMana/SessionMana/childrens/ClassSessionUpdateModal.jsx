@@ -28,7 +28,6 @@ export default function ClassSessionUpdateModal({ open, onCancel, record }) {
         };
 
         const res = await updateData("admin/class-session", record._id, options);
-        console.log(res);
         if (res.statusCode === 200) {
             dispatch(updateAction("classsessions", res.data));
             alertSuccess(res.message);

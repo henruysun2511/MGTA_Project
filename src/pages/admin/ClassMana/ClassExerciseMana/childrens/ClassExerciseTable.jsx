@@ -4,33 +4,28 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { usePagination } from '../../../../../hooks/usePagination';
-import { softDeleteAction } from '../../../../../redux/actions/baseAction';
-import { updateData } from '../../../../../services/baseService';
+import { formatDateFromApi } from "../../../../../utils/formatDate";
 import ClassExerciseUpdateModal from "./ClassExerciseUpdateModal";
 const { Column } = Table;
 
-export default function ClassExerciseTable({ deadlineDataByClassId, exerciseData }) {
+export default function ClassExerciseTable({ deadlineData}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const classExerciseData = deadlineDataByClassId.map((item, index) => ({
+    const classExerciseData = deadlineData ? deadlineData.map((item, index) => ({
         ...item,
-        exerciseName: exerciseData.find(ex => String(ex.id) === String(item.exerciseId))?.title || "",
-        exerciseId: exerciseData.find(ex => String(ex.id) === String(item.exerciseId))?.id || "",
-    }));
+        key: index,
+        exerciseName: item.exerciseId ? item.exerciseId.title : 'N/A',
+        exerciseId: item.exerciseId ? item.exerciseId._id : 'N/A',
+        due_date: formatDateFromApi(item.due_date)
+    })) : [];
 
     const { getPagination, getIndex } = usePagination(5);
     const [openModal, setOpenModal] = useState(false);
     const [editingRecord, setEditingRecord] = useState(null);
 
     const handleSoftDeleteClassExercise = async (item) => {
-        dispatch(softDeleteAction("deadlines", item.id));
-        const res = await updateData("deadlines", item.id, { ...item, deleted: true });
-        if (res) {
-            alert("Đã chuyển vào thùng rác");
-        } else {
-            alert("Không thể xóa");
-        }
+        
     }
 
     return (

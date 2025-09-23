@@ -19,7 +19,6 @@ export default function SkillUpdateModal({ open, onCancel, record }) {
         const options = {
             ...values
         }
-        console.log(options);
         await handleUpdate(dispatch, "admin/skill", "skills", record._id, options, () => onCancel());
     }
 

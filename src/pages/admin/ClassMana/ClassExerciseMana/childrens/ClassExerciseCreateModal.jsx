@@ -1,18 +1,13 @@
 import { Button, Col, DatePicker, Form, Modal, Select } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { createAction } from "../../../../../redux/actions/baseAction";
-import { createData } from "../../../../../services/baseService";
-import { alertSuccess } from "../../../../../utils/alerts";
+import { useDispatch } from "react-redux";
+import { handleCreate } from "../../../../../utils/handles";
 
 
-export default function ClassExerciseCreateModal({ open, onClose, exerciseData, classId }) {
+export default function ClassExerciseCreateModal({ open, onCancel, exerciseData, classId }) {
     const dispatch = useDispatch();
 
-    const classDataById = useSelector(state => state.classes.list).filter(item => item.id === classId);
-    const className = classDataById[0]?.className;
-
     const exerciseOptions = exerciseData.map((item) => ({
-        value: item.id,
+        value: item._id,
         label: item.title,
     }));
 
@@ -24,23 +19,12 @@ export default function ClassExerciseCreateModal({ open, onClose, exerciseData, 
             due_date: formatted
         };
 
-        const res = await createData("deadlines", options);
-        if (res) {
-            dispatch(createAction("deadlines", res));
-            // const nofityOptions = {
-            //     message: `Giáo viên đã giao thêm bài tập mới`,
-            // }
-            // const res2 = await createData("nofitications", nofityOptions);
-
-            alertSuccess("Giao bài tập thành công");
-            onClose();
-        } else {
-            alert("Giao bài tập thất bại");
-        }
+        await handleCreate(dispatch, "admin/exercise-class", "deadlines", options, () => onCancel());
     }
+
     return (
         <>
-            <Modal open={open} onCancel={onClose} title={`Giao bài tập cho lớp ${className}`} width={500} footer={null}>
+            <Modal open={open} onCancel={onCancel} title={`Giao bài tập cho lớp `} width={500} footer={null}>
                 <Form layout="vertical" onFinish={handleAddClassExercise}>
                     <Form.Item
                         name="exerciseId"
