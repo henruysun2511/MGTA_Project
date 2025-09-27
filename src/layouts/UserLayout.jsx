@@ -1,9 +1,12 @@
 import { Button } from 'antd';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Outlet } from "react-router-dom";
 import logo from '../assets/images/logoNoBackGround.png';
 import Container2 from '../components/Container/container2';
 import NofiticationStudent from '../components/Nofitications/NofiticationStudent';
+import useFetch from '../hooks/useFetch';
+import { fetchAction } from '../redux/actions/baseAction';
 import './UserLayout.scss';
 
 export default function UserLayout() {
@@ -12,6 +15,16 @@ export default function UserLayout() {
     const isLogin = useSelector(state => state.loginReducer);
     const username = localStorage.getItem("username");
 
+    const dispatch = useDispatch();
+    const [settingDataRes] = useFetch("/setting", {}, {});
+    const settingData = useSelector(state => state.settings.list || []);
+    useEffect(() => {
+        if (settingDataRes) {
+            dispatch(fetchAction("settings", [settingDataRes]));
+        }
+    }, [dispatch, settingDataRes]); 
+    console.log(settingData)
+ 
     return (
         <>
             <div className="header">
