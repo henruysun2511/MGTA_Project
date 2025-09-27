@@ -41,7 +41,7 @@ export default function AdminLayout() {
 
                 <div className="admin__main">
                     <div className='admin__header'>
-                        <div className='admin__logo'><img src={settingData[0].logo} alt="logo.jpg" /></div>
+                        <div className='admin__logo'><img src={settingData[0]?.logo || ""} alt="logo.jpg" /></div>
                         <Button className='button__home' icon={<HomeFilled />}>
                             <Link to="/">Home</Link>
                         </Button>

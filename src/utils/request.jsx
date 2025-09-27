@@ -1,6 +1,6 @@
 import { alertWarning } from "./alerts";
 
-const API_DOMAIN = import.meta.env.VITE_API_DOMAIN;
+const API_DOMAIN = "http://localhost:4000/api/v1/";
 
 const getToken = () => localStorage.getItem("accessToken");
 const setToken = (accessToken) => localStorage.setItem("accessToken", accessToken);

@@ -49,6 +49,7 @@ export default function Overview() {
                                     height={150}
                                     src={settingData[0]?.logo || ""}
                                     alt="logo.png"
+                                    style={{objectFit: "cover"}}
                                     preview={false}
                                 />
                             </>
