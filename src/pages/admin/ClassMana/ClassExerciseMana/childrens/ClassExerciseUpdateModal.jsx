@@ -2,27 +2,29 @@ import { Button, Col, DatePicker, Form, Modal, Select } from 'antd';
 import dayjs from "dayjs";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateAction } from '../../../../../redux/actions/baseAction';
-import { updateData } from '../../../../../services/baseService';
+import { handleUpdate } from '../../../../../utils/handles';
 
 export default function ClassExerciseUpdateModal({ open, onCancel, record }) {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
 
-    const exerciseData = useSelector((state) => state.exercises.list).filter(ex => !ex.deleted);
+    const exerciseData = useSelector(state => state.exercises.list || []);
     const exerciseOptions = exerciseData.map((item) => ({
-        value: item.id,
+        value: item._id,
         label: item.title,
     }));
 
     useEffect(() => {
         if (open && record) {
+            const exercise = exerciseData.find((r) => String(r._id) === String(record.exerciseId));
             form.setFieldsValue({
-                exerciseId: record.exerciseId,
-                due_date: record.due_date ? dayjs(record.due_date, "YYYY-MM-DD") : null
+                exerciseId: exercise ? String(exercise._id) : undefined,
+                due_date: record.due_date
+                    ? dayjs(record.due_date, "DD/MM/YYYY")
+                    : null
             });
         }
-    }, [open, record, form]);
+    }, [open, record, exerciseData, form]);
 
     const handleUpdateClassExercise = async (values) => {
         const formatted = values.due_date.format("YYYY-MM-DD");
@@ -31,21 +33,14 @@ export default function ClassExerciseUpdateModal({ open, onCancel, record }) {
             exerciseId: values.exerciseId,
             due_date: formatted
         };
+         await handleUpdate(dispatch, "admin/exercise/", "deadlines", record._id, options, ()=> onCancel()); 
 
-        const res = await updateData("deadlines", record.id, options);
-        if (res) {
-            dispatch(updateAction("deadlines", res));
-            alert("Cập nhật bài tập thành công");
-            onCancel();
-        } else {
-            alert("Cập nhật bài tập thất bại");
-        }
     };
 
     return (<>
         <Modal
             open={open}
-            title="Cập nhật lịch học"
+            title="Cập nhật bài tập giao cho lớp"
             onCancel={onCancel}
             footer={null}
         >

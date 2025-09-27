@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { alertConfirm } from '../../../../utils/alerts';
 import { handleDelete, handleUpdate } from '../../../../utils/handles';
 import AccountUpdateClassModal from './AccountUpdateClassModal';
+import AccountUpdateRoleModal from './AccountUpdateRoleModal';
 import AccountWatchDetailModal from './AccountWatchDetailModal';
 const { Column, ColumnGroup } = Table;
 
@@ -25,6 +26,8 @@ export default function AccountTable({ accountData, studentData, classData, pagi
 
         return {
             ...account,
+            roleId: account ? account.roleId?._id : "N/A",
+            roleName: account ? account.roleId?.name : "N/A",
             name: studentDataByAccountId ? studentDataByAccountId.name : "N/A",
             class: classDataByStudentId ? classDataByStudentId.className : "Chưa phân lớp",
         };
@@ -49,7 +52,8 @@ export default function AccountTable({ accountData, studentData, classData, pagi
     }
 
     const [editingRecord, setEditingRecord] = useState(null);
-    const [openEditClassModal, setOpenEditClassModal] = useState(false);
+    const [openUpdateClassModal, setOpenUpdateClassModal] = useState(false);
+    const [openUpdateRoleModal, setOpenUpdateRoleModal] = useState(false);
     const [openWatchDetailModal, setOpenWatchDetailModal] = useState(false);
 
     return (
@@ -69,7 +73,7 @@ export default function AccountTable({ accountData, studentData, classData, pagi
                                 <Tooltip title="Phân lớp">
                                     <EditOutlined
                                         style={{ color: "#1890ff", cursor: "pointer" }}
-                                        onClick={() => { setOpenEditClassModal(true); setEditingRecord(record); }}
+                                        onClick={() => { setOpenUpdateClassModal(true); setEditingRecord(record); }}
                                     />
                                 </Tooltip>
                             )}
@@ -115,10 +119,30 @@ export default function AccountTable({ accountData, studentData, classData, pagi
                         </>
                     )}
                 />
+
+                <Column
+                    title="Vai trò"
+                    dataIndex="roleName"
+                    key="roleName"
+                    render={(roleName, record) => (
+                        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                            <span>{roleName}</span>
+                            <Tooltip title="Sửa vai trò">
+                                <EditOutlined
+                                    style={{ color: "#1890ff", cursor: "pointer" }}
+                                    onClick={() => { setOpenUpdateRoleModal(true); setEditingRecord(record); }}
+                                />
+                            </Tooltip>
+                        </div>
+                    )}
+                />
+
             </Table>
 
-            <AccountUpdateClassModal classData={classData} studentData={studentData} open={openEditClassModal} onCancel={() => setOpenEditClassModal(false)} record={editingRecord} />
-            <AccountWatchDetailModal classData={classData} studentData={studentData} open={openWatchDetailModal} onCancel={() => setOpenWatchDetailModal(false)} record={editingRecord} />
+
+            <AccountUpdateClassModal classData={classData} studentData={studentData} open={openUpdateClassModal} onCancel={() => setOpenUpdateClassModal(false)} record={editingRecord} />
+            <AccountWatchDetailModal classData={classData} studentData={studentData} open={openWatchDetailModal} onCancel={()=> setOpenWatchDetailModal(false)} record={editingRecord}/>
+            <AccountUpdateRoleModal open={openUpdateRoleModal} onCancel={() => setOpenUpdateRoleModal(false)} record={editingRecord} />
         </>
     )
 }

@@ -20,6 +20,7 @@ import Logout from "../pages/auth/Logout";
 import Register from "../pages/auth/Register";
 import AboutUs from "../pages/client/AboutUs";
 import Blog from "../pages/client/Blog";
+import BlogDetail from "../pages/client/Blog/BlogDetail";
 import Curriculum from "../pages/client/Curriculum";
 import ExerciseDetail from "../pages/client/ExerciseDetail";
 import Feedback from "../pages/client/Feedback";
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
       { path: "", element: <Home /> },
       { path: "curriculum", element: <Curriculum /> },
       { path: "blog", element: <Blog /> },
+      { path: "blogDetail/:id", element: <BlogDetail />},
       { path: "feedback", element: <Feedback /> },
       { path: "aboutUs", element: <AboutUs /> },
       {
@@ -52,7 +54,7 @@ const router = createBrowserRouter([
         children: [
           { path: "exerciseDetail/:id", element: <ExerciseDetail /> },
           { path: "practice/:id", element: <Practice /> },
-          { path: "score", element: <Score /> },
+          { path: "score/:id", element: <Score /> },
           { path: "profile", element: <Profile /> },
         ]
       }

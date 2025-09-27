@@ -21,6 +21,7 @@ const AllReducers = combineReducers({
     permissions: baseReducer("permissions"),
     deletedblogs: baseReducer("deletedblogs"),
     deletedaccounts: baseReducer("deletedaccounts"),
+    settings: baseReducer("settings"),
 });
 
 export default AllReducers;

@@ -1,5 +1,5 @@
 import { Modal } from "antd"
-import BlogItem from "../../../client/Blog/childrens/BlogItem"
+import BlogItem from "./BlogItem"
 export default function BlogWatchDetailModal({ open, onCancel, record }) {
     return (
         <>

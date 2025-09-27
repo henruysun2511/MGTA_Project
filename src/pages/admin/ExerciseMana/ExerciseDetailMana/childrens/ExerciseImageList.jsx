@@ -1,12 +1,11 @@
 import {
-    EditOutlined, UploadOutlined
+    DeleteOutlined,
+    EditOutlined, SaveOutlined, UploadOutlined
 } from '@ant-design/icons';
 import { Button, Col, Form, Image, Modal, Row, Spin, Upload } from 'antd';
 import { useEffect, useState } from 'react';
-import { handleUpdate, handleUploadImage } from '../../../../../utils/handles';
-
-import { DeleteOutlined } from "@ant-design/icons";
 import { useDispatch } from 'react-redux';
+import { handleUpdate, handleUploadImage } from '../../../../../utils/handles';
 
 export default function ExerciseImageList({ exerciseData, onUpdated }) {
     const dispatch = useDispatch();
@@ -16,7 +15,6 @@ export default function ExerciseImageList({ exerciseData, onUpdated }) {
     const [currentImages, setCurrentImages] = useState([]); // ảnh hiện tại từ server
     const [loading, setLoading] = useState(false);
 
-    console.log(currentImages);
 
     useEffect(() => {
         if (exerciseData) {
@@ -46,8 +44,6 @@ export default function ExerciseImageList({ exerciseData, onUpdated }) {
 
         const mergedImages = [...currentImages, ...newImages];
 
-        console.log("Ảnh sau merge:", mergedImages);
-
         const options = {
             ...exerciseData,
             images: mergedImages,
@@ -75,6 +71,9 @@ export default function ExerciseImageList({ exerciseData, onUpdated }) {
                     ))}
                     <Button icon={<EditOutlined />} onClick={() => setOpenEditImageModal(true)}>
                         Chỉnh sửa
+                    </Button>
+                    <Button icon={<SaveOutlined />} onClick={handleUpdateImage} loading={loading}>
+                        Lưu
                     </Button>
                 </div>
             </Spin>

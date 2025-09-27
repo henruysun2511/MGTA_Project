@@ -66,7 +66,7 @@ export default function ExerciseDetailMana() {
   return (
     <>
       <div style={padding1}>
-        <div className="exercise-detail">
+        <div className="exercise-detail-2">
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div>
               <h1>{exerciseDataById.title ? exerciseDataById.title : "N/A"}</h1>

@@ -32,9 +32,17 @@ export default function Login() {
 
                 alertSuccess("Đăng nhập thành công");
 
-                setTimeout(() => {
-                    navigate("/");
-                }, 1000);
+                const roleId = localStorage.getItem("roleId");
+                if (roleId && roleId === "68ada708a19888b3462e7a6f") {
+                    setTimeout(() => {
+                        navigate("/admin/overview");
+                    }, 1000);
+                } else {
+                    setTimeout(() => {
+                        navigate("/");
+                    }, 1000);
+                }
+
             } else if (response.statusCode === 401) {
                 dispatch(checkLogin(true));
                 alertSuccess("Đăng nhập thành công " + response.message);

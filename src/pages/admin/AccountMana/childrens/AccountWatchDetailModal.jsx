@@ -1,9 +1,7 @@
 import { Modal, Table } from 'antd';
-import { useDispatch } from 'react-redux';
 const { Column } = Table;
 
-export default function AccountWatchDetailModal({classData, studentData, open, onCancel, record }) {
-    const dispatch = useDispatch();
+export default function AccountWatchDetailModal({ classData, studentData, open, onCancel, record }) {
 
     if (!record) {
         return (
@@ -18,9 +16,11 @@ export default function AccountWatchDetailModal({classData, studentData, open, o
         );
     }
 
+    const studentByAccountId = studentData.find(
+        (st) => st.accountId && st.accountId._id === record._id
+    ) || null;
 
-    const studentByAccountId = studentData.find((st) => st.accountId && st.accountId._id === record._id) || [];
-    const classByStudentId = studentByAccountId
+    const classByStudentId = studentByAccountId?.classId
         ? classData.find((cl) => String(cl._id) === String(studentByAccountId.classId._id))
         : null;
 
@@ -36,6 +36,7 @@ export default function AccountWatchDetailModal({classData, studentData, open, o
             <p>Trạng thái: {record.status}</p>
             <p>Email: {studentByAccountId ? studentByAccountId.email : "N/A"}</p>
             <p>Địa chỉ: {studentByAccountId ? studentByAccountId.address : "N/A"}</p>
+            <p>Trường: {studentByAccountId ? studentByAccountId.school : "N/A"}</p>
             <p>Phụ huynh: {studentByAccountId ? studentByAccountId.parentName : "N/A"}</p>
             <p>Số điện thoại phụ huynh: {studentByAccountId ? studentByAccountId.parentPhone : "N/A"}</p>
 

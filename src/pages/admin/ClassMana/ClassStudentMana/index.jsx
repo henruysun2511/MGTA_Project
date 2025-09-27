@@ -18,7 +18,7 @@ export default function ClassStudentMana({ classId }) {
         }
     }, [studentDataRes, dispatch]);
 
-    const studentData = useSelector(state => state.students.list || []).filter(st => !st.deleted);
+    const studentData = useSelector(state => state.students.list || []);
 
 
     const handleFilterChange = (newFilter) => {

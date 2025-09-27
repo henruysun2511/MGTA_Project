@@ -65,6 +65,74 @@ export default function UserLayout() {
 
             <Outlet />
 
+            <div class="footer">
+                <div class="footer__top">
+                    <ul>
+                        <li>
+                            <div class="footer__icon">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <p>03.999.78686</p>
+                        </li>
+                        <li>
+                            <div class="footer__icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <p>mgtahanoi@gmail.com</p>
+                        </li>
+                        <li>
+                            <div class="footer__icon">
+                                <i class="fa-brands fa-facebook"></i>
+                            </div>
+                            <p>Tiếng Anh Cho Học Sinh Cấp 2 Mất Gốc</p>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="footer__main">
+                    <div class="about-us">
+                        <h1>VỀ MGTA</h1>
+                        <div class="list-box"></div>
+                        <ul>
+                            <li><Link to="/aboutUs">Về chúng tôi</Link></li>
+                            <li><Link to="/blog">Blog</Link></li>
+                            <li><Link to="/feedback">Đánh giá từ học viên</Link></li>
+                        </ul>
+                    </div>
+                    <div class="about-us">
+                        <h1>QUY ĐỊNH & ĐIỀU KHOẢN</h1>
+                        <div class="list-box"></div>
+                        <ul>
+                            <li><a href="#">Điều khoản</a></li>
+                            <li><a href="#">Quy định thành viên</a></li>
+                            <li><a href="#">Quy định và chính sách chung</a></li>
+                            <li><a href="#">Chính sách bảo vệ thông tin cá nhân của người tiêu dùng</a></li>
+                        </ul>
+                    </div>
+                    <div class="about-us">
+                        <h1>CHĂM SÓC KHÁCH HÀNG</h1>
+                        <div class="list-box"></div>
+                        <ul>
+                            <li>
+                                <p><b>Hotline:</b> 19002005</p>
+                            </li>
+                            <li>
+                                <p><b>Giờ làm việc</b>: 9:00 - 22:00 (Tất cả các ngày bao gồm cả Lễ, Tết)</p>
+                            </li>
+                            <li>
+                                <p><b>Email:</b> huysun2511@gmail.com</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="footer__bottom">
+                    © 2025. Bản quyền thuộc về Tác giả. Nghiêm cấm sao chép dưới mọi hình thức.
+                </div>
+            </div>
+
+
         </>
     )
 }

@@ -1,35 +1,30 @@
-import { Input } from 'antd';
-import { useEffect, useRef, useState } from "react";
+import { Col, Input, Row } from 'antd';
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 import Container from "../../../../components/Container";
 import useFetch from '../../../../hooks/useFetch';
 import { fetchAction } from '../../../../redux/actions/baseAction';
-import BlogItem from './BlogItem';
+import { formatDateFromApi } from '../../../../utils/formatDate';
 const { Search } = Input;
 
 export default function Section2() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const blogData = useSelector((state) => state.blogs.list) || [];
-
     const [data] = useFetch("blog/blogs", {}, {});
-    console.log(data);
 
     useEffect(() => {
-        if(data){ 
-            dispatch(fetchAction("blogs", data?.blogs?.items)); 
+        if (data) {
+            dispatch(fetchAction("blogs", data?.blogs?.items));
         }
     }, [dispatch, data]);
 
     const [searchText, setSearchText] = useState("");
-    const blogRefs = useRef({}); // lưu ref theo id
 
     const filteredBlogs = blogData.filter(blog =>
         blog.title.toLowerCase().includes(searchText.toLowerCase())
     );
-
-    const handleScrollTo = (id) => {
-        blogRefs.current[id]?.scrollIntoView({ behavior: "smooth", block: "start" });
-    };
 
     return (
         <div className="blog__section-2">
@@ -43,31 +38,20 @@ export default function Section2() {
                     />
                 </div>
 
-                <div className="blog__wrap">
-                    <div className="blog__overview">
-                        <h3>Blog mới nhất</h3>
-                        {blogData.map(blog => (
-                            <div
-                                key={blog.id}
-                                className="blog__index"
-                                onClick={() => handleScrollTo(blog._id)}
-                            >
-                                <i className="fa-solid fa-blog"></i>
-                                {blog.title}
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="blog__list">
+                <div className="blog__list">
+                    <Row gutter={20}>
                         {filteredBlogs.map(blog => (
-                            <div
-                                key={blog.id}
-                                ref={(el) => (blogRefs.current[blog._id] = el)}
-                            >
-                                <BlogItem blog={blog} />
-                            </div>
+                            <Col span={8}>
+                                <div className='blog__card' key={blog._id} onClick={() => navigate(`/blogDetail/:${blog._id}`)}>
+                                    <div className="blog__image">
+                                        <img src={blog.images[0] || ""} alt="blog.png" />
+                                    </div>
+                                    <p className="blog__published">{formatDateFromApi(blog.publishedAt) || "N/A"}</p>
+                                    <h3 className="blog__title">{blog.title || "N/A"}</h3>
+                                </div>
+                            </Col>
                         ))}
-                    </div>
+                    </Row>
                 </div>
             </Container>
         </div>

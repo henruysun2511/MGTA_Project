@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import girl from "../../../../assets/images/girl.png";
 export default function Section1() {
     return (
@@ -15,7 +16,9 @@ export default function Section1() {
                             <li>Thời gian học: 2 buổi/tuần (1h30)</li>
                             <li>Cam kết điểm số từ 3,4 điểm tăng lên 6,7+ điểm sau một học kì</li>
                         </ul>
-                          <div className="button__regist">Đăng ký học thử ngay</div>
+                        <Link to={"/auth/register"}>
+                            <div className="button__regist">Đăng ký học thử ngay</div>
+                        </Link>
                     </div>
                     <div className="section-1__image">
                         <div className="circle--dot">

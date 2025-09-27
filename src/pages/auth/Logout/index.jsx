@@ -3,19 +3,27 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { checkLogin } from "../../../redux/actions/loginAction";
 
-export default function Logout(){
+import { createData } from "../../../services/baseService";
+
+export default function Logout() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    // deleteAllCookies();
-    localStorage.clear();
-
     useEffect(() => {
-        dispatch(checkLogin(false));
-        navigate("/");
-    }, []);
-    
-    return 
-    (<>
-    </>)
+        const logout = async () => {
+            try {
+                await createData("auth/logout", {});
+            } catch (err) {
+                console.error("Lỗi logout:", err);
+            } finally {
+                localStorage.clear();
+                dispatch(checkLogin(false));
+                navigate("/");
+            }
+        };
+
+        logout();
+    }, [dispatch, navigate]);
+
+    return null; 
 }

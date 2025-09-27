@@ -108,8 +108,12 @@ export default function Section4() {
                             <div className="course__overview-image">
                                 <img src="https://static.vecteezy.com/system/resources/thumbnails/047/341/778/small_2x/young-boy-studying-hard-in-library-photo.jpg" alt="" />
                             </div>
-                            <div className="button__register-study">ĐĂNG KÝ HỌC NGAY</div>
-                            <div className="button__register-try">HỌC THỬ MIỄN PHÚ</div>
+                            <Link to={"/auth/register"}>
+                                <div className="button__register-study">ĐĂNG KÝ HỌC NGAY</div>
+                            </Link>
+                            <Link to={"/auth/register"}>
+                                <div className="button__register-try">HỌC THỬ MIỄN PHÚ</div>
+                            </Link>
                             <div className="course__common-info">
                                 <b>Khai giảng</b>
                                 <p>15/9/2025</p>

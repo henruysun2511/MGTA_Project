@@ -10,7 +10,6 @@
 }
 
 .profile__section-1 {
-
     .section-1__wrap {
 
         display: flex;
@@ -34,7 +33,7 @@
 
         .profile__content {
             h3 {
-                font-size: 30px;
+                font-size: 35px;
                 margin: 10px 0;
                 text-transform: uppercase;
             }
@@ -50,12 +49,35 @@
 }
 
 .profile__section-2 {
-    margin: 50px 0;
+    margin: 50px 0 200px;
 
-    .section-2__wrap {
-        display: flex;
-        .profile__info {
-            @extend .base-padding;
+    .profile__info {
+        @extend .base-padding;
+        position: relative;
+
+        ul {
+            padding-left: 20px;
+
+            li {
+                margin: 15px 0;
+                font-size: 16px;
+            }
+        }
+
+        .button__edit {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            border: 1px solid pink;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
         }
     }
+
+    .profile__result {
+        @extend .base-padding;
+    }
+
 }

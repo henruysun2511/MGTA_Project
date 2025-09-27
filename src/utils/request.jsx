@@ -1,92 +1,84 @@
-//Định nghĩa các phương thức lên server
-// const API_DOMAIN = "http://localhost:3001/";
-// const API_DOMAIN = "https://mgta-fake-api.onrender.com/api/";
+import { alertWarning } from "./alerts";
 
-const API_DOMAIN = "http://localhost:4000/api/v1/";
+const API_DOMAIN = import.meta.env.VITE_API_DOMAIN;
 
-// Hàm lấy token
-const getToken = () => {
-  return localStorage.getItem("accessToken");
-};
+const getToken = () => localStorage.getItem("accessToken");
+const setToken = (accessToken) => localStorage.setItem("accessToken", accessToken);
 
-// Phương thức lấy
-export const get = async (path) => {
-  const token = getToken();
-  const response = await fetch(API_DOMAIN + path, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      ...(token && { Authorization: `Bearer ${token}` }) 
-    },
-    credentials: "include"
-  });
-  const result = await response.json();
-  return result;
-};
-
-// Phương thức thêm
-export const post = async (path, options) => {
-  const token = getToken();
-  console.log(API_DOMAIN+path)
-  const response = await fetch(API_DOMAIN + path, {
+// Refresh token
+const refreshToken = async () => {
+  const res = await fetch(API_DOMAIN + "auth/refresh-token", {
     method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      ...(token && { Authorization: `Bearer ${token}` })
-    },
-    body: JSON.stringify(options),
-    credentials: "include"
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      refreshToken: localStorage.getItem("refreshToken"),
+    }),
+    credentials: "include",
   });
-  const result = await response.json();
-  return result;
+
+  console.log("refresh status:", res.status);
+  const data = await res.json().catch(() => null);
+  console.log("refresh response:", data);
+
+  if (!res.ok) throw new Error("Refresh token failed");
+
+  localStorage.setItem("accessToken", data.data.accessToken);
+  return data.data.accessToken;
 };
 
-// Phương thức thêm ảnh
-export const postFormData = async (path, formData) => {
-  const token = getToken();
-  const response = await fetch(API_DOMAIN + path, {
-    method: "POST",
-    headers: {
-      ...(token && { Authorization: `Bearer ${token}` })
-    },
-    body: formData,
-    credentials: "include"
-  });
-  return await response.json();
-};
+// Request chung
+const request = async (path, options = {}) => {
+  let token = getToken();
+  const isFormData = options.body instanceof FormData;
 
-// Phương thức sửa
-export const patch = async (path, options) => {
-  const token = getToken();
-  const response = await fetch(API_DOMAIN + path, {
-    method: "PATCH",
+  let response = await fetch(API_DOMAIN + path, {
+    ...options,
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json",
-      ...(token && { Authorization: `Bearer ${token}` })
+      ...(isFormData ? {} : { "Content-Type": "application/json" }),
+      ...(token ? { Authorization: `Bearer ${token}` } : {}), 
+      ...options.headers,
     },
-    body: JSON.stringify(options),
-    credentials: "include"
+    credentials: "include",
   });
-  const result = await response.json();
-  return result;
-};
 
-//Phương thức xóa
-export const del = async (path) => {
-  const token = getToken();
-  const response = await fetch(API_DOMAIN + path, {
-    method: "DELETE",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      ...(token && { Authorization: `Bearer ${token}` })
-    },
-    credentials: "include"
-  });
- 
-  const result = await response.json();
-  return result;
+  // Nếu chưa đăng nhập (không có token) -> 0 refresh
+  if (!token && response.status === 401) {
+    return response.json();
+  }
+
+  // Nếu accessToken hết hạn -> refresh
+  if (response.status === 401 && token) {
+    try {
+      token = await refreshToken();
+      response = await fetch(API_DOMAIN + path, {
+        ...options,
+        headers: {
+          Accept: "application/json",
+          ...(isFormData ? {} : { "Content-Type": "application/json" }),
+          Authorization: `Bearer ${token}`,
+          ...options.headers,
+        },
+        credentials: "include",
+      });
+    } catch (err) {
+      console.error("Refresh token failed:", err);
+      localStorage.clear();
+      const alert = await alertWarning(
+        "Phiên đăng nhập đã hết hạn",
+        "Vui lòng đăng nhập lại để tiếp tục"
+      );
+      if (alert.isConfirmed) {
+        window.location.replace("/auth/login");
+      }
+      throw err;
+    }
+  }
+
+  return response.json();
 };
+export const get = (path) => request(path, { method: "GET" });
+export const post = (path, body) => request(path, { method: "POST", body: JSON.stringify(body) });
+export const postFormData = (path, formData) => request(path, { method: "POST", body: formData });
+export const patch = (path, body) => request(path, { method: "PATCH", body: JSON.stringify(body) });
+export const del = (path) => request(path, { method: "DELETE" });

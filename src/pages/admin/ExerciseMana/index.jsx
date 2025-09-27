@@ -21,7 +21,6 @@ export default function ExerciseMana() {
         limit: 10,
     })
     const [data] = useFetch("admin/exercise/exercises", query, {});
-    console.log(data);
 
     useEffect(() => {
         if (data) {

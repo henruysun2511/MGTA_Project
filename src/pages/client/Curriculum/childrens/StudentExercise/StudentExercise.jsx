@@ -1,17 +1,13 @@
-import { Checkbox, Col, Input, Row, Space } from 'antd';
+import { Checkbox, Col, Input, Pagination, Row, Space } from 'antd';
 import { useNavigate } from "react-router-dom";
 import useFetch from '../../../../../hooks/useFetch';
 import useQuery from '../../../../../hooks/useQuery';
+import { alertInfo } from '../../../../../utils/alerts';
 const { Search } = Input;
 
 export default function StudentExercise({ classId }) {
+    const accessToken = localStorage.getItem("accessToken");
     const navigate = useNavigate();
-
-    const skillData = [];
-    const skillOptions = skillData ? skillData.map((sk) => ({
-        value: sk.id,
-        label: sk.name
-    })) : [];
 
     const [query, updateQuery, resetQuery] = useQuery({
         page: 1,
@@ -19,13 +15,30 @@ export default function StudentExercise({ classId }) {
     });
 
     const [data] = useFetch(`exercise-class/exercises/${classId}`, query, {});
-    console.log(data);
     const exerciseData = data?.items ? data.items : [];
-    console.log(exerciseData)
+    console.log(data)
+
+    const [skillResData] = useFetch("skill/skills", {}, {})
+    const skillData = skillResData ? skillResData.skills : [];
+    const skillOptions = skillData ? skillData.map((sk) => ({
+        value: sk._id,
+        label: sk.skillName
+    })) : [];
 
     const handleWatchDetail = (id) => {
-        navigate(`/exerciseDetail/:${id}`);
+        if (!accessToken) {
+            alertInfo("Vui lòng đăng nhập để tiếp tục");
+        } else {
+            navigate(`/exerciseDetail/:${id}`);
+        }
     }
+
+    const handlePageChange = (page, pageSize) => {
+        updateQuery({
+            page: page,
+            limit: pageSize
+        });
+    };
 
     return (
         <>
@@ -73,7 +86,7 @@ export default function StudentExercise({ classId }) {
                                         <div className="practice__status ps--1">
                                             Chưa làm
                                         </div>
-                                        <div className="button__detail" onClick={() => handleWatchDetail(exercise._id)}>
+                                        <div className="button__detail" onClick={() => handleWatchDetail(exercise.exerciseId._id)}>
                                             Xem chi tiết
                                         </div>
                                     </div>
@@ -81,9 +94,19 @@ export default function StudentExercise({ classId }) {
                             ))
                                 : <p>Chưa có bài tập nào được giao</p>
                         }
-
-
                     </Row>
+                    <div style={{ marginTop: '50px', display: 'flex', justifyContent: 'center' }}>
+                        {data?.pagination && (
+                            <Pagination
+                                current={data.pagination.currentPage}
+                                pageSize={data.pagination.limit}
+                                total={data.pagination.count}
+                                onChange={handlePageChange}
+                                showSizeChanger
+                                pageSizeOptions={['5', '10', '20', '50']}
+                            />
+                        )}
+                    </div>
                 </div>
             </Space>
         </>

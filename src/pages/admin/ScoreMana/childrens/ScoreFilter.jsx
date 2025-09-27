@@ -10,21 +10,6 @@ export default function ScoreFilter({ classData, exerciseData, onFilterChange })
         { value: "dsc/score", label: "Điểm giảm dần" }
     ];
 
-    const classOptions = [
-        { value: "all", label: "Tất cả" },
-        ...classData.map(item => ({
-            value: item.id,
-            label: item.className,
-        }))
-    ];
-
-    const exerciseOptions = [
-        { value: "all", label: "Tất cả" },
-        ...exerciseData.map(item => ({
-            value: item.id,
-            label: item.title,
-        }))
-    ];
 
     return (
         <Space direction='vertical' size='large' style={{ width: '100%' }}>
@@ -42,22 +27,6 @@ export default function ScoreFilter({ classData, exerciseData, onFilterChange })
                     defaultValue={'all'}
                     style={{ width: "200px", fontSize: "18px" }}
                     onChange={(value) => onFilterChange({ type: "sort", value })}
-                />
-                <p>Lớp: </p>
-                <Select
-                    options={classOptions}
-                    size='large'
-                    defaultValue={'all'}
-                    style={{ width: "200px", fontSize: "18px" }}
-                    onChange={(value) => onFilterChange({ type: "class", value })}
-                />
-                <p>Bài tập: </p>
-                <Select
-                    options={exerciseOptions}
-                    size='large'
-                    defaultValue={'all'}
-                    style={{ width: "200px", fontSize: "18px" }}
-                    onChange={(value) => onFilterChange({ type: "exercise", value })}
                 />
             </Space>
         </Space>

@@ -1,189 +1,192 @@
-import { Col, Input, Row, Statistic } from "antd";
+import { Col, Input, Row, Space, Statistic } from "antd";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { fetchAction } from "../../../redux/actions/baseAction";
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import useFetch from "../../../hooks/useFetch";
+import { alertConfirm, alertWarning } from "../../../utils/alerts";
+import { handleCreate } from "../../../utils/handles";
 import "./practice.scss";
 const { Countdown } = Statistic;
 
 export default function Practice() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { id } = useParams();
     const cleanId = id.replace(/^:/, "");
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const exercises = await getDataBySpecificId("exercises", "id", cleanId);
-                dispatch(fetchAction("exercises", exercises));
-            } catch (error) {
-                console.error("Fetch error:", error);
-            };
-        }
-        fetchData();
-    }, [dispatch, cleanId]);
-
-    const exerciseData = useSelector(state => state.exercises.list).filter(ex => !ex.deleted) || [];
-    console.log(exerciseData);
+    const [data] = useFetch(`exercise/${cleanId}`, {}, {});
+    const exerciseData = data || {};
 
     const multipleChoiceQuestions =
-        exerciseData[0]?.questions?.filter((q) => q.answer.length === 1) || [];
+        exerciseData?.questions?.filter((q) => q.answer.length === 1) || [];
     const essayQuestions =
-        exerciseData[0]?.questions?.filter((q) => q.answer.length > 1) || [];
+        exerciseData?.questions?.filter((q) => q.answer.length > 1) || [];
 
-    const handleBackClick = () => {
-        navigate(-1);
-    };
+    const [selectedQuestion, setSelectedQuestion] = useState(null);
+    const [answers, setAnswers] = useState({});
+    const [timeLeft, setTimeLeft] = useState(null);
+    const [endTime, setEndTime] = useState(false);
 
-    const handleSubmitClick = () => {
-        console.log("Nộp bài!");
-    };
-
-    const [selectedQuestion, setSelectedQuestion] = useState(null); // số câu đang chọn
-    const [answers, setAnswers] = useState({}); // { index: "A" }
+    useEffect(() => {
+        if (exerciseData?.duration) {
+            const deadline = Date.now() + exerciseData.duration * 60 * 1000;
+            setTimeLeft(deadline);
+        }
+    }, [exerciseData?.duration]);
 
     const handleAnswerChange = (e) => {
         const value = e.target.value;
         setAnswers((prev) => ({
             ...prev,
-            [selectedQuestion]: value, // cập nhật theo câu đang chọn
+            [selectedQuestion]: value,
         }));
     };
 
-    const handleSubmit = () => {
-        if (!exerciseData[0]) return;
-
-        const totalDurationMs = totalTime * 60 * 1000;
-        const workedDurationMs = totalDurationMs - timeLeft;
-
-        const formatDuration = (ms) => {
-            const totalSec = Math.floor(ms / 1000);
-            const h = String(Math.floor(totalSec / 3600)).padStart(2, "0");
-            const m = String(Math.floor((totalSec % 3600) / 60)).padStart(2, "0");
-            const s = String(totalSec % 60).padStart(2, "0");
-            return `${h}:${m}:${s}`;
-        };
-
-        const payload = {
-            duration: formatDuration(workedDurationMs),
-            exerciseId: exerciseData[0].id,
-            studentId: "s1", // TODO: thay bằng user login
-            endTime: new Date().toISOString(),
-            answers: exerciseData[0].questions.map((q) => ({
+    const handleSubmit = async () => {
+        const options = {
+            answers: exerciseData.questions.map((q) => ({
                 index: q.index,
-                studentAnswer: answers[q.index] || "",
-                correctAnswer: q.answer,
+                answer: answers[q.index] || "",
             })),
         };
-
-        console.log("Payload nộp bài:", payload);
+        if (endTime) {
+            let result = await alertWarning("Đã hết thời gian làm bài, vui lòng nộp bài", "Nộp bài");
+            if (result.isConfirmed) {
+                await handleCreate(dispatch, `exercise/submit/${exerciseData._id}`, "", options, () => { });
+            }
+        } else {
+            let result = await alertConfirm("Xác nhận nộp bài", "", "Ok", "Hủy");
+            if (result.isConfirmed) {
+                const res = await handleCreate(dispatch, `exercise/submit/${exerciseData._id}`, "", options, () => { });
+                if (res?.data?._id) {
+                    navigate(`/score/${res.data._id}`);
+                }
+            }
+        }
     };
 
-    const [timeLeft, setTimeLeft] = useState(exerciseData.totalTime * 60 * 1000);
-
-    const onCountdownChange = (val) => {
-        setTimeLeft(val);
+    const handleBackClick = async () => {
+        const response = await alertConfirm(
+            "Thoát?",
+            "Những thay đổi sẽ không được lưu",
+            "Thoát",
+            "Hủy"
+        );
+        if (response.isConfirmed) {
+            navigate(-1);
+        }
     };
-    const [deadline, setDeadline] = useState(exerciseData.totalTime); // 30s
 
     return (
-        <>
-            <div class="section-1">
-                <div class="inner-wrap">
-                    <div class="button-back" onclick="handleBackClick()">Thoát</div>
-                    <Row gutter={10}>
-                        <Col span={18}>
-                            <div class="test-wrap"></div>
-                            <div class="image-list">
-                                {exerciseData.images ? (
-                                    exerciseData.images.map(img => {
-                                        <div className="inner-image" key={idx}>
-                                            <img src={img} alt="" />
-                                        </div>
-                                    })
-
-                                ) : (
-                                    <h3>Lỗi hiển thị ảnh</h3>
-                                )
-                                }
-
-                            </div>
-                        </Col>
-                        <Col span={6}>
-                            <div class="question-wrap">
-                                <h3>Thời gian làm bài: </h3>
-                                <div class="time">
+        <div className="practice">
+            <div className="practice__wrap">
+                <div className="button__back" onClick={handleBackClick}>
+                    Thoát
+                </div>
+                <Row gutter={10}>
+                    <Col span={18}>
+                        <div className="test__wrap"></div>
+                        <div className="image__list">
+                            {exerciseData.images ? (
+                                exerciseData.images.map((img, index) => (
+                                    <div className="inner-image" key={index}>
+                                        <img src={img} alt="" />
+                                    </div>
+                                ))
+                            ) : (
+                                <h3>Lỗi hiển thị ảnh</h3>
+                            )}
+                        </div>
+                    </Col>
+                    <Col span={6}>
+                        <div className="question__wrap">
+                            <h3>Thời gian làm bài: </h3>
+                            <div className="time">
+                                {timeLeft ? (
                                     <Countdown
-                                        title="Thời gian làm bài"
-                                        value={deadline}
+                                        title=""
+                                        value={timeLeft}
                                         format="HH:mm:ss"
-                                        onChange={onCountdownChange}
                                         onFinish={() => {
-                                            alert("Hết thời gian!");
-                                            // ở đây có thể tự động nộp bài
+                                            setEndTime(true);
                                             handleSubmit();
                                         }}
                                     />
-                                </div>
-                                <div className="button-submit" onClick={handleSubmit}>
-                                    NỘP BÀI
-                                </div>
-                                <h4 class="alert">Vui lòng chọn câu hỏi và nhập đáp án tương ứng</h4>
-                                <h3>Trắc nghiệm</h3>
-                                <div class="question-number">
-                                    {multipleChoiceQuestions.length > 0 ? (
-                                        multipleChoiceQuestions.map((q) => {
-                                            const ans = answers[q.index];
-                                            return (
-                                                <p
-                                                    key={q.index}
-                                                    className={ans ? "active" : ""}
-                                                    onClick={() => setSelectedQuestion(q.index)}
-                                                    style={{ cursor: "pointer" }}
-                                                >
-                                                    {q.index} {ans ? `: ${ans}` : ""}
-                                                </p>
-                                            );
-                                        }
-                                        )
-                                    ) : (
-                                        <p>Không có câu hỏi trắc nghiệm</p>
-                                    )}
-                                </div>
-                                <h3>Điền chữ</h3>
-                                <div class="question-number qn-1">
-                                    {essayQuestions.length > 0 ? (
-                                        essayQuestions.map((q) => {
-                                            const ans = answers[q.index];
-                                            return (
-                                                <p
-                                                    key={q.index}
-                                                    className={ans ? "active" : ""}
-                                                    onClick={() => setSelectedQuestion(q.index)}
-                                                    style={{ cursor: "pointer" }}
-                                                >
-                                                    {q.index} {ans ? `: ${ans}` : ""}
-                                                </p>
-                                            );
-                                        })
-                                    ) : (
-                                        <>Không có câu hỏi tự luận</>
-                                    )}
-                                </div>
-                                <h3>Câu trả lời</h3>
+                                ) : (
+                                    <p>Đang tải...</p>
+                                )}
+                            </div>
 
-                                <label htmlFor="answer">Câu số: {selectedQuestion}</label>
+                            <div className="button__submit" onClick={handleSubmit}>
+                                NỘP BÀI
+                            </div>
+
+                            <h4 className="alert">
+                                Vui lòng chọn câu hỏi và nhập đáp án tương ứng
+                            </h4>
+
+                            <h3>Trắc nghiệm</h3>
+                            <div className="question__number">
+                                {multipleChoiceQuestions.length > 0 ? (
+                                    multipleChoiceQuestions.map((q) => {
+                                        const ans = answers[q.index];
+                                        return (
+                                            <p
+                                                key={q.index}
+                                                className={ans ? "active" : ""}
+                                                onClick={() => setSelectedQuestion(q.index)}
+                                                style={{ cursor: "pointer" }}
+                                            >
+                                                {q.index} {ans ? `: ${ans}` : ""}
+                                            </p>
+                                        );
+                                    })
+                                ) : (
+                                    <h3 className="infomation">
+                                        Không có câu hỏi trắc nghiệm
+                                    </h3>
+                                )}
+                            </div>
+
+                            <h3>Điền chữ</h3>
+                            <div className="question__number qn--1">
+                                {essayQuestions.length > 0 ? (
+                                    essayQuestions.map((q) => {
+                                        const ans = answers[q.index];
+                                        return (
+                                            <p
+                                                key={q.index}
+                                                className={ans ? "active" : ""}
+                                                onClick={() => setSelectedQuestion(q.index)}
+                                                style={{ cursor: "pointer" }}
+                                            >
+                                                {q.index} {ans ? `: ${ans}` : ""}
+                                            </p>
+                                        );
+                                    })
+                                ) : (
+                                    <h3 className="infomation">Không có câu hỏi tự luận</h3>
+                                )}
+                            </div>
+
+                            <h3>Câu trả lời</h3>
+                            <Space direction="vertical" size="middle">
+                                <label htmlFor="answer">
+                                    Câu số: {selectedQuestion ?? "-"}
+                                </label>
                                 <Input
                                     id="answer"
                                     placeholder="Nhập câu trả lời vào đây"
                                     value={answers[selectedQuestion] || ""}
                                     onChange={handleAnswerChange}
+                                    size="large"
+                                    disabled={!selectedQuestion}
                                 />
-                            </div>
-                        </Col>
-                    </Row>
-                </div>
+                            </Space>
+                        </div>
+                    </Col>
+                </Row>
             </div>
-        </>
-    )
+        </div>
+    );
 }

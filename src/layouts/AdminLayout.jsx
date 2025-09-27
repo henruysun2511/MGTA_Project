@@ -1,9 +1,8 @@
 import { BookOutlined, DeleteOutlined, FolderOutlined, HomeFilled, LaptopOutlined, LogoutOutlined, ReadOutlined, SafetyOutlined, ScheduleOutlined, TrophyOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Menu } from 'antd';
+import { useSelector } from 'react-redux';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import avatar from '../assets/images/gv.png';
-import logo from '../assets/images/logo.jpg';
-import NofiticationAdmin from '../components/Nofitications/NofiticationAdmin';
 import "./AdminLayout.scss";
 
 export default function AdminLayout() {
@@ -11,7 +10,9 @@ export default function AdminLayout() {
 
     const handleClick = ({ key }) => {
         navigate(key); // key chính là đường dẫn
-    };
+    }; 
+
+    const settingData = useSelector(state => state.settings.list || []);
 
     const items = [
         { icon: <FolderOutlined />, label: 'Tổng quan', key: '/admin/overview' },
@@ -40,12 +41,10 @@ export default function AdminLayout() {
 
                 <div className="admin__main">
                     <div className='admin__header'>
-                        <div className='admin__logo'><img src={logo} alt="logo.jpg" /></div>
+                        <div className='admin__logo'><img src={settingData[0].logo} alt="logo.jpg" /></div>
                         <Button className='button__home' icon={<HomeFilled />}>
                             <Link to="/">Home</Link>
                         </Button>
-                        <NofiticationAdmin />
-
                     </div>
                     <div className='admin__content'>
                         <Outlet />

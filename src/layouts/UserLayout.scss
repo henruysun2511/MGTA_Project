@@ -82,7 +82,7 @@
                 color: white;
             }
 
-            .header__button-admin{
+            .header__button-admin {
                 font-size: 18px;
                 color: $color-dark-pink;
                 border: 1px solid $color-dark-pink;
@@ -104,3 +104,94 @@
         color: black;
     }
 }
+
+.footer {
+    .footer__top {
+        background: linear-gradient(135deg, #5c6ff4, #e870c2);
+        padding: 20px 0;
+
+        ul {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin: 0;
+
+            li {
+                display: flex;
+                gap: 15px;
+                font-size: 18px;
+                font-weight: 600;
+                margin: 0;
+
+                p {
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    .footer__main {
+        display: flex;
+        justify-content: space-evenly;
+        background-color: #1c1c24;
+        padding: 30px 10px;
+
+        .about-us {
+            margin-right: 20px;
+
+            width: 300px;
+
+            h1 {
+                font-size: 20px;
+                color: white;
+                margin-bottom: 20px;
+            }
+
+            .list-box {
+                background-color: #69dfe1;
+                width: 200px;
+                height: 10px;
+                border-radius: 15px;
+                margin-bottom: 20px;
+            }
+
+            ul {
+                list-style-type: none;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+
+                li {
+                    margin-bottom: 10px;
+
+                    a {
+                        color: white;
+
+                        &:hover {
+                            color: #f6c964;
+                        }
+                    }
+
+                    p {
+                        color: white;
+                        margin-bottom: 0;
+                    }
+                }
+
+            }
+        }
+    }
+
+    .footer__bottom {
+        background-color: #16171F;
+        display: flex;
+        align-items: center;
+        padding: 10px 110px;
+        color: white;
+    }
+
+}
+
+
+
+    

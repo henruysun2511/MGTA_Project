@@ -1,8 +1,7 @@
-import { Button, Form, Modal, Select, Table } from 'antd';
+import { Button, Form, Modal, Select } from 'antd';
 import { useDispatch } from 'react-redux';
 import { alertError } from '../../../../utils/alerts';
 import { handleUpdate } from '../../../../utils/handles';
-const { Column } = Table;
 
 export default function AccountUpdateClassModal({ open, onCancel, record, classData, studentData }) {
     const dispatch = useDispatch();
@@ -16,8 +15,6 @@ export default function AccountUpdateClassModal({ open, onCancel, record, classD
         ? studentData.find(st => st.accountId?._id === record._id)
         : null;
 
-    console.log(studentData);
-    console.log(studentByAccountId);
 
     const handleUpdateClassStudents = async (values) => {
         if (!record) return;
@@ -25,12 +22,9 @@ export default function AccountUpdateClassModal({ open, onCancel, record, classD
             alertError("Tài khoản này chưa được kích hoạt. Vui lòng kích hoạt trước khi phân lớp.");
             return;
         }
-
         const options = {
-
             classId: values.classId,
         }
-
         await handleUpdate(dispatch, 'admin/student/add-class', "students", studentByAccountId._id, options, () => onCancel());
     };
 
