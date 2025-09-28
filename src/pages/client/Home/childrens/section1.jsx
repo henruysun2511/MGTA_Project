@@ -1,6 +1,9 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import girl from "../../../../assets/images/girl.png";
 export default function Section1() {
+    const settingData = useSelector(state => state.settings.list || []); 
+
     return (
         <>
             <div className="home__section-1">
@@ -32,7 +35,7 @@ export default function Section1() {
                             </div>
                             <div className="contact__info">
                                 <h3>Số điện thoại liên hệ</h3>
-                                <p>03.999.78686</p>
+                                <p>{settingData[0]?.phone ? settingData[0].phone : "03.999.78686"}</p>
                             </div>
                         </div>
                         <div className="contact contact--3">
@@ -41,7 +44,7 @@ export default function Section1() {
                             </div>
                             <div className="contact__info">
                                 <h3>Facebook</h3>
-                                <p>Tiếng Anh Cho Học Sinh Cấp 2 Mất Gốc</p>
+                                <p>{settingData[0]?.fb ? settingData[0].fb : "Tiếng Anh Cho Học Sinh Cấp 2 Mất Gốc"}</p>
                             </div>
                         </div>
                         <div className="contact contact--2">
@@ -50,7 +53,7 @@ export default function Section1() {
                             </div>
                             <div className="contact__info">
                                 <h3>Email</h3>
-                                <p>mgtahanoi@gmail.com</p>
+                                <p>{settingData[0]?.email ? settingData[0].email : "mgtahanoi@gmail.com"}</p>
                             </div>
                         </div>
                     </div>

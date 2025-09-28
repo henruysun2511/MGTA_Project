@@ -189,9 +189,45 @@
         padding: 10px 110px;
         color: white;
     }
-
 }
 
 
+@media (max-width: 992px) {
+    .footer__main {
+        flex-wrap: wrap;
+        justify-content: center;
 
-    
+        .about-us {
+            width: 45%;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .footer__top ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .footer__main {
+        flex-direction: column;
+        align-items: center;
+
+        .about-us {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+
+            .list-box {
+                margin: 0 auto 20px;
+            }
+        }
+    }
+
+    .footer__bottom {
+        padding: 10px;
+        font-size: 14px;
+    }
+}

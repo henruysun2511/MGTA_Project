@@ -16,15 +16,17 @@ export default function UserLayout() {
     const username = localStorage.getItem("username");
 
     const dispatch = useDispatch();
-    const [settingDataRes] = useFetch("/setting", {}, {});
     const settingData = useSelector(state => state.settings.list || []);
+    const [settingDataRes] = useFetch(
+        settingData.length === 0 ? "admin/setting" : "",  {},{}
+    );
     useEffect(() => {
         if (settingDataRes) {
             dispatch(fetchAction("settings", [settingDataRes]));
         }
-    }, [dispatch, settingDataRes]); 
+    }, [dispatch, settingDataRes]);
     console.log(settingData)
- 
+
     return (
         <>
             <div className="header">
@@ -32,7 +34,7 @@ export default function UserLayout() {
                     <div className="header__wrap">
                         <Link to="/">
                             <div className='header__logo'>
-                                <img src={logo} alt="logo.png" />
+                                <img src={settingData[0]?.logo ? settingData[0].logo : logo} alt="logo.png" />
                             </div>
                         </Link>
 
@@ -85,19 +87,19 @@ export default function UserLayout() {
                             <div class="footer__icon">
                                 <i class="fa-solid fa-phone"></i>
                             </div>
-                            <p>03.999.78686</p>
+                            <p>{settingData[0]?.phone ? settingData[0].phone : "03.999.78686"}</p>
                         </li>
                         <li>
                             <div class="footer__icon">
                                 <i class="fa-solid fa-envelope"></i>
                             </div>
-                            <p>mgtahanoi@gmail.com</p>
+                            <p>{settingData[0]?.email ? settingData[0].email : "mgtahanoi@gmail.com"}</p>
                         </li>
                         <li>
                             <div class="footer__icon">
                                 <i class="fa-brands fa-facebook"></i>
                             </div>
-                            <p>Tiếng Anh Cho Học Sinh Cấp 2 Mất Gốc</p>
+                            <p>{settingData[0]?.fb ? settingData[0].fb : "Tiếng Anh Cho Học Sinh Cấp 2 Mất Gốc"}</p>
                         </li>
 
                     </ul>

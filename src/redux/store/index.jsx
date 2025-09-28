@@ -22,6 +22,7 @@ const AllReducers = combineReducers({
     deletedblogs: baseReducer("deletedblogs"),
     deletedaccounts: baseReducer("deletedaccounts"),
     settings: baseReducer("settings"),
+    replycomments: baseReducer("replycomments")
 });
 
 export default AllReducers;

@@ -73,6 +73,12 @@
         margin-bottom: 20px;
     }
 
+    .comment__item{
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
     .comment__user {
         display: flex;
         gap: 20px;
@@ -92,27 +98,47 @@
             }
         }
 
-        .comment__name {
-            font-weight: 600;
-            color: #f6c964;
-            margin-bottom: 15px;
-            font-size: 18px;
+        .comment__info {
+            .comment__name {
+                font-weight: 600;
+                color: #f6c964;
+                margin-bottom: 15px;
+                font-size: 18px;
+            }
+
+            .comment__content {
+                margin-bottom: 5px;
+                width: 650px;
+                font-size: 18px;
+            }
+
+            .comment__actions {
+                display: flex;
+                gap: 10px;
+
+                p {
+                    cursor: pointer;
+                    font-size: 13px;
+                    color: blue;
+                }
+            }
         }
+    }
 
-        .comment__content {
-            margin-bottom: 5px;
-            width: 650px;
-            font-size: 18px;
-        }
+    .reply-comment{
+       margin-left: 70px;
 
-        .comment__actions {
-            display: flex;
-            gap: 10px;
+       .comment__image {
+            height: 70px;
+            width: 70px;
+            background-color: #e870c2;
+            border-radius: 50%;
 
-            p{
-                cursor: pointer;
-                font-size: 13px;
-                color: blue;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 50%;
             }
         }
     }

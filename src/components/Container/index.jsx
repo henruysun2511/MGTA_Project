@@ -1,9 +1,11 @@
+import './container.scss';
+
 export default function Container({ children }){
     const style = {
-        margin: "0 350px"
+        padding: "0 350px"
     }
     return (
-        <div style={style}>
+        <div className="responsive-container" style={style}>
               {children}
         </div>
     )

@@ -1,0 +1,23 @@
+.responsive-container {
+    padding: 0 230px; 
+    width: 100%; 
+    box-sizing: border-box;
+}
+
+@media (max-width: 1200px) {
+    .responsive-container {
+        padding: 0 80px; 
+    }
+}
+
+@media (max-width: 768px) {
+    .responsive-container {
+        padding: 0 40px;
+    }
+}
+
+@media (max-width: 576px) {
+    .responsive-container {
+        padding: 0 15px;
+    }
+}
