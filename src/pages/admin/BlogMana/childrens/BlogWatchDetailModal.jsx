@@ -1,5 +1,6 @@
 import { Modal } from "antd"
 import BlogItem from "./BlogItem"
+
 export default function BlogWatchDetailModal({ open, onCancel, record }) {
     return (
         <>
@@ -8,5 +9,4 @@ export default function BlogWatchDetailModal({ open, onCancel, record }) {
             </Modal>
         </>
     )
-
 }

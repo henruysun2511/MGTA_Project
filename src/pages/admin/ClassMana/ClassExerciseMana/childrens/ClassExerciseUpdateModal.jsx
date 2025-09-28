@@ -33,8 +33,7 @@ export default function ClassExerciseUpdateModal({ open, onCancel, record }) {
             exerciseId: values.exerciseId,
             due_date: formatted
         };
-         await handleUpdate(dispatch, "admin/exercise/", "deadlines", record._id, options, ()=> onCancel()); 
-
+         await handleUpdate(dispatch, "admin/exercise-class", "deadlines", record._id, options, ()=> onCancel()); 
     };
 
     return (<>

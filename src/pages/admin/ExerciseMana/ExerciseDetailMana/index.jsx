@@ -12,7 +12,6 @@ import { fetchById } from '../../../../redux/actions/baseAction';
 import { formatDateFromApi } from '../../../../utils/formatDate';
 import ExerciseEditModal from './childrens/ExerciseEditModal';
 import ExerciseImageList from './childrens/ExerciseImageList';
-import ExerciseNotSubmitTable from './childrens/ExerciseNotSubmitTable';
 import ExerciseQuestionTable from './childrens/ExerciseQuestionTable';
 
 export default function ExerciseDetailMana() {
@@ -55,11 +54,6 @@ export default function ExerciseDetailMana() {
       key: '2',
       label: 'Ảnh đề',
       children: <ExerciseImageList exerciseData={exerciseDataById} />
-    },
-    {
-      key: '3',
-      label: 'Danh sách học sinh chưa nộp bài',
-      children: <ExerciseNotSubmitTable exerciseData={exerciseDataById} />
     },
   ]
 

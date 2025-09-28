@@ -34,8 +34,6 @@ export default function PermissionMana() {
         return acc;
     }, {});
 
-    console.log(permissionGrouped);
-
     const [openCreateModal, setOpenCreateModal] = useState(false);
 
     const handlePageChange = (page, pageSize) => {

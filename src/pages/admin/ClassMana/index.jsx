@@ -62,7 +62,6 @@ export default function ClassMana() {
     };
 
     const remove = async (targetKey) => {
-        console.log(targetKey);
         const res = await handleDelete(dispatch, "admin/class", "classes", targetKey, "Lớp");
         if (res) {
             const affectedStudents = studentData.filter(st => String(st.classId) === String(targetKey));

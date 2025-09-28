@@ -19,7 +19,6 @@ export default function BlogTable({ blogData, pagination }) {
     const [editingRecord, setEditingRecord] = useState(null);
     const dispatch = useDispatch();
 
-
     const handleSoftDeleteBlog = async (record) => {
         await handleDelete(dispatch,"admin/blog","blogs",record._id, record.title);
     }

@@ -3,13 +3,12 @@ import { Space, Table, Tooltip } from 'antd';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { usePagination } from '../../../../../hooks/usePagination';
 import { formatDateFromApi } from "../../../../../utils/formatDate";
 import { handleDelete } from '../../../../../utils/handles';
 import ClassExerciseUpdateModal from "./ClassExerciseUpdateModal";
 const { Column } = Table;
 
-export default function ClassExerciseTable({ deadlineData}) {
+export default function ClassExerciseTable({ deadlineData, pagination}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -20,9 +19,7 @@ export default function ClassExerciseTable({ deadlineData}) {
         exerciseId: item.exerciseId ? item.exerciseId._id : 'N/A',
         due_date: formatDateFromApi(item.due_date)
     })) : [];
-    console.log(classExerciseData);
 
-    const { getPagination, getIndex } = usePagination(5);
     const [openModal, setOpenModal] = useState(false);
     const [editingRecord, setEditingRecord] = useState(null);
 
@@ -32,9 +29,9 @@ export default function ClassExerciseTable({ deadlineData}) {
 
     return (
         <>
-            <Table dataSource={classExerciseData} pagination={getPagination(classExerciseData.length)}
+            <Table dataSource={classExerciseData} pagination={false}
             >
-                <Column title="STT" key="index" render={(text, record, index) => getIndex(index)} />
+                <Column title="STT" key="index" render={(text, record, index) =>  (((pagination?.currentPage - 1) * pagination?.limit) + index + 1)}/>
                 <Column title="Bài tập" dataIndex="exerciseName" key="shift" />
                 <Column title="Hạn nộp" dataIndex="due_date" key="shift" />
                 <Column

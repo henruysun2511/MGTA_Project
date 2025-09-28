@@ -31,9 +31,8 @@ export default function BlogMana() {
             dispatch(fetchAction("blogs", data?.blogActives?.items));
         }
     }, [data, dispatch]);
-
     const blogData = useSelector((state) => state.blogs.list || []);
-    console.log(blogData);
+
 
     const handleFilterChange = (newFilter) => {
         updateQuery({

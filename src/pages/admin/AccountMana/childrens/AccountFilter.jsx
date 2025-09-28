@@ -5,7 +5,6 @@ import useDebounce from '../../../../hooks/useDebounce';
 const { Search } = Input;
 
 export default function AccountFilter({ onFilterChange }) {
-
     const [searchText, setSearchText] = useState("");
     const debouncedSearch = useDebounce(searchText, 500)
 

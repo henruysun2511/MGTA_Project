@@ -25,7 +25,7 @@ export default function UserLayout() {
             dispatch(fetchAction("settings", [settingDataRes]));
         }
     }, [dispatch, settingDataRes]);
-    console.log(settingData)
+
 
     return (
         <>

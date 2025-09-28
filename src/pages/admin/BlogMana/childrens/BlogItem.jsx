@@ -5,7 +5,6 @@ import useFetch from '../../../../hooks/useFetch';
 
 export default function BlogItem({ key, blog }) {
     const [blogDataById] = useFetch(`admin/blog/blog-detail/${blog._id}`, {}, {});
-    console.log(blogDataById);
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const h4Matches = blogDataById?.content?.match(/<h4>(.*?)<\/h4>/g) || [];

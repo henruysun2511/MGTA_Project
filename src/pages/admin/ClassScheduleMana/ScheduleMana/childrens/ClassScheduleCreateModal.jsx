@@ -1,8 +1,5 @@
 import { Button, Col, DatePicker, Form, Input, Modal, Select } from 'antd';
 import { useDispatch } from 'react-redux';
-// import { createAction } from '../../../../../redux/actions/baseAction';
-// import { createData } from '../../../../../services/baseService';
-// import { alertError, alertSuccess } from '../../../../../utils/alerts';
 import { handleCreate } from '../../../../../utils/handles';
 
 export default function ClassScheduleCreateModal({ open, onCancel, classData, classSessionData }) {

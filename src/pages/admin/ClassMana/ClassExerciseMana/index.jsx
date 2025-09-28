@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Space } from "antd";
+import { Button, Pagination, Space } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useFetch from '../../../../hooks/useFetch';
@@ -13,7 +13,7 @@ export default function ClassExerciseMana({ classId }) {
     const id = classId;
     const [data] = useFetch(`admin/exercise-class/${id}`, {}, {});
     const deadlineData = useSelector((state) => state.deadlines.list || []);
-    const [query, udpateQuery, resetQuery] = useQuery({
+    const [query, updateQuery, resetQuery] = useQuery({
         page: 1,
         limit: 50
     });
@@ -33,6 +33,13 @@ export default function ClassExerciseMana({ classId }) {
         }
     }, [exerciseDataRes, dispatch])
 
+    const handlePageChange = (page, pageSize) => {
+        updateQuery({
+            page: page,
+            limit: pageSize
+        });
+    };
+
     return (
         <>
             <Space direction='vertical' size="large" style={{ width: "100%" }}>
@@ -47,6 +54,16 @@ export default function ClassExerciseMana({ classId }) {
                     </Button>
                 </div>
                 <ClassExerciseTable deadlineData={deadlineData} />
+                {data?.pagination && (
+                    <Pagination
+                        current={data.pagination.currentPage}
+                        pageSize={data.pagination.limit}
+                        total={data.pagination.count}
+                        onChange={handlePageChange}
+                        showSizeChanger
+                        pageSizeOptions={['5', '10', '20', '50']}
+                    />
+                )}
             </Space>
 
             <ClassExerciseCreateModal

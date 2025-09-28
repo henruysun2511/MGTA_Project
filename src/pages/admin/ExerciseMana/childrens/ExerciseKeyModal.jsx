@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { handleCreate, handleUploadImage } from "../../../../utils/handles";
 
-
 const ExcerciseKeyModal = ({ visible, onClose, totalQuestion, exerciseData }) => {
   const dispatch = useDispatch();
   const [answers, setAnswers] = useState([]);

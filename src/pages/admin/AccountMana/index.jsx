@@ -1,5 +1,5 @@
 import { Input, Pagination, Space } from 'antd';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import padding1 from "../../../components/Padding";
 import useFetch from '../../../hooks/useFetch';
@@ -18,7 +18,6 @@ export default function AccountMana() {
     });
 
     const [data] = useFetch("admin/account/accounts", query, {});
-    console.log(data);
     const [studentDataRes] = useFetch("admin/student/students", {}, {});
     const [classDataRes] = useFetch("admin/class/classes", {}, {})
 
@@ -43,12 +42,6 @@ export default function AccountMana() {
     const accountData = useSelector(state => state.accounts.list || [])?.filter(acc => !acc.deleted);
     const studentData = useSelector(state => state.students.list || [])?.filter(st => !st.deleted);
     const classData = useSelector(state => state.classes.list || [])?.filter(cls => !cls.deleted);
-
-    const [filters, setFilters] = useState({
-        keyword: "",
-        status: "all",
-        classId: "all"
-    });
 
     const handleFilterChange = (newFilter) => {
         updateQuery({

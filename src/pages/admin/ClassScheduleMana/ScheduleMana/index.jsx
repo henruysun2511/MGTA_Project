@@ -19,7 +19,6 @@ export default function ScheduleMana() {
         page: 1,
         limit: 10,
     });
-
     const [data] = useFetch("admin/class-schedule/class-schedules", query, {});
 
     useEffect(() => {

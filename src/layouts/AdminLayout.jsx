@@ -9,7 +9,7 @@ export default function AdminLayout() {
     const navigate = useNavigate();
 
     const handleClick = ({ key }) => {
-        navigate(key); // key chính là đường dẫn
+        navigate(key); 
     }; 
 
     const settingData = useSelector(state => state.settings.list || []);

@@ -1,5 +1,4 @@
 import { Col, Row } from "antd";
-import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import Container from "../../../components/Container/index";
 import useFetch from "../../../hooks/useFetch";
@@ -7,14 +6,11 @@ import { formatDuration } from "../../../utils/formatDate";
 import "./score.scss";
 
 export default function Score() {
-    const dispatch = useDispatch();
     const { id } = useParams();
     const cleanId = id.replace(/^:/, "");
 
     const [data] = useFetch(`exercise/result/${cleanId}`, {}, {});
     const resultData = data ? data : {};
-    console.log(data)
-    console.log(resultData?.answers);
 
     const multipleChoiceAnswers = (resultData?.answers || []).filter(q => q?.studentAnswer?.length === 1);
     const essayAnswers = (resultData?.answers || []).filter(q => q?.studentAnswer?.length > 1);
