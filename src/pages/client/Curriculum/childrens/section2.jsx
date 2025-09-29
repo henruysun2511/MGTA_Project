@@ -60,7 +60,7 @@ export default function Section2() {
                                             classData ? classData.map(cls => (
                                                 <li
                                                     className={selectedClass?._id === cls._id ? "active" : ""}
-                                                    key={cls.id}
+                                                    key={cls._id}
                                                     onClick={() => setSelectedClass(cls)}
                                                 >
                                                     {cls.className}

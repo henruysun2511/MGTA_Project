@@ -95,7 +95,7 @@ export default function Login() {
                             </Form.Item>
                         </div>
 
-                        <div className='forgot-passsword'>Quên mật khẩu?</div>
+                        <div className='forgot-passsword'><Link to="/auth/forgotPassword">Quên mật khẩu?</Link></div>
 
                         <div className="login__button">
                             <button type="submit">Đăng nhập</button>

@@ -1,10 +1,5 @@
 import { del, get, patch, post, postFormData } from "../utils/request";
 
-export const getAllData = async (path) => {
-    const result = await get(path);
-    return result;
-}
-
 export const getData = async (path, queryString) => {
   const result = await get(`${path}?${queryString}`);
   console.log("Fetch URL:", `${path}?${queryString}`);

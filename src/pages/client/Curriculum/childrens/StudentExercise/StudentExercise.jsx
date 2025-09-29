@@ -1,4 +1,5 @@
 import { Checkbox, Col, Input, Pagination, Row, Space } from 'antd';
+import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import useFetch from '../../../../../hooks/useFetch';
 import useQuery from '../../../../../hooks/useQuery';
@@ -40,6 +41,27 @@ export default function StudentExercise({ classId }) {
         });
     };
 
+    const [filter, setFilter] = useState({
+        searchText: "",
+        selectedSkills: []
+    });
+
+    console.log(filter)
+
+    const filteredExercises = exerciseData.filter((exercise) => {
+        const titleMatch = exercise.exerciseId.title
+            .toLowerCase()
+            .includes(filter.searchText.toLowerCase());
+
+        const skillMatch =
+            filter.selectedSkills.length === 0 ||
+            exercise.exerciseId?.skillId?.some((sk) =>
+                filter.selectedSkills.includes(sk._id)
+            );
+
+        return titleMatch && skillMatch;
+    });
+
     return (
         <>
             <Space direction='vertical' size="large" style={{ width: "100%" }}>
@@ -52,40 +74,50 @@ export default function StudentExercise({ classId }) {
                         searchText: e.target.value
                     }))}
                 />
-                <Space direction='horizontal' size="middle" style={{ width: "100%" }}
-                    onChange={(checkedValues) => setFilter(prev => ({
-                        ...prev,
-                        selectedSkills: checkedValues
-                    }))}>
-                    <p>Kỹ năng: </p> <Checkbox.Group options={skillOptions} />
+                <Space direction="horizontal" size="middle" style={{ width: "100%" }}>
+                    <p>Kỹ năng: </p>
+                    <Checkbox.Group
+                        options={skillOptions}
+                        onChange={(checkedValues) =>
+                            setFilter((prev) => ({
+                                ...prev,
+                                selectedSkills: checkedValues
+                            }))
+                        }
+                    />
                 </Space>
 
 
                 <div className="practice__list">
                     <Row gutter={15}>
                         {
-                            exerciseData ? exerciseData.map(exercise => (
+                            filteredExercises ? filteredExercises.map(exercise => (
                                 <Col span={4} key={exercise._id}>
                                     <div className="practice__item">
                                         <h3>{exercise.exerciseId.title}</h3>
                                         <div className="practice__icon">
                                             <i className="fa-solid fa-users"></i>
-                                            <p>Lớp {exercise.classId.className}</p>
+                                            <p>Lớp {exercise.classId?.className || "N/A"}</p>
                                         </div>
                                         <div className="practice__icon">
                                             <i className="fa-solid fa-clock"></i>
-                                            <p> phút</p>
+                                            <p>{exercise.exerciseId?.duration || "N/A"} phút</p>
                                         </div>
                                         <div className="practice__icon">
                                             <i className="fa-solid fa-circle-question"></i>
-                                            <p> câu hỏi</p>
+                                            <p>{exercise.exerciseId?.totalQuestion || "N/A"} câu hỏi</p>
                                         </div>
 
-                                        <div className="practice__tag"></div>
-
+                                        <div className="practice__tag">
+                                            {exercise.exerciseId?.skillId?.map(skill => (
+                                                <p key={skill._id}>#{skill.skillName}</p>
+                                            ))
+                                            }
+                                        </div>
+                                        {/* 
                                         <div className="practice__status ps--1">
                                             Chưa làm
-                                        </div>
+                                        </div> */}
                                         <div className="button__detail" onClick={() => handleWatchDetail(exercise.exerciseId._id)}>
                                             Xem chi tiết
                                         </div>

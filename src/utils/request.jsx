@@ -10,9 +10,6 @@ const refreshToken = async () => {
   const res = await fetch(API_DOMAIN + "auth/refresh-token", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      refreshToken: localStorage.getItem("refreshToken"),
-    }),
     credentials: "include",
   });
 
@@ -22,6 +19,7 @@ const refreshToken = async () => {
 
   if (!res.ok) throw new Error("Refresh token failed");
 
+  console.log(data.data.accessToken);
   localStorage.setItem("accessToken", data.data.accessToken);
   return data.data.accessToken;
 };
@@ -41,6 +39,7 @@ const request = async (path, options = {}) => {
     },
     credentials: "include",
   });
+  console.log(response);
 
   // Nếu chưa đăng nhập (không có token) -> 0 refresh
   if (!token && response.status === 401) {

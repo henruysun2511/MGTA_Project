@@ -1,4 +1,5 @@
 import { Form, Input, Select } from 'antd';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom";
 import logo from '../../../assets/images/logoNoBackGround.png';
@@ -8,9 +9,11 @@ import "./register.scss";
 
 export default function Register() {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch(); 
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
+        setLoading(true);
         try {
             if (e.password != e.rePassword) {
                 alertError("Mật khẩu không trùng khớp");
@@ -19,13 +22,13 @@ export default function Register() {
 
             const account = {
                 username: e.username,
-                password: e.password
+                password: e.password,
+                email: e.email,
             };
 
             const student = {
                 name: e.fullname,
                 phone: e.phone || "",
-                email: e.email || "",
                 class: e.classroom || "",
                 school: e.school || "",
                 previousEnglishScore: Number(e.preScore),
@@ -57,6 +60,8 @@ export default function Register() {
         } catch (err) {
             console.error(err);
             alertError("Có lỗi xảy ra khi đăng ký");
+        } finally {
+            setLoading(false);
         }
 
     }
@@ -101,7 +106,7 @@ export default function Register() {
                                 <Form.Item label="Số điện thoại" name="phone">
                                     <Input />
                                 </Form.Item>
-                                <Form.Item label="Email" name="email" rules={[{ type: 'email', message: 'Email không hợp lệ' }]}>
+                                <Form.Item label="Email" name="email" rules={[{ required: true, type: 'email', message: 'Vui lòng nhập email' }]}>
                                     <Input />
                                 </Form.Item>
                                 <Form.Item label="Điểm kì trước" name="preScore">
@@ -141,7 +146,7 @@ export default function Register() {
                         </div>
 
                         <div className="register__button">
-                            <button type="submit">Đăng ký</button>
+                            <button type="submit">{loading ? "Đang tiến hành đăng ký..." : "Đăng ký"}</button>
                             <p><Link to="/auth/login">Bạn đã có tài khoản, ấn vào đây để đăng nhập</Link></p>
                         </div>
                     </Form>

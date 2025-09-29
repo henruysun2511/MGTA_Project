@@ -40,37 +40,55 @@
                 }
             }
 
-            .forgot-passsword{
+            .forgot-passsword {
                 text-align: right;
                 cursor: pointer;
                 margin: 20px 0 50px;
                 font-size: 18px;
 
-                &:hover{
+                &:hover {
                     color: red;
                 }
             }
 
             .login__button {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                z-index: 2;
+
                 button {
-                    background-color: #f6c964;
-                    border: 0;
-                    padding: 10px 15px;
-                    border-radius: 5px;
+                    background: linear-gradient(135deg, #f6c964, #f09a3e);
+                    border: none;
+                    padding: 12px 15px;
+                    border-radius: 8px;
                     width: 100%;
-                    text-align: center;
+                    font-size: 16px;
+                    font-weight: 600;
                     text-transform: uppercase;
-                    margin: 20px 0 0;
-                    font-size: 18px;
                     cursor: pointer;
+                    color: #fff;
+                    transition: 0.3s;
+
+                    &:hover {
+                        background: linear-gradient(135deg, #f09a3e, #e870c2);
+                        transform: translateY(-2px);
+                        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+                    }
                 }
 
                 p {
-                    text-align: center;
-                    width: 100%;
-                    font-size: 18px;
+                    font-size: 15px;
                     cursor: pointer;
-                    color: red;
+                    color: #5c6ff4;
+                    font-weight: 500;
+                    transition: 0.3s;
+
+                    &:hover {
+                        text-decoration: underline;
+                        color: #e870c2;
+                    }
                 }
             }
         }

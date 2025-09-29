@@ -15,6 +15,9 @@ import Overview from "../pages/admin/Overview";
 import PermissionRoleMana from "../pages/admin/PermissionRoleMana";
 import RecycleBin from "../pages/admin/RecycleBin";
 import ScoreMana from "../pages/admin/ScoreMana";
+import ForgotPassword from "../pages/auth/ForgotPassword/ForgotPassword";
+import Otp from "../pages/auth/ForgotPassword/Otp";
+import ResetPassword from "../pages/auth/ForgotPassword/ResetPassword";
 import Login from "../pages/auth/Login";
 import Logout from "../pages/auth/Logout";
 import Register from "../pages/auth/Register";
@@ -36,7 +39,10 @@ const router = createBrowserRouter([
     children: [
       { path: "login", element: <Login /> },
       { path: "logout", element: <Logout /> },
-      { path: "register", element: <Register /> }
+      { path: "register", element: <Register /> },
+      { path: "forgotPassword", element: <ForgotPassword/> },
+      { path: "otp", element: <Otp /> },
+      { path: "resetPassword", element: <ResetPassword /> }
     ],
   },
   {
