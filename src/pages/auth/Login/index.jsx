@@ -17,12 +17,11 @@ export default function Login() {
         const password = e.password;
 
         try {
-            const response = await createData("auth/login", { username: username, password: password });
+            const response = await createData("auth/login", { username, password });
             console.log(response);
 
             if (response.statusCode === 200 && response.data?.accessToken) {
                 const decoded = jwtDecode(response.data?.accessToken);
-                console.log(decoded);
                 localStorage.setItem("roleId", decoded.roleId);
                 localStorage.setItem("accountId", decoded.accountId);
                 localStorage.setItem("accessToken", response.data.accessToken);
@@ -30,27 +29,23 @@ export default function Login() {
 
                 dispatch(checkLogin(true));
 
-                alertSuccess("Đăng nhập thành công");
 
-                const roleId = localStorage.getItem("roleId");
-                if (roleId && roleId === "68ada708a19888b3462e7a6f") {
-                    setTimeout(() => {
-                        navigate("/admin/overview");
-                    }, 1000);
-                } else {
-                    setTimeout(() => {
-                        navigate("/");
-                    }, 1000);
+                const result = await alertSuccess("Đăng nhập thành công");
+                if (result.isConfirmed) {
+                    const roleId = localStorage.getItem("roleId");
+                    if (roleId && roleId === "68ada708a19888b3462e7a6f") {
+                        setTimeout(() => {
+                            navigate("/admin/overview");
+                        }, 1000);
+                    } else {
+                        setTimeout(() => {
+                            navigate("/");
+                        }, 1000);
+                    }
                 }
-
             } else if (response.statusCode === 401) {
-                dispatch(checkLogin(true));
-                alertSuccess("Đăng nhập thành công " + response.message);
-                setTimeout(() => {
-                    navigate("/");
-                }, 1000);
-            }
-            else {
+                alertError("Tên đăng nhập hoặc mật khẩu sai");
+            } else {
                 alertError("Tên đăng nhập hoặc mật khẩu sai");
             }
         } catch (error) {
@@ -95,7 +90,7 @@ export default function Login() {
                             </Form.Item>
                         </div>
 
-                        <div className='forgot-passsword'><Link to="/auth/forgotPassword">Quên mật khẩu?</Link></div>
+                        <div className='forgot-passsword'>Quên mật khẩu?</div>
 
                         <div className="login__button">
                             <button type="submit">Đăng nhập</button>
