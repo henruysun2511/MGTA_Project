@@ -1336,3 +1336,8 @@ strong {
         }
     }
 }
+
+.ant-dropdown .ant-dropdown-menu {
+  max-height: 400px;
+  overflow-y: auto;
+}

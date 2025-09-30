@@ -81,7 +81,11 @@ export default function NofiticationStudent() {
 
     return (
         <>
-            <Dropdown menu={{ items: nofiticationItems }} placement="bottomRight">
+            <Dropdown
+                menu={{ items: nofiticationItems }}
+                placement="bottomRight"
+                overlayStyle={{ maxHeight: 400, overflowY: "auto" }}
+            >
                 <BellFilled className='admin__icon-nofitication' />
             </Dropdown>
         </>

@@ -29,29 +29,30 @@ export default function UserLayout() {
     }, [dispatch, settingDataRes]);
 
 
-    //Xử lý socket thông báo
+    // ================== Notification config ==================
+    const [api, contextHolder] = notification.useNotification();
+
     useEffect(() => {
-        // socket connect
-        socket.on("connect", () => {
-            console.log("Socket connected:", socket.id);
+        socket.onAny((event, data) => {
+            console.log("📡 Received event:", event, data);
         });
 
         socket.on(EVENT.NEW_SCHEDULE, (data) => {
-            notification.info({
+            api.info({
                 message: "Lịch học mới",
                 description: data.message,
             });
         });
 
         socket.on(EVENT.ASSIGN_EXERCISE, (data) => {
-            notification.warning({
-                message: "📝 Bài tập mới",
+            api.warning({
+                message: "Bài tập mới",
                 description: data.message,
             });
         });
 
         socket.on(EVENT.CHANGE_CLASS_SCHEDULE, (data) => {
-            notification.info({
+            api.info({
                 message: "Thay đổi lịch học",
                 description: data.message,
             });
@@ -62,11 +63,14 @@ export default function UserLayout() {
             socket.off(EVENT.ASSIGN_EXERCISE);
             socket.off(EVENT.CHANGE_CLASS_SCHEDULE);
         };
-    }, []);
+    }, [api]);
+    // ========================================================
 
 
     return (
         <>
+            {contextHolder} {/* Quan trọng: chèn contextHolder để hiển thị notification */}
+
             <div className="header">
                 <Container2>
                     <div className="header__wrap">
@@ -184,8 +188,6 @@ export default function UserLayout() {
                     © 2025. Bản quyền thuộc về Tác giả. Nghiêm cấm sao chép dưới mọi hình thức.
                 </div>
             </div>
-
-
         </>
     )
 }
