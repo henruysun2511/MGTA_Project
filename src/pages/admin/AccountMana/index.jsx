@@ -1,10 +1,12 @@
-import { Input, Pagination, Space } from 'antd';
-import { useEffect } from 'react';
+import { PlusOutlined } from '@ant-design/icons';
+import { Button, Input, Pagination, Space } from 'antd';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import padding1 from "../../../components/Padding";
 import useFetch from '../../../hooks/useFetch';
 import useQuery from '../../../hooks/useQuery';
 import { fetchAction } from '../../../redux/actions/baseAction';
+import AccountCreateModal from './childrens/AccountCreateModal';
 import AccountFilter from './childrens/AccountFilter';
 import AccountTable from './childrens/AccountTable';
 const { Search } = Input;
@@ -12,12 +14,14 @@ const { Search } = Input;
 export default function AccountMana() {
     const dispatch = useDispatch();
 
+    const [openCreateModal, setOpenCreateModal] = useState(false);
     const [query, updateQuery, setQuery] = useQuery({
         page: 1,
         limit: 8
     });
 
     const [data] = useFetch("admin/account/accounts", query, {});
+    console.log(data);
     const [studentDataRes] = useFetch("admin/student/students", {}, {});
     const [classDataRes] = useFetch("admin/class/classes", {}, {})
 
@@ -62,6 +66,11 @@ export default function AccountMana() {
             <div style={padding1}>
                 <Space direction='vertical' size='large' style={{ width: '100%' }}>
                     <AccountFilter accountData={accountData} onFilterChange={handleFilterChange} />
+                    <div style={{textAlign: 'right'}}>
+                        <Button icon={<PlusOutlined/> } type="primary" 
+                        onClick={() => setOpenCreateModal(true)}
+                        >Thêm tài khoản</Button>
+                    </div> 
                     <AccountTable accountData={accountData} studentData={studentData} classData={classData} pagination={data?.pagination}/>
                     
                     {data?.pagination && (
@@ -76,6 +85,8 @@ export default function AccountMana() {
                     )}
                 </Space>
             </div>
+
+            <AccountCreateModal open={openCreateModal} onCancel={() => setOpenCreateModal(false)} />
 
         </>
     )

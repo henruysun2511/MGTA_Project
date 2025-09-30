@@ -1,4 +1,4 @@
-import { EditOutlined } from "@ant-design/icons";
+import { EditOutlined, RetweetOutlined } from "@ant-design/icons";
 import { Col, Pagination, Row, Space, Table, Tooltip } from "antd";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -7,12 +7,14 @@ import Container2 from "../../../../components/Container/container2";
 import useFetch from "../../../../hooks/useFetch";
 import useQuery from "../../../../hooks/useQuery";
 import { formatDateFromApi } from "../../../../utils/formatDate";
+import PasswordUpdateModal from "./PasswordUpdateModal";
 import ProfileUpdateModal from "./ProfileUpdateModal";
 const { Column } = Table;
 
 export default function Section2() {
     const navigate = useNavigate();
     const [openUpdateProfileModal, setOpenUpdateProfileModal] = useState(false);
+    const [openUpdatePasswordModal, setOpenUpdatePasswordModal] = useState(false);
 
     const studentData = useSelector(state => state.students.list || []);
 
@@ -74,12 +76,17 @@ export default function Section2() {
                                         <EditOutlined />
                                     </Tooltip>
                                 </div>
+                                <div className="button__edit--2" onClick={() => setOpenUpdatePasswordModal(true)}>
+                                    <Tooltip title="Đổi mật khẩu">
+                                        <RetweetOutlined />
+                                    </Tooltip>
+                                </div>
                             </div>
                         </Col>
                         <Col span={16}>
                             <div className="profile__result">
                                 <h3>Lịch sử làm bài</h3>
-                                <Space direction="vertical" size="middle"  style={{width: "100%"}}>
+                                <Space direction="vertical" size="middle" style={{ width: "100%" }}>
                                     <Table dataSource={dataSource} pagination={false}>
                                         <Column title="STT" key="index" render={(text, record, index) =>
                                             ((data?.results?.pagination?.currentPage - 1) * data?.results?.pagination?.limit) + index + 1
@@ -117,6 +124,7 @@ export default function Section2() {
             </div>
 
             <ProfileUpdateModal open={openUpdateProfileModal} onCancel={() => setOpenUpdateProfileModal(false)} studentData={studentData[0]} />
+            <PasswordUpdateModal open={openUpdatePasswordModal} onCancel={() => setOpenUpdatePasswordModal(false)} />
         </>
     )
 }

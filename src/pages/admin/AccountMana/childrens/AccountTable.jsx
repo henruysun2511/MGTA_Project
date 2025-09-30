@@ -1,10 +1,11 @@
-import { DeleteOutlined, EditOutlined, EyeOutlined, StopOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, EyeOutlined, RetweetOutlined, StopOutlined } from '@ant-design/icons';
 import { Button, Space, Table, Tooltip } from 'antd';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { alertConfirm } from '../../../../utils/alerts';
 import { handleDelete, handleUpdate } from '../../../../utils/handles';
 import AccountUpdateClassModal from './AccountUpdateClassModal';
+import AccountUpdatePasswordModal from './AccountUpdatePasswordModal';
 import AccountUpdateRoleModal from './AccountUpdateRoleModal';
 import AccountWatchDetailModal from './AccountWatchDetailModal';
 const { Column, ColumnGroup } = Table;
@@ -55,6 +56,7 @@ export default function AccountTable({ accountData, studentData, classData, pagi
     const [openUpdateClassModal, setOpenUpdateClassModal] = useState(false);
     const [openUpdateRoleModal, setOpenUpdateRoleModal] = useState(false);
     const [openWatchDetailModal, setOpenWatchDetailModal] = useState(false);
+    const [openUpdatePasswordModal, setOpenUpdatePasswordModal] = useState(false);
 
     return (
         <>
@@ -91,6 +93,9 @@ export default function AccountTable({ accountData, studentData, classData, pagi
                             </Tooltip>
                             <Tooltip title="Xóa tài khoản">
                                 <DeleteOutlined onClick={() => handleDeleteAccount(record)} />
+                            </Tooltip>
+                            <Tooltip title="Đổi mật khẩu">
+                                <RetweetOutlined onClick={() => {setOpenUpdatePasswordModal(true); setEditingRecord(record); }} />
                             </Tooltip>
                         </Space>
                     )}
@@ -141,8 +146,9 @@ export default function AccountTable({ accountData, studentData, classData, pagi
 
 
             <AccountUpdateClassModal classData={classData} studentData={studentData} open={openUpdateClassModal} onCancel={() => setOpenUpdateClassModal(false)} record={editingRecord} />
-            <AccountWatchDetailModal classData={classData} studentData={studentData} open={openWatchDetailModal} onCancel={()=> setOpenWatchDetailModal(false)} record={editingRecord}/>
+            <AccountWatchDetailModal classData={classData} studentData={studentData} open={openWatchDetailModal} onCancel={() => setOpenWatchDetailModal(false)} record={editingRecord} />
             <AccountUpdateRoleModal open={openUpdateRoleModal} onCancel={() => setOpenUpdateRoleModal(false)} record={editingRecord} />
+            <AccountUpdatePasswordModal open={openUpdatePasswordModal} onCancel={()=> setOpenUpdatePasswordModal(false)} record={editingRecord} />
         </>
     )
 }

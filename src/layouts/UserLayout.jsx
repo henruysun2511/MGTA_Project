@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, notification } from 'antd';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Outlet } from "react-router-dom";
@@ -7,6 +7,8 @@ import Container2 from '../components/Container/container2';
 import NofiticationStudent from '../components/Nofitications/NofiticationStudent';
 import useFetch from '../hooks/useFetch';
 import { fetchAction } from '../redux/actions/baseAction';
+import { EVENT } from "../sockets/event";
+import socket from "../sockets/socket";
 import './UserLayout.scss';
 
 export default function UserLayout() {
@@ -18,13 +20,36 @@ export default function UserLayout() {
     const dispatch = useDispatch();
     const settingData = useSelector(state => state.settings.list || []);
     const [settingDataRes] = useFetch(
-        settingData.length === 0 ? "admin/setting" : "",  {},{}
+        settingData.length === 0 ? "admin/setting" : "", {}, {}
     );
     useEffect(() => {
         if (settingDataRes) {
             dispatch(fetchAction("settings", [settingDataRes]));
         }
     }, [dispatch, settingDataRes]);
+
+
+    //Xử lý socket hông báo
+    useEffect(() => {
+        socket.on(EVENT.NEW_SCHEDULE, (data) => {
+            notification.info({
+                message: "Lịch học mới",
+                description: data.message,
+            });
+        });
+
+        socket.on(EVENT.CHANGE_CLASS_SCHEDULE, (data) => {
+            notification.warning({
+                message: "Thay đổi lịch học",
+                description: data.message,
+            });
+        });
+
+        return () => {
+            socket.off(EVENT.NEW_SCHEDULE);
+            socket.off(EVENT.CHANGE_CLASS_SCHEDULE);
+        };
+    }, []);
 
 
     return (

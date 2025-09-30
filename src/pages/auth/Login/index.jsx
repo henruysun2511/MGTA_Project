@@ -29,7 +29,6 @@ export default function Login() {
 
                 dispatch(checkLogin(true));
 
-
                 const result = await alertSuccess("Đăng nhập thành công");
                 if (result.isConfirmed) {
                     const roleId = localStorage.getItem("roleId");

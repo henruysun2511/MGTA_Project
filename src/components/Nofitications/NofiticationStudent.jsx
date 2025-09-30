@@ -1,8 +1,16 @@
 import { BellFilled } from '@ant-design/icons';
 import { Dropdown } from 'antd';
+import useFetch from '../../hooks/useFetch';
+import useQuery from '../../hooks/useQuery';
 
 export default function NofiticationStudent() {
-        const nofiItems = [
+    const [query, updateQuery, resetQuery] = useQuery({
+        page: 1,
+        limit: 10
+    });
+    const [data] = useFetch("notification/notifications", query, {});
+    console.log(data);
+    const nofiItems = [
         {
             key: '1',
             label: (
