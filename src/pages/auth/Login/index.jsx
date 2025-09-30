@@ -18,7 +18,6 @@ export default function Login() {
 
         try {
             const response = await createData("auth/login", { username, password });
-            console.log(response);
 
             if (response.statusCode === 200 && response.data?.accessToken) {
                 const decoded = jwtDecode(response.data?.accessToken);

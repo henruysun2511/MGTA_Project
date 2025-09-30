@@ -2,7 +2,6 @@ import { Modal, Table } from 'antd';
 const { Column } = Table;
 
 export default function AccountWatchDetailModal({ classData, studentData, open, onCancel, record }) {
-
     if (!record) {
         return (
             <Modal

@@ -1,6 +1,6 @@
 import { BellFilled, BookOutlined, ScheduleOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 import { Dropdown } from 'antd';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useFetch from '../../hooks/useFetch';
 import useQuery from '../../hooks/useQuery';
@@ -8,18 +8,59 @@ import { fetchAction } from '../../redux/actions/baseAction';
 
 export default function NofiticationStudent() {
     const dispatch = useDispatch();
+    const [unreadCount, setUnreadCount] = useState(0);
     const [query, updateQuery, resetQuery] = useQuery({
         page: 1,
         limit: 10
     });
     const notificationData = useSelector(state => state.notifications.list || []);
     const [data] = useFetch("notification/notifications", query, {});
-    console.log(notificationData);
     useEffect(() => {
         if (data) {
             dispatch(fetchAction("notifications", data.notifications?.items));
         }
     }, [data, dispatch]);
+
+
+    useEffect(() => {
+        socket.on(EVENT.NEW_SCHEDULE, (data) => {
+            setUnreadCount((c) => c + 1);
+        });
+
+        socket.on(EVENT.ASSIGN_EXERCISE, (data) => {
+            setUnreadCount((c) => c + 1);
+        });
+
+        socket.on(EVENT.CHANGE_CLASS_SCHEDULE, (data) => {
+            setUnreadCount((c) => c + 1);
+        });
+
+        socket.on(EVENT.CHANGE_CLASS, (data) => {
+           setUnreadCount((c) => c + 1);
+        });
+
+        socket.on(EVENT.JOIN_CLASS, (data) => {
+            setUnreadCount((c) => c + 1);
+        });
+
+        socket.on(EVENT.ADD_TO_CLASS, (data) => {
+            setUnreadCount((c) => c + 1);
+        });
+
+        socket.on(EVENT.UPDATE_CLASS, (data) => {
+            setUnreadCount((c) => c + 1);
+        });
+
+        return () => {
+            socket.off(EVENT.NEW_SCHEDULE);
+            socket.off(EVENT.ASSIGN_EXERCISE);
+            socket.off(EVENT.CHANGE_CLASS_SCHEDULE);
+            socket.off(EVENT.CHANGE_CLASS);
+            socket.off(EVENT.JOIN_CLASS);
+            socket.off(EVENT.ADD_TO_CLASS);
+            socket.off(EVENT.UPDATE_CLASS);
+        };
+    }, [api]);
 
     const nofiticationItems = [
         ...(notificationData || []).map((ntf, index) => {
@@ -28,7 +69,7 @@ export default function NofiticationStudent() {
             let IconComp = BellFilled;
 
             switch (ntf.type) {
-                case "UPLOAD_SCHEDULE":
+                case "UPLOAD_SCHEDULE" & "":
                     bgColor = "#e6f7e6";
                     iconColor = "#38db43ff";
                     IconComp = ScheduleOutlined;
@@ -85,8 +126,15 @@ export default function NofiticationStudent() {
                 menu={{ items: nofiticationItems }}
                 placement="bottomRight"
                 overlayStyle={{ maxHeight: 400, overflowY: "auto" }}
+                trigger={["click"]}
+                onOpenChange={(open) => {
+                    if (open) setUnreadCount(0);
+                    resetQuery(); 
+                }}
             >
-                <BellFilled className='admin__icon-nofitication' />
+                <Badge count={unreadCount} size="small" offset={[-2, 2]}>
+                    <BellFilled className="admin__icon-nofitication" />
+                </Badge>
             </Dropdown>
         </>
     )

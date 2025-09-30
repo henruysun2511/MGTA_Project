@@ -42,13 +42,8 @@ export default function Register() {
                 account: account,
                 student: student
             };
-            console.log(options)
-            // const json = JSON.stringify(options);
-            // console.log(json);
-
+            
             const res = await createData("auth/register", options);
-            console.log(res);
-
             if (res.statusCode === 201) {
                 alertSuccess(res.message);
                 setTimeout(() => {
@@ -66,13 +61,9 @@ export default function Register() {
 
     }
 
-
-
     return (
         <>
             <div className="register__wrap">
-
-
                 <div className="register">
                     <div className="square--blue"></div>
                     <div className="square--yellow"></div>

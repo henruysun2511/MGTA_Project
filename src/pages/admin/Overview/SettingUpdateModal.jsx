@@ -9,7 +9,6 @@ export default function SettingUpdateModal({ open, onCancel, settingData }) {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
 
-    console.log(settingData);
     useEffect(() => {
         if (open && settingData) {
             form.setFieldsValue({

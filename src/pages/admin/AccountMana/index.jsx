@@ -15,13 +15,12 @@ export default function AccountMana() {
     const dispatch = useDispatch();
 
     const [openCreateModal, setOpenCreateModal] = useState(false);
-    const [query, updateQuery, setQuery] = useQuery({
+    const [query, updateQuery, resetQuery] = useQuery({
         page: 1,
         limit: 8
     });
 
     const [data] = useFetch("admin/account/accounts", query, {});
-    console.log(data);
     const [studentDataRes] = useFetch("admin/student/students", {}, {});
     const [classDataRes] = useFetch("admin/class/classes", {}, {})
 

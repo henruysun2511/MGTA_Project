@@ -23,14 +23,12 @@ export default function Otp() {
             otp: values.otp,
             email: email
         }
-        console.log(options)
         try {
             const res = await createData("auth/confirm-password", options);
             if (res.statusCode === 200) {
                 alertSuccess("Thành công", "Xác thực tài khoản thành công");
                 navigate("/auth/resetPassword");
             }
-            console.log(res)
         } catch (error) {
             console.error(error);
             alertError("Có lỗi xảy ra với mã otp");
@@ -38,7 +36,6 @@ export default function Otp() {
             setLoading(false);
         }
     }
-
 
     return (
         <>

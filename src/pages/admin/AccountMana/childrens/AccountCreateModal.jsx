@@ -26,7 +26,6 @@ export default function AccountCreateModal({ open, onCancel}) {
             password: values.password,
             roleId: values.roleId
         }
-        console.log(options)
         await handleCreate(dispatch, "admin/account", "accounts", options, () => onCancel());
     };
 

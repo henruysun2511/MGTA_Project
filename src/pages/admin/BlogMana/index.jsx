@@ -19,7 +19,7 @@ export default function BlogMana() {
     const [openCreateModal, setOpenCreateModal] = useState(false);
 
     const dispatch = useDispatch();
-
+    
     const [query, updateQuery, resetQuery] = useQuery({
         page: 1,
         limit: 10

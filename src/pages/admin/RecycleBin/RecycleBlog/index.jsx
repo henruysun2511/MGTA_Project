@@ -16,7 +16,6 @@ export default function RecycleBlog() {
         limit: 10
     })
     const [data] = useFetch("admin/blog/deletedBlogs", query, {});
-    console.log(data);
 
     const deletedBlog = data.deletedBlogs?.items.map(item => ({
         ...item,

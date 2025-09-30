@@ -13,7 +13,6 @@ export default function PasswordUpdateModal({ open, onCancel }) {
             oldPassword: values.oldPassword,
             newPassword: values.newPassword
         };
-        console.log(options)
         await handleUpdate(dispatch, "auth/change-password", "", "", options, () => onCancel());
     };
 

@@ -17,7 +17,6 @@ export default function StudentExercise({ classId }) {
 
     const [data] = useFetch(`exercise-class/exercises/${classId}`, query, {});
     const exerciseData = data?.items ? data.items : [];
-    console.log(data)
 
     const [skillResData] = useFetch("skill/skills", {}, {})
     const skillData = skillResData ? skillResData.skills : [];
@@ -46,7 +45,6 @@ export default function StudentExercise({ classId }) {
         selectedSkills: []
     });
 
-    console.log(filter)
 
     const filteredExercises = exerciseData.filter((exercise) => {
         const titleMatch = exercise.exerciseId.title

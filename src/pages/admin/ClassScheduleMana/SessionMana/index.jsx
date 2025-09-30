@@ -3,7 +3,6 @@ import { Button, Space } from 'antd';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useFetch from '../../../../hooks/useFetch';
-import useQuery from '../../../../hooks/useQuery';
 import { fetchAction } from '../../../../redux/actions/baseAction';
 import ClassSessionCreateModal from './childrens/ClassSessionCreateModal';
 import ClassSessionFilter from './childrens/ClassSessionFilter';
@@ -15,12 +14,7 @@ export default function SessionMana() {
 
     const [modalVisible, setModalVisible] = useState(false);
 
-    const [query, updateQuery, resetQuery] = useQuery({
-        currentPage: 1,
-        limit: 10
-    });
-
-    const [data] = useFetch("admin/class-session/class-sessions", query, {});
+    const [data] = useFetch("admin/class-session/class-sessions", {}, {});
 
     useEffect(() => {
         if (data) {

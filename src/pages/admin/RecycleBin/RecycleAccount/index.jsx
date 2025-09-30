@@ -16,7 +16,6 @@ export default function RecycleAccount() {
         limit: 10
     })
     const [data] = useFetch("admin/account/accounts-deleted", query, {});
-    console.log(data);
 
     const deletedAccount = data.items ? data.items.map(item => ({
         ...item,
@@ -28,10 +27,9 @@ export default function RecycleAccount() {
             dispatch(fetchAction("deletedaccounts", deletedAccount));
         }
     }, [data, dispatch]);
-
-
+    
     const accountData = useSelector((state) => state.deletedaccounts.list || []);
-    console.log(accountData);
+  
     const handlePageChange = (page, pageSize) => {
         updateQuery({
             page: page,

@@ -39,7 +39,6 @@ export default function ExerciseEditModal({ open, onCancel, exerciseData }) {
       totalQuestion: values.totalQuestion,
       duration: values.duration
     };
-    console.log(options);
 
     await handleUpdate(dispatch, "admin/exercise", "exercises", id, options, () => onCancel());
   }

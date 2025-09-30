@@ -14,17 +14,13 @@ export default function RoleMana() {
     const [openCreateModal, setOpenCreateModal] = useState(false);
 
     const [data] = useFetch("admin/role/roles", {}, {});
-    console.log(data);
-
     useEffect(() => {
         if (data) {
             dispatch(fetchAction("roles", data));
         }
     }, [data, dispatch]);
-
     const roleData = useSelector(state => state.roles.list || []);
     const permissionData = useSelector(state => state.permissions.list || []);
-
 
     const newRoleData = roleData.map(role => {
         return {
@@ -38,8 +34,6 @@ export default function RoleMana() {
             }) || []
         };
     });
-
-    console.log(newRoleData)
 
     return (
         <>

@@ -14,7 +14,6 @@ import './UserLayout.scss';
 export default function UserLayout() {
     const token = localStorage.getItem("accessToken");
     const roleId = localStorage.getItem("roleId");
-    const isLogin = useSelector(state => state.loginReducer);
     const username = localStorage.getItem("username");
 
     const dispatch = useDispatch();
@@ -29,32 +28,118 @@ export default function UserLayout() {
     }, [dispatch, settingDataRes]);
 
 
-    // ================== Notification config ==================
     const [api, contextHolder] = notification.useNotification();
 
     useEffect(() => {
-        socket.onAny((event, data) => {
-            console.log("📡 Received event:", event, data);
-        });
-
         socket.on(EVENT.NEW_SCHEDULE, (data) => {
             api.info({
                 message: "Lịch học mới",
-                description: data.message,
+                description: (
+                    <div>
+                        <p>{data.message}</p>
+                        <small style={{ color: "#888" }}>
+                            {dayjs().format("HH:mm:ss DD/MM/YYYY")}
+                        </small>
+                    </div>
+                ),
+                placement: "bottomLeft",
+                duration: 4,
             });
         });
 
         socket.on(EVENT.ASSIGN_EXERCISE, (data) => {
             api.warning({
                 message: "Bài tập mới",
-                description: data.message,
+                description: (
+                    <div>
+                        <p>{data.message}</p>
+                        <small style={{ color: "#888" }}>
+                            {dayjs().format("HH:mm:ss DD/MM/YYYY")}
+                        </small>
+                    </div>
+                ),
+                placement: "bottomLeft",
+                duration: 4,
             });
         });
 
         socket.on(EVENT.CHANGE_CLASS_SCHEDULE, (data) => {
             api.info({
                 message: "Thay đổi lịch học",
-                description: data.message,
+                description: (
+                    <div>
+                        <p>{data.message}</p>
+                        <small style={{ color: "#888" }}>
+                            {dayjs().format("HH:mm:ss DD/MM/YYYY")}
+                        </small>
+                    </div>
+                ),
+                placement: "bottomLeft",
+                duration: 4,
+            });
+        });
+
+        socket.on(EVENT.CHANGE_CLASS, (data) => {
+            api.info({
+                message: "Chuyển lớp",
+                description: (
+                    <div>
+                        <p>{data.message}</p>
+                        <small style={{ color: "#888" }}>
+                            {dayjs().format("HH:mm:ss DD/MM/YYYY")}
+                        </small>
+                    </div>
+                ),
+                placement: "bottomLeft",
+                duration: 4,
+            });
+        });
+
+        socket.on(EVENT.JOIN_CLASS, (data) => {
+            api.info({
+                message: "Tham gia lớp",
+                description: (
+                    <div>
+                        <p>{data.message}</p>
+                        <small style={{ color: "#888" }}>
+                            {dayjs().format("HH:mm:ss DD/MM/YYYY")}
+                        </small>
+                    </div>
+                ),
+                placement: "bottomLeft",
+                duration: 4,
+            });
+        });
+
+        socket.on(EVENT.ADD_TO_CLASS, (data) => {
+            api.info({
+                message: "Thêm vào lớp",
+               description: (
+                    <div>
+                        <p>{data.message}</p>
+                        <small style={{ color: "#888" }}>
+                            {dayjs().format("HH:mm:ss DD/MM/YYYY")}
+                        </small>
+                    </div>
+                ),
+                placement: "bottomLeft",
+                duration: 4,
+            });
+        });
+
+        socket.on(EVENT.UPDATE_CLASS, (data) => {
+            api.info({
+                message: "Chỉnh sửa lớp học",
+                description: (
+                    <div>
+                        <p>{data.message}</p>
+                        <small style={{ color: "#888" }}>
+                            {dayjs().format("HH:mm:ss DD/MM/YYYY")}
+                        </small>
+                    </div>
+                ),
+                placement: "bottomLeft",
+                duration: 4,
             });
         });
 
@@ -62,14 +147,17 @@ export default function UserLayout() {
             socket.off(EVENT.NEW_SCHEDULE);
             socket.off(EVENT.ASSIGN_EXERCISE);
             socket.off(EVENT.CHANGE_CLASS_SCHEDULE);
+            socket.off(EVENT.CHANGE_CLASS);
+            socket.off(EVENT.JOIN_CLASS);
+            socket.off(EVENT.ADD_TO_CLASS);
+            socket.off(EVENT.UPDATE_CLASS);
         };
     }, [api]);
-    // ========================================================
 
 
     return (
         <>
-            {contextHolder} {/* Quan trọng: chèn contextHolder để hiển thị notification */}
+            {contextHolder}
 
             <div className="header">
                 <Container2>

@@ -17,24 +17,17 @@ import ExerciseQuestionTable from './childrens/ExerciseQuestionTable';
 export default function ExerciseDetailMana() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [formOpen, setFormOpen] = useState(false);
 
   const { id } = useParams();
   const cleanId = id.replace(/^:/, "");
-  console.log(cleanId)
-
-  const [formOpen, setFormOpen] = useState(false);
-
   const [exerciseDataByIdRes] = useFetch(`admin/exercise/${cleanId}`, {}, {});
-  console.log(exerciseDataByIdRes);
   const exerciseDataById = useSelector(state => state.exercises.current || []);
-  console.log(exerciseDataById);
-  
   useEffect(() => {
     if (exerciseDataByIdRes) {
       dispatch(fetchById("exercises", exerciseDataByIdRes.exercise));
     }
   }, [exerciseDataByIdRes, dispatch]);
-
 
   // Đếm số lượng câu
   let tracNghiem = 0;

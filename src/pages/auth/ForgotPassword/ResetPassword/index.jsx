@@ -21,7 +21,6 @@ export default function ResetPassword() {
                 alertSuccess("Thành công", "Thay đổi mật khẩu thành công");
                 navigate("/auth/login");
             }
-            console.log(res)
         } catch (error) {
             console.error(error);
             alertError("Có lỗi xảy ra với mã otp");

@@ -2,8 +2,6 @@ import { Modal, Table } from 'antd';
 const { Column } = Table;
 
 export default function ScoreWatchDetailModal({ open, onCancel, record }) {
-    console.log(record);
-
     if (!record) {
         return (
             <Modal
