@@ -15,7 +15,7 @@ const AllReducers = combineReducers({
     skills: baseReducer("skills"),
     blogs: baseReducer("blogs"),
     results: baseReducer("results"),
-    notifications: baseReducer("nofitications"),
+    notifications: baseReducer("notifications"),
     comments: baseReducer("comments"),
     roles: baseReducer("roles"),
     permissions: baseReducer("permissions"),

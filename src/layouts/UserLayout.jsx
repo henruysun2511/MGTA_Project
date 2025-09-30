@@ -29,8 +29,13 @@ export default function UserLayout() {
     }, [dispatch, settingDataRes]);
 
 
-    //Xử lý socket hông báo
+    //Xử lý socket thông báo
     useEffect(() => {
+        // socket connect
+        socket.on("connect", () => {
+            console.log("Socket connected:", socket.id);
+        });
+
         socket.on(EVENT.NEW_SCHEDULE, (data) => {
             notification.info({
                 message: "Lịch học mới",
@@ -38,8 +43,15 @@ export default function UserLayout() {
             });
         });
 
-        socket.on(EVENT.CHANGE_CLASS_SCHEDULE, (data) => {
+        socket.on(EVENT.ASSIGN_EXERCISE, (data) => {
             notification.warning({
+                message: "📝 Bài tập mới",
+                description: data.message,
+            });
+        });
+
+        socket.on(EVENT.CHANGE_CLASS_SCHEDULE, (data) => {
+            notification.info({
                 message: "Thay đổi lịch học",
                 description: data.message,
             });
@@ -47,6 +59,7 @@ export default function UserLayout() {
 
         return () => {
             socket.off(EVENT.NEW_SCHEDULE);
+            socket.off(EVENT.ASSIGN_EXERCISE);
             socket.off(EVENT.CHANGE_CLASS_SCHEDULE);
         };
     }, []);

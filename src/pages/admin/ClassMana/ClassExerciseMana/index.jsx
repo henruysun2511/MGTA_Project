@@ -53,7 +53,7 @@ export default function ClassExerciseMana({ classId }) {
                         Giao thêm bài tập mới
                     </Button>
                 </div>
-                <ClassExerciseTable deadlineData={deadlineData} />
+                <ClassExerciseTable deadlineData={deadlineData} pagination={data?.pagination} />
                 {data?.pagination && (
                     <Pagination
                         current={data.pagination.currentPage}

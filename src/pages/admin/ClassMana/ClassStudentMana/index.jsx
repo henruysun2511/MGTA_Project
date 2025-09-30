@@ -18,7 +18,7 @@ export default function ClassStudentMana({ classId }) {
         }
     }, [studentDataRes, dispatch]);
 
-    const studentData = useSelector(state => state.students.list || []);
+    const studentData = useSelector(state => state.students.list || []).filter(st => st.classId?._id === classId);
 
 
     const handleFilterChange = (newFilter) => {

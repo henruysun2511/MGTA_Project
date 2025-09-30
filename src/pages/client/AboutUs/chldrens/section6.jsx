@@ -10,7 +10,7 @@ export default function Section6() {
                             <p>6 năm kinh nghiêm chuyên dạy cho học sinh mất gốc</p>
                         </div>
                         <div class="section-6__image">
-                            <img src="https://scontent.fhan14-3.fna.fbcdn.net/v/t1.15752-9/536218027_1442625610379218_5714373474038393190_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=9f807c&_nc_ohc=EL55D__ozj8Q7kNvwEueogz&_nc_oc=AdkMyaeUK3hh98DS0WDsbZZsZ0ElcegV9dxEIzWuJag8rb34U9Ll2o4tcCDv2s0-2cHLjix6E8Spa4oEsGD108qZ&_nc_zt=23&_nc_ht=scontent.fhan14-3.fna&oh=03_Q7cD3AGwpqz2j8WXOIZheyJSs4BO1eI0fGmZuAvT5oCwZOTUmQ&oe=68D244FE"
+                            <img src="https://i.pinimg.com/736x/2c/2c/1a/2c2c1a72179188c371cd46ae59894392.jpg"
                                 alt="" />
                             <div class="section-6__quote">
                                 "Tiếng Anh không khó, chỉ cần bắt đầu đúng cách – và bạn sẽ không đi một mình"
