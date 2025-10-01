@@ -64,8 +64,8 @@ export default function Login() {
                     <h2>Đăng nhập</h2>
 
                     <Form className="login__form"
-                        labelCol={{ span: 8, style: { textAlign: 'left' } }}
-                        wrapperCol={{ span: 16 }}
+                        labelCol={{ xs: { span: 24 }, sm: { span: 8 } }}
+                        wrapperCol={{ xs: { span: 24 }, sm: { span: 16 } }}
                         style={{ maxWidth: 600 }}
                         onFinish={handleSubmit}
                     >

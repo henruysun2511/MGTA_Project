@@ -92,29 +92,6 @@ export default function Section2() {
                                 )) : <p>Lỗi khi tải lớp</p>
                             )
                         }
-                        {/* {
-                            accessToken ? (
-                                classStudentData ? (
-                                    <li className='active'>
-                                        {classStudentData.className}
-                                    </li>
-                                ) : (
-                                    <li>Chưa phân lớp
-                                    </li>
-                                )
-
-                            ) : (
-                                classData ? classData.map(cls => (
-                                    <li
-                                        className={selectedClass?._id === cls._id ? "active" : ""}
-                                        key={cls.id}
-                                        onClick={() => setSelectedClass(cls)}
-                                    >
-                                        {cls.className}
-                                    </li>
-                                )) : <p>Lỗi khi tải lớp</p>
-                            )
-                        } */}
                     </ul>
                 </Container2>
             </div>

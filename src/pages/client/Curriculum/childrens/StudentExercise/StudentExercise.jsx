@@ -90,7 +90,7 @@ export default function StudentExercise({ classId }) {
                     <Row gutter={15}>
                         {
                             filteredExercises ? filteredExercises.map(exercise => (
-                                <Col span={4} key={exercise._id}>
+                                <Col key={exercise._id} xs={24} sm={12} md={8} lg={6} xl={4} >
                                     <div className="practice__item">
                                         <h3>{exercise.exerciseId.title}</h3>
                                         <div className="practice__icon">
@@ -112,10 +112,6 @@ export default function StudentExercise({ classId }) {
                                             ))
                                             }
                                         </div>
-                                        {/* 
-                                        <div className="practice__status ps--1">
-                                            Chưa làm
-                                        </div> */}
                                         <div className="button__detail" onClick={() => handleWatchDetail(exercise.exerciseId._id)}>
                                             Xem chi tiết
                                         </div>

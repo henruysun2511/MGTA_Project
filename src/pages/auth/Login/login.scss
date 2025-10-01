@@ -1,108 +1,115 @@
 .login__wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #5c6ff4, #e870c2);
-    position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #5c6ff4, #e870c2);
+  position: fixed;
+  width: 100%;
+  padding: 20px; // tránh dính sát màn hình mobile
+
+  .login {
+    background-color: white;
+    padding: 40px 30px 20px;
+    border-radius: 12px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
     width: 100%;
+    max-width: 550px; // responsive: co lại vừa với màn hình
+    position: relative;
 
-    .login {
-        background-color: white;
-        padding: 50px 50px 0;
-        border-radius: 10px;
-        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
-        width: 550px;
-        height: auto;
-        position: relative;
+    h2 {
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      font-size: 28px;
 
-        h2 {
-            text-align: center;
-            text-transform: uppercase;
-            margin-bottom: 50px;
-            font-size: 35px;
-        }
-
-        .login__form {
-            margin-bottom: 30px;
-
-            .login__item {
-                height: 100px;
-                margin-bottom: 5px;
-
-                label {
-                    font-size: 18px;
-                    text-align: left;
-                }
-
-                input {
-                    font-size: 16px;
-                }
-            }
-
-            .forgot-passsword {
-                text-align: right;
-                cursor: pointer;
-                margin: 20px 0 50px;
-                font-size: 18px;
-
-                &:hover {
-                    color: red;
-                }
-            }
-
-            .login__button {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-                z-index: 2;
-
-                button {
-                    background: linear-gradient(135deg, #f6c964, #f09a3e);
-                    border: none;
-                    padding: 12px 15px;
-                    border-radius: 8px;
-                    width: 100%;
-                    font-size: 16px;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    cursor: pointer;
-                    color: #fff;
-                    transition: 0.3s;
-
-                    &:hover {
-                        background: linear-gradient(135deg, #f09a3e, #e870c2);
-                        transform: translateY(-2px);
-                        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
-                    }
-                }
-
-                p {
-                    font-size: 15px;
-                    cursor: pointer;
-                    color: #5c6ff4;
-                    font-weight: 500;
-                    transition: 0.3s;
-
-                    &:hover {
-                        text-decoration: underline;
-                        color: #e870c2;
-                    }
-                }
-            }
-        }
-
-        .login__logo {
-            width: 100%;
-            height: auto;
-            margin: 50px 0;
-            text-align: center;
-
-            img {
-                width: 180px;
-                height: auto;
-            }
-        }
+      @media (min-width: 768px) {
+        font-size: 35px;
+      }
     }
+
+    .login__form {
+      margin-bottom: 30px;
+
+      .login__item {
+        margin-bottom: 15px;
+
+        label {
+          font-size: 16px;
+        }
+
+        input {
+          font-size: 16px;
+        }
+      }
+
+      .forgot-passsword {
+        text-align: right;
+        cursor: pointer;
+        margin: 15px 0 30px;
+        font-size: 15px;
+
+        &:hover {
+          color: red;
+        }
+      }
+
+      .login__button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        z-index: 2;
+
+        button {
+          background: linear-gradient(135deg, #f6c964, #f09a3e);
+          border: none;
+          padding: 12px 15px;
+          border-radius: 8px;
+          width: 100%;
+          font-size: 16px;
+          font-weight: 600;
+          text-transform: uppercase;
+          cursor: pointer;
+          color: #fff;
+          transition: 0.3s;
+
+          &:hover {
+            background: linear-gradient(135deg, #f09a3e, #e870c2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+          }
+        }
+
+        p {
+          font-size: 14px;
+          cursor: pointer;
+          color: #5c6ff4;
+          font-weight: 500;
+          text-align: center;
+
+          &:hover {
+            text-decoration: underline;
+            color: #e870c2;
+          }
+        }
+      }
+    }
+
+    .login__logo {
+      width: 100%;
+      height: auto;
+      margin: 30px 0;
+      text-align: center;
+
+      img {
+        width: 140px;
+        height: auto;
+
+        @media (min-width: 768px) {
+          width: 180px;
+        }
+      }
+    }
+  }
 }

@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
-import { alertConfirm, alertWarning } from "../../../utils/alerts";
-import { handleCreate } from "../../../utils/handles";
+import { createData } from "../../../services/baseService";
+import { alertConfirm, alertSuccess, alertWarning } from "../../../utils/alerts";
 import "./practice.scss";
 const { Countdown } = Statistic;
 
@@ -52,14 +52,23 @@ export default function Practice() {
         if (endTime) {
             let result = await alertWarning("Đã hết thời gian làm bài, vui lòng nộp bài", "Nộp bài");
             if (result.isConfirmed) {
-                await handleCreate(dispatch, `exercise/submit/${exerciseData._id}`, "", options, () => { });
+                const res = await createData(`exercise/submit/${exerciseData._id}`, options);
+                if (res?.data?._id) {
+                    const alert = await alertSuccess("Nộp bài thành công", "Xem kết quả");
+                    if (alert.isConfirmed) {
+                        navigate(`/score/${res.data._id}`);
+                    }
+                }
             }
         } else {
             let result = await alertConfirm("Xác nhận nộp bài", "", "Ok", "Hủy");
             if (result.isConfirmed) {
-                const res = await handleCreate(dispatch, `exercise/submit/${exerciseData._id}`, "", options, () => { });
+                const res = await createData(`exercise/submit/${exerciseData._id}`, options);
                 if (res?.data?._id) {
-                    navigate(`/score/${res.data._id}`);
+                    const alert = await alertSuccess("Nộp bài thành công", "Xem kết quả");
+                    if (alert.isConfirmed) {
+                        navigate(`/score/${res.data._id}`);
+                    }
                 }
             }
         }
@@ -83,8 +92,8 @@ export default function Practice() {
                 <div className="button__back" onClick={handleBackClick}>
                     Thoát
                 </div>
-                <Row gutter={10}>
-                    <Col span={18}>
+                <Row gutter={[10, 10]}>
+                    <Col xs={24} sm={24} md={18} lg={18} xl={18}>
                         <div className="test__wrap"></div>
                         <div className="image__list">
                             {exerciseData.images ? (
@@ -98,7 +107,7 @@ export default function Practice() {
                             )}
                         </div>
                     </Col>
-                    <Col span={6}>
+                    <Col xs={24} sm={24} md={6} lg={6} xl={6}>
                         <div className="question__wrap">
                             <h3>Thời gian làm bài: </h3>
                             <div className="time">

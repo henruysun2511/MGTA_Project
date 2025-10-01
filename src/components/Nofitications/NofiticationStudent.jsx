@@ -1,10 +1,12 @@
 import { BellFilled, BookOutlined, ScheduleOutlined, UsergroupAddOutlined } from '@ant-design/icons';
-import { Dropdown } from 'antd';
+import { Badge, Dropdown } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useFetch from '../../hooks/useFetch';
 import useQuery from '../../hooks/useQuery';
 import { fetchAction } from '../../redux/actions/baseAction';
+import { EVENT } from "../../sockets/event";
+import socket from "../../sockets/socket";
 
 export default function NofiticationStudent() {
     const dispatch = useDispatch();
@@ -36,7 +38,7 @@ export default function NofiticationStudent() {
         });
 
         socket.on(EVENT.CHANGE_CLASS, (data) => {
-           setUnreadCount((c) => c + 1);
+            setUnreadCount((c) => c + 1);
         });
 
         socket.on(EVENT.JOIN_CLASS, (data) => {
@@ -60,7 +62,7 @@ export default function NofiticationStudent() {
             socket.off(EVENT.ADD_TO_CLASS);
             socket.off(EVENT.UPDATE_CLASS);
         };
-    }, [api]);
+    }, []);
 
     const nofiticationItems = [
         ...(notificationData || []).map((ntf, index) => {
@@ -69,7 +71,7 @@ export default function NofiticationStudent() {
             let IconComp = BellFilled;
 
             switch (ntf.type) {
-                case "UPLOAD_SCHEDULE" & "":
+                case "UPLOAD_SCHEDULE":
                     bgColor = "#e6f7e6";
                     iconColor = "#38db43ff";
                     IconComp = ScheduleOutlined;
@@ -110,7 +112,8 @@ export default function NofiticationStudent() {
                         fontWeight: 500,
                         padding: "8px 0"
                     }}
-                    onClick={() => {
+                    onClick={(e) => {
+                        e.stopPropagation(); 
                         updateQuery({ limit: query.limit + 10 });
                     }}
                 >
@@ -129,7 +132,7 @@ export default function NofiticationStudent() {
                 trigger={["click"]}
                 onOpenChange={(open) => {
                     if (open) setUnreadCount(0);
-                    resetQuery(); 
+                    resetQuery();
                 }}
             >
                 <Badge count={unreadCount} size="small" offset={[-2, 2]}>

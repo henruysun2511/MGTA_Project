@@ -1,5 +1,6 @@
 import { Col, Row, Table } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
+import Container2 from '../../../components/Container/container2';
 import useFetch from '../../../hooks/useFetch';
 import { createData } from '../../../services/baseService';
 import { alertError } from '../../../utils/alerts';
@@ -37,9 +38,9 @@ export default function ExerciseDetail() {
     return (
         <>
             <div className="exercise-detail">
-                <div className="exercise-detail__wrap">
-                    <Row gutter={20}>
-                        <Col span={16}>
+                <Container2>
+                    <Row gutter={[16, 16]}>
+                        <Col xs={24} sm={24} md={16}>
                             {
                                 exerciseData && (
                                     <div className="exercise-detail__info">
@@ -77,11 +78,13 @@ export default function ExerciseDetail() {
                             <ExerciseDetailComment exerciseId={cleanId} />
                         </Col>
 
-                        <Col span={8}>
+                        <Col xs={24} sm={24} md={8}>
                             <ExerciseDetailRanking exerciseId={cleanId} />
                         </Col>
                     </Row>
-                </div>
+                </Container2>
+
+
             </div>
         </>
     );

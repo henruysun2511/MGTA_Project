@@ -287,7 +287,6 @@ strong {
         i {
             font-size: 35px;
             background-color: rgba(255, 255, 255, 0.25);
-            // border-radius: 50%;
             margin-bottom: 20px;
             color: #fff;
             transition: transform 0.3s ease;
@@ -651,6 +650,7 @@ strong {
         display: flex;
         gap: 20px;
         justify-content: space-evenly;
+        flex-wrap: wrap;
 
         .step__box {
             position: relative;
@@ -713,6 +713,7 @@ strong {
     .profile__wrap {
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
 
         .profile__image {
             display: flex;
@@ -918,14 +919,14 @@ strong {
 @media (max-width: 1200px) {
     .home__section-1 {
         .section-1__wrap {
-            padding: 0 40px; 
-            margin-top: 150px; 
+            padding: 0 40px;
+            margin-top: 150px;
             justify-content: center;
 
             .section-1__content {
                 h1 {
-                    font-size: 45px; 
-                    width: auto; 
+                    font-size: 45px;
+                    width: auto;
                 }
             }
 
@@ -939,7 +940,7 @@ strong {
                         height: 390px;
 
                         img {
-                            width: 600px; 
+                            width: 600px;
                         }
                     }
                 }
@@ -952,11 +953,11 @@ strong {
 
 @media (max-width: 992px) {
     .home__section-1 {
-        height: auto; 
+        height: auto;
 
         .section-1__wrap {
             margin-top: 100px;
-            flex-direction: column; 
+            flex-direction: column;
             padding: 0 20px;
 
             .section-1__content {
@@ -969,9 +970,9 @@ strong {
 
                 .checklist {
                     li {
-                        text-align: left; 
+                        text-align: left;
                         margin: 0 auto 15px auto;
-                        width: fit-content; 
+                        width: fit-content;
                     }
                 }
             }
@@ -989,18 +990,20 @@ strong {
                 }
 
                 .contact {
-                    position: static; 
+                    position: static;
                     margin: 15px auto;
                     width: 90%;
-                    max-width: 300px; 
-                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+                    max-width: 300px;
+                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
                 }
 
-                .contact--1, .contact--2, .contact--3 {
+                .contact--1,
+                .contact--2,
+                .contact--3 {
                     bottom: auto;
                     left: auto;
                     right: auto;
-                    position: static; 
+                    position: static;
                 }
             }
         }
@@ -1011,36 +1014,43 @@ strong {
 @media (max-width: 576px) {
     .home__section-1 {
         overflow: scroll;
+
         .section-1__wrap {
             .section-1__content {
                 h1 {
                     font-size: 30px; // Kích thước mobile nhỏ hơn
                 }
+
                 .year-label {
                     font-size: 18px;
                 }
+
                 .checklist {
                     li {
                         font-size: 16px;
                     }
                 }
             }
+
             .section-1__image {
                 width: 300px;
                 height: 300px;
 
                 .circle--dot {
                     padding: 3px;
+
                     .circle--pink {
                         width: 294px;
                         height: 294px;
+
                         img {
                             width: 450px; // Điều chỉnh lại kích thước ảnh bên trong
                         }
                     }
                 }
+
                 .contact {
-                    width: 100%; 
+                    width: 100%;
                     max-width: 300px;
                 }
             }
@@ -1048,296 +1058,458 @@ strong {
     }
 }
 
-// =========================================================
-// RESPONSIVE CHO TẤT CẢ CÁC SECTION
-// =========================================================
 
-// Tablet lớn và Desktop nhỏ (max-width: 1200px)
+
 @media (max-width: 1200px) {
     .home__section-2 {
         .section-2__wrap {
-            gap: 50px; // Giảm khoảng cách
-            padding: 0 40px; // Thêm padding ngang
+            gap: 50px;
+            padding: 0 40px;
         }
     }
 
     .home__section-4 {
         .section-4__wrap {
-            padding: 0 40px; // Thêm padding ngang
+            padding: 0 40px;
         }
     }
 
     .home__section-6 {
         .profile__wrap {
             padding: 0 40px;
+
             .profile__content {
-                padding: 15px 30px; // Giảm padding nội dung
+                padding: 15px 30px;
             }
         }
     }
 }
 
-// ---------------------------------------------------------
-// Tablet ngang và Mobile lớn (max-width: 992px)
-// Xếp chồng các phần tử lớn (flex-direction: column)
-// ---------------------------------------------------------
+
 @media (max-width: 992px) {
-    // --- SECTION 2 ---
     .home__section-2 {
-        margin: 100px 0; // Giảm margin
+        margin: 100px 0;
+
         .section-2__wrap {
-            flex-direction: column; // Xếp chồng
+            flex-direction: column;
             padding: 0 20px;
             gap: 50px;
 
             .section-2__image {
-                width: 100%; // Chiếm toàn bộ chiều rộng
+                width: 100%;
                 max-width: 500px;
                 height: auto;
                 margin: 0 auto;
-                
+
                 img {
-                    height: 400px; // Giảm kích thước ảnh
+                    height: 400px;
                 }
+
                 .blob {
                     width: 400px;
-                    height: 400px; // Giảm kích thước blob
+                    height: 400px;
                     top: 50%;
                     left: 50%;
-                    transform: translate(-50%, -50%); // Căn giữa
+                    transform: translate(-50%, -50%);
                 }
             }
         }
     }
 
-    // --- SECTION 3 ---
     .home__section-3 {
         .section-3__content {
             padding: 50px 20px;
-            height: auto; // Cho phép chiều cao co giãn
+            height: auto;
+
             h3 {
                 font-size: 25px;
             }
         }
     }
 
-    // --- SECTION 4 ---
     .home__section-4 {
         .section-4__wrap {
-            flex-direction: column; // Xếp chồng Course Detail và Overview
+            flex-direction: column;
             padding: 0 20px;
-            
+
             .course__detail {
-                width: 100%; // Chiếm toàn bộ chiều rộng
+                width: 100%;
             }
 
             .course__overview {
-                width: 100%; // Chiếm toàn bộ chiều rộng
-                height: auto; // Cho phép chiều cao co giãn
-                // Giữ nguyên thiết kế sidebar nhưng giờ nó nằm dưới
-            }
-            
-            .course__detail, .course__overview {
-                // Giả sử .base-padding có padding lớn, giảm nó ở đây
-                padding: 20px; 
-            }
+                width: 100%;
+                height: auto;
 
-            .course__detail {
-                .course__achieve ul {
-                    justify-content: space-around; // Căn giữa các li khi wrap
-                    li {
-                        width: 45%; // Cho phép 2 cột trên tablet
-                        max-width: 300px;
-                        height: 250px;
+                .course__detail,
+                .course__overview {
+                    padding: 20px;
+                }
+
+                .course__detail {
+                    .course__achieve ul {
+                        justify-content: space-around;
+
+                        li {
+                            width: 45%;
+                            max-width: 300px;
+                            height: 250px;
+                            font-size: 20px;
+                        }
+                    }
+
+                    .course__fee .button.button-watch-more {
+                        width: 100%;
                         font-size: 20px;
                     }
                 }
-                .course__fee .button.button-watch-more {
+            }
+        }
+
+        .home__section-5 {
+            margin: 100px 0;
+
+            .section-5__title {
+                font-size: 40px;
+            }
+
+            .section-5__subtitle {
+                font-size: 20px;
+                padding: 0 20px;
+            }
+
+            .section-5__wrap {
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 0 20px;
+
+                .step__box {
+                    width: 45%;
+                    height: 320px;
+                    margin-bottom: 20px;
+                }
+            }
+        }
+
+        .home__section-6 {
+            margin: 100px 0;
+
+            .profile__wrap {
+                flex-direction: column;
+                padding: 0 20px;
+
+                .profile__image {
                     width: 100%;
-                    font-size: 20px;
+                    max-width: 500px;
+                    margin-bottom: 30px;
+                    border-radius: 20px;
                 }
-            }
-        }
-    }
 
-    // --- SECTION 5 ---
-    .home__section-5 {
-        margin: 100px 0;
-        .section-5__title {
-            font-size: 40px;
-        }
-        .section-5__subtitle {
-            font-size: 20px;
-            padding: 0 20px;
-        }
-        .section-5__wrap {
-            flex-wrap: wrap; // Cho phép box rớt hàng
-            justify-content: center; // Căn giữa các box khi rớt hàng
-            padding: 0 20px;
-            .step__box {
-                width: 45%; // Cho phép 2 box/hàng
-                height: 320px;
-                margin-bottom: 20px;
-            }
-        }
-    }
+                .profile__content {
+                    width: 100%;
+                    padding: 15px 0;
 
-    // --- SECTION 6 ---
-    .home__section-6 {
-        margin: 100px 0;
-        .profile__wrap {
-            flex-direction: column; // Xếp chồng ảnh và nội dung
-            padding: 0 20px;
+                    h3 {
+                        padding-left: 0;
+                        text-align: center;
+                        font-size: 30px;
+                    }
 
-            .profile__image {
-                width: 100%;
-                max-width: 500px;
-                margin-bottom: 30px;
-                border-radius: 20px;
-            }
-            .profile__content {
-                width: 100%;
-                padding: 15px 0;
-                h3 {
-                    padding-left: 0;
-                    text-align: center;
-                    font-size: 30px;
-                }
-                ul li {
-                    font-size: 18px;
-                    gap: 15px;
-                    p {
+                    ul li {
                         font-size: 18px;
+                        gap: 15px;
+
+                        p {
+                            font-size: 18px;
+                        }
                     }
                 }
             }
         }
-    }
 
-    // --- SECTION 7 ---
-    .home__section-7 {
-        margin: 80px 0;
-        padding: 0 20px;
+        .home__section-7 {
+            margin: 80px 0;
+            padding: 0 20px;
 
-        // Giả định .feedback__col nằm trong container flex/grid (ví dụ: Bootstrap grid)
-        // Nếu không dùng grid, cần điều chỉnh layout container
-        .feedback__col, .feedback__col--2 {
-            padding-top: 20px; // Giảm padding trên
-        }
-        
-        .feedback__display--1, .feedback__display--2 {
-             // Đảm bảo các thành phần nhỏ không bị lệch quá nhiều
-             gap: 5px;
-        }
+            .feedback__col,
+            .feedback__col--2 {
+                padding-top: 20px;
+            }
 
-        .feedback__text {
-            font-size: 16px; // Giảm kích thước chữ
-            text-align: center;
-        }
-        .txt--1 {
-            text-align: center;
-        }
-        
-        .feedback__button {
-            margin: 50px 0 0;
-            .button__watch-more {
-                width: 100%;
-                max-width: 300px;
+            .feedback__display--1,
+            .feedback__display--2 {
+                gap: 5px;
+            }
+
+            .feedback__text {
                 font-size: 16px;
-                padding: 12px 30px;
+                text-align: center;
+            }
+
+            .txt--1 {
+                text-align: center;
+            }
+
+            .feedback__button {
+                margin: 50px 0 0;
+
+                .button__watch-more {
+                    width: 100%;
+                    max-width: 300px;
+                    font-size: 16px;
+                    padding: 12px 30px;
+                }
+            }
+
+            .fb--2,
+            .fb--3,
+            .fb--4,
+            .fb--5,
+            .fb--7 {
+                width: 100% !important;
+                margin-bottom: 10px;
+            }
+
+            .feedback__display--3 {
+                width: 100%;
             }
         }
-        
-        // Điều chỉnh lại tỷ lệ ảnh cho mobile (nếu cần)
-        .fb--2, .fb--3, .fb--4, .fb--5, .fb--7 {
-             width: 100% !important;
-             margin-bottom: 10px;
+    }
+
+    @media (max-width: 576px) {
+
+        .home__section-2 {
+            .section-2__wrap .section-2__image {
+                max-width: 320px;
+
+                img {
+                    height: 300px;
+                }
+
+                .blob {
+                    width: 300px;
+                    height: 300px;
+                }
+            }
         }
 
-        .feedback__display--3 {
-            width: 100%;
+        .home__section-4 {
+            .course__detail .course__achieve ul {
+                li {
+                    width: 100%;
+                    height: 200px;
+                }
+            }
+        }
+
+        .home__section-5 {
+            .section-5__title {
+                font-size: 30px;
+            }
+
+            .section-5__subtitle {
+                font-size: 16px;
+            }
+
+            .section-5__wrap {
+                .step__box {
+                    width: 90%;
+                    height: auto;
+                    padding: 15px;
+
+                    .step__word {
+                        font-size: 22px;
+                    }
+
+                    .step__content {
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+
+        .home__section-6 {
+            .profile__wrap {
+                .profile__image {
+                    .profile__box {
+                        width: 48%;
+                        height: 150px;
+                        font-size: 20px;
+                    }
+                }
+
+                .profile__content {
+                    ul li {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        gap: 5px;
+
+                        .profile__icon {
+                            margin-right: 0;
+                            margin-bottom: 5px;
+                        }
+                    }
+                }
+            }
         }
     }
 }
 
-// ---------------------------------------------------------
-// Mobile nhỏ (max-width: 576px)
-// Tối ưu hóa cho màn hình điện thoại
-// ---------------------------------------------------------
-@media (max-width: 576px) {
-    // --- SECTION 2 ---
-    .home__section-2 {
-        .section-2__wrap .section-2__image {
-            max-width: 320px;
-            img {
-                height: 300px;
-            }
-            .blob {
-                width: 300px;
-                height: 300px;
-            }
+@media (max-width: 1024px) {
+  .about-us__section-6 {
+    padding: 120px 0 50px 0;
+
+    .section-6__wrap {
+      flex-direction: column;
+      gap: 40px;
+
+      .ct--1 {
+        width: 100%;
+        text-align: center;
+      }
+
+      .section-6__content {
+        .section-6__info {
+          padding: 30px;
+          height: auto;
+
+          h1 {
+            font-size: 24px;
+          }
         }
-    }
-    
-    // --- SECTION 4 ---
-    .home__section-4 {
-        .course__detail .course__achieve ul {
-            li {
-                width: 100%; // Mỗi li một hàng
-                height: 200px;
-            }
+
+        .if--1 {
+          width: 100%;
+          height: auto;
+          text-align: center;
+          padding: 20px;
+          font-size: 20px;
         }
+      }
+
+      .section-6__image {
+        width: 100%;
+        height: auto;
+
+        img {
+          height: auto;
+        }
+
+        .section-6__quote {
+          font-size: 22px;
+          padding: 0 20px 20px 0;
+        }
+      }
     }
 
-    // --- SECTION 5 ---
-    .home__section-5 {
-        .section-5__title {
-            font-size: 30px;
-        }
-        .section-5__subtitle {
+    .section-6__profile {
+      flex-direction: column;
+      gap: 20px;
+
+      .profile__box {
+        width: 100%;
+      }
+    }
+  }
+}
+
+/* Mobile (<= 768px) */
+@media (max-width: 768px) {
+  .about-us__section-6 {
+    padding: 80px 0 40px 0;
+
+    .section-6__wrap {
+      .ct--1 {
+        font-size: 16px;
+        padding: 20px;
+      }
+
+      .section-6__content {
+        .section-6__info {
+          padding: 20px;
+          h1 {
+            font-size: 20px;
+          }
+          h3 {
             font-size: 16px;
+          }
         }
-        .section-5__wrap {
-            .step__box {
-                width: 90%; // Mỗi box chiếm gần hết chiều rộng
-                height: auto;
-                padding: 15px;
-                .step__word {
-                    font-size: 22px;
-                }
-                .step__content {
-                    font-size: 16px;
-                }
-            }
+
+        .if--1 {
+          font-size: 16px;
+          padding: 16px;
         }
+      }
+
+      .section-6__image {
+        .section-6__quote {
+          font-size: 18px;
+          text-align: center;
+          position: static;
+          padding: 20px;
+        }
+      }
+    }
+  }
+
+  .about-us__section-7 {
+    padding: 80px 20px;
+
+    .section-7__wrap {
+      .ant-collapse {
+        .ant-collapse-item {
+          .ant-collapse-header {
+            font-size: 16px;
+            padding: 12px 16px;
+          }
+
+          .ant-collapse-content {
+            font-size: 14px;
+            padding: 12px 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Small Mobile (<= 480px) */
+@media (max-width: 480px) {
+  .about-us__section-6 {
+    .section-6__wrap {
+      .section-6__content {
+        .section-6__info h1 {
+          font-size: 18px;
+        }
+        .if--1 {
+          font-size: 14px;
+        }
+      }
     }
 
-    // --- SECTION 6 ---
-    .home__section-6 {
-        .profile__wrap {
-            .profile__image {
-                .profile__box {
-                    width: 48%; // Cố gắng giữ 2 cột
-                    height: 150px;
-                    font-size: 20px;
-                }
-            }
-            .profile__content {
-                ul li {
-                    flex-direction: column; // Xếp icon và chữ xuống dòng
-                    align-items: flex-start;
-                    gap: 5px;
-                    .profile__icon {
-                        margin-right: 0;
-                        margin-bottom: 5px;
-                    }
-                }
-            }
-        }
+    .section-6__profile {
+      padding: 20px;
     }
+  }
+
+  .about-us__section-7 {
+    padding: 60px 15px;
+
+    .section-7__wrap {
+      .ant-collapse {
+        .ant-collapse-item {
+          .ant-collapse-header {
+            font-size: 14px;
+          }
+          .ant-collapse-content {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
 }
 
 .ant-dropdown .ant-dropdown-menu {
-  max-height: 400px;
-  overflow-y: auto;
+    max-height: 400px;
+    overflow-y: auto;
 }

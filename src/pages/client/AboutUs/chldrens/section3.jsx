@@ -1,15 +1,49 @@
 import { Col, Row } from "antd";
 import Container2 from "../../../../components/Container/container2";
+import useViewport from "../../../../hooks/useViewport";
 
 export default function Section3() {
+    const viewPort = useViewport();
+    const isMobile = viewPort.width <= 768;
     return (
         <>
-            <div class="about-us__section-3">
+            <div className="about-us__section-3">
                 <Container2>
                     <div class="section-3__wrap">
                         <h1>TẠI SAO NÊN LỰA CHỌN LỚP HỌC MGTA?</h1>
-                        <Row gutter={70}>
-                            <Col span={6}>
+                        {isMobile ? 
+                        <>
+                        <Row gutter={[70,35]}>
+                           <Col xs={24} sm={12} md={6}>
+                                <div className="section-3__card">
+                                    <h3 className="card__title">Đội ngũ MGTA tận tâm, thân thiện</h3>
+                                    <div className="card__script">Chúng tôi tin rằng sự tận tâm, chu đáo, luôn lắng nghe, thấu hiểu học sinh là cách nhanh nhất để có thể hiểu và truyền đạt cho các bạn niềm vui thích, hứng khởi trong quá trình học lại từ đầu môn Tiếng Anh</div>
+                                </div>
+                            </Col>
+                            <Col xs={24} sm={12} md={6}>
+                                <div className="section-3__card">
+                                    <h3 className="card__title">Phương pháp dễ hiểu, hết nhớ</h3>
+                                    <div className="card__script">Với kinh nghiệm 6 năm, đã tiếp nhận và gỡ rối rất nhiều trường hợp mất gốc tiếng anh. Chúng tôi đã có những phưng pháp hệ thống hóa ngữ pháp, phương pháp đối với từng kĩ năng để giúp các bạn học </div>                             
+                                </div>
+                            </Col>
+                          <Col xs={24} sm={12} md={6}>
+                                <div className="section-3__card">
+                               
+                                    <h3 className="card__title">Chương trình học bám sát chương trình phổ thông</h3>
+                                    <div className="card__script">Tại MGTA, chúng tôi luôn khuyến khích, đảm bảo rằng học sinh năm được vững phần kiến thức cơ bản của chương trình học phổ thông, đảm bảo điểm số các em đạt mức trung bình - khá khi làm các bài kiểm tra trên trường lớp</div>
+                                </div>
+                            </Col>
+                            <Col xs={24} sm={12} md={6}>
+                                <div className="section-3__card">
+                                    <h3 className="card__title">Kho học liệu, bài tập đa dạng</h3>
+                                    <div className="card__script">Để cải thiện điểm số tiếng Anh, điều quan trọng nhất chính là luyện tập đều đặn mỗi ngày. Việc lặp lại và thực hành thường xuyên sẽ giúp các bạn nắm vững kiến thức, ghi nhớ lâu hơn và tiến bộ rõ rệt từng ngày.</div>
+                                </div>
+                            </Col>
+                        </Row>
+                        </> 
+                        : 
+                        <Row gutter={[70,70]}>
+                           <Col xs={24} sm={12} md={6}>
                                 <div className="section-3__card">
                                     <div className="card__image">
                                         <img src="https://demo.careerprep.vn/wp-content/uploads/2021/11/watch-tv-8.jpg" alt="" />
@@ -18,7 +52,7 @@ export default function Section3() {
                                     <div className="card__script">Chúng tôi tin rằng sự tận tâm, chu đáo, luôn lắng nghe, thấu hiểu học sinh là cách nhanh nhất để có thể hiểu và truyền đạt cho các bạn niềm vui thích, hứng khởi trong quá trình học lại từ đầu môn Tiếng Anh</div>
                                 </div>
                             </Col>
-                            <Col span={6}>
+                            <Col xs={24} sm={12} md={6}>
                                 <div className="section-3__card">
 
                                     <h3 className="card__title">Phương pháp dễ hiểu, hết nhớ</h3>
@@ -28,7 +62,7 @@ export default function Section3() {
                                     </div>
                                 </div>
                             </Col>
-                            <Col span={6}>
+                          <Col xs={24} sm={12} md={6}>
                                 <div className="section-3__card">
                                     <div className="card__image">
                                         <img src="https://tienziven.com/wp-content/uploads/2021/02/toi-uu-hinh-anh.jpg" alt="" />
@@ -37,7 +71,7 @@ export default function Section3() {
                                     <div className="card__script">Tại MGTA, chúng tôi luôn khuyến khích, đảm bảo rằng học sinh năm được vững phần kiến thức cơ bản của chương trình học phổ thông, đảm bảo điểm số các em đạt mức trung bình - khá khi làm các bài kiểm tra trên trường lớp</div>
                                 </div>
                             </Col>
-                            <Col span={6}>
+                            <Col xs={24} sm={12} md={6}>
                                 <div className="section-3__card">
                                     <h3 className="card__title">Kho học liệu, bài tập đa dạng</h3>
                                     <div className="card__script">Để cải thiện điểm số tiếng Anh, điều quan trọng nhất chính là luyện tập đều đặn mỗi ngày. Việc lặp lại và thực hành thường xuyên sẽ giúp các bạn nắm vững kiến thức, ghi nhớ lâu hơn và tiến bộ rõ rệt từng ngày.</div>
@@ -46,7 +80,8 @@ export default function Section3() {
                                     </div>
                                 </div>
                             </Col>
-                        </Row>
+                        </Row>}
+                        
                     </div>
                 </Container2>
             </div>

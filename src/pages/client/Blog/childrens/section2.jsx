@@ -39,9 +39,16 @@ export default function Section2() {
                 </div>
 
                 <div className="blog__list">
-                    <Row gutter={20}>
-                        {filteredBlogs.map(blog => (
-                            <Col span={8}>
+                    <Row gutter={[20, 20]}>
+                        {filteredBlogs.map((blog) => (
+                            <Col
+                                key={blog._id}
+                                xs={24}
+                                sm={12}
+                                md={12}
+                                lg={8}
+                                xl={8}
+                            >
                                 <div className='blog__card' key={blog._id} onClick={() => navigate(`/blogDetail/:${blog._id}`)}>
                                     <div className="blog__image">
                                         <img src={blog.images[0] || ""} alt="blog.png" />

@@ -387,4 +387,170 @@
   }
 }
 
+/* ================= Responsive ================= */
+@media (max-width: 1200px) {
+  .about-us__section-1 .section-1__wrap {
+    gap: 30px;
+
+    h1 {
+      font-size: 48px;
+    }
+
+    h3 {
+      font-size: 20px;
+      width: 100%;
+    }
+  }
+
+  .about-us__section-3 .section-3__wrap h1 {
+    font-size: 48px;
+    margin-bottom: 120px;
+  }
+
+  .about-us__section-6 .section-6__wrap .section-6__image {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 992px) {
+  .about-us__section-1 .section-1__wrap {
+    flex-direction: column;
+    text-align: center;
+
+    h1 {
+      font-size: 40px;
+    }
+    h3 {
+      font-size: 18px;
+    }
+    .button__study {
+      padding: 12px 24px;
+      font-size: 14px;
+    }
+  }
+
+  .about-us__section-2 {
+    .section-2__box {
+      height: auto;
+      padding: 20px;
+    }
+  }
+
+  .about-us__section-3 .section-3__wrap .section-3__card {
+    height: auto;
+    .card__image {
+      width: 200px;
+      height: 200px;
+      margin-top: -120px;
+    }
+  }
+
+  .about-us__section-4 .section-4__wrap {
+    flex-direction: column;
+
+    .section-4__image,
+    .section-4__content {
+      flex: 1 1 100%;
+      width: 100%;
+    }
+  }
+
+  .about-us__section-5 .section-5__wrap {
+    flex-direction: column;
+
+    .section-5__content,
+    .section-5__image {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .about-us__section-6 .section-6__wrap {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+
+    .section-6__image {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .about-us__section-6 .section-6__profile {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .about-us__section-1 {
+    padding: 80px 0 0 0;
+
+    .section-1__wrap h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .section-1__wrap h3 {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+  }
+
+  .about-us__section-2 {
+    padding: 60px 0;
+    margin-bottom: 50px;
+
+    .section-2__box {
+      padding: 15px;
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .about-us__section-3 {
+    padding: 60px 0 120px 0;
+
+    .section-3__wrap h1 {
+      font-size: 28px;
+      margin-bottom: 80px;
+    }
+  }
+
+  .about-us__section-5 {
+    margin-top: 80px;
+
+    .section-5__content {
+      padding: 15px;
+
+      h1 {
+        font-size: 22px;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .about-us__section-6 {
+    padding: 100px 0 50px 0;
+  }
+
+  .about-us__section-7 {
+    padding: 80px 0;
+
+    .section-7__wrap .ant-collapse .ant-collapse-item .ant-collapse-header {
+      font-size: 16px;
+    }
+
+    .section-7__wrap .ant-collapse .ant-collapse-item .ant-collapse-content {
+      font-size: 14px;
+    }
+  }
+}
+
+
 

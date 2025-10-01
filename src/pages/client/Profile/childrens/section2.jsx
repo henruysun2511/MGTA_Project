@@ -48,7 +48,7 @@ export default function Section2() {
             <div className="profile__section-2">
                 <Container2>
                     <Row gutter={12}>
-                        <Col span={8}>
+                        <Col  xs={24} sm={8} md={8} lg={8} xl={8} >
                             <div className="profile__info">
                                 {
                                     studentData.length > 0 && (
@@ -83,7 +83,7 @@ export default function Section2() {
                                 </div>
                             </div>
                         </Col>
-                        <Col span={16}>
+                        <Col  xs={24} sm={16} md={16} lg={16} xl={16}>
                             <div className="profile__result">
                                 <h3>Lịch sử làm bài</h3>
                                 <Space direction="vertical" size="middle" style={{ width: "100%" }}>
