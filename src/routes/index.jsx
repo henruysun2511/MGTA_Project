@@ -1,5 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
+import NotFound from "../components/NotFound";
 import ProtectedAdminRoute from "../components/ProtectedAdminRoute";
+import ProtectedAuthRoute from "../components/ProtectedAuthRoute";
 import ProtectedClientRoute from "../components/ProtectedClientRoute";
 import AdminLayout from "../layouts/AdminLayout";
 import AuthLayout from "../layouts/AuthLayout";
@@ -37,12 +39,17 @@ const router = createBrowserRouter([
     path: "/auth",
     element: <AuthLayout />,
     children: [
-      { path: "login", element: <Login /> },
       { path: "logout", element: <Logout /> },
-      { path: "register", element: <Register /> },
-      { path: "forgotPassword", element: <ForgotPassword/> },
-      { path: "otp", element: <Otp /> },
-      { path: "resetPassword", element: <ResetPassword /> }
+      {
+        element: <ProtectedAuthRoute />,
+        children: [
+          { path: "login", element: <Login /> },
+          { path: "register", element: <Register /> },
+          { path: "forgotPassword", element: <ForgotPassword /> },
+          { path: "otp", element: <Otp /> },
+          { path: "resetPassword", element: <ResetPassword /> }
+        ]
+      }
     ],
   },
   {
@@ -52,11 +59,11 @@ const router = createBrowserRouter([
       { path: "", element: <Home /> },
       { path: "curriculum", element: <Curriculum /> },
       { path: "blog", element: <Blog /> },
-      { path: "blogDetail/:id", element: <BlogDetail />},
+      { path: "blogDetail/:id", element: <BlogDetail /> },
       { path: "feedback", element: <Feedback /> },
       { path: "aboutUs", element: <AboutUs /> },
       {
-        element: <ProtectedClientRoute />, 
+        element: <ProtectedClientRoute />,
         children: [
           { path: "exerciseDetail/:id", element: <ExerciseDetail /> },
           { path: "practice/:id", element: <Practice /> },
@@ -68,7 +75,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <ProtectedAdminRoute roles={["68ada708a19888b3462e7a6f"]} />,
+    element: <ProtectedAdminRoute  />,
     children: [
       {
         element: <AdminLayout />,
@@ -87,6 +94,10 @@ const router = createBrowserRouter([
         ],
       },
     ]
+  },
+  {
+    path: "*",
+    element: <NotFound />
   }
 ]
 );

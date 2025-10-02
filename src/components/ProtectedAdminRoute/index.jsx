@@ -1,15 +1,11 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-export default function ProtectedAdminRoute({ roles = [] }) {
+export default function ProtectedAdminRoute({ children}) {
   const roleId = localStorage.getItem("roleId");
+  const roleENV = import.meta.env.VITE_ADMIN_ROLE_ID;
 
-  if (!roleId) {
+  if (roleId !== roleENV) {
     return <Navigate to="/auth/login" replace />;
   }
-
-  if (roles.length > 0 && !roles.includes(roleId)) {
-    return <Navigate to="/forbidden" replace />;
-  }
-
-  return <Outlet />;
+  return children ? children : <Outlet />;
 }
