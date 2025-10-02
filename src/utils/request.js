@@ -1,27 +1,45 @@
-import { alertWarning } from "./alerts";
+import { alertSuccess, alertWarning } from "./alerts";
 
 const API_DOMAIN = import.meta.env.VITE_API_DOMAIN;
 
 const getToken = () => localStorage.getItem("accessToken");
 const setToken = (accessToken) => localStorage.setItem("accessToken", accessToken);
 
+// Biến toàn cục để tránh refresh nhiều lần
+let refreshPromise = null;
+
 // Refresh token
 const refreshToken = async () => {
-  const res = await fetch(API_DOMAIN + "auth/refresh-token", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
-  });
+  if (!refreshPromise) {
+    refreshPromise = (async () => {
+      const res = await fetch(API_DOMAIN + "auth/refresh-token", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
 
-  console.log("refresh status:", res.status);
-  const data = await res.json().catch(() => null);
-  console.log("refresh response:", data);
+      console.log("refresh status:", res.status);
+      const data = await res.json().catch(() => null);
+      console.log("refresh response:", data);
 
-  if (!res.ok) throw new Error("Refresh token failed");
+      if (!res.ok || !data?.data?.accessToken) {
+        throw new Error("Refresh token failed");
+      }
 
-  console.log(data.data.accessToken);
-  localStorage.setItem("accessToken", data.data.accessToken);
-  return data.data.accessToken;
+      setToken(data.data.accessToken);
+      return data.data.accessToken;
+    })()
+      .catch((err) => {
+        // reset nếu lỗi để lần sau còn gọi lại
+        refreshPromise = null;
+        throw err;
+      })
+      .then((token) => {
+        refreshPromise = null; // reset flag khi xong
+        return token;
+      });
+  }
+  return refreshPromise;
 };
 
 // Request chung
@@ -34,22 +52,21 @@ const request = async (path, options = {}) => {
     headers: {
       Accept: "application/json",
       ...(isFormData ? {} : { "Content-Type": "application/json" }),
-      ...(token ? { Authorization: `Bearer ${token}` } : {}), 
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...options.headers,
     },
     credentials: "include",
   });
-  console.log(response);
 
-  // Nếu chưa đăng nhập (không có token) -> 0 refresh
+  // Nếu chưa đăng nhập
   if (!token && response.status === 401) {
-    return response.json();
+    return response.json().catch(() => ({}));
   }
 
-  // Nếu accessToken hết hạn -> refresh
+  // Nếu accessToken hết hạn
   if (response.status === 401 && token) {
     try {
-      token = await refreshToken();
+      token = await refreshToken(); 
       response = await fetch(API_DOMAIN + path, {
         ...options,
         headers: {
@@ -60,6 +77,7 @@ const request = async (path, options = {}) => {
         },
         credentials: "include",
       });
+      alertSuccess("Refresh token thành công", "");
     } catch (err) {
       console.error("Refresh token failed:", err);
       localStorage.clear();
@@ -74,10 +92,15 @@ const request = async (path, options = {}) => {
     }
   }
 
-  return response.json();
+  return response.json().catch(() => ({}));
 };
+
 export const get = (path) => request(path, { method: "GET" });
-export const post = (path, body) => request(path, { method: "POST", body: JSON.stringify(body) });
-export const postFormData = (path, formData) => request(path, { method: "POST", body: formData });
-export const patch = (path, body) => request(path, { method: "PATCH", body: JSON.stringify(body) });
+export const post = (path, body) =>
+  request(path, { method: "POST", body: JSON.stringify(body) });
+export const postFormData = (path, formData) =>
+  request(path, { method: "POST", body: formData });
+export const patch = (path, body) =>
+  request(path, { method: "PATCH", body: JSON.stringify(body) });
 export const del = (path) => request(path, { method: "DELETE" });
+
