@@ -12,12 +12,12 @@ export const connectSocket = () => {
   socket.connect();
 };
 
-socket.on("connect", () => {
-  console.log("✅ Socket connected:", socket.id);
-});
+// socket.on("connect", () => {
+//   console.log("✅ Socket connected:", socket.id);
+// });
 
-socket.on("connect_error", (err) => {
-  console.error("❌ Socket connection error:", err.message);
-});
+// socket.on("connect_error", (err) => {
+//   console.error("❌ Socket connection error:", err.message);
+// });
 
 export default socket;
