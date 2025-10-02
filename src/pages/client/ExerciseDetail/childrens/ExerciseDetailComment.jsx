@@ -40,9 +40,7 @@ export default function ExerciseDetailComment({ exerciseId }) {
             replyCommentId: replyCommentByDataId
         })
     }
-    )
-
-    console.log(mergerdComment);
+    );
 
 
     const handleComment = async (values) => {

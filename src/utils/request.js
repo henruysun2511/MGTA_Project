@@ -1,4 +1,5 @@
-import { alertSuccess, alertWarning } from "./alerts";
+import { connectSocket } from "../sockets/socket";
+import { alertWarning } from "./alerts";
 
 const API_DOMAIN = import.meta.env.VITE_API_DOMAIN;
 
@@ -25,6 +26,7 @@ const refreshToken = async () => {
       }
 
       setToken(data.data.accessToken);
+      connectSocket();
       return data.data.accessToken;
     })()
       .catch((err) => {
@@ -76,7 +78,6 @@ const request = async (path, options = {}) => {
         credentials: "include",
       });
       console.log("refresh token success");
-      alertSuccess("Đăng nhập thành công", "Phiên đăng nhập đã được làm mới");
     } catch (err) {
       console.error("Refresh token failed:", err);
       localStorage.clear();

@@ -19,6 +19,13 @@ export default function Score() {
     const correct = resultData?.correctCount || 0;
     const accuracy = total > 0 ? ((correct / total) * 100).toFixed(1) : 0;
 
+    const getMessage = (score) => {
+        if (score === 10) return "Xuất sắc!";
+        if (score >= 6) return "Cô khen!";
+        if (score >= 5) return "Tiến bộ nha!";
+        return "Cố thêm chút nữa nhé!";
+    };
+
     return (
         <>
             <div class="score">
@@ -27,19 +34,10 @@ export default function Score() {
                         <div class="overview">
                             <p>Thời gian hoàn thành: {formatDuration(resultData.duration) || "N/A"}</p>
                             <p>Tỉ lệ trả lời đúng: {accuracy}%</p>
-                            {
-                                resultData.score === 10 && (<p>Xuất sắc!</p>)
-                            }{
-                                resultData.score < 10  && (<p>Cô khen!</p>)
-                            }{
-                                resultData.score < 6 && (<p>Tiến bộ nha!</p>)
-                            }
-                            {
-                                resultData.score < 5 && (<p>Cố thêm chút nữa nhé!</p>)
-                            }
+                            <p>{getMessage(resultData.score)}</p>
                         </div>
                         <div class="your-score">
-                            <h3>{resultData.score || "N/A"}/10</h3>
+                            <h3>{resultData.score}/10</h3>
                             <p>Điểm</p>
                         </div>
                     </div>
@@ -47,7 +45,7 @@ export default function Score() {
                         <div class="sta right">
                             <i class="fa-solid fa-circle-check"></i>
                             <h2>Số câu đúng</h2>
-                            <h3>{resultData.correctCount || "N/A"}</h3>
+                            <h3>{resultData.correctCount}</h3>
                             <p>câu hỏi</p>
                         </div>
                         <div class="sta wrong">
