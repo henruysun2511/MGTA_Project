@@ -18,9 +18,7 @@ const refreshToken = async () => {
         credentials: "include",
       });
 
-      console.log("refresh status:", res.status);
       const data = await res.json().catch(() => null);
-      console.log("refresh response:", data);
 
       if (!res.ok || !data?.data?.accessToken) {
         throw new Error("Refresh token failed");
@@ -35,7 +33,7 @@ const refreshToken = async () => {
         throw err;
       })
       .then((token) => {
-        refreshPromise = null; // reset flag khi xong
+        refreshPromise = null; 
         return token;
       });
   }

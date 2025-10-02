@@ -1,12 +1,3 @@
-// export const formatDateFromDatePicker = (date) => {
-//     //Định dạng lại 
-//     const newdate = new Date(date);
-
-//     // Đổi sang giờ Việt Nam (UTC+7)
-//     const formatted = newdate.toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" });
-//     return formatted;
-// }
-
 export const getCurrentDate = () => {
   const now = new Date();
 
