@@ -5,7 +5,7 @@ export default function ProtectedAuthRoute({ children }) {
 
   if (accessToken) {
     const roleId = localStorage.getItem("roleId");
-    const roleENV = import.meta.env.VITE_ADMIN_ROLE_ID;
+    const roleENV = import.meta.env.VITE_ROLE_ID;
     if (roleId === roleENV) {
       return <Navigate to="/admin/overview" replace />;
     }

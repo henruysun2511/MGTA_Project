@@ -181,13 +181,26 @@ export default function UserLayout() {
     ];
 
     const privateItems = token
-        ? [
-            {
-                key: '5',
-                label: <NavLink to="/profile">Trang cá nhân</NavLink>,
-            },
-        ]
-        : [];
+  ? [
+      {
+        key: '5',
+        label: <NavLink to="/profile">Trang cá nhân</NavLink>,
+      },
+      {
+        key: '7',
+        label: <NavLink to="/auth/logout">Đăng xuất</NavLink>,
+      },
+    ]
+  : [
+      {
+        key: '8',
+        label: <NavLink to="/auth/login">Đăng nhập</NavLink>,
+      },
+      {
+        key: '9',
+        label: <NavLink to="/auth/register">Đăng ký</NavLink>,
+      },
+    ];
 
     const adminItems =
         roleId === roleEnv
