@@ -23,7 +23,7 @@ export default function Section1() {
 
     return (
         <>
-            <div class="curriculumn__section-1">
+            <div className="curriculumn__section-1">
                 <Container2>
                     {accessToken ? (
                         <>
@@ -51,11 +51,11 @@ export default function Section1() {
                                 </> :
                                 <>
                                     <h1>Kết quả ôn luyện mới nhất</h1>
-                                    <div class="practice__history-wrap">
+                                    <div className="practice__history-wrap">
                                         <Row gutter={[16, 16]}>
-                                            {currentResults.length > 0 ? (currentResults.map(rs => {
+                                            {currentResults.length > 0 ? (currentResults.map((rs, index) => {
                                                 return (
-                                                    <Col xs={24} sm={12} md={8} lg={6} xl={6}>
+                                                    <Col xs={24} sm={12} md={8} lg={6} xl={6}  key={index}>
                                                         <div className="practice___history-item">
                                                             <h3>{rs.exerciseId.title || "N/A"}</h3>
                                                             <div className="practice__info">Ngày làm bài: {formatDateFromApi(rs.endTime)}</div>
@@ -99,7 +99,6 @@ export default function Section1() {
                                     <div className="section-1__image">
                                         <div className="blob"></div>
                                     </div></>
-
                             }
                         </>
 

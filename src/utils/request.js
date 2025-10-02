@@ -1,4 +1,4 @@
-import { alertSuccess, alertWarning } from "./alerts";
+import { alertWarning } from "./alerts";
 
 const API_DOMAIN = import.meta.env.VITE_API_DOMAIN;
 
@@ -75,7 +75,6 @@ const request = async (path, options = {}) => {
         },
         credentials: "include",
       });
-      alertSuccess("Refresh token thành công", "");
     } catch (err) {
       console.error("Refresh token failed:", err);
       localStorage.clear();
