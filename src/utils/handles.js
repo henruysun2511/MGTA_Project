@@ -13,7 +13,6 @@ export const handleCreate = async (dispatch, apiPath, reduxPath, options, onSucc
         } else {
             alertError(res.message);
         }
-        console.log(res);
     } catch (err) {
         console.error(err);
         alertError("Có lỗi xảy ra khi thêm. Vui lòng thử lại!");
@@ -23,7 +22,6 @@ export const handleCreate = async (dispatch, apiPath, reduxPath, options, onSucc
 export const handleUpdate = async (dispatch, apiPath, reduxPath, id, options, onCancel) => {
     try {
         const res = await updateData(apiPath, id, options);
-        console.log(res);
         if (res.statusCode === 200) {
             dispatch(updateAction(reduxPath, res.data));
             alertSuccess(res.message);
@@ -107,7 +105,6 @@ export const handleDelete = async (dispatch, apiPath, reduxPath, id, name) => {
         );
         if (result.isConfirmed) {
             const res = await deleteData(apiPath, id);
-            console.log(res);
             if (res.statusCode === 200) {
                 dispatch(deleteAction(reduxPath, res.data._id));
                 alertSuccess(res.message);
@@ -133,7 +130,6 @@ export const handlePermanentDelete = async (dispatch, apiPath, reduxPath, id, na
         );
         if (result.isConfirmed) {
             const res = await deleteData(apiPath, id);
-            console.log(res);
             if (res.statusCode === 200) {
                 dispatch(deleteAction(reduxPath, id));
                 alertSuccess(res.message);
@@ -164,7 +160,6 @@ export const handleDeleteAll = async (dispatch, apiPath, reduxPath, list) => {
             }
             for (const item of list) {
                 const res = await deleteData(apiPath, item._id);
-                console.log(res);
                 if (res) {
                     dispatch(deleteAction(reduxPath, item._id));
                     alertSuccess(res.message);
