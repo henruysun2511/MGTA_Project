@@ -337,13 +337,16 @@ export default function UserLayout() {
                         <div class="list-box"></div>
                         <ul>
                             <li>
-                                <p><b>Hotline:</b> 19002005</p>
+                                <p><b>Hotline:</b> {settingData[0]?.phone ? settingData[0].phone : "03.999.78686"}</p>
                             </li>
                             <li>
                                 <p><b>Giờ làm việc</b>: 9:00 - 22:00 (Tất cả các ngày bao gồm cả Lễ, Tết)</p>
                             </li>
                             <li>
-                                <p><b>Email:</b> huysun2511@gmail.com</p>
+                                <p><b>Email:</b>{settingData[0]?.email ? settingData[0].email : "mgtahanoi@gmail.com"}</p>
+                            </li>
+                            <li>
+                                <p><Link to={"https://henruysun2511.github.io/developer/test.html"}><b>Tác giả</b></Link></p>
                             </li>
                         </ul>
                     </div>

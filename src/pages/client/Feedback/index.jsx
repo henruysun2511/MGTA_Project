@@ -9,8 +9,8 @@ function Feedback() {
         <>
             <Section1 />
             <Section3 />
-            <Section2 />
             <Section4 />
+            <Section2 />
         </>
     );
 }

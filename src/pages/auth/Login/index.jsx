@@ -1,5 +1,6 @@
 import { Form, Input } from 'antd';
 import { jwtDecode } from "jwt-decode";
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom";
 import logo from '../../../assets/images/logoNoBackGround.png';
@@ -11,11 +12,12 @@ import "./login.scss";
 export default function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         const username = e.username;
         const password = e.password;
-
+        setLoading(true);
         try {
             const response = await createData("auth/login", { username, password });
 
@@ -49,6 +51,8 @@ export default function Login() {
         } catch (error) {
             console.error(error);
             alertError("Có lỗi xảy ra khi đăng nhập");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -90,7 +94,7 @@ export default function Login() {
                         <div className='forgot-passsword'>Quên mật khẩu?</div>
 
                         <div className="login__button">
-                            <button type="submit">Đăng nhập</button>
+                             <button type="submit">{loading ? "Đang tiến hành đăng nhập..." : "Đăng nhập"}</button>
                             <p><Link to="/auth/register">Bạn chưa có tài khoản, ấn vào đây để đăng ký</Link></p>
                         </div>
                     </Form>
