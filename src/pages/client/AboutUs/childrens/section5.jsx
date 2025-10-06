@@ -6,7 +6,7 @@ export default function Section5() {
         <>
             <div class="about-us__section-5">
                 <Container>
-                    <Title title={"Cô trà là ai?"} />
+                    <Title title={"Tại sao các vị phụ huynh và học sinh lại lựa chọn lớp học MGTA?"} />
                     <div class="section-5__wrap">
                         <div class="section-5__content">
                             <h1>Khơi lại đam mê tiếng Anh từ những điều cơ bản nhất</h1>

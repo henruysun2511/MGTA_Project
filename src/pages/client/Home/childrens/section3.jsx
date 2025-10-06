@@ -17,7 +17,7 @@ export default function Section3() {
                         <Col span={8}>
                             <div className="section-3__content" style={{ backgroundColor: "#f6c964" }}>
                                 <i class="fa-solid fa-users"></i>
-                                <h3>Hỗ trợ 10.000+ học viên vượt qua nỗi sợ tiếng Anh trong 5 năm tới</h3>
+                                <h3>Hỗ trợ nhiều học sinh vượt qua nỗi sợ tiếng Anh trong vòng 7 năm qua</h3>
                                 <p>Tạo ra thay đổi thực sự cho cộng đồng người học tiếng Anh ở Việt Nam – đặc biệt là các bạn từng
                                     mất gốc, mất động lực.</p>
                             </div>
@@ -25,8 +25,8 @@ export default function Section3() {
                         <Col span={8}>
                             <div className="section-3__content" style={{ backgroundColor: "#e88ec6" }}>
                                 <i className="fa-solid fa-trophy"></i>
-                                <h3>Mở rộng thương hiệu "Cô Trà – Tiếng Anh cho học sinh mất gốc"</h3>
-                                <p>Không cần ở thành phố lớn – bạn vẫn có thể học lại tiếng Anh cùng cô Trà, dù ở đâu.</p>
+                                <h3>Mở rộng mô hình học Lớp học tiếng Anh mất gốc dành cho học sinh cấp 2</h3>
+                                <p>Không cần ở thành phố lớn – bạn vẫn có thể học tiếng anh dù ở bất kì nơi đâu</p>
                             </div>
                         </Col>
                     </Row>

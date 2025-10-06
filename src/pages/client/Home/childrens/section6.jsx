@@ -1,4 +1,3 @@
-import GV from "../../../../assets/images/gv2.webp";
 import Container2 from "../../../../components/Container/container2";
 import Title from "../../../../components/Title";
 
@@ -11,29 +10,29 @@ export default function Section6() {
                     <div class="profile__wrap">
                         <div class="profile__image">
                             <div class="profile__box">
-                                <img src={GV} alt="giaovien.webp" />
+                                Tận tậm
                             </div>
-                            <div class="profile__box bx-0">NGUYỄN THU TRÀ</div>
-                            <div class="profile__box bx-1">1998</div>
-                            <div class="profile__box bx-2">HÀ NỘI</div>
+                            <div class="profile__box bx-0">Giá trị thật</div>
+                            <div class="profile__box bx-1">Thấu hiểu</div>
+                            <div class="profile__box bx-2">Phát triển bền vững</div>
 
                         </div>
                         <div class="profile__content">
-                            <h3><strong>Không còn </strong>sợ tiếng Anh nữa – nhờ cô Trà!</h3>
+                            <h3><strong>Không còn</strong>s sợ Tiếng Anh nữa - Nhờ lớp học MGTA</h3>
                             <ul class="profile__achieve">
                                 <li>
                                     <div class="profile__icon">
                                         <i class="fa-solid fa-graduation-cap"></i>
                                     </div>
-                                    <p>Tốt nghiệp loại giỏi (Upper-second Division) ngành Quản Trị Kinh Doanh - Chương trình liên
-                                        kết
-                                        quốc tế (Top-Up) University of the West of England</p>
+                                    <p>Tốt nghiệp các chương trình liên kết quốc tế,
+                                        hệ quốc tế, chất lượng cao các trường
+                                        ĐH Kinh Tế, ĐH Ngoại Ngữ, ĐH Sư Phạm...</p>
                                 </li>
                                 <li>
                                     <div class="profile__icon ic-1">
                                         <i class="fa-solid fa-certificate"></i>
                                     </div>
-                                    <p>Chứng chỉ tiếng anh TEG - Level 4</p>
+                                    <p>Chứng chỉ IELTS 7.0+</p>
                                 </li>
                                 <li>
                                     <div class="profile__icon ic-2">
