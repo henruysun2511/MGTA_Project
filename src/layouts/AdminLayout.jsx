@@ -34,9 +34,11 @@ export default function AdminLayout() {
                         <div className='admin__avatar'><img src={avatar} alt="avatar.png" /></div>
                         <Menu items={items} onClick={handleClick} defaultSelectedKeys={['/admin/overview']}></Menu>
                     </div>
-                    <Button className='button__logout' icon={<LogoutOutlined />}>
-                        <Link to="/auth/logout">Đăng xuất</Link>
-                    </Button>
+                    <Link to="/auth/logout">
+                        <Button className='button__logout' icon={<LogoutOutlined />}>
+                            Đăng xuất
+                        </Button>
+                    </Link>
                 </div>
 
                 <div className="admin__main">
