@@ -10,7 +10,7 @@ export default function Section6() {
                             <p>6 năm kinh nghiêm chuyên dạy cho học sinh mất gốc</p>
                         </div>
                         <div class="section-6__image">
-                            <img src="https://scontent.fhan14-4.fna.fbcdn.net/v/t39.30808-6/475278124_9175764269158141_1517181284836107117_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeEUKcMY92h2l9CTX3cLghhbBoIXnAp-oqEGghecCn6ioT61pYmnqipRNXi4KyOehyXJe9VUGxw94TwiJ_-Y-rOF&_nc_ohc=BYbHs25zjCkQ7kNvwHUBnPH&_nc_oc=AdkT1sCMqw6NNcxrwiarUQYRaKPn2i3PoY8SVE65WcD-JxskNEanoZeg8Lt4f6Wox9wgEO8KvAUsOE4LS3IGNvzN&_nc_zt=23&_nc_ht=scontent.fhan14-4.fna&_nc_gid=W4H-UgJfJpSOdOfxIfy1ww&oh=00_Afe-lVsjuoFg5Aj7MQoEMtwcSPclvJIhdp3_eo82J_Rufw&oe=68E907B1"
+                            <img src="https://scontent.fhan14-3.fna.fbcdn.net/v/t1.15752-9/553633736_827279626499905_4403067579390005624_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHe9PelmGKcM788csiKMNCpdoatl2g1plR2hq2XaDWmVIUoFNXZ-zhSp9UDf6SToYxmkc0cuEc4LB9ah3rmAZ1W&_nc_ohc=APC1-u0smQ4Q7kNvwFWH83A&_nc_oc=AdnEsGb5qEegd2yRpersxlpy3L7-k7b2_SCRoVHdKqhMOhP8KogaaCYw9U44K-3Crt8ZKC-6xW3bpkylQeNw17RB&_nc_zt=23&_nc_ht=scontent.fhan14-3.fna&oh=03_Q7cD3gFRh_iFEJrBhDWfjWsGX89pGMNU968FEd8nYernfnNiMQ&oe=690AA91E"
                                 alt="" />
                             <div class="section-6__quote">
                                 "Tiếng Anh không khó, chỉ cần bắt đầu đúng cách – và bạn sẽ không đi một mình"
@@ -18,6 +18,7 @@ export default function Section6() {
                         </div>
                         <div class="section-6__content">
                             <div class="section-6__info">
+
                                 <h1>MS.NGUYỄN THU TRÀ</h1>
                             </div>
                             <div class="section-6__info if--1">
