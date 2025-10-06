@@ -35,7 +35,7 @@ export default function AdminLayout() {
                         <Menu items={items} onClick={handleClick} defaultSelectedKeys={['/admin/overview']}></Menu>
                     </div>
                     <Link to="/auth/logout" style={{ textAlign: 'center'}}>
-                        <Button className='button__logout' icon={<LogoutOutlined />}>
+                        <Button className='button__logout' icon={<LogoutOutlined />} style={{ width: '100%' }}>
                             Đăng xuất
                         </Button>
                     </Link>
