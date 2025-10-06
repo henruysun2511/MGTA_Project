@@ -100,7 +100,8 @@ export default function Section4() {
                                 <h3>Lịch học</h3>
                                 <p>Xem chi tiết lịch học tại đây:</p>
                                 <div class="course__schedule-button">
-                                    <div class="button__schedule">Chương trình học </div>
+                                    <Link to={"/curriculum"} ><div class="button__schedule">Chương trình học </div></Link>
+                                 
                                 </div>
                             </div>
                         </div>

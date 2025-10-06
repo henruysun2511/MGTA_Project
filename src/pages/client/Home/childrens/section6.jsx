@@ -5,20 +5,18 @@ export default function Section6() {
     return (
         <>
             <div class="home__section-6">
-                <Title title={"Sơ lược về cô trà"} />
+                <Title title={"Sơ lược về đội ngũ MGTA "} />
                 <Container2>
                     <div class="profile__wrap">
                         <div class="profile__image">
-                            <div class="profile__box">
-                                Tận tậm
-                            </div>
+                            <div class="profile__box">Tận tâm</div>
                             <div class="profile__box bx-0">Giá trị thật</div>
                             <div class="profile__box bx-1">Thấu hiểu</div>
-                            <div class="profile__box bx-2">Phát triển bền vững</div>
+                            <div class="profile__box bx-2">Phát triển <br /> bền vững</div>
 
                         </div>
                         <div class="profile__content">
-                            <h3><strong>Không còn</strong>s sợ Tiếng Anh nữa - Nhờ lớp học MGTA</h3>
+                            <h3><strong>Không còn</strong> sợ Tiếng Anh nữa nhờ lớp học MGTA</h3>
                             <ul class="profile__achieve">
                                 <li>
                                     <div class="profile__icon">
@@ -34,7 +32,7 @@ export default function Section6() {
                                     </div>
                                     <p>Chứng chỉ IELTS 7.0+</p>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <div class="profile__icon ic-2">
                                         <i class="fa-solid fa-pen-fancy"></i>
                                     </div>
@@ -47,7 +45,7 @@ export default function Section6() {
                                         <i class="fa-solid fa-book-open"></i>
                                     </div>
                                     <p>2 Năm dạy kèm chương tình tiếng anh Cambridge Vinschool tiểu học </p>
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
 

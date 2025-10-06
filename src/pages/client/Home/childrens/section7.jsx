@@ -17,7 +17,7 @@ export default function Section7() {
         <>
             <div class="home__section-7">
                 <Container2>
-                    <Title title={"FEEDBACK TỪ HỌC VIÊN"} subtitle={"Những chia sẻ thật từ hành trình học cùng cô Trà"} />
+                    <Title title={"FEEDBACK TỪ HỌC VIÊN"} subtitle={"Những chia sẻ thật từ hành trình học cùng đội ngũ MGTA"} />
 
                     <Row gutter={10}>
                         <Col span={6}>
