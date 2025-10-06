@@ -276,18 +276,18 @@
         }
 
         .section-6__image {
-            width: 600px;
-            height: 800px;
+            width: 550px;
+            height: 750px;
             position: relative;
 
-            &::after {
-                content: '';
-                position: absolute;
-                inset: 0;
-                background: rgba(0, 0, 0, 0.3);
-                z-index: 1;
-                border-radius: 15px;
-            }
+            // &::after {
+            //     content: '';
+            //     position: absolute;
+            //     inset: 0;
+            //     background: rgba(0, 0, 0, 0.3);
+            //     z-index: 1;
+            //     border-radius: 15px;
+            // }
 
             img {
                 width: 100%;

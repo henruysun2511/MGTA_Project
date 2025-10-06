@@ -9,8 +9,8 @@ export default function AdminLayout() {
     const navigate = useNavigate();
 
     const handleClick = ({ key }) => {
-        navigate(key); 
-    }; 
+        navigate(key);
+    };
 
     const settingData = useSelector(state => state.settings.list || []);
 
@@ -42,9 +42,11 @@ export default function AdminLayout() {
                 <div className="admin__main">
                     <div className='admin__header'>
                         <div className='admin__logo'><img src={settingData[0]?.logo || ""} alt="logo.jpg" /></div>
-                        <Button className='button__home' icon={<HomeFilled />}>
-                            <Link to="/">Home</Link>
-                        </Button>
+                        <Link to="/">
+                            <Button className='button__home' icon={<HomeFilled />}>
+                                Home
+                            </Button>
+                        </Link>
                     </div>
                     <div className='admin__content'>
                         <Outlet />
