@@ -32,7 +32,7 @@ export default function Section6() {
                                     </div>
                                     <p>Chứng chỉ IELTS 7.0+</p>
                                 </li>
-                                {/* <li>
+                                <li>
                                     <div class="profile__icon ic-2">
                                         <i class="fa-solid fa-pen-fancy"></i>
                                     </div>
@@ -45,7 +45,7 @@ export default function Section6() {
                                         <i class="fa-solid fa-book-open"></i>
                                     </div>
                                     <p>2 Năm dạy kèm chương tình tiếng anh Cambridge Vinschool tiểu học </p>
-                                </li> */}
+                                </li>
                             </ul>
                         </div>
 
