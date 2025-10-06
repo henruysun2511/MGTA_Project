@@ -91,10 +91,13 @@ export default function Login() {
                             </Form.Item>
                         </div>
 
-                        <div className='forgot-passsword'>Quên mật khẩu?</div>
+                        <Link to={"/auth/forgotPassword"}>
+                            <div className='forgot-passsword'>Quên mật khẩu?</div>
+                        </Link>
+
 
                         <div className="login__button">
-                             <button type="submit">{loading ? "Đang tiến hành đăng nhập..." : "Đăng nhập"}</button>
+                            <button type="submit">{loading ? "Đang tiến hành đăng nhập..." : "Đăng nhập"}</button>
                             <p><Link to="/auth/register">Bạn chưa có tài khoản, ấn vào đây để đăng ký</Link></p>
                         </div>
                     </Form>
