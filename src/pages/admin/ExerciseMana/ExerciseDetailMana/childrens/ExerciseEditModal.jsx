@@ -40,6 +40,8 @@ export default function ExerciseEditModal({ open, onCancel, exerciseData }) {
       duration: values.duration
     };
 
+    console.log("Submitting updated exercise:", options);
+
     await handleUpdate(dispatch, "admin/exercise", "exercises", id, options, () => onCancel());
   }
 
