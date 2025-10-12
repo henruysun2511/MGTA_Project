@@ -32,7 +32,6 @@ export default function ExerciseEditModal({ open, onCancel, exerciseData }) {
   const handleSubmit = async (values) => {
     const id = exerciseData._id;
     const options = {
-      // ...exerciseData,
       title: values.title,
       skillId: values.skillId || [],
       unit: values.unit,
@@ -41,7 +40,6 @@ export default function ExerciseEditModal({ open, onCancel, exerciseData }) {
       images: exerciseData.images || [],
       questions: exerciseData.questions || []
     };
-
 
     await handleUpdate(dispatch, "admin/exercise", "exercises", id, options, () => onCancel());
   }

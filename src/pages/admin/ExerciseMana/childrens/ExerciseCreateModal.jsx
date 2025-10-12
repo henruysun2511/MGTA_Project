@@ -31,13 +31,21 @@ export default function ExcerciseFormModal({ open, onCancel, onSubmit, skillData
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item name="unit" label="Unit" rules={[{ required: true }]}>
-              <Input placeholder="Nhập unit" />
+            <Form.Item
+              name="unit"
+              label="Unit"
+              rules={[{ required: true, message: "Vui lòng nhập Unit" }]}
+            >
+              <InputNumber
+                min={1}
+                style={{ width: "100%" }}
+                placeholder="Nhập Unit (chỉ số)"
+              />
             </Form.Item>
           </Col>
           <Col span={12}>
             <Form.Item name="duration" label="Thời gian làm" rules={[{ required: true }]}>
-              <InputNumber min={5} defaultValue={5} step={5} style={{width: "100%"}}/>
+              <InputNumber min={5} defaultValue={5} step={5} style={{ width: "100%" }} />
             </Form.Item>
           </Col>
           <Col span={12}>

@@ -22,7 +22,7 @@ export default function ExerciseDetailMana() {
   const { id } = useParams();
   const cleanId = id.replace(/^:/, "");
   const [exerciseDataByIdRes] = useFetch(`admin/exercise/${cleanId}`, {}, {});
-  console.log(exerciseDataByIdRes);
+
   const exerciseDataById = useSelector(state => state.exercises.current || []);
   useEffect(() => {
     if (exerciseDataByIdRes) {

@@ -22,7 +22,6 @@ export const handleCreate = async (dispatch, apiPath, reduxPath, options, onSucc
 export const handleUpdate = async (dispatch, apiPath, reduxPath, id, options, onCancel) => {
     try {
         const res = await updateData(apiPath, id, options);
-        console.log(res);
         if (res.statusCode === 200) {
             dispatch(updateAction(reduxPath, res.data));
             alertSuccess(res.message);
