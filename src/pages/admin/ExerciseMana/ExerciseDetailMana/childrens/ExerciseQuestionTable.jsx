@@ -68,16 +68,18 @@ export default function ExerciseQuestionTable({ exerciseData }) {
 
     const handleSave = async () => {
         const options = {
-            title: values.title,
-            unit: values.unit,
-            duration: values.duration,
+            title: exerciseData.title,
+            unit: exerciseData.unit,
+            duration: exerciseData.duration,
             images: exerciseData.images || [],
             skillId: exerciseData.skillId.map(s => s._id),
             questions: editableQuestions,
             totalQuestion: editableQuestions.length
         };
 
-        await handleUpdate(dispatch, "admin/exercise", "exercise", exerciseData._id, options);
+        console.log("Saving updated questions:", options);
+
+        await handleUpdate(dispatch, "admin/exercise", "exercises", exerciseData._id, options);
         setIsEditing(false);
     };
 
