@@ -11,7 +11,7 @@ export default function ExerciseEditModal({ open, onCancel, exerciseData }) {
 
   const [skillDataRes] = useFetch("admin/skill/skills", {}, {});
   const skillData = skillDataRes || [];
-
+  
   const skillOptions = skillData.map(skill => ({
     value: skill._id,
     label: skill.skillName
@@ -32,16 +32,16 @@ export default function ExerciseEditModal({ open, onCancel, exerciseData }) {
   const handleSubmit = async (values) => {
     const id = exerciseData._id;
     const options = {
-      title,
-      skillId: skillId || [],
-      unit,
-      totalQuestion,
-      duration,
+      // ...exerciseData,
+      title: values.title,
+      skillId: values.skillId || [],
+      unit: values.unit,
+      totalQuestion: values.totalQuestion,
+      duration: values.duration,
       images: exerciseData.images || [],
       questions: exerciseData.questions || []
     };
 
-    console.log("Submitting updated exercise:", options);
 
     await handleUpdate(dispatch, "admin/exercise", "exercises", id, options, () => onCancel());
   }

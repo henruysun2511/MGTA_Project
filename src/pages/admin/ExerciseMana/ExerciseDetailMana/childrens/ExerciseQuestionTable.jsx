@@ -68,7 +68,10 @@ export default function ExerciseQuestionTable({ exerciseData }) {
 
     const handleSave = async () => {
         const options = {
-            // ...exerciseData,
+            title: values.title,
+            unit: values.unit,
+            duration: values.duration,
+            images: exerciseData.images || [],
             skillId: exerciseData.skillId.map(s => s._id),
             questions: editableQuestions,
             totalQuestion: editableQuestions.length

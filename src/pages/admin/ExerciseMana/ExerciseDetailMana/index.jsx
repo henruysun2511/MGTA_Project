@@ -58,7 +58,7 @@ export default function ExerciseDetailMana() {
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div>
               <h1>{exerciseDataById.title ? exerciseDataById.title : "N/A"}</h1>
-              <p>Ngày đăng: {formatDateFromApi(exerciseDataById?.createAt)}</p>
+              <p>Ngày đăng: {formatDateFromApi(exerciseDataById?.createdAt)}</p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
               <Button icon={<ArrowLeftOutlined />} type="primary" ghost size='middle' onClick={() => navigate(`/admin/exerciseMana`)}>Thoát </Button>

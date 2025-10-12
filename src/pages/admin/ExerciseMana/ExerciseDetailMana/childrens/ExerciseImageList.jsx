@@ -45,7 +45,9 @@ export default function ExerciseImageList({ exerciseData, onUpdated }) {
         const mergedImages = [...currentImages, ...newImages];
 
         const options = {
-            ...exerciseData,
+            title: exerciseData.title,
+            unit: exerciseData.unit,
+            duration: exerciseData.duration,
             images: mergedImages,
             skillId: exerciseData.skillId.map(s => s._id),
             questions: exerciseData.questions || [],
