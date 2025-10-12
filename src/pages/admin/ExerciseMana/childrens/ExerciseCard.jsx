@@ -10,7 +10,7 @@ export default function ExerciseCard({ exercise }) {
   const dispatch = useDispatch();
 
   const handleSorfDelete = async (item) => {
-    await handleDelete(dispatch, "admin/exercise", "exercises", item._id, `Bài tập ${item._name}`);
+    await handleDelete(dispatch, "admin/exercise", "exercises", item._id, `Bài tập ${item.title}`);
   }
 
   return (
