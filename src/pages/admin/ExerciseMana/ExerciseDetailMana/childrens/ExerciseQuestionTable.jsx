@@ -72,7 +72,9 @@ export default function ExerciseQuestionTable({ exerciseData }) {
             unit: exerciseData.unit,
             duration: exerciseData.duration,
             images: exerciseData.images || [],
-            skillId: exerciseData.skillId.map(s => s._id),
+            skillId: (exerciseData.skillId || []).map(s =>
+                typeof s === "object" ? s._id : s
+            ),
             questions: editableQuestions,
             totalQuestion: editableQuestions.length
         };

@@ -49,7 +49,9 @@ export default function ExerciseImageList({ exerciseData, onUpdated }) {
             unit: exerciseData.unit,
             duration: exerciseData.duration,
             images: mergedImages,
-            skillId: exerciseData.skillId.map(s => s._id),
+            skillId: (exerciseData.skillId || []).map(s =>
+                typeof s === "object" ? s._id : s
+            ),
             questions: exerciseData.questions || [],
             totalQuestion: exerciseData.questions?.length || 0
         };
