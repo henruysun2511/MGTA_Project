@@ -199,13 +199,13 @@ export const handleUploadImage = async (files, setLoading) => {
             console.log("FormData:", key, value);
         }
 
-        const endpoint = files.length === 1 ? "upload" : "upload/uploads";
+        const endpoint = "upload/uploads";
         const res = await createImageData(endpoint, formData);
-        if (res.statusCode === 200) {
-            alertSuccess(res.message);
-        } else {
-            alertSuccess(res.message);
-        }
+        // if (res.statusCode === 200) {
+        //     alertSuccess(res.message);
+        // } else {
+        //     alertSuccess(res.message);
+        // }
         setLoading(false);
         return res.data || [];
 
