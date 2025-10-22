@@ -175,45 +175,35 @@ export const handleDeleteAll = async (dispatch, apiPath, reduxPath, list) => {
 }
 
 export const handleUploadImage = async (files, setLoading) => {
-    try {
-        setLoading(true);
+  try {
+    setLoading(true);
 
-        if (!files || files.length === 0) {
-            setLoading(false);
-            return [];
-        }
-
-        const formData = new FormData();
-
-        // Nếu chỉ có 1 file
-        if (files.length === 1) {
-            formData.append("image", files[0].originFileObj);
-        } else {
-            // Nếu nhiều file
-            files.forEach((file) => {
-                formData.append("images", file.originFileObj);
-            });
-        }
-
-        for (let [key, value] of formData.entries()) {
-            console.log("FormData:", key, value);
-        }
-
-        const endpoint = "upload/uploads";
-        const res = await createImageData(endpoint, formData);
-        // if (res.statusCode === 200) {
-        //     alertSuccess(res.message);
-        // } else {
-        //     alertSuccess(res.message);
-        // }
-        setLoading(false);
-        return res.data || [];
-
-    } catch (err) {
-        setLoading(false);
-        console.error(err);
-        alertError("Có lỗi xảy ra khi up ảnh. Vui lòng thử lại!");
+    if (!files || files.length === 0) {
+      setLoading(false);
+      return [];
     }
+
+    const formData = new FormData();
+
+    files.forEach((file) => {
+      formData.append("images", file.originFileObj);
+    });
+
+    const endpoint = "upload/uploads";
+    const res = await createImageData(endpoint, formData);
+
+    setLoading(false);
+
+    const data = Array.isArray(res.data)
+      ? res.data.flat() 
+      : [res.data];    
+    return data;
+  } catch (err) {
+    setLoading(false);
+    console.error(err);
+    alertError("Có lỗi xảy ra khi up ảnh. Vui lòng thử lại!");
+    return [];
+  }
 };
 
 
