@@ -47,7 +47,7 @@ const ExcerciseKeyModal = ({ visible, onClose, totalQuestion, exerciseData }) =>
   const handleOk = async () => {
     const uploadedUrls = await handleUploadImage(exerciseData.images, setLoading);
 
-    const questions = answers.map(item => ({
+    const questions = answers.map((item) => ({
       index: item.stt,
       answer: item.dapAn,
     }));
@@ -55,8 +55,8 @@ const ExcerciseKeyModal = ({ visible, onClose, totalQuestion, exerciseData }) =>
     const options = {
       ...exerciseData,
       unit: Number(exerciseData.unit),
-      questions: questions,
-      images: uploadedUrls.urls || [uploadedUrls],
+      questions,
+      images: uploadedUrls, 
     };
 
     await handleCreate(dispatch, "admin/exercise", "exercises", options, () => onClose());

@@ -184,20 +184,21 @@ export const handleUploadImage = async (files, setLoading) => {
     }
 
     const formData = new FormData();
+    files.forEach((file) => formData.append("images", file.originFileObj));
 
-    files.forEach((file) => {
-      formData.append("images", file.originFileObj);
-    });
-
-    const endpoint = "upload/uploads";
-    const res = await createImageData(endpoint, formData);
-
+    const res = await createImageData("upload/uploads", formData);
     setLoading(false);
 
-    const data = Array.isArray(res.data)
-      ? res.data.flat() 
-      : [res.data];    
-    return data;
+    let urls = [];
+
+    if (Array.isArray(res.data)) {
+      urls = res.data.flatMap((item) => item.urls || item.url || []);
+    }
+    else if (res.data?.urls) {
+      urls = res.data.urls;
+    }
+
+    return urls;
   } catch (err) {
     setLoading(false);
     console.error(err);
