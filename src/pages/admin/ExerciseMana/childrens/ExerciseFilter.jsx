@@ -18,8 +18,13 @@ export default function ExcerciseFilter({ skillData, onFilterChange }) {
   }, [debouncedSearch]);
 
   const handleChangeSkill = (selectedSkills) => {
-    console.log(selectedSkills)
-    onFilterChange({ skillName: selectedSkills });
+    const params = {};
+    if (selectedSkills && selectedSkills.length > 0) {
+      params.skillName = selectedSkills;
+    } else {
+      params.skillName = undefined;
+    }
+    onFilterChange(params);
   };
 
   const uniqueSkills = Array.from(
