@@ -10,7 +10,18 @@ const useFetch = (path, query = {}, config = {}) => {
         setLoading(true);
         const fetchApi = async () => {
             try {
-                const queryString = new URLSearchParams(query).toString();
+                const params = new URLSearchParams();
+                for (const key in query) {
+                    const value = query[key];
+                    if (Array.isArray(value)) {
+                        value.forEach(v => params.append(key, v));
+                    } else if (value !== undefined && value !== null) {
+                        params.append(key, value);
+                    }
+                }
+
+                const queryString = params.toString();
+                // const queryString = new URLSearchParams(query).toString();
                 const res = await getData(path, queryString, config);
                 setData(res.data);
             }
