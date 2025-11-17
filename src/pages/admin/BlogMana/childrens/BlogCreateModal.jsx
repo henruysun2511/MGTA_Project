@@ -17,7 +17,7 @@ export default function BlogCreateModal({ open, onCancel }) {
         const options = {
             ...values,
             content,
-            images: uploadedUrls.urls || [uploadedUrls],
+            images: uploadedUrls || [uploadedUrls],
             publishedAt: getCurrentDate()
         };
         
