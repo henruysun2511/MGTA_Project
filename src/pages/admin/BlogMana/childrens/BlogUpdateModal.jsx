@@ -46,7 +46,7 @@ export default function BlogUpdateModal({ open, onCancel, record }) {
         let newImageUrls = [];
         if (newFiles.length > 0) {
             const uploaded = await handleUploadImage(newFiles, setLoading);
-            newImageUrls = uploaded.urls || [uploaded];
+            newImageUrls = uploaded || [uploaded];
         }
 
         const options = {
